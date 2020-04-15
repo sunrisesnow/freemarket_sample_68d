@@ -49,6 +49,7 @@ Things you may want to cover:
 - has_one  :creadit_card
 
 ##  addressテーブル
+|user_id|integer|null, false|
 |last_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
 |first_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
 |last_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
@@ -61,7 +62,7 @@ Things you may want to cover:
 |phone_number|string|/\A\d{10,11}\z/|
 
 ### Association
-- belongs_to :user, optional: true
+- belongs_to :user
 
 ## itemsテーブル
 
@@ -89,7 +90,7 @@ Things you may want to cover:
 - has_many   :comment
 - has_many   :images
 
-##  imagesテーブル
+## imagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
