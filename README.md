@@ -49,7 +49,7 @@ Things you may want to cover:
 - has_one  :creadit_card
 
 ##  addressテーブル
-|user_id|integer|null, false|
+|user_id|integer|null: false, foreign_key: true|
 |last_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
 |first_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
 |last_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
