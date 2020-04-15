@@ -53,8 +53,8 @@ Things you may want to cover:
 |first_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
 |last_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
 |first_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
-|postal_code|string|null: false, /\A\d{3}[-]\d{4}$|^\d{3}[-]\d{2}$|^\d{3}$|^\d{5}$|^\d{7}\z/|
-|prefectures|string|null: false|
+|postal_code|string|null: false, /\A\d{7}\z/|
+|prefectures|integer|null: false|
 |municipality|string|null: false|
 |address|stringr|null: false|
 |building|string|-----|
