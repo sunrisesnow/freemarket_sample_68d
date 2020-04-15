@@ -46,7 +46,7 @@ Things you may want to cover:
 - has_many :likes
 - has_many :comments
 - has_one  :address
-- has_one  :creadit_cards
+- has_one  :creadit_card
 
 ##  addressテーブル
 |last_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
@@ -56,7 +56,7 @@ Things you may want to cover:
 |postal_code|string|null: false, /\A\d{7}\z/|
 |prefectures|integer|null: false|
 |municipality|string|null: false|
-|address|stringr|null: false|
+|address|string|null: false|
 |building|string|-----|
 |phone_number|string|/\A\d{10,11}\z/|
 
@@ -147,7 +147,7 @@ Things you may want to cover:
 
 - has_many :items
 
-## cardsテーブル
+## creadit_cardsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
