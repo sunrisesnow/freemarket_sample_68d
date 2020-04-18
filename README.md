@@ -76,7 +76,7 @@ Things you may want to cover:
 |explaination|text|null, false|
 |status|string|null: false|
 |delivery_charge_flag|string|null: false|
-|prefectures|string|null: false|
+|prefectures|integer|null: false|
 |delivery_data|string|null: fasle|
 |price|integer|null: false|
 |delivery_method|string|null: false|
