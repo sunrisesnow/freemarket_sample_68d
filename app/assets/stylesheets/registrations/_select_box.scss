@@ -1,0 +1,35 @@
+// カラー変数は_color.scssに定義
+// セレクトボックスのcss
+
+// 新規登録（生年月日）のセレクトボックス
+select::-ms-expand {
+	display: none;
+}
+select {
+  padding-left: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("/assets/pulldown.png");
+  background-repeat: no-repeat;
+  background-size: 10px 20px;
+  background-position: right 5px center;
+  font-size: 15px;
+  margin-bottom: 10px;
+  height: 50px;
+  width:70px;
+  background-color:white;
+  border: 1px solid #ccc;
+}
+select:focus{
+  border: 1px solid $skyblue;
+  outline: 0;
+}
+
+// 商品送付先ページ（都道府県）のセレクトボックス
+.select{
+  height: 30px;
+  width:90px;
+  font-size: 15px;
+  border-radius: 1px;
+}
