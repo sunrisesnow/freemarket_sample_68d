@@ -3,11 +3,9 @@
 // エラーが出た際フォームの入力フォントサイズが変わってしまうのでフォーム要素のidにfont-sizeを指定。
 #user_nickname, #user_email, #user_password, #user_password_confirmation, #user_last_name, #user_first_name, #user_last_name_kana, #user_first_name_kana{
   font-size: 15px;
-  border: 1px solid $lightgrey;
   color: black;
   height: 40px;
   padding: 0 10px;
-  border-radius: 5px;
 }
 
 // エラー文が入れられているクラスにcssを指定
@@ -18,11 +16,6 @@
   letter-spacing: 2px;
 }
 
-// フォーム要素がクリックされたときに表示されるボーダーを変更
-input:focus{
-  border: 1px solid $skyblue;
-  outline: 0;
-}
 
 // パスワード表示のチェックボックスのcss
 .pw__checkbox{
@@ -39,6 +32,16 @@ input:focus{
     margin:0 5px 10px 0;
     border: 1px solid $lightgrey;
   }
+}
+
+// フォーム要素がクリックされたときに表示されるボーダーを変更
+input{
+  border: 1px solid $lightgrey;
+  border-radius: 5px;
+}
+input:focus{
+  border: 1px solid $skyblue;
+  outline: 0;
 }
 
 // 以下二つはフォームの高さとlabel(フォーム要素の上に表示される名前のような物)は全て一致しているためまとめて定義
@@ -73,6 +76,17 @@ input:focus{
   height: 80px;
   .form__zone--left{
     margin-right: 10px;
+  }
+}
+
+// エラーが出た際"日"といテキストがビュー崩れするので崩れないようにposition指定
+
+.field__birthday{
+  position: relative;
+  &--day{
+    position: absolute;
+    top: 13px;
+    right: 35px;
   }
 }
 
@@ -161,6 +175,7 @@ input:focus{
     }
   }
 }
+
 
 
 
