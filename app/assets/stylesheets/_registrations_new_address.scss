@@ -1,0 +1,185 @@
+$mainWhiteColor     : #fff;
+$mainWhite2Color    : #f5f5f5;
+$maingrayColor      : #888;
+$maingray2Color     : #ccc;
+$mainblueColor      : #3ccace;
+
+
+.member-body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  background-color: $mainWhite2Color;
+  .member-case {
+    width: 700px;
+    margin: 0 auto;
+    padding-bottom: 128px;
+    .member-header {
+      height: 128px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-around;
+      &__logo {
+        margin-top: 40px;
+        &--image {
+          height: 50px;
+          width: 185px;
+        }
+      }
+
+      &__progress {
+        margin-top: 40px;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        &-text {
+          margin-right: 40px;
+          z-index: 1;
+          color: $maingrayColor;
+        }
+        &-active {
+          @extend .member-header__progress--text;
+          font-weight: 600;
+          color: $mainblueColor;
+        }
+        &-round {
+          height: 12px;
+          width: 12px;
+          margin: 8px auto 0;
+          border-radius: 50%;
+          background-color: $maingray2Color;
+        }
+        &-round-blue {
+          @extend .member-header__progress-round;
+          background-color: $mainblueColor;
+        }
+        &-border {
+          height: 2px;
+          width: 220px;
+          position: absolute;
+          top: 25px;
+          left: 20px;
+          background-color: $maingray2Color;
+        }
+      }
+    }
+
+    .member-form {
+      background-color: $mainWhiteColor;
+      &__title {
+       border-bottom: 1px solid $mainWhite2Color;
+        &-text {
+          font-size: 25px;
+          font-weight: 600;
+          text-align: center;
+          line-height: 1.5;
+          padding-top: 32px; 
+        }
+      }
+      &__for {
+        padding: 24px 16px 40px;
+        .field_with_errors {
+          display: inline;
+        }          
+        .field_with_errors input,
+        .field_with_errors select {
+           outline: 0;
+           border-color: red !important;
+        }
+        .errors {
+           margin-top: 5px;
+           line-height: 1.5;
+           color: red;
+        }
+        .member-main {
+          max-width: 343px;
+          margin: 0 auto;
+          &__form {
+            margin-top: 24px;
+            position: relative;
+            &--input {
+              height: 48px;
+              width: 328px;
+              margin-top: 8px;
+              padding-left: 16px;
+              font-size: 16px;
+              border: 1px solid $maingray2Color;
+            }
+            &--label {
+              font-weight: 600;
+            }
+            &--require {
+              margin-left: 8px;
+              padding: 3px 5px;
+              font-size: 12px;
+              vertical-align: top;
+              color: $mainWhiteColor;
+              background-color: $mainblueColor;
+            }
+            &--info {
+              margin-top: 8px;
+              line-height: 2.0;
+              color: $maingrayColor;
+            }
+            &--identify {
+              font-size: 16px;
+              font-weight: 600;
+            }
+            &--text {
+              margin-top: 8px;
+              line-height: 1.5;
+            }
+            &--prefecture {
+              @extend .member-main__form--input;
+              width: 346px;
+              background-color: $mainWhiteColor;
+            }
+            &--select {
+              margin-top: 8px;  
+            }
+            .select__text {
+              position: absolute;
+              right: 54px;
+              top: 39px;
+            }
+            .year,.month,.day {
+              height: 48px;
+              width: 76px;
+              background-color: $mainWhiteColor;
+            }
+            &--text-center {
+              padding-top: 24px;
+              line-height: 1.5;
+              text-align: center;
+            }
+            &--btn {
+              width: 100%;
+              margin-top: 24px;
+              font-size: 16px;
+              line-height: 48px;
+              border: 1px solid $mainblueColor;
+              color: $mainWhiteColor;
+              background-color: $mainblueColor;
+            }
+            &--btn2 {
+              @extend .member-form__title2--btn;
+            }
+          }
+          &__name {
+            display: flex;
+            justify-content: space-between;
+            &--half {
+              
+              &__input {
+                @extend .member-main__form--input;
+                margin-right: 8px;
+                width: 80%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
