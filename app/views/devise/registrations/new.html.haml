@@ -69,6 +69,8 @@
               %span 必須
             .field__birthday
               != sprintf(f.date_select(:birthday, prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:Time.now.year - 120, date_separator:'%s'),'年','月')
+              .field__birthday--day
+                日
           .actions
             = f.submit "次へ進む", class: "next__btn"
   = render "footer"
