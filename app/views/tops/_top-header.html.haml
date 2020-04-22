@@ -2,7 +2,8 @@
   .header__block
     .header__block__inner
       .header__block__inner__icon
-        = image_tag "logo.png", class:"furima-logo", width: "140px", height: "40px"
+        = link_to "#" do
+          = image_tag "logo.png", class:"furima-logo", width: "140px", height: "40px"
       .header__block__inner__form
         .header__block__inner__form__box
           = text_field_tag :content, "", class: "header__block__inner__form__box__input", placeholder:"キーワードから探す"
@@ -18,6 +19,10 @@
           %a.header__block__menu__left__brand__tab ブランド
       .header__block__menu__right
         .header__block__menu__right__login
-          %a.header__block__menu__right__login__tab ログイン
+          %a
+          = link_to "#", class: "header__block__menu__right__login__tab" do
+            ログイン
         .header__block__menu__right__signin
-          %a.header__block__menu__right__signin__tab 新規登録
+          %a
+          = link_to "#", class: "header__block__menu__right__signin__tab" do
+            新規登録
