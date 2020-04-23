@@ -187,6 +187,15 @@ $mainblueColor      : #3ccace;
               @extend .member-form__title2--btn;
             }
           }
+          &__image {
+            margin-top: 8px;
+            width: 80%;
+            img {
+              width: 250px;
+              height: 200px;
+            }
+          }
+         
           &__name {
             display: flex;
             justify-content: space-between;

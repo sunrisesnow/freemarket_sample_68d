@@ -2,13 +2,13 @@
   .member-case
     .member-header
       %h1.member-header__logo
-        =link_to image_tag("logo.png", class:"member-header__logo--image"), root_path
+        =link_to image_tag("logo.png", class:"member-header__logo--image"), "#"
     .member-form
       .member-form__title2
         .member-form__title2--text2 アカウントをお持ちでない方はこちら
         = link_to '新規会員登録', new_user_registration_path, {class: 'member-form__title2--btn'}
         
-      = form_for( resource, url: user_session_path, builder: WithErrorFormBuilder, html: {class: 'member-form__for'}) do |f|
+      = form_for( resource, url: user_session_path, html: {class: 'member-form__for'}) do |f|
         .member-main
           .member-main__form-first
             = f.email_field :email, {autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class:'member-main__form--input'}
@@ -18,4 +18,3 @@
             = f.submit "ログイン", {class: 'member-main__form--btn'}
 
 .member-footer
-  = render "shared/overview"
