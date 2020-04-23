@@ -76,6 +76,6 @@ gem 'erb2haml'
 
 gem 'devise'
 gem 'font-awesome-sass'
-gem 'jquery-rails'
+
 
 
