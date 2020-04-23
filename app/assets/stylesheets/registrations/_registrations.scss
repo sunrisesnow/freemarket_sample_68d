@@ -1,0 +1,193 @@
+// カラー変数は_color.scssに定義
+
+// エラーが出た際フォームの入力フォントサイズが変わってしまうのでフォーム要素のidにfont-sizeを指定。
+#user_nickname, #user_email, #user_password, #user_password_confirmation, #user_last_name, #user_first_name, #user_last_name_kana, #user_first_name_kana{
+  font-size: 15px;
+  color: black;
+  height: 40px;
+  padding: 0 10px;
+}
+
+// エラー文が入れられているクラスにcssを指定
+.error-class{
+  color: red;
+  opacity: 0.9;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+
+// パスワード表示のチェックボックスのcss
+.pw__checkbox{
+  font-size: 13px;
+  letter-spacing: 1px;
+  height: 13px;
+  line-height: 13px;
+  font-weight: normal;
+  padding-left: 4px;
+  padding-bottom: 30px;
+  & input {
+    padding: 5px;
+    transform: scale(1.5);
+    margin:0 5px 10px 0;
+    border: 1px solid $lightgrey;
+  }
+}
+
+// フォーム要素がクリックされたときに表示されるボーダーを変更
+input{
+  border: 1px solid $lightgrey;
+  border-radius: 5px;
+}
+input:focus{
+  border: 1px solid $skyblue;
+  outline: 0;
+}
+
+// 以下二つはフォームの高さとlabel(フォーム要素の上に表示される名前のような物)は全て一致しているためまとめて定義
+.field__form{
+  height: 60px;
+}
+.field__label{
+  font-size: 13px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  & span{
+    background-color: $skyblue;
+    color: white;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 3px;
+    padding-bottom: 3px;
+  }
+}
+
+// 以下二つはインプット要素にサイズの異なる物があるため別々にサイズを定義。一致しているカラーなどはページ上部の複数のidにまとめて定義してある（ニックネーム入力欄と氏名入力欄ではサイズが異なるため。）
+.field__form input{
+  width: 306px;
+}
+.field__form--name input{
+  width: 148px;
+}
+
+// 氏名入力欄が姓と名の二つに分かれているので横並びにします。また他の要素と違いエラー文が二つ出る場合があるので高さを20px高くしています。また空白を作るためにmargin-rightで距離を作っています。（148 * 2 + 10 = 306 なのでフォーム要素のサイズは空白を含めると同じサイズになるようにしました）
+.field__area{
+  display: flex;
+  height: 80px;
+  .form__zone--left{
+    margin-right: 10px;
+  }
+}
+
+// エラーが出た際"日"といテキストがビュー崩れするので崩れないようにposition指定
+
+.field__birthday{
+  position: relative;
+  &--day{
+    position: absolute;
+    top: 13px;
+    right: 35px;
+  }
+}
+
+// 新規登録画面のcss
+
+#top{
+  background-color: $whitesmoke;
+  #registrations__header{
+    text-align: center;
+    padding-top: 50px;
+    .header__logo--btn{
+      &:hover{
+        opacity: 0.6;
+      }
+    }
+  }
+  #container{
+    padding: 30px;
+    width: 100%;
+    #field__contents{
+      width: 700px;
+      justify-content: center;
+      background-color: white;
+      margin: 0 auto;
+      &--title h2{
+        text-align: center;
+        padding: 20px 0 30px;
+        border-bottom: 1px solid $whitesmoke;
+        font-weight: normal;
+      }
+      &--form{
+        padding: 30px 197px 60px;
+        .nav{
+          padding-bottom: 25px;
+          &__title{
+            font-size: 15px;
+            font-weight: bold;
+            padding-bottom: 5px;
+          }
+          &__text{
+            font-size: 12px;
+            font-weight: normal;
+          }
+        }
+        .actions{
+          padding-top: 40px;
+          .next__btn{
+            display: inline-block;
+            background-color: $skyblue;
+            width: 306px;
+            opacity: 0.8;
+            padding: 15px 0;
+            color: white;
+            transition: 1s;
+            &:hover{
+              opacity: 0.4;
+            }
+          }
+        }
+      }
+    }
+  }
+  .registrations__footer{
+    padding-top: 35px;
+    text-align: center;
+    font-size: 11px;
+    .footer__menu{
+      text-align: center;
+      padding: 40px 0 20px;
+      &--btn{
+        color:gray;
+        margin: 10px 10px 0;
+        &:hover{
+          opacity: 0.8;
+          border-bottom: 1px solid black;
+        }
+      }
+    }
+    .footer__logo{
+      padding: 40px 0;
+      &--btn{
+        &:hover{
+          border-bottom: 1px solid $lightgrey;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
