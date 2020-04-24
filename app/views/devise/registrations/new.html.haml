@@ -1,87 +1,76 @@
-.member-body
-  .member-case
-    .member-header
-      %h1.member-header__logo
-        =link_to image_tag("logo.png", class:"member-header__logo--image"), "#"
-      .member-header__progress
-        %li.member-header__progress--active
-          会員情報
-          .member-header__progress--round-blue
-        %li.member-header__progress--text 
-          お届け先情報入力
-          .member-header__progress--round
-        %li.member-header__progress--text
-          完了 
-          .member-header__progress--round
-        .member-header__progress--border
+#top
+  #registrations__header
+    = render "tops/header"
+  = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
+    -# 
+      FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
 
-
-    .member-form
-      .member-form__title
-        %h2.member-form__title--text 会員情報入力
-      = form_for( @user, url: user_registration_path, html: {class: 'member-form__for'}) do |f|
-        .member-main
-          .member-main__form-first
-            = f.label 'ニックネーム', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-            = f.text_field :nickname, {placeholder: "例) フリマ太朗", class: 'member-main__form--input'}
-          .member-main__form
-            = f.label 'メールアドレス', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-            = f.email_field :email, {autofocus: true, autocomplete: "email", placeholder: "PC・携帯どちらでも可", class:'member-main__form--input'}
-          .member-main__form
-            = f.label 'パスワード', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-            - if @minimum_password_length
-              %em
-            = f.password_field :password,{placeholder: "7文字以上の半角英数字",class:'member-main__form--input'}
-          .member-main__form
-            = f.label 'パスワード(確認)', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-            = f.password_field :password_confirm,{placeholder:"上記と同じパスワードを入力してください",class:'member-main__form--input'}
-          .member-main__form
-            %h3.member-main__form--identify 本人確認
-            %p.member-main__form--text 安心・安全にご利用いただくために<br>お客様の本人情報の登録にご協力ください<br>他のお客様に公開されることはありません
-          .member-main__form
-            = f.label 'お名前(全角)', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-          .member-main__name
-            .member-main__name--half
-              = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--half__input'}
-            .member-main__name--half
-              = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--half__input'} 
-          .member-main__form
-            = f.label 'お名前(ふりがな)', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-          .member-main__name
-            .member-main__name--half
-              = f.text_field :last_name_kana, {placeholder:"例) やまだ",class:'member-main__name--half__input'}
-            .member-main__name--half
-              = f.text_field :first_name_kana, {placeholder:"例) たろう",class:'member-main__name--half__input'}
-          .member-main__form
-            = f.label '生年月日', {class: 'member-main__form--label'}
-            %span.member-main__form--require 必須
-            %p.member-main__form--select
-              .select__text 日
-              != sprintf(f.date_select(:birthday, require:true,with_css_classes:'XXXXX', prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:1900, date_separator:'%s'),'年 ','月 ')
-          .member-main__form
-            = f.label 'アイコン', {class: 'member-main__form--label'}
-            %span.member-main__form--require 任意
-          .member-main__image
-            - if @user.icon_image.present?
-              .member-main__image-read
-                = image_tag @user.icon_image.url, alt: "preview", class: "image-perv"
-          = f.file_field :icon_image, class: 'member-main__image-icon hidden_file' 
-          .member-main__form
-            %p.member-main__form--text-center
-              「次に進む」のボタンを押すことにより<br>
-              =link_to "利用規約", "#", target:"_blank"
-              に同意したものとみなします
-            = f.submit "次に進む", {class: 'member-main__form--btn'}
-
- 
-  .member-footer
-
-
-
-
+    -# 
+      従来のdeviseのFormHelperを適用し画面上部にエラー内容を表示したい場合FormHelperのオプションを消去し= render "shared/_error_messages"を画面上部に書き込んでください
+    #container
+      #field__contents
+        #field__contents--title
+          %h2
+            会員情報入力
+        #field__contents--form
+          .field
+            .field__label
+              = f.label :nickname
+              %span 必須
+            .field__form
+              = f.text_field :nickname,  autocomplete: "nickname", placeholder: "例）メルカリ君"
+          .field
+            .field__label
+              = f.label :email
+              %span 必須
+            .field__form
+              = f.email_field :email, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
+          .field__pw
+            .field__label
+              = f.label :password
+              %span 必須
+            .field__form
+              = f.password_field :password, autocomplete: "password",placeholder: "7文字以上の半角英数字", class: "pwform"
+            .field__form
+              = f.password_field :password_confirmation, autocomplete: "password_confirmation", placeholder: "もう一度入力", class: "pwform"
+            .pw__checkbox
+              %input{ type: "checkbox", id: "checkpw" }
+                パスワードを表示する
+          .nav
+            .nav__title
+              本人確認
+            .nav__text
+              安全・安心にご利用いただくために、お客さまの本人情報のご登録にご協力ください。他のお客さまに公開されることはありません。
+          .field__name
+            .field__label
+              = f.label :fullname
+              %span 必須
+            .field__area
+              .form__zone--left
+                .field__form--name
+                  = f.text_field :last_name, autocomplete: "last_name", placeholder: "例）山田"
+              .form__zone
+                .field__form--name
+                  = f.text_field :first_name, autocomplete: "first_name", placeholder: "例）太郎"
+          .field__name
+            .field__label
+              = f.label :fullname_kana
+              %span 必須
+            .field__area
+              .form__zone--left
+                .field__form--name
+                  = f.text_field :last_name_kana, autocomplete: "last_name_kana", placeholder: "例）ヤマダ"
+              .form__zone
+                .field__form--name
+                  = f.text_field :first_name_kana, autocomplete: "first_name_kana", placeholder: "例）タロウ"
+          .field
+            .field__label
+              = f.label :birthday 
+              %span 必須
+            .field__birthday
+              != sprintf(f.date_select(:birthday, prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:Time.now.year - 120, date_separator:'%s'),'年','月')
+              .field__birthday--day
+                日
+          .actions
+            = f.submit "次へ進む", class: "next__btn"
+  = render "footer"

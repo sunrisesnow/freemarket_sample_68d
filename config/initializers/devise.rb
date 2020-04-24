@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'feab8bb6e078c07910f9110837403bf382081be451384b672c1458e03fdd6a142d23baaac8b973e4ad0fc5f33f19a9bc159cab9f3e9e83dcf36d0cef57019c30'
+  # config.secret_key = '57704f52f2734c9027dadd3fef5906304572add021f3b5b5074b87f92a7ae5cb03ac2ea596a3e1655730f176b5343a43904dfa79c2324d5696e76806ac733f41'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -114,7 +114,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '1747cdee6b10eaf8ea0158c993449e1d77bea4655efd4d30eeadeb07022628ff8e7ed0654f424072ba0613928d43e5c5a3b320bea7b81f4e92c3c9035a7930ea'
+  # config.pepper = '538f749eb82652bf3802650291481bb986049da1d4c73fdb67f8ccca4db43fce8f276c5b932c38777638541c86b3073aed4361ea41dd7e2628ec363e55a7a4e3'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -166,7 +166,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 7..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
