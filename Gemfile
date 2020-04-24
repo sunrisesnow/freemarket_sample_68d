@@ -76,5 +76,3 @@ gem 'erb2haml'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'font-awesome-sass'
-
-
