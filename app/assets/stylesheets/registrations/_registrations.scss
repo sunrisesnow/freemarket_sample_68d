@@ -6,6 +6,7 @@
   color: black;
   height: 40px;
   padding: 0 10px;
+  border-radius: 5px;
 }
 
 // エラー文が入れられているクラスにcssを指定
@@ -30,14 +31,13 @@
     padding: 5px;
     transform: scale(1.5);
     margin:0 5px 10px 0;
-    border: 1px solid $lightgrey;
+    border: 1px solid $lightgray;
   }
 }
 
 // フォーム要素がクリックされたときに表示されるボーダーを変更
 input{
-  border: 1px solid $lightgrey;
-  border-radius: 5px;
+  border: 1px solid $lightgray;
 }
 input:focus{
   border: 1px solid $skyblue;
@@ -169,7 +169,7 @@ input:focus{
       padding: 40px 0;
       &--btn{
         &:hover{
-          border-bottom: 1px solid $lightgrey;
+          border-bottom: 1px solid $lightgray;
         }
       }
     }
