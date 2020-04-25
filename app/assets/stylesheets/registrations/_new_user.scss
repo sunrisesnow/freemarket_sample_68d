@@ -1,7 +1,7 @@
 // カラー変数は_color.scssに定義
 // 新規登録方法選択画面のcss
 
-.wrapper{
+.new__wrapper{
   width: 100%;
   height: 100%;
   background-color: $whitesmoke; 
@@ -17,7 +17,7 @@
       }
     }
   }
-  .main{
+  .mainnew{
     height: calc(100vh - 130px - 200px);
     width: 700px;
     margin: 0 auto;
@@ -85,6 +85,7 @@
     width: 100%;
     padding-top: 30px;
     text-align: center;
+    background-color: $whitesmoke;
     &__menu ul{
       display: flex;
       text-align: center;

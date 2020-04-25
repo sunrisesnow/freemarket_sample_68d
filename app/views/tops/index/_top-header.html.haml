@@ -14,15 +14,12 @@
     .header__block__menu
       .header__block__menu__left
         .header__block__menu__left__category
-          %a.header__block__menu__left__category__tab カテゴリー
+          %a.header__block__menu__left__category__tab カテゴリーから探す
         .header__block__menu__left__brand
-          %a.header__block__menu__left__brand__tab ブランド
+          %a.header__block__menu__left__brand__tab ブランドから探す
       .header__block__menu__right
-        .header__block__menu__right__login
-          %a
-          = link_to "#", class: "header__block__menu__right__login__tab" do
-            ログイン
-        .header__block__menu__right__signin
-          %a
-          = link_to "#", class: "header__block__menu__right__signin__tab" do
-            新規登録
+        - if user_signed_in?
+          =  link_to "ログアウト", destroy_user_session_path, method: :delete, class: "right__btn logout__btn"
+        - else
+          = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
+          = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 

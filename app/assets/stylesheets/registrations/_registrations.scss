@@ -6,6 +6,7 @@
   color: black;
   height: 40px;
   padding: 0 10px;
+  border-radius: 5px;
 }
 
 // エラー文が入れられているクラスにcssを指定
@@ -37,7 +38,6 @@
 // フォーム要素がクリックされたときに表示されるボーダーを変更
 input{
   border: 1px solid $lightgrey;
-  border-radius: 5px;
 }
 input:focus{
   border: 1px solid $skyblue;

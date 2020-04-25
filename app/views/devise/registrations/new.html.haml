@@ -1,6 +1,6 @@
 #top
   #registrations__header
-    = render "tops/header"
+    = render "tops/new/header"
   = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
     -# 
       FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
