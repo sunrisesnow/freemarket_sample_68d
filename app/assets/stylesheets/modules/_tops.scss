@@ -34,7 +34,7 @@
               height: 36px;
               padding: 0 0 0 5px;
               line-height: 36px;
-              background-color: $whitesmoke;
+              background-color: $white-smoke;
             }
             &__btn{
               width: 36px;
@@ -101,7 +101,7 @@
             font-size: 13px;
           }
           .signup__btn{
-            background-color: $signupbtn;
+            background-color: $sign-up-btn;
             opacity: 0.8;
             margin-right: 10px;
             transition: 0.7s;
@@ -110,12 +110,12 @@
             }
           }
           .login__btn, .logout__btn{
-            color: $loginbtn;
+            color: $login-btn;
             background-color: white;
-            border: 1px solid $loginbtn;
+            border: 1px solid $login-btn;
             transition: 0.7s;
             &:hover{
-              background-color: $loginbtn;
+              background-color: $login-btn;
               color: white;
             }
           }
@@ -502,7 +502,7 @@
             color: gray;
             &:hover{
               opacity: 0.8;
-              border-bottom: 1px solid $whitesmoke;
+              border-bottom: 1px solid $white-smoke;
             }
           }
         }
