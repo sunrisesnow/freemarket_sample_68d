@@ -1,44 +1,74 @@
-%h2 商品送付先住所登録
-= form_for @address , builder: FormHelper::FormWithErrorMessageBuilder do |f|
-  -# 
-    FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
+.member-body
+  .member-case
+    .member-header
+      %h1.member-header__logo
+        =link_to image_tag("logo.png", class:"member-header__logo--image"), "#"
+      .member-header__progress
+        %li.member-header__progress--text
+          会員情報
+          .member-header__progress-round
+        %li.member-header__progress-active
+          お届け先情報入力
+          .member-header__progress-round-blue
+        %li.member-header__progress-text
+          完了
+          .member-header__progress-round
+        .member-header__progress-border
 
-  -# 
-    従来のdeviseのFormHelperを適用し画面上部にエラー内容を表示したい場合FormHelperのオプションを消去し= render "shared/error_messages"を画面上部に書き込んでください
-  .field
-    = f.label :fullname
-    %br/
-    = f.text_field :last_name, autocomplete: "last_name", placeholder: "例）山田", autofocus: true
-    = f.text_field :first_name, autocomplete: "first_name", placeholder: "例）太郎"
-  .field
-    = f.label :fullname_kana
-    %br/
-    = f.text_field :last_name_kana,autocomplete: "last_name_kana", placeholder: "例）ヤマダ"
-    = f.text_field :first_name_kana, autocomplete: "first_name_kana", placeholder: "例）タロウ"
-  .field
-    = f.label :postal_code
-    %br/
-    = f.text_field :postal_code, autocomplete: "postal_code", placeholder: "例）1234567"
-  .field
-    = f.label  :prefectures
-    %br/
-    = f.select :prefectures, Address.prefectures.keys, {prompt: '------'}, class: "select"
-  .field
-    = f.label :municipality
-    %br/
-    = f.text_field :municipality, autocomplete: "municipality", placeholder: "例）横浜市緑区"
-  .field
-    = f.label :address
-    %br/
-    = f.text_field :address, autocomplete: "address", placeholder: "例）青山 1-1-1"
-  .field
-    = f.label :building
-    %br/
-    = f.text_field :building, placeholder: "例）草薙ビル 103"
-  .field
-    = f.label :phone_number
-    %br/
-    = f.text_field :phone_number, autocomplete: "phone_number", placeholder: "例）09012345678"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+    .member-form
+      .member-form__title
+        %h2.member-form__title-text お届け先情報入力
+      = form_for( @address, url: addresses_path, html: {class: 'member-form__for'}) do |f|
+        .member-main
+          .member-main__form-first
+            = f.label '送付先氏名(全角)', {class: 'member-main__form--label'}
+            %span.member-main__form--require 必須
+          .member-main__name
+            .member-main__name--half
+              = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--half__input'}
+            .member-main__name--half
+              = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--half__input'}
+          .member-main__form
+            = f.label '送付先氏名(全角ふりがな)', {class: 'member-main__form--label'}
+            %span.member-main__form--require 必須
+          .member-main__name
+            .member-main__name--half
+              = f.text_field :last_name_kana, {placeholder:"例) やまだ",class:'member-main__name--half__input'}
+            .member-main__name--half
+              = f.text_field :first_name_kana, {placeholder:"例) たろう",class:'member-main__name--half__input'}
+          .member-main__form
+            = f.label '郵便番号', {class: 'member-main__form--label'}
+            %span.member-main__form--require 必須
+            = f.text_field :postal_code, {placeholder: "7ケタの半角数字", class:'member-main__form--input'}
+            %p.member-main__form--info ※ ハイフン不要
+          .member-main__form
+            = f.label '都道府県', {class: 'member-main__form-label'}
+            %span.member-main__form--require 必須
+            = f.select :prefectures, Address.prefectures.keys, {}, {class:'member-main__form--prefecture'}
+            - if @address.errors.full_messages_for(:prefecture)
+              %ul.errors
+                %li
+                  = @address.errors.full_messages_for(:prefecture).first
+          .member-main__form
+            = f.label '市区町村', {class: 'member-main__form--label'}
+            %span.member-main__form--require 必須
+            = f.text_field :municipality, {placeholder: "例) 〇〇市", class:'member-main__form--input'}
+          .member-main__form
+            = f.label '町名・番地', {class: 'member-main__form-label'}
+            %span.member-main__form--require 必須
+            = f.text_field :address, {placeholder: "例) 〇〇町1-1-1", class:'member-main__form--input'}
+          .member-main__form
+            = f.label '建物名・部屋番号', {class: 'member-main__form-label'}
+            %span.member-main__form--require 任意
+            = f.text_field :building, {placeholder: "例) 〇〇ビル101", class:'member-main__form--input'}
+          .member-main__form
+            = f.label '電話番号', {class: 'member-main__form-label'}
+            %span.member-main__form--require 任意
+            = f.text_field :phone_number, {placeholder: "半角数字で10桁または11桁の番号", class:'member-main__form--input'}
+            %p.member-main__form--info ※ ハイフン不要
+                  
+          .member-main__form
+            = f.submit "登録完了", {class: 'member-main__form--btn'}
+
+.member-footer
+　結合待ち
