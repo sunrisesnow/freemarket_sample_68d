@@ -19,22 +19,20 @@ ActiveRecord::Schema.define(version: 2020_04_15_150335) do
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
     t.string "postal_code", null: false
-    t.string "prefectures", null: false
+    t.integer "prefectures", default: 0, null: false
     t.string "municipality", null: false
     t.string "address", null: false
     t.string "building"
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "nickname", null: false 
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "password_confirm", null: false
+    t.string "nickname", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
