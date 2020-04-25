@@ -31,16 +31,16 @@
     padding: 5px;
     transform: scale(1.5);
     margin:0 5px 10px 0;
-    border: 1px solid $light-gray;
+    border: 1px solid $lightgray;
   }
 }
 
 // フォーム要素がクリックされたときに表示されるボーダーを変更
 input{
-  border: 1px solid $light-gray;
+  border: 1px solid $lightgray;
 }
 input:focus{
-  border: 1px solid $sky-blue;
+  border: 1px solid $skyblue;
   outline: 0;
 }
 
@@ -53,7 +53,7 @@ input:focus{
   font-weight: bold;
   padding-bottom: 4px;
   & span{
-    background-color: $sky-blue;
+    background-color: $skyblue;
     color: white;
     font-size: 11px;
     padding: 5px;
@@ -93,7 +93,7 @@ input:focus{
 // 新規登録画面のcss
 
 #top{
-  background-color: $white-smoke;
+  background-color: $whitesmoke;
   #registrations__header{
     text-align: center;
     padding-top: 50px;
@@ -114,7 +114,7 @@ input:focus{
       &--title h2{
         text-align: center;
         padding: 20px 0 30px;
-        border-bottom: 1px solid $white-smoke;
+        border-bottom: 1px solid $whitesmoke;
         font-weight: normal;
       }
       &--form{
@@ -135,7 +135,7 @@ input:focus{
           padding-top: 40px;
           .next__btn{
             display: inline-block;
-            background-color: $sky-blue;
+            background-color: $skyblue;
             width: 306px;
             opacity: 0.8;
             padding: 15px 0;
@@ -169,7 +169,7 @@ input:focus{
       padding: 40px 0;
       &--btn{
         &:hover{
-          border-bottom: 1px solid $light-gray;
+          border-bottom: 1px solid $lightgray;
         }
       }
     }
