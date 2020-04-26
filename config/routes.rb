@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'items/new'
   root 'tops#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
