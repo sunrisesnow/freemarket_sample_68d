@@ -132,7 +132,7 @@
       width: 100%;
       &__leading{
         height: 560px;
-        background-image: url(bg-mainVisual-pict_pc.jpg);
+        background-image: url(../../images/bg-mainVisual-pict_pc.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top center;
@@ -245,7 +245,7 @@
         }
       }
       &__membership{
-        background-image: url(bg-topMiddleDl-pict.jpg);
+        background-image: url(../../images/bg-topMiddleDl-pict.jpg);
         background-position: bottom right;
         height: 400px;
         background-size: cover;
@@ -434,7 +434,7 @@
   }
   
   section.app-banner {
-    background-image: url(bg-appBanner-pict.jpg);
+    background-image: url(../../images/bg-appBanner-pict.jpg);
     padding: 100px 40px;
     position: relative;
     background-size: cover;
