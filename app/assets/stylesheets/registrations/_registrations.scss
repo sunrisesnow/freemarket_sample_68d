@@ -79,28 +79,68 @@ input:focus{
   }
 }
 
-// エラーが出た際"日"といテキストがビュー崩れするので崩れないようにposition指定
 
-.field__birthday{
+// ナビゲーター
+.field__pw{
   position: relative;
-  &--day{
+  .nav__password{
     position: absolute;
-    top: 13px;
-    right: 35px;
+    top: 0;
+    right: 0;
+    color: gray;
+    letter-spacing: 2px;
+    font-size: 11px;
+  }
+}
+
+.nav__information{
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  &--center{
+    text-align: center;
+  }
+  .confirmation__link{
+    color: $skyblue;
+    @include hover($skyblue, 0.8);
+  }
+}
+
+.personal{
+  color: gray;
+  padding-bottom: 30px;
+}
+
+.nav__personal--information{
+  text-align: right;
+  padding: 30px 0;
+  &--link{
+    color: $skyblue;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    @include hover($skyblue, 0.8);
+  }
+}
+
+.nav__privacy--information{
+  background-color: $whitesmoke;
+  height: 50px;
+  padding-top: 11px;
+  font-size: 8px;
+  color: gray;
+  &--link{
+    color: $skyblue;
+    @include hover($skyblue, 0.8);
   }
 }
 
 // 新規登録画面のcss
-
 #top{
   background-color: $whitesmoke;
   #registrations__header{
     text-align: center;
     padding-top: 50px;
     .header__logo--btn{
-      &:hover{
-        opacity: 0.6;
-      }
+      @include hover(white, 0.6)
     }
   }
   #container{
@@ -141,9 +181,7 @@ input:focus{
             padding: 15px 0;
             color: white;
             transition: 1s;
-            &:hover{
-              opacity: 0.4;
-            }
+            @include hover(white, 0.6)
           }
         }
       }
@@ -159,18 +197,13 @@ input:focus{
       &--btn{
         color:gray;
         margin: 10px 10px 0;
-        &:hover{
-          opacity: 0.8;
-          border-bottom: 1px solid black;
-        }
+        @include hover(black,0.8);
       }
     }
     .footer__logo{
       padding: 40px 0;
       &--btn{
-        &:hover{
-          border-bottom: 1px solid $lightgray;
-        }
+        @include hover($lightgray,0.8);
       }
     }
   }

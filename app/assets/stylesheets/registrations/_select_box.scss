@@ -10,20 +10,35 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("/assets/pulldown.png");
+  background-image: url("pulldown.png");
   background-repeat: no-repeat;
   background-size: 10px 20px;
   background-position: right 5px center;
   font-size: 15px;
   margin-bottom: 10px;
   height: 50px;
-  width:70px;
+  width:72px;
   background-color:white;
   border: 1px solid #ccc;
 }
 select:focus{
   border: 1px solid $skyblue;
   outline: 0;
+}
+
+// 年のセレクトボックス のサイズ変更
+#user_birthday_1i{
+  width: 100px;
+}
+
+// エラーが出た際"日"といテキストがビュー崩れするので崩れないようにposition指定
+.field__birthday{
+  position: relative;
+  &--day{
+    position: absolute;
+    top: 13px;
+    right: 0;
+  }
 }
 
 // 商品送付先ページ（都道府県）のセレクトボックス

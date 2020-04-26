@@ -1,0 +1,6 @@
+@mixin hover($color,$opacity){
+  &:hover{
+    opacity: $opacity;
+    border-bottom: 1px solid $color;
+  }
+}

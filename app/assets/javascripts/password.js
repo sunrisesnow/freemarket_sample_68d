@@ -1,9 +1,11 @@
 $(function() {
   $("#checkpw").change(function(){
     if($(this).prop('checked')){
-      $('.pwform').attr('type','text');
+      $('#user_password').attr('type','text');
+      $('#user_password_confirmation').attr('type','text');
     }else{
-      $('.pwform').attr('type','password');
+      $('#user_password').attr('type','password');
+      $('#user_password_confirmation').attr('type','password');
     }
   });
 });
