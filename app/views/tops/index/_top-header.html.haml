@@ -10,16 +10,37 @@
           .header__block__inner__form__box__btn
             = link_to '#' do
               = image_tag "icon-search 1.png", class: "header__block__inner__form__box__btn__pic"
+  .header__bottom
+    .header__left--content
     
-    .header__block__menu
-      .header__block__menu__left
-        .header__block__menu__left__category
-          %a.header__block__menu__left__category__tab カテゴリーから探す
-        .header__block__menu__left__brand
-          %a.header__block__menu__left__brand__tab ブランドから探す
-      .header__block__menu__right
-        - if user_signed_in?
-          =  link_to "ログアウト", destroy_user_session_path, method: :delete, class: "right__btn logout__btn"
-        - else
-          = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
-          = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 
+      .categories
+        %ul
+          %li
+            = link_to "#", class: "category__search search__btn" do
+              カテゴリーから探す
+            %ul.category__parent
+              - @parents.each do |parent|  
+                %li
+                  = link_to "#", class: "category__parent--name" do
+                    = parent.name
+                  %ul.category__child
+                    - parent.children.each do |child|
+                      %li
+                        = link_to "#", class: "category__child--name" do
+                          = child.name
+                        %ul.category__grandchild
+                          - child.children.each do |grandchild|
+                            %li
+                              = link_to "#", class: "category__grandchild--name" do
+                                = grandchild.name                             
+      .brands
+        %ul
+          = link_to "#", class: "brands__search search__btn" do
+            ブランドから探す
+    .header__right--content
+      - if user_signed_in?
+        =  link_to "ログアウト", destroy_user_session_path, method: :delete, class: "right__btn logout__btn"
+      - else
+        = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
+        = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 
+      
