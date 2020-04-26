@@ -12,31 +12,13 @@
               = image_tag "icon-search 1.png", class: "header__block__inner__form__box__btn__pic"
   .header__bottom
     .header__left--content
-    
-      .categories
-        %ul
-          %li
-            = link_to "#", class: "category__search search__btn" do
-              カテゴリーから探す
-            %ul.category__parent
-              - @parents.each do |parent|  
-                %li
-                  = link_to "#", class: "category__parent--name" do
-                    = parent.name
-                  %ul.category__child
-                    - parent.children.each do |child|
-                      %li
-                        = link_to "#", class: "category__child--name" do
-                          = child.name
-                        %ul.category__grandchild
-                          - child.children.each do |grandchild|
-                            %li
-                              = link_to "#", class: "category__grandchild--name" do
-                                = grandchild.name                             
+      = render "tops/index/category"                       
       .brands
         %ul
-          = link_to "#", class: "brands__search search__btn" do
-            ブランドから探す
+          %li
+            = link_to "#", class: "brands__search search__btn" do
+              %i.fas.fa-monument.brands__icon
+              ブランドから探す
     .header__right--content
       - if user_signed_in?
         =  link_to "ログアウト", destroy_user_session_path, method: :delete, class: "right__btn logout__btn"

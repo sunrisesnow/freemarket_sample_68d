@@ -1,67 +1,60 @@
+
 .category__child, .category__parent, .category__grandchild{
   display: none;
 }
-.category__parent{
+
+.category__icon,.brands__icon{
+  color: $mainblueColor;
+}
+
+// カテゴリーの大枠の要素の共通項
+.category__list{
   position: absolute;
   height: 560px;
-  top: 114px;
   background-color: white;
   border-right: 1px solid $whitesmoke;
-  &--name{
-    width: 100%;
-    color: black;
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 13px;
-    letter-spacing: 2px;
-    @include hover__color(white, $skyblue, 1);
-  }
+}
+
+// 子要素はカテゴリー名の共通項
+.category__child--name{
+  width: 100%;
+  color: black;
+  display: inline-block;
+  padding: 3px 15px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  @include hover__color(black, $lightgray, 1);
 }
 
 .categories{
+  padding-bottom: 10px;
   &:hover{
     .category__parent{
+      top: 122px;
       display: block;
+      &--name{
+        width: 100%;
+        color: black;
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 13px;
+        letter-spacing: 2px;
+        @include hover__color(white, $skyblue, 1);
+      }
       li {
         &:hover{
           .category__child{
-            height: 560px;
             width: 100%;
             display: block;
-            position: absolute;
-            top: 0px;
+            top: 0;
             left: 221px;
-            background-color: white;
-            border-right: 1px solid $whitesmoke;
-            &--name{
-              width: 100%;
-              color: black;
-              display: inline-block;
-              padding: 3px 15px;
-              font-size: 11px;
-              letter-spacing: 2px;
-              @include hover__color(black, $lightgray, 1);
-            }
             li {
               &:hover{
                 .category__grandchild{
-                  height: 560px;
                   width: 300px;
                   display: block;
-                  position: absolute;
-                  top: 0px;
+                  top: 0;
                   left: 220px;
-                  background-color: white;
-                  border-right: 1px solid $whitesmoke;
-                  &--name{
-                    width: 100%;
-                    color: black;
-                    display: inline-block;
-                    padding: 3px 15px;
-                    font-size: 11px;
-                    letter-spacing: 2px;
-                    @include hover__color(black, $lightgray, 1);
-                  }
                 }
               }
             }
