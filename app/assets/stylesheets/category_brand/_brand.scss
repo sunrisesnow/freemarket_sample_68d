@@ -1,0 +1,26 @@
+.brand__parent{
+  display: none;
+}
+
+.brands{
+  padding-bottom: 10px;
+  &:hover{
+    .brand__parent{
+      display: block;
+      position: absolute;
+      top: 122px;
+      left: 253px;
+      background-color: white;
+      border-right: 1px solid $whitesmoke;
+      &--name{
+        width: 200px;
+        color: black;
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 13px;
+        letter-spacing: 2px;
+        @include hover__color(white, $mainblueColor, 1);
+      }
+    }
+  }
+}
