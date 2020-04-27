@@ -1,0 +1,8 @@
+.content
+  %span 商品名
+  = item.name
+  %span 価格
+  = "#{item.price}円"
+  - item.images.each do |image|
+    = image_tag image.image.url
+
