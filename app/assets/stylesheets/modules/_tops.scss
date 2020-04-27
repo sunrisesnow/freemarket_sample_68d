@@ -224,6 +224,7 @@
         }
       }
       &__membership{
+
         background-image: url("bg-topMiddleDl-pict.jpg");
         background-position: bottom right;
         height: 400px;
@@ -413,7 +414,7 @@
   }
   
   section.app-banner {
-    background-image: url(bg-appBanner-pict.jpg);
+    background-image: url(../../images/bg-appBanner-pict.jpg);
     padding: 100px 40px;
     position: relative;
     background-size: cover;
