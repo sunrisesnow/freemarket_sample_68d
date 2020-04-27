@@ -57,71 +57,49 @@
           }
         }
       }
-      &__menu{
+    } 
+    &__bottom{
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      .header__left--content{
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        &__left{
-          position: relative;
-          display: flex;
-          &__category{
-            text-decoration: none;
-            padding: 0;
-            line-height: 38px;
-            &__tab{
-              display: flex;
-              align-items: center;
-              color: #333;
-              text-decoration: none;
-              line-height: 32px;
-              font-size: 14px;
-            }
-          }
-          &__brand{
-            display: flex;
-            line-height: 38px;
-            padding: 0 0 0 16px;
-            &__tab{
-              display: flex;
-              align-items: center;
-              color: #333;
-              text-decoration: none;
-              line-height: 32px;
-              font-size: 14px;
-            }
-          }
-        }
-        &__right{
-          .right__btn{
-            display: inline-block;
-            color: white;
-            padding: 5px 10px;
-            letter-spacing: 2px;
-            border-radius: 3px;
-            font-size: 13px;
-          }
-          .signup__btn{
-            background-color: $sign-up-btn;
-            opacity: 0.8;
-            margin-right: 10px;
-            transition: 0.7s;
-            &:hover{
-              opacity: 0.5;
-            }
-          }
-          .login__btn, .logout__btn{
-            color: $login-btn;
-            background-color: white;
-            border: 1px solid $login-btn;
-            transition: 0.7s;
-            &:hover{
-              background-color: $login-btn;
-              color: white;
-            }
-          }
+        .search__btn{
+          display: inline-block;
+          padding: 5px 10px;
+          color: black;
+          font-size: 13px;
+          font-weight: bold;
+          transition: 0.2s;
+          @include hover__color($mainblueColor, white, 1)
         }
       }
-    }  
+      .header__right--content{
+        display: flex;
+        .right__btn{
+          height: 30px;
+          display: inline-block;
+          padding: 5px 10px;     
+          font-size: 13px;
+          border-radius: 3px;
+          letter-spacing: 3px;
+          transition: 0.7s;
+        }
+        .signup__btn{
+          color: white;
+          background-color: $sign-up-btn;
+          opacity: 0.8;
+          margin-right: 20px;
+          @include hover__color(white, $sign-up-btn, 0.6)
+        }
+        .login__btn, .logout__btn{
+          color: $login-btn;
+          border: 1px solid $login-btn;
+          background-color: white;
+          @include hover__color(white, $login-btn, 1)
+        }
+      }
+    } 
   }
   
   
@@ -131,6 +109,7 @@
     &__upper{
       width: 100%;
       &__leading{
+        z-index: -1;
         height: 560px;
         background-image: url(../../images/bg-mainVisual-pict_pc.jpg);
         background-size: cover;
