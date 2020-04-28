@@ -16,14 +16,13 @@
 }
 
 // 子要素はカテゴリー名の共通項
-.category__child--name{
+.category__child--name, .category__grandchild--name{
   width: 100%;
   color: black;
-  display: inline-block;
+  display: block;
   padding: 3px 15px;
   font-size: 11px;
   letter-spacing: 2px;
-  @include hover__color(black, $lightgray, 1);
 }
 
 .categories{
@@ -35,11 +34,10 @@
       &--name{
         width: 100%;
         color: black;
-        display: inline-block;
+        display: block;
         padding: 10px 20px;
         font-size: 13px;
         letter-spacing: 2px;
-        @include hover__color(white, $mainblueColor, 1);
       }
       li {
         &:hover{
