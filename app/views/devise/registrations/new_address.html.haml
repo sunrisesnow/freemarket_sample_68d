@@ -1,6 +1,20 @@
 #top
   #registrations__header
-    = render "tops/new/header"
+    .member-header
+      %h1.member-header__logo
+        = link_to root_path, class: "member-header__logo--image" do
+          = image_tag "logo.png"
+      .member-header__progress
+        %li.member-header__progress-text
+          会員情報
+          .member-header__progress-round
+        %li.member-header__progress-active
+          お届け先情報入力
+          .member-header__progress-round-blue
+        %li.member-header__progress-text
+          完了
+          .member-header__progress-round
+        .member-header__progress-border
 
     .member-form
       .member-form__title
