@@ -32,13 +32,13 @@
                 = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--right__input'}
           .member-main--area
             .member-main--area__label
-              = f.label '送付先氏名(全角ふりがな)'
+              = f.label '送付先氏名(全角カナ)'
               %span.member-main__form--require 必須
             .member-main--area__name
               .member-main--area__name--left
-                = f.text_field :last_name_kana, {placeholder:"例) やまだ",class:'member-main__name--left__input'}
+                = f.text_field :last_name_kana, {placeholder:"例) ヤマダ",class:'member-main__name--left__input'}
               .member-main--area__name--right
-                = f.text_field :first_name_kana, {placeholder:"例) たろう",class:'member-main__name--right__input'}
+                = f.text_field :first_name_kana, {placeholder:"例) タロウ",class:'member-main__name--right__input'}
           .member-main--area  
             .member-main--area__label
               = f.label '郵便番号', {class: 'member-main__form--label'}
