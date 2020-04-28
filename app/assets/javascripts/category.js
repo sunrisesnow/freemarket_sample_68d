@@ -11,7 +11,7 @@ $(function(){
   });
 
   // カテゴリーボックスの動的背景色変化
-
+  
   // 親要素にmouseoverした時、親要素のcss変化（mouseoverした時も変化）
   $('.category__parent--name').mouseover(function(){
     $(this).css("background-color", "#3ccace").css("color", "white");
@@ -35,14 +35,18 @@ $(function(){
   $('.category__grandchild--name').mouseover(function(){
     let child  = $(this).parent().parent().parent().children('a');
     let parent = child.parent().parent().parent().children('a');
-    $(this).css("background-color", "lightgray")
+    $(this).css("background-color", "lightgray");
     child.css("background-color", "lightgray");
     parent.css("background-color", "#3ccace").css("color", "white");
   }).mouseout(function(){
     let child  = $(this).parent().parent().parent().children('a');
     let parent = child.parent().parent().parent().children('a');
-    $(this).css("background-color", "white")
+    $(this).css("background-color", "white");
     child.css("background-color", "white");
     parent.css("background-color", "white").css("color", "black");
   });
 });
+
+
+
+
