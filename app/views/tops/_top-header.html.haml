@@ -1,0 +1,23 @@
+.header
+  .header__block
+    .header__block__inner
+      .header__block__inner__icon
+        = link_to root_path do
+          = image_tag "logo.png", class:"furima-logo", width: "140px", height: "40px"
+      .header__block__inner__form
+        .header__block__inner__form__box
+          = text_field_tag :content, "", class: "header__block__inner__form__box__input", placeholder:"キーワードから探す"
+          .header__block__inner__form__box__btn
+            = link_to '#' do
+              = image_tag "icon-search 1.png", class: "header__block__inner__form__box__btn__pic"
+  .header__bottom
+    .header__left--content
+      = render "tops/category"                       
+      = render "tops/brand"
+    .header__right--content
+      - if user_signed_in?
+        =  link_to "ログアウト", destroy_user_session_path, method: :delete, class: "right__btn logout__btn"
+      - else
+        = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
+        = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 
+      
