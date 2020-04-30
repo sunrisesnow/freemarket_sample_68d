@@ -76,3 +76,5 @@ gem 'erb2haml'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
 gem 'ancestry'
+
+

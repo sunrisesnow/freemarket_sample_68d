@@ -7,7 +7,7 @@ parentAfterColor.color = "white";
 var childBeforeColor = new Object();
 childBeforeColor.backgroundColor = "white";
 var childAfterColor = new Object();
-childAfterColor.backgroundColor = "lightgray";
+childAfterColor.backgroundColor = "whitesmoke";
 
 
 $(function(){
