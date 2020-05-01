@@ -1,19 +1,20 @@
-.member-body
-  .member-case
+#top
+  #registrations__header
     .member-header
       %h1.member-header__logo
-        =link_to image_tag("logo.png", class:"member-header__logo--image"), "#"
+        = link_to root_path, class: "member-header__logo--image" do
+          = image_tag "logo.png"
       .member-header__progress
-        %li.member-header__progress--text
+        %li.member-header__progress-text
           会員情報
-          .member-header__progress--round
-        %li.member-header__progress--text
+          .member-header__progress-round
+        %li.member-header__progress-text
           お届け先情報入力
-          .member-header__progress--round
-        %li.member-header__progress--active
-          完了 
-          .member-header__progress--round-blue
-        .member-header__progress--border
+          .member-header__progress-round
+        %li.member-header__progress-active
+          完了
+          .member-header__progress-round-blue
+        .member-header__progress-border
 
     .member-form
       .member-form__title
@@ -21,6 +22,7 @@
       .member-form__for
         .member-main
           .member-main__form
-            = link_to "トップへ戻る", "#", class: 'member-main__form--btn2'
+            = link_to "トップへ戻る", root_path, class: 'member-main__form--btn'
 
 .member-footer
+  = render "footer"
