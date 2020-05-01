@@ -16,13 +16,13 @@
           .member-header__progress-round-blue
         .member-header__progress-border
 
-    .member-form
-      .member-form__title
-        %h2.member-form__title--text 登録が完了しました
-      .member-form__for
-        .member-main
-          .member-main__form
-            = link_to "トップへ戻る", root_path, class: 'member-main__form--btn'
+    .create-form
+      .create-form__title
+        %h2.create-form__title--text 登録が完了しました
+      .create-form__for
+        .create-main
+          .create-main__form
+            = link_to "トップへ戻る", root_path, class: 'create-main__form--btn'
 
 .member-footer
   = render "footer"
