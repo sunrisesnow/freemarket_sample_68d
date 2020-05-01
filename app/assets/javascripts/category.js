@@ -7,7 +7,7 @@ parentAfterColor.color = "white";
 var childBeforeColor = new Object();
 childBeforeColor.backgroundColor = "white";
 var childAfterColor = new Object();
-childAfterColor.backgroundColor = "lightgray";
+childAfterColor.backgroundColor = "whitesmoke";
 
 
 $(function(){
@@ -48,7 +48,7 @@ $(function(){
     let parent = child.parent().parent().parent().children('a');
     $(this).css(childAfterColor);
     child.css(childAfterColor);
-    parent.css(parentAfterColor)
+    parent.css(parentAfterColor);
   }).mouseout(function(){
     let child  = $(this).parent().parent().parent().children('a');
     let parent = child.parent().parent().parent().children('a');
