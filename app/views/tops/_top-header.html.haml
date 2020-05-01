@@ -53,8 +53,8 @@
                   出品数：１   
             .mypage__container--menu
               .menu__sales
-                = link_to "#", class: "proceeds__link " do
-                  売上金
+                = link_to  destroy_user_session_path,method: :delete, class: "proceeds__link " do
+                  ログアウト
                   %i.fas.fa-chevron-right
                 = link_to "#", class: "proceeds__link" do
                   フリマポイント

@@ -80,6 +80,7 @@
           padding-right: 5px;
         }
         &--menu{
+          padding-top: 3px;
           &--list{
             display: block;
             height: 23px;
@@ -539,7 +540,7 @@
   display: none;
 }
 .news__content{
-  right: 23%;
+  right: 26.5%;
   display: none;
 }
 .nothice__list{
@@ -547,7 +548,7 @@
   width: 300px;
   background-color: white;
   border-top: 1px solid $whitesmoke;
-  top: 122px;
+  top: 40px;
   position: absolute;
   padding: 55px 30px;
   text-align: center;
@@ -558,9 +559,11 @@
 }
 
 .news__content--link{
+  position: relative;
   &:hover{
     .news__content{
       display: block;
+      right: -110px;
       &:hover{
         .user__news--list{
           color: $mainblueColor;
@@ -570,9 +573,11 @@
   }
 }
 .todo__content--link{
+  position: relative;
   &:hover{
     .todo__content{
       display: block;
+      right: -90px;
     }
   }
 }
