@@ -5,4 +5,5 @@
   = "#{item.price}円"
   - item.images.each do |image|
     = image_tag image.image.url
+  = link_to '編集', edit_item_path(item)
 
