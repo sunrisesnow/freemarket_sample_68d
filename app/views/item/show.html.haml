@@ -1,0 +1,55 @@
+.main
+  .main-item
+    .main-item__content
+      .main-item__content--form
+        .itembox
+          %h2.itembox__name
+            product1
+          .itembox__image
+            %ul
+              %li
+                =image_src "free_1.jpg"
+                %ul
+                  %li
+                    =img_src "free_1.jpg"
+                  %li
+                    =img_src "free_2.jpg"
+                  %li
+                    =img_src "free_3.jpg"
+          .itembox__price
+            %span
+              ￥10000
+            .itembox__price--detail
+              %span
+                (税込)
+              %span
+                送料込み
+          .itembox__explaination
+            グーグルの画像認識システムは、まだ「ゴリラ問題」を解決できていない。
+            自分と友人の写真を「Google フォト」が「ゴリラ」とタグ付けしている。
+          .itembox__table
+          .itembox__option
+            %ul
+              %li.like-btn
+                = link_to '#' do
+                  %i.fa.fa-star
+                    お気に入り 0
+            %ul.optical
+              %li.report-btn
+                = link_to '#' do
+                  %i.fa.fa-flag
+                    不適切な商品の通報
+        .commentbox
+          %ul.commentbox__contents
+          %form{class: 'new__comment', action: '#',method:'post'}
+            %text_area.comment__body
+            %p.notice__message
+              相手のことを考え丁寧なコメントを心がけましょう。
+              %br
+              不快な言葉遣いなどは利用制限や退会処分となることがあります。 
+              %br             
+            %button.comment__btn
+              %i.fa.fa-comment
+                コメントする
+      .main-item__content--links
+      .main-item__content--related
