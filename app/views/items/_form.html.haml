@@ -14,7 +14,7 @@
                 = image_tag image.image.url, data: {index: i}
           = f.fields_for :images do |image|
             %div{ data: {index: image.index}, class: 'js-file_group'}
-              = image.file_field :image, class: 'js-file', required: :true
+              = image.file_field :image, class: 'js-file'
               .js-remove 削除
             - if @item.persisted?
               = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
@@ -54,7 +54,7 @@
         = f.label :商品の状態
         %span.field__label--require 必須
       .field__input
-        = f.select :status, [['新品、未使用', '1'], ['未使用に近い', '2'], ['目立った傷や汚れなし', '3'], ['やや傷や汚れあり', '4'], ['傷や汚れあり', '5'], ['全体的に状態が悪い', '6']], include_blank: '選択して下さい', required: :true
+        = f.collection_select :status_id, Status.all, :id, :name, prompt: "選択してください", required: :true, id: 'item-prefecture'
   .item-delivery
     %p 配送について
     .field
@@ -68,13 +68,13 @@
         = f.label :発送元の地域
         %span.field__label--require 必須
       .field__input
-        = f.text_field :prefectures, required: :true
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt: "選択してください", required: :true
     .field
       .field__label
         = f.label :発送までの日数
         %span.field__label--require 必須
       .field__input
-        = f.text_field :delivery_date, required: :true
+        = f.collection_select :delivery_date_id, DeliveryDate.all, :id, :name, prompt: "選択してください", required: :true
   .item-price
     %p 価格（¥300〜9,999,999）
     .field
