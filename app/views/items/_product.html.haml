@@ -1,0 +1,14 @@
+-@items.each do |item|
+  .item-list.hover
+    = link_to '#',class: "item" do
+      = image_tag 'pict-reason-02.jpg', class: 'item-img'
+    .item-list__body
+      %h3.name 
+        =item.name
+      .details
+        %ul
+          %li 
+            =item.price
+          %li#like 0
+        %p.detail (税込)
+          

@@ -1,0 +1,46 @@
+.item-list__main  
+  %nav.category-guide
+    %ul.category-guide__box
+      %li.category-guide__box__one
+        %a.category-guide__box__one__title{href: '#'} FURIMA
+      %li.category-guide__box__one
+        %a.category-guide__box__one__sub{href: '#'} カテゴリー
+      %li.category-guide__box__one
+        %a.category-guide__box__one__sub{href: '#'} レディース
+      %li.category-guide__box__one
+        %a.category-guide__box__one__sub{href: '#'} トップス
+  %section.category-list
+    .category-list__title
+      %h2.category-list__title__box トップス
+    .category-list__sub
+      %ul.category-list__sub__parents
+        %li.category-list__sub__parents__one
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one  
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one  
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one  
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one  
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+        %li.category-list__sub__parents__one  
+          %a.category-list__sub__parents__one__inner{href: '#'} Tシャツ/カットソー(半袖/袖なし)
+    .category-list__box
+      .category-list__items
+        = render "/items/product"
+
+
+
+
+  %section.app-banner
+    .inner
+      %h2.inner__title だれでもかんたん、人生を変えるフリマアプリ
+      %p.inner__text 今すぐ無料ダウンロード！
+      .inner__icon
+        = link_to '#', class: "footer-banner" do
+          = image_tag 'app-store.svg', alt: 'app-store', class: 'link-app'
+        = link_to '#', class: "footer-banner" do
+          = image_tag 'google-play.svg', alt: 'google-play', class: 'link-google'
