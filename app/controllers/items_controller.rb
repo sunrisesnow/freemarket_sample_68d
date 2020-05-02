@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
   def set_item
     @item = Item.find(params[:id])
@@ -38,15 +38,17 @@ class ItemsController < ApplicationController
     params.require(:item).permit(
       :name, 
       :explanation,
-      :status,
+      :status_id,
       :delivery_charge_flag,
-      :prefectures,
-      :delivery_date,
+      :prefecture_id,
+      :delivery_date_id,
       :price, 
       images_attributes: [
         :id,
         :image
       ]
     )
+    # userの登録機能実装が完了したら生かす
+    # .merge(user_id: current_user.id)
   end
 end
