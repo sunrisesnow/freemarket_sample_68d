@@ -25,7 +25,6 @@ $(function () {
     const file = e.target.files[0];
     const blobUrl = window.URL.createObjectURL(file);
 
-    console.log(targetIndex)
     if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
       img.setAttribute('image', blobUrl);
     } else {
