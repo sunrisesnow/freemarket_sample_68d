@@ -6,7 +6,8 @@ class Address < ApplicationRecord
   validates :last_name,:first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
   validates :last_name_kana,:first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :postal_code, format: { with: /\A\d{7}\z/}
-  
+
+  validates :phone_number, allow_blank: true, format: { with: /\A(0{1}\d{9,10})\z/}
 
   enum prefectures: {
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

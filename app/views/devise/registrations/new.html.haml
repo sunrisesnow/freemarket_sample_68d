@@ -1,6 +1,20 @@
 #top
   #registrations__header
-    = render "tops/new/header"
+    .member-header
+      %h1.member-header__logo
+        = link_to root_path, class: "member-header__logo--image" do
+          = image_tag "logo.png"
+      .member-header__progress
+        %li.member-header__progress-active
+          会員情報
+          .member-header__progress-round-blue
+        %li.member-header__progress-text
+          お届け先情報入力
+          .member-header__progress-round
+        %li.member-header__progress-text
+          完了
+          .member-header__progress-round
+        .member-header__progress-border
   = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
     -# 
       FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
@@ -30,12 +44,14 @@
               = f.label :password
               %span.field__label--require 必須
             .field__form
-              = f.password_field :password, autocomplete: "password",placeholder: "7文字以上の半角英数字", class: "pwform"
+              = f.password_field :password, autocomplete: "password",placeholder: "7文字以上の半角英数字"
             .field__form
-              = f.password_field :password_confirmation, autocomplete: "password_confirmation", placeholder: "もう一度入力", class: "pwform"
+              = f.password_field :password_confirmation, autocomplete: "password_confirmation", placeholder: "もう一度入力"
             .pw__checkbox
               %input{ type: "checkbox", id: "checkpw" }
                 パスワードを表示する
+            .nav__password
+              ※英字と数字の両方を含めて入力
           .nav
             .nav__title
               本人確認
@@ -71,6 +87,25 @@
               != sprintf(f.date_select(:birthday, prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:Time.now.year - 120, date_separator:'%s'),'年','月')
               .field__birthday--day
                 日
+              .nav__information.personal
+                ※本人情報は正しく入力してください。会員登録後、修正いただく場合にはお時間を頂く場合があります。
+              .nav__information 
+                「次へ進む」のボタンを押すことにより、
+                = link_to "#", class: "confirmation__link" do
+                  利用規約
+                .nav__information--center
+                  に同意したものとみなします。      
           .actions
             = f.submit "次へ進む", class: "next__btn"
+          .nav__personal--information
+            = link_to "#", class: "nav__personal--information--link" do
+              本人情報の登録について＞
+          .nav__privacy--information
+            This site is protected by reCAPTCHA and the Google
+            = link_to "#", class: "nav__privacy--information--link" do
+              Privacy Policy
+            and
+            = link_to "#", class: "nav__privacy--information--link" do
+              Terms of Service
+            apply.
   = render "footer"

@@ -1,9 +1,9 @@
 .wrapper
-  = render "tops/index/top-header"
-  = render "tops/index/upper-main"
-  = render "tops/index/lower-main"
-  = render "tops/index/top-footer"
-  .sell-btn 
+  = render "top-header"
+  = render "upper-main"
+  = render "lower-main"
+  = render "top-footer"
+  .sell-btn
     = link_to(new_item_path, class: 'sell-btn__link') do
       %p.sell-btn__text 出品する
       = image_tag "icon_camera.png", class: "sell-btn__image", width: "54px", height: "54px"
