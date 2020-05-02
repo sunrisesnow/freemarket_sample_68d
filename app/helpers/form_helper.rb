@@ -9,14 +9,14 @@ module FormHelper
         options[:class] = "error-class"              
         error_contents = create_error_div(attribute, error_messages)            
       end
-      # 従来の入力フォーム と 生成されたエラーメッセージ を連結して返す             
-      block.call + error_contents || ""                                         
+      # 従来の入力フォーム と 生成されたエラーメッセージ を連結して返す  
+      block.call + error_contents    
     end                                                                                                                             
     # エラーメッセージのHTMLタグを作成する
     def create_error_div(attribute, messages)    
       # content_tag でHTMLタグを生成                               
-      @template.content_tag(:ul, class: "error-class") do
-        messages.each do|  message|                                              
+      @template.content_tag(:div, class: "error-class") do
+        messages.each do|message|                                              
           @template.concat(@template.content_tag(:div, message))                
         end                   
       end          

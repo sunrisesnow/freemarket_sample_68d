@@ -4,3 +4,10 @@
     border-bottom: 1px solid $color;
   }
 }
+@mixin hover__color($color, $background-color, $opacity){
+  &:hover{
+    color: $color;
+    background-color: $background-color;
+    opacity: $opacity;
+  }
+}

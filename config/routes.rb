@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :tops, only: [:new]
   resources :items
   get '/lists', to: 'items#index'
+  resources :categories, only: [:index]
+
 end

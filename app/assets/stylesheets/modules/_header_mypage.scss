@@ -1,0 +1,99 @@
+.mypage__container{
+  position: absolute;
+  z-index: 1000;
+  top: 122px;
+  right: 9.7%;
+  width: 300px;
+  display: none;
+  a{
+    color: black;
+  }
+  .mypage__container--top{
+    width: 100%;
+    height: 165px;
+    background-color: white;
+    text-align: center;
+    .user__mypage--big--icon{
+      border-radius: 100px;
+      position: absolute;
+      top: 6%;
+      right: 42%;
+    }
+    .user__details{
+      padding-top: 20px;
+      font-size: 13px;
+      &--link{
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .mypage__container--menu{
+    background-color: white;
+    padding: 10px 10px 0;
+    width: 100%;
+    .menu__sales{
+      margin-bottom: 10px;
+      .proceeds__link{
+        width: 100%;
+        display: inline-block;
+        padding: 10px;
+        border: 1px solid $lightgray;
+        background-color: $whitesmoke;
+        opacity: 0.8;
+        font-weight: normal;
+        font-size: 13px;
+        position: relative;
+        &:hover{
+          opacity: 0.6;
+          .fa-chevron-right{
+            color: black;
+            transform: scale(1.5);	/*画像の拡大率*/
+	          transition-duration: 0.3s;
+          }
+        }
+        .fa-chevron-right{
+          transition-duration: 0.3s;
+          color: $lightgray;
+          position: absolute;
+          right: 10px;
+          top: 12.5px;
+        }
+      }
+    }
+    &--link{
+      width: 100%;
+      display: inline-block;
+      padding: 10px;
+      background-color: $mainWhiteColor;
+      border-top: 1px solid $lightgray;
+      font-weight: normal;
+      font-size: 13px;
+      position: relative;
+      &:hover{
+        opacity: 0.8;
+        .fa-chevron-right{
+          color: black;
+          transform: scale(1.5);	/*画像の拡大率*/
+	        transition-duration: 0.3s;
+        }
+      }
+      .fa-chevron-right{
+        transition-duration: 0.3s;
+        color: $lightgray;
+        position: absolute;
+        right: 10px;
+        top: 12.5px;
+      }
+    }
+  }        
+}
+
+.mypage__content--link{
+  &:hover{
+    .mypage__container{
+      display: block;
+    }
+  }
+}

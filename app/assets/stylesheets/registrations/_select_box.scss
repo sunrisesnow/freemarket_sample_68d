@@ -3,23 +3,18 @@
 
 // 新規登録（生年月日）のセレクトボックス
 select::-ms-expand {
-	display: none;
+  display: block;
 }
+
 select {
-  padding-left: 15px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url("pulldown.png");
-  background-repeat: no-repeat;
-  background-size: 10px 20px;
-  background-position: right 5px center;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
   font-size: 15px;
   margin-bottom: 10px;
   height: 50px;
   width:72px;
   background-color:white;
-  border: 1px solid #ccc;
+  border: 1px solid $lightgray;
 }
 select:focus{
   border: 1px solid $skyblue;
@@ -47,4 +42,6 @@ select:focus{
   width:90px;
   font-size: 15px;
   border-radius: 1px;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist; 
 }
