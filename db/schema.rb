@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 2020_05_02_144921) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.string "image", null: false
@@ -39,10 +47,10 @@ ActiveRecord::Schema.define(version: 2020_05_02_144921) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "buyer_id"
-    t.integer "saler_id"
+    t.integer "saler_id", null: false
     t.string "name", null: false
     t.text "explanation"
-    t.string "delivery_charge_flag"
+    t.string "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,13 +61,6 @@ ActiveRecord::Schema.define(version: 2020_05_02_144921) do
     t.integer "trading_status_id", default: 1
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["saler_id"], name: "index_items_on_saler_id"
-
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "ancestry"
-    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
