@@ -41,8 +41,9 @@
       .field__label
         = f.label :カテゴリー
         %span.field__label--require 必須
-      .field__input
-        = text_field_tag('')
+      %ul.field__input--category 
+        %li
+          = f.select :category, @parents, {}, {id: 'parent_category', required: :true}
     .field
       .field__label
         = f.label :ブランド

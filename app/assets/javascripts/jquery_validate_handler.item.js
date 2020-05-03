@@ -16,6 +16,9 @@ $(function () {
       "item[images_attributes][0][image]": {
         required: true,
       },
+      "item[category]": {
+        required: true,
+      },
       "item[status_id]": {
         required: true,
       },
@@ -37,6 +40,9 @@ $(function () {
         required: "画像がありません",
       },
       "item[status_id]": {
+        required: "選択してください",
+      },
+      "item[category]": {
         required: "選択してください",
       },
       "item[delivery_charge_flag]": {
