@@ -1,11 +1,9 @@
 class ChangeColumnToNotNull < ActiveRecord::Migration[5.2]
-  def change
-    def up
-      change_column :imtes, :saler_id, :integer, null: true
-    end
-  
-    def down
-      change_column :items, :saler_id, :integer, null: false
-    end
+  def up
+    change_column :items, :saler_id, :integer, null: true
+  end
+
+  def down
+    change_column :items, :saler_id, :integer, null: false
   end
 end
