@@ -52,13 +52,19 @@ input:focus{
   font-size: 13px;
   font-weight: bold;
   padding-bottom: 4px;
-  & span{
-    background-color: $skyblue;
-    color: white;
+  span {
     font-size: 11px;
     padding: 5px;
     border-radius: 3px;
     padding-bottom: 3px;
+  }
+  &--require{
+    background-color: $skyblue;
+    color: white;
+  }
+  &--any{
+    background-color: $lightgray;
+    color: white;
   }
 }
 
