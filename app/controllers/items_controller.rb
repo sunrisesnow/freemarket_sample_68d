@@ -65,7 +65,5 @@ class ItemsController < ApplicationController
         :image
       ]
     ).merge(saler_id: current_user.id)
-    # userの登録機能実装が完了したら生かす
-    # .merge(user_id: current_user.id)
   end
 end
