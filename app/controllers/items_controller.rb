@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, except: [:new, :create, :index]
+  before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
   def index
     @items = Item.includes(:images).order('created_at DESC')
   end
@@ -7,9 +7,25 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
+    @parents = ["選択してください"]
+    Category.where(ancestry: nil).each do |parent|
+      @parents << parent.name
+    end
+  end
+
+  def category_children
+    @children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  end
+
+  def category_grandchildren
+    @grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   def create
+    @parents = ["選択してください"]
+    Category.where(ancestry: nil).each do |parent|
+      @parents << parent.name
+    end
     @item = Item.new(item_params)
     if @item.save
       redirect_to items_path
@@ -38,6 +54,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(
       :name, 
       :explanation,
+      :category_id,
       :status_id,
       :delivery_charge_flag,
       :prefecture_id,
@@ -47,7 +64,7 @@ class ItemsController < ApplicationController
         :id,
         :image
       ]
-    )
+    ).merge(saler_id: current_user.id)
     # userの登録機能実装が完了したら生かす
     # .merge(user_id: current_user.id)
   end
