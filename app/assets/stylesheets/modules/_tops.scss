@@ -2,9 +2,8 @@
 .wrapper{
   width: 100%;
   .header{
-    padding: 0 60px;
+    padding: 0 10%;
     &__block{
-      max-width: 1040px;
       width: 100%;
       min-height: 82px;
       margin: 0 auto;
@@ -61,7 +60,6 @@
     &__bottom{
       display: flex;
       justify-content: space-between;
-      padding: 0 30px;
       .header__left--content{
         display: flex;
         .search__btn{
@@ -72,11 +70,33 @@
           letter-spacing: 1px;
           font-weight: bold;
           transition: 0.2s;
-          @include hover__color($mainblueColor, white, 1)
+          @include hover__color($mainblueColor, white, 1);
         }
       }
       .header__right--content{
         display: flex;
+        &--icon{
+          color: gray;
+          padding-right: 5px;
+        }
+        &--menu{
+          padding-top: 3px;
+          &--list{
+            display: block;
+            height: 23px;
+            line-height: 23px;
+            margin-left: 30px;
+            color: black;
+            font-weight: normal;
+            font-size: 14px;
+            @include hover__color($mainblueColor, white, 1);
+            &:hover{
+              .header__right--content--icon{
+                color: $mainblueColor;
+              }
+            }
+          }
+        }
         .right__btn{
           height: 30px;
           display: inline-block;
@@ -93,18 +113,30 @@
           margin-right: 20px;
           @include hover__color(white, $sign-up-btn, 0.6)
         }
-        .login__btn, .logout__btn{
+        .login__btn{
           color: $login-btn;
           border: 1px solid $login-btn;
           background-color: white;
           @include hover__color(white, $login-btn, 1)
         }
+        .user__mypage{
+          width: 110px;
+          position: relative;
+          &--icon{
+            border-radius: 100px;
+            position: absolute;
+            top: -4px;
+          }
+          p{
+            position: absolute;
+            letter-spacing: 1px;
+            top: 0;
+            right: 0;
+          }
+        }
       }
     } 
   }
-  
-  
-  
   .main{
     width: 100%;
     &__upper{
@@ -116,7 +148,6 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top center;
-        position: relative;
         padding: 0 60px;
         display: flex;
         align-items: center;
@@ -262,27 +293,30 @@
     }
   }
   
-  .buy{
-    &__btn{
-      width: 120px;
-      background: #3CCACE;
-      text-align: center;
-      border-radius: 4%;
-      bottom: 32px;
-      right: 32px;
-      position: fixed;
+  .sell-btn{
+    width: 120px;
+    background: #3CCACE;
+    text-align: center;
+    border-radius: 4%;
+    bottom: 32px;
+    right: 32px;
+    position: fixed;
+    &:hover{
+      transform: scale(1.1);	/*画像の拡大率*/
+      transition-duration: 0.3s;
+    }
+    &__link{
+      display: block;
       padding: 15px;
-      &:hover{
-        transform: scale(1.1);	/*画像の拡大率*/
-	      transition-duration: 0.3s;
-      }
-      &__text{
-        color: #fff;
-        display: block;
-        font-size: 18px;
-        text-decoration: none;
-        margin-bottom: 5px;
-      }
+      width: 120px;
+      height: 100%;
+    }
+    &__text{
+      color: #fff;
+      display: block;
+      font-size: 18px;
+      text-decoration: none;
+      margin-bottom: 5px;
     }
   }
   
@@ -408,8 +442,6 @@
       .hover:hover {
         opacity: 0.6;
       }
-  
-  
     }
   }
   
@@ -499,6 +531,56 @@
       font-size: 14px;
     }
   }
-  
 }
 
+.app__google--link{
+  &:hover{
+    opacity: 0.7;
+  }
+}
+.todo__content{
+  right: 14%;
+  display: none;
+}
+.news__content{
+  right: 26.5%;
+  display: none;
+}
+.nothice__list{
+  z-index: 1000;
+  width: 300px;
+  background-color: white;
+  border-top: 1px solid $whitesmoke;
+  top: 40px;
+  position: absolute;
+  padding: 55px 30px;
+  text-align: center;
+  color:$lightgray;
+  p{
+    padding-top: 35px;
+  }
+}
+
+.news__content--link{
+  position: relative;
+  &:hover{
+    .news__content{
+      display: block;
+      right: -110px;
+      &:hover{
+        .user__news--list{
+          color: $mainblueColor;
+        }
+      }
+    }
+  }
+}
+.todo__content--link{
+  position: relative;
+  &:hover{
+    .todo__content{
+      display: block;
+      right: -90px;
+    }
+  }
+}

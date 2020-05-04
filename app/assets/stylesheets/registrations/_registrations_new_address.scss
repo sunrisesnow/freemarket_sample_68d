@@ -1,77 +1,108 @@
-.member-body {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1;
-  background-color: $mainWhite2Color;
-  .member-case {
+#user_nickname, #user_postal_code, #user_password, #user_password_confirmation, #user_last_name, #user_first_name, #user_last_name_kana, #user_first_name_kana{
+  font-size: 15px;
+  color: black;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+#top{
+  background-color: $whitesmoke;
+  #registrations__header{
     width: 700px;
     margin: 0 auto;
-    padding-bottom: 128px;
-    .member-header {
-      height: 128px;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-around;
-      &__logo {
-        margin-top: 40px;
-        &--image {
-          height: 50px;
-          width: 185px;
-        }
-      }
+  }
+}
 
-      &__progress {
-        margin-top: 40px;
-        list-style: none;
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        &-text {
-          margin-right: 40px;
-          z-index: 1;
-          color: $maingrayColor;
-        }
-        &-active {
-          @extend .member-header__progress--text;
-          font-weight: 600;
-          color: $mainblueColor;
-        }
-        &-round {
-          height: 12px;
-          width: 12px;
-          margin: 8px auto 0;
-          border-radius: 50%;
-          background-color: $maingray2Color;
-        }
-        &-round-blue {
-          @extend .member-header__progress-round;
-          background-color: $mainblueColor;
-        }
-        &-border {
-          height: 2px;
-          width: 220px;
-          position: absolute;
-          top: 25px;
-          left: 20px;
-          background-color: $maingray2Color;
-        }
+
+.member-header {
+  height: 128px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  &__logo {
+    margin-top: 40px;
+    &--image {
+      & img {
+      height: 50px;
+      width: 185px;
       }
     }
+  }
+
+  &__progress {
+    margin-top: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    &-text {
+      margin-right: 40px;
+      z-index: 1;
+      color: $maingrayColor;
+    }
+    &-active {
+      margin-right: 40px;
+      z-index: 1;
+      font-weight: 600;
+      color: $mainblueColor;
+    }
+    &-round {
+      height: 12px;
+      width: 12px;
+      margin: 8px auto 0;
+      border-radius: 50%;
+      background-color: $maingray2Color;
+    }
+    &-round-blue {
+    height: 12px;
+    width: 12px;
+    margin: 8px auto 0;
+    border-radius: 50%;
+    background-color: $mainblueColor;
+    }
+    &-border {
+      height: 2px;
+      width: 220px;
+      position: absolute;
+      top: 30px;
+      left: 20px;
+      background-color: $maingray2Color;
+    }
+  }
+}
+    
+
+
+.nav__privacy--information{
+  background-color: $whitesmoke;
+  height: 50px;
+  padding-top: 11px;
+  font-size: 8px;
+  color: gray;
+  margin-top: 25px;
+  &--link{
+    color: $skyblue;
+    @include hover($skyblue, 0.8);
+  }
+}
 
     .member-form {
-      background-color: $mainWhiteColor;
+      width: 700px;
+      justify-content: center;
+      background-color: white;
+      margin: 0 auto;
       &__title {
        border-bottom: 1px solid $mainWhite2Color;
         &-text {
-          font-size: 25px;
-          font-weight: 600;
           text-align: center;
-          line-height: 1.5;
-          padding-top: 32px; 
+          padding: 30px 0 30px;
+          border-bottom: 1px solid whitesmoke;
+          font-weight: normal;
         }
       }
       &__for {
-        padding: 24px 16px 40px;
+        padding: 7px 16px 40px;
         .field_with_errors {
           display: inline;
         }          
@@ -86,93 +117,185 @@
            color: red;
         }
         .member-main {
-          max-width: 343px;
+          width: 306px;
           margin: 0 auto;
-          &__form {
-            margin-top: 24px;
-            position: relative;
-            &--input {
-              height: 48px;
-              width: 328px;
-              margin-top: 8px;
-              padding-left: 16px;
-              font-size: 16px;
-              border: 1px solid $maingray2Color;
-            }
-            &--label {
-              font-weight: 600;
-            }
-            &--require {
-              margin-left: 8px;
-              padding: 3px 5px;
-              font-size: 12px;
-              vertical-align: top;
-              color: $mainWhiteColor;
-              background-color: $mainblueColor;
-            }
-            &--info {
-              margin-top: 8px;
-              line-height: 2.0;
-              color: $maingrayColor;
-            }
-            &--identify {
-              font-size: 16px;
-              font-weight: 600;
-            }
-            &--text {
-              margin-top: 8px;
-              line-height: 1.5;
-            }
-            &--prefecture {
-              @extend .member-main__form--input;
-              width: 346px;
-              background-color: $mainWhiteColor;
-            }
-            &--select {
-              margin-top: 8px;  
-            }
-            .select__text {
-              position: absolute;
-              right: 54px;
-              top: 39px;
-            }
-            .year,.month,.day {
-              height: 48px;
-              width: 76px;
-              background-color: $mainWhiteColor;
-            }
-            &--text-center {
-              padding-top: 24px;
-              line-height: 1.5;
-              text-align: center;
-            }
-            &--btn {
-              width: 100%;
+          &--area {
+            &__flabel {
               margin-top: 24px;
-              font-size: 16px;
-              line-height: 48px;
-              border: 1px solid $mainblueColor;
-              color: $mainWhiteColor;
-              background-color: $mainblueColor;
+              position: relative;
+              font-size: 13px;
+              font-weight: bold;
+              text-align: left;
+              & span {
+                background-color: $skyblue;
+                color: white;
+                font-size: 11px;
+                padding: 5px;
+                border-radius: 3px;
+                padding-bottom: 3px;
+              }
             }
-            &--btn2 {
-              @extend .member-form__title2--btn;
+            &__label {
+              text-align: left;
+              position: relative;
+              font-size: 13px;
+              font-weight: bold;
+              & span {
+                background-color: $skyblue;
+                color: white;
+                font-size: 11px;
+                padding: 5px;
+                border-radius: 3px;
+                padding-bottom: 3px;
+              }
+              &--info {
+                position: absolute;
+                top: 0;
+                right: 110px;
+                color: gray;
+                letter-spacing: 2px;
+                font-size: 11px;
+              }
+              &--input {
+                height: 48px;
+                width: 328px;
+                margin-top: 8px;
+                padding-left: 16px;
+                font-size: 16px;
+                border: 1px solid $maingray2Color;
+              }
+            }
+            &__name {
+              display: flex;
+              height: 80px;
+              text-align: left;
+              &--left {
+                width: 148px;
+                height: 80px;
+                margin-right: 10px;
+                & input {
+                  width: 148px;
+                  font-size: 15px;
+                  color: black;
+                  height: 40px;
+                  padding: 0 10px;
+                  border-radius: 5px;
+                }
+              }
+              &--right {
+                width: 148px;
+                height: 80px;
+                & input {
+                  width: 148px;
+                  font-size: 15px;
+                  color: black;
+                  height: 40px;
+                  padding: 0 10px;
+                  border-radius: 5px;
+                }
+              }            
+            }
+            &__form {
+              height: 60px;
+              text-align: left;
+              & input {
+                font-size: 15px;
+                color: black;
+                height: 40px;
+                padding: 0 10px;
+                border-radius: 5px;
+                width: 306px;
+              }
+              &--prefecture {
+                width: 306px;
+                background-color: $mainWhiteColor;
+              }
+            }
+            &__pform {
+              height: 80px;
+              text-align: left;
+              & input {
+                font-size: 15px;
+                color: black;
+                height: 40px;
+                padding: 0 10px;
+                border-radius: 5px;
+                width: 306px;
+              }
             }
           }
-          &__name {
-            display: flex;
-            justify-content: space-between;
-            &--half {
-              
-              &__input {
-                @extend .member-main__form--input;
-                margin-right: 8px;
-                width: 80%;
-              }
+          &--action {
+            padding-top: 40px;
+            &__btn {
+              display: inline-block;
+              background-color: #00BFFF;
+              width: 306px;
+              opacity: 0.8;
+              padding: 15px 0;
+              color: white;
+              transition: 1s;
+
             }
           }
         }
       }
     }
-  }
+        
+    .registrations__footer{
+      padding-top: 35px;
+      text-align: center;
+      font-size: 11px;
+      .footer__menu{
+        text-align: center;
+        padding: 40px 0 20px;
+        &--btn{
+          color:gray;
+          margin: 10px 10px 0;
+          @include hover(black,0.8);
+        }
+      }
+      .footer__logo{
+        padding: 40px 0;
+        &--btn{
+          @include hover($lightgray,0.8);
+        }
+      }
+    }
+
+    .create-form{
+      background-color: $mainWhiteColor;
+      height: 374px ;
+      &__title{
+       border-bottom: 1px solid $mainWhite2Color;
+       height: 160px;
+       &--text{
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 1.5;
+        padding-top: 62px;
+        text-align: center;
+       }
+      }
+      &--btn{
+        margin: 0 auto;
+        padding: 16px 120px;
+        font-size: 16px;
+        line-height: 48px;
+        text-decoration: none;
+        border: 1px solid $mainblueColor;
+        background-color: $mainblueColor;
+        color: $mainWhiteColor;
+      }
+      &__for{
+        padding: 40px 16px 40px;
+        text-align: center;
+        .field_with_errors{
+          display: inline;
+        }          
+      }
+    }
+
+.member-footer {
+  background-color: whitesmoke;;
 }
+

@@ -3,6 +3,15 @@
   display: none;
 }
 
+.category__search{
+  position: relative;
+  margin-left: 15px;
+  .icon__category{
+    position: absolute;
+    top: 6.5px;
+    left: -10px;
+  }
+}
 .category__icon,.brands__icon{
   color: $mainblueColor;
 }
@@ -13,6 +22,7 @@
   height: 560px;
   background-color: white;
   border-right: 1px solid $whitesmoke;
+  z-index: 1000;
 }
 
 // 子要素はカテゴリー名の共通項
@@ -30,6 +40,7 @@
   &:hover{
     .category__parent{
       top: 122px;
+      left: 10.3%;
       display: block;
       &--name{
         width: 100%;

@@ -2,7 +2,7 @@
   %ul
     %li
       = link_to categories_path, class: "category__search search__btn" do
-        %i.fas.fa-bars.category__icon
+        = image_tag "icon_category.png", height: "15px", width: "15px", class: "icon__category"
         カテゴリーから探す
       %ul.category__parent.category__list
         - @parents.each do |parent|  
@@ -18,7 +18,7 @@
                 - parent.children.each do |child|
                   %li
                     = link_to "#", class: "category__child--name" do
-                      =child.name
+                      = child.name
                     %ul.category__grandchild.category__list
                       - child.children.each do |grandchild|
                         %li
