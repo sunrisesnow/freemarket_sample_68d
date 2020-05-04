@@ -106,7 +106,7 @@
               }
             }
           }
-          &__options {
+          &__option {
             display: flex;
             justify-content: space-between;
             & ul {
@@ -172,7 +172,6 @@
         }
       }
       &--links {
-        list-style: none;
         & li {
           float: left;
           & a {
@@ -180,11 +179,14 @@
             color: #3CCACE;
           }
         }
+        & li:last-child {
+          float: right;
+        }
       }
       &--related {
         & a {
           display: block;
-          margin: 24px 0 8px;
+          margin: 50px 0 8px;
           color: #3CCACE;
           text-decoration: none;
           font-weight: bold;
@@ -194,12 +196,4 @@
       }
     }
   }
-}
-
-.fa {
-  display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
 }
