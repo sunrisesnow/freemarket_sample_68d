@@ -22,6 +22,9 @@ $(function () {
       "item[status_id]": {
         required: true,
       },
+      "item[category_id]": {
+        required: true,
+      },
       "item[delivery_charge_flag]": {
         required: true,
       },
@@ -42,7 +45,7 @@ $(function () {
       "item[status_id]": {
         required: "選択してください",
       },
-      "item[category]": {
+      "item[category_id]": {
         required: "選択してください",
       },
       "item[delivery_charge_flag]": {
@@ -105,9 +108,9 @@ $(function () {
         flag = false;
       }
     });
-    $('#new_item select').each(function(e) {
-      if ($('#new_item select').eq(e).val() === "") {
-        $('#new_item select').eq(e).valid();
+    $('#new_item select:required').each(function(e) {
+      if ($('#new_item select:required').eq(e).val() === "") {
+        $('#new_item select:required').eq(e).valid();
         flag = false;
       }
     });

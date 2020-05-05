@@ -7,10 +7,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @parents_array = 
-    @parents = ["選択してください"]
-    Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").each do |parent|
-      @parents << parent.name
+    @parents = []
+    Category.where(ancestry: nil).each do |parent|
+      unless parent.name == "カテゴリー一覧"
+        @parents << parent.name
+      end
     end
   end
 
@@ -19,12 +20,12 @@ class ItemsController < ApplicationController
   end
 
   def category_grandchildren
-    @grandchildren = Category.find_by(name: "#{params[:child_name]}").children
+    @grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+    if @item.save!
       redirect_to items_path
     else
       render :new
@@ -61,8 +62,6 @@ class ItemsController < ApplicationController
         :id,
         :image
       ]
-    )
-    # userの登録機能実装が完了したら生かす
-    # .merge(user_id: current_user.id)
+    ).merge(saler_id: current_user.id)
   end
 end
