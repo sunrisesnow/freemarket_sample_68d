@@ -1,0 +1,5 @@
+- @items.each do |item|
+  - category = Category.find(item.category_id)
+  = category.name
+  = item.name
+  = item.price
