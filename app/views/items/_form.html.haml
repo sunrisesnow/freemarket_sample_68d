@@ -1,0 +1,88 @@
+-# = form_for(@item, builder:FormHelper::FormWithErrorMessageBuilder) do |f|
+= form_for @item do |f|
+  .item-image
+    .field
+      .field__label
+        = f.label :出品画像
+        %span.field__label--require 必須
+        %p 最大10枚までアップロードできます
+      .field__input
+        #image-box
+          #previews
+            - if @item.persisted?
+              - @item.images.each_with_index do |image, i|
+                = image_tag image.image.url, data: {index: i}
+          = f.fields_for :images do |image|
+            %div{ data: {index: image.index}, class: 'js-file_group'}
+              = image.file_field :image, class: 'js-file'
+              .js-remove 削除
+            - if @item.persisted?
+              = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+          - if @item.persisted?
+            %div{ class: 'js-file_group', data: {index: @item.images.count}}
+              = file_field_tag :image, name: "item[images_attributes][#{@item.images.count}][image]", class: 'js-file'
+              .js-remove 削除
+  .item-info
+    .field
+      .field__label
+        = f.label :商品名
+        %span.field__label--require 必須
+      .field__input
+        = f.text_field :name, required: :true
+    .field
+      .field__label
+        = f.label :商品の説明
+        %span.field__label--require 必須
+      .field__input
+        = f.text_area :explanation, required: :true
+  .item-detail
+    %p 商品の詳細
+    .field
+      .field__label
+        = f.label :カテゴリー
+        %span.field__label--require 必須
+      %ul.field__input--category
+        %li
+          = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
+  
+    .field
+      .field__label
+        = f.label :ブランド
+        %span.field__label--any 任意
+      .field__input
+        = text_field_tag('')
+    .field
+      .field__label
+        = f.label :商品の状態
+        %span.field__label--require 必須
+      .field__input
+        = f.collection_select :status_id, Status.all, :id, :name, prompt: "選択してください", required: :true, id: 'item-prefecture'
+  .item-delivery
+    %p 配送について
+    .field
+      .field__label
+        = f.label :配送料の負担
+        %span.field__label--require 必須
+      .field__input
+        = f.select :delivery_charge_flag, [['送料込み(出品者負担)', '1'], ['着払い(購入者負担)', '2']], include_blank: '選択して下さい', required: :true
+    .field
+      .field__label
+        = f.label :発送元の地域
+        %span.field__label--require 必須
+      .field__input
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt: "選択してください", required: :true
+    .field
+      .field__label
+        = f.label :発送までの日数
+        %span.field__label--require 必須
+      .field__input
+        = f.collection_select :delivery_date_id, DeliveryDate.all, :id, :name, prompt: "選択してください", required: :true
+  .item-price
+    %p 価格（¥300〜9,999,999）
+    .field
+      .field__label
+        = f.label :販売価格
+        %span.field__label--require 必須
+      .field__input
+        = f.number_field :price, required: :true
+  = f.submit '登録', id: 'item-post-btn'

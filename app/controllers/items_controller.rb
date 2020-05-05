@@ -1,13 +1,74 @@
 class ItemsController < ApplicationController
+
+  before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
   def index
-    @items = Item.all
-    @images = Image.all
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+    @items = Item.includes(:images).order('created_at DESC')
   end
-  
+
+  def new
+    @item = Item.new
+    @item.images.new
+    @parents = []
+    Category.where(ancestry: nil).each do |parent|
+      unless parent.name == "カテゴリー一覧"
+        @parents << parent.name
+      end
+    end
+  end
+
+  def category_children
+    @children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  end
+
+  def category_grandchildren
+    @grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save!
+      redirect_to items_path
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to items_path
+    else
+      render :edit
+    end
+  end
+
+    
   # def done
   #   @item_buyer = Item.find(params[:id])
   #   @item_buyer.update(buyer_id: current_user.id)
   # end
+
+  private
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def item_params
+    params.require(:item).permit(
+      :name, 
+      :explanation,
+      :category_id,
+      :status_id,
+      :delivery_charge_flag,
+      :prefecture_id,
+      :delivery_date_id,
+      :price, 
+      images_attributes: [
+        :id,
+        :image
+      ]
+    ).merge(saler_id: current_user.id)
+  end
 end

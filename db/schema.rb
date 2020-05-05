@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_050915) do
+ActiveRecord::Schema.define(version: 2020_05_03_125523) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -38,34 +38,31 @@ ActiveRecord::Schema.define(version: 2020_04_29_050915) do
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "item_id"
-    t.string "image"
+    t.bigint "item_id", null: false
+    t.string "image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_images_on_item_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "buyer_id"
-    t.integer "seller_id"
-    t.integer "category_id"
-    t.integer "brand_id"
-    t.string "name"
-    t.integer "price"
-    t.string "status"
+    t.integer "saler_id"
+    t.string "name", null: false
     t.text "explanation"
-    t.string "delivery_data"
-    t.string "delivery_method"
-    t.string "delivery_charge"
-    t.integer "prefecture"
+    t.string "delivery_charge_flag", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "prefecture_id"
+    t.integer "status_id"
+    t.integer "delivery_date_id"
+    t.integer "delivery_method_id"
+    t.integer "trading_status_id", default: 1
+    t.bigint "category_id", null: false
+    t.index ["buyer_id"], name: "index_items_on_buyer_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["saler_id"], name: "index_items_on_saler_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -88,4 +85,6 @@ ActiveRecord::Schema.define(version: 2020_04_29_050915) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "images", "items"
+  add_foreign_key "items", "categories"
 end
