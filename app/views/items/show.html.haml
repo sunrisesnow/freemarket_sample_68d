@@ -4,78 +4,69 @@
       .main-item__content--form
         .itembox
           %h2.itembox__name
-            product1
+            = @item.name
           .itembox__image
             %ul
               %li
-                =image_tag "free_1.jpg"
+                = image_tag @images[0].image.url
                 %ul
-                  %li
-                    =image_tag "free_1.jpg"
-                  %li
-                    =image_tag "free_2.jpg"
-                  %li
-                    =image_tag "free_3.jpg"
+                  - @images.each do |image|
+                    %li
+                      =image_tag image.image.url
           .itembox__price
             %span
-              ￥10000
+              ¥
+              = @item.price
             .itembox__price--detail
               %span
                 (税込)
               %span
                 送料込み
-          .itembox__explaination
-            グーグルの画像認識システムは、まだ「ゴリラ問題」を解決できていない。
-            自分と友人の写真を「Google フォト」が「ゴリラ」とタグ付けしている。
+          .itembox__explanation
+            = @item.explaination
           .itembox__table
             %table
               %tbody
                 %tr
                   %th 出品者
                   %td
-                    test
-                    /= @items.user.nickname
+                    =@item.saler_id
                 %tr
                   %th カテゴリー
                   %td
                     = link_to '#' do
-                      レディース
-                      /  =@items.category.name
+                      =@item.category.parent.parent.name
                     %br
                     = link_to '#' do
-                      トップス
-                      /  =@items.category.parent.name
+                      =@item.category.parent.name
                     %br
                     = link_to '#' do
-                      Tシャツ/カットソー(半袖/袖なし)
-                      /  =@items.category.parent.parent.name
+                      =@item.category.name
                 %tr
                   %th ブランド
                   %td
-
-                    /  = @items.brand
+                    /  = @item.brand
                 %tr
                   %th 商品の状態
                   %td 
-                    新品、未使用
+                    = @item.status.name
                 %tr
                   %th 配送料の負担
                   %td 
-                    送料込み(出品者負担)
+                    = @item.delivery_charge_flag
                 %tr
                   %th 発送元の地域
                   %td
-                    東京都
                     = link_to '#' do
-                      /= @items.prefectures
+                      = @item.prefecture.name
                 %tr
                   %th 発送日の目安
                   %td
-                    1~2日で発送
+                    = @item.delivery_date.name
                 %tr
                   %th 配送方法
                   %td
-                    手渡し
+                    = @item.delivery_method.name
           .itembox__option
             %ul
               %li.like-btn
@@ -101,15 +92,12 @@
                 コメントする
       .main-item__content--links
         %li
-          =link_to "#" do
-            %i.fa.fa-angle-left
-            %span
-              前の商品
+          = link_to "前の商品", item_path(@item.id - 1), method: :get
+          %i.fa.fa-angle-left
         %li
-          =link_to "#" do
-            %i.fa.fa-angle-right
-            %span
-              後ろの商品
+          = link_to "後ろの商品",item_path(@item.id + 1), method: :get
+          %i.fa.fa-angle-right
       .main-item__content--related
         =link_to "#" do
-          レディースをもっと見る
+          = @item.category.parent.parent.name
+          をもっと見る

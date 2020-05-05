@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_113611) do
     t.integer "buyer_id"
     t.integer "saler_id"
     t.string "name", null: false
-    t.text "explanation"
-    t.string "delivery_charge_flag"
+    t.text "explaination"
+    t.string "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_113611) do
     t.integer "delivery_date_id"
     t.integer "delivery_method_id"
     t.integer "trading_status_id", default: 1
-    t.integer "category"
+    t.integer "category_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["saler_id"], name: "index_items_on_saler_id"
   end

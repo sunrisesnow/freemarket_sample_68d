@@ -29,7 +29,26 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @images = @item.images
+    @categories = Category.all
+  end 
+
+  def get_category_children
+    @category_children = Category.find(params[:productcategory]).children
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:productcategory]).children
+  end
+end
+
   private
+
+  def category_params
+    params.require(:category).permit(:name)
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end
@@ -37,7 +56,7 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(
       :name, 
-      :explanation,
+      :explaination,
       :status_id,
       :delivery_charge_flag,
       :prefecture_id,
@@ -51,4 +70,3 @@ class ItemsController < ApplicationController
     # userの登録機能実装が完了したら生かす
     # .merge(user_id: current_user.id)
   end
-end
