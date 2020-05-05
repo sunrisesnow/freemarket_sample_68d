@@ -43,7 +43,7 @@
         %span.field__label--require 必須
       %ul.field__input--category
         %li
-          = f.select :category_id, @parents, {}, {id: 'parent_category', name: ""}
+          = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
   
     .field
       .field__label

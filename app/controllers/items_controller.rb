@@ -7,9 +7,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @parents = ["選択してください"]
+    @parents = []
     Category.where(ancestry: nil).each do |parent|
-      @parents << parent.name
+      unless parent.name == "カテゴリー一覧"
+        @parents << parent.name
+      end
     end
   end
 
@@ -22,12 +24,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @parents = ["選択してください"]
-    Category.where(ancestry: nil).each do |parent|
-      @parents << parent.name
-    end
     @item = Item.new(item_params)
-    if @item.save
+    if @item.save!
       redirect_to items_path
     else
       render :new

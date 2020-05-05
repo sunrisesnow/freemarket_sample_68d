@@ -63,7 +63,7 @@ $(function(){
   // 子カテゴリーの表示作成
   function appendChidrenBox(insertHTML){
     var childSelectHtml = `<li>
-                              <select id="children_category" name="" class="valid" aria-invalid="false">
+                              <select id="children_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
                                 <option value="">選択してください</option>
                                 ${insertHTML}
                               </select>
@@ -74,7 +74,7 @@ $(function(){
   function appendGrandchidrenBox(insertHTML){
     
     var grandchildSelectHtml = `<li>
-                                  <select id="grandchildren_category" name="item[category_id]" class="valid" aria-invalid="false">
+                                  <select id="grandchildren_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
                                     <option value="">選択してください</option>
                                     ${insertHTML}
                                   </select>
@@ -83,8 +83,9 @@ $(function(){
   }
   // 親カテゴリー選択後のイベント
   $('#parent_category').on('change', function(){
-    var parentName =$(this).val(); //選択された親カテゴリーの名前を取得
-    if (parentName != "選択してください"){ 
+    //選択された親カテゴリーの名前を取得
+    var parentName =$(this).val(); 
+    if (parentName != ""){ 
       //親カテゴリーが初期値でないことを確認
       $.ajax({
         url: 'category_children',
@@ -106,7 +107,7 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
-      //親カテゴリーが初期値になった時、子以下を削除するする
+      //親カテゴリーが初期値になった時、子以下を削除する
       $('#children_category').remove();
       $('#grandchildren_category').remove();
     }
@@ -126,7 +127,7 @@ $(function(){
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
           $('#grandchildren_category').remove(); 
-          //子が変更された時、孫以下を削除するする
+          //子が変更された時、孫以下を削除する
           var insertHTML = '';
           grandchildren.forEach(function(grandchild){
             insertHTML += appendOption(grandchild);
