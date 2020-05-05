@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_item, except: [:new, :create, :index]
   def index
     @items = Item.includes(:images).order('created_at DESC')
