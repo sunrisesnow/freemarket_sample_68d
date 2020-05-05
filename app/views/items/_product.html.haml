@@ -1,14 +1,44 @@
--@items.each do |item|
-  .item-list.hover
-    = link_to '#',class: "item" do
-      = image_tag 'pict-reason-02.jpg', class: 'item-img'
-    .item-list__body
-      %h3.name 
-        =item.name
-      .details
-        %ul
-          %li 
-            =item.price
-          %li#like 0
-        %p.detail (税込)
-          
+.item-list
+  = link_to '#',class: "item" do
+    = image_tag 'pict-reason-02.jpg', class: 'item-img'
+    .items-box_photo__sold
+      %p.items-box_photo__sold__inner
+        SOLD
+
+  .item-list__body
+    %h3.name TAKOYAKI
+    .details
+      %ul
+        %li 20000JPY
+        %li#like 0
+      %p.detail (税込)
+
+.item-list
+  = link_to '#',class: "item" do
+    = image_tag 'pict-reason-02.jpg', class: 'item-img'
+    .items-box_photo__sold
+      %p.items-box_photo__sold__inner
+        SOLD
+
+  .item-list__body
+    %h3.name TAKOYAKI
+    .details
+      %ul
+        %li 20000JPY
+        %li#like 0
+      %p.detail (税込)
+
+
+-# -@items.each do |item|
+-#   .item-list.hover
+-#     = link_to '#',class: "item" do
+-#       = image_tag 'pict-reason-02.jpg', class: 'item-img'
+-#     .item-list__body
+-#       %h3.name 
+-#         = item.name
+-#       .details
+-#         %ul
+-#           %li 
+-#             = item.price
+-#           %li#like 0
+-#         %p.detail (税込)
