@@ -29,6 +29,8 @@
                 & img {
                   object-fit: cover;
                   height: 346px;
+                  width: 100%;
+                  vertical-align: bottom;
                 }
                 & ul {
                   display: flex;
@@ -41,6 +43,30 @@
                       object-fit: cover;
                       height: 87px;
                     }
+                  }
+                }
+                
+                .sold-item {
+                  width: 0;
+                  height: 0;
+                  border-width: 160px 160px 0 0;
+                  border-color: #ea352d transparent transparent transparent;
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  z-index: 1;
+                  border-style: solid;
+                  &__inner {
+                    top: -130px;
+                    font-size: 34px;
+                    position: absolute;
+                    left: 0;
+                    z-index: 2;
+                    color: #fff;
+                    transform: rotate(-45deg);
+                    letter-spacing: 2px;
+                    font-weight: 600;
                   }
                 }
               }
@@ -60,6 +86,73 @@
               font-size: 16px;
               & span {
                 font-size: 16px;
+              }
+            }
+          }
+          .itembox__detail {
+            line-height: 1.5;
+            font-size: 18px;
+            margin-bottom: 30px;
+            &--sold {
+              margin-bottom: 20px;
+              text-align: center;
+              &--btn  {
+                line-height: 60px;
+                background: #888;
+                width: 80%;
+                cursor: not-allowed;
+                margin: 0 auto;
+                p{
+                  text-decoration: none;
+                  color: #fff;
+                  font-size: 17px;
+                }
+              }
+            }
+            &--buy{
+              margin-bottom: 20px;
+              text-align: center;
+              &--btn{
+                line-height: 60px;
+                background: #48D1CC;
+                width: 80%;
+                & a{
+                  text-decoration: none;
+                  color: #FFF;
+                  font-size: 17px;
+                }
+              }
+            }
+            &--edit{
+              text-align: center;
+              &--btn {
+                line-height: 60px;
+                background: #ea352d;
+                width: 80%;
+                & a {
+                  text-decoration: none;
+                  color:  #FFF;
+                  font-size: 17px;
+                }
+              }
+            }
+            &--or {
+              text-align: center;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            &--delete {
+              margin-bottom: 20px;
+              text-align: center;
+              &--btn {
+                line-height: 60px;
+                background: #888;
+                width: 80%;
+                & a {
+                  text-decoration: none;
+                  color:  #FFF;
+                  font-size: 17px;
+                }
               }
             }
           }
@@ -150,6 +243,10 @@
               width: 100%;
               min-height: 104px;
               padding: 10px;
+              font-family: inherit;
+              font-size: inherit;
+              font-weight: inherit;
+              border-style: solid;
             }
             .notice__message {
               padding: 8px;
@@ -193,6 +290,41 @@
           font-size: 22px;
           position: relative;
         }      
+      }
+    }
+  }
+}
+
+.app-banner {
+  background-image: url(/assets/bg-appBanner-pict.jpg);
+  padding: 100px 40px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  &__inner {
+    color: #fff;
+    text-align: center;
+    &-title {
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.4;  
+    }
+    &-text {
+      font-size: 35px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+    &-icon {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 0;
+      & a {
+        margin-right: 10px;
+        & img {
+          width: 180px;
+          vertical-align: bottom;
+        }
       }
     }
   }

@@ -1,0 +1,25 @@
+%nav.category-list
+  %ul
+    %li
+      = link_to root_path do
+        FURIMA
+    %li
+      %i.fa.fa-angle-right
+    %li
+      = link_to "#" do
+        = @item.category.parent.parent.name
+    %li
+      %i.fa.fa-angle-right
+    %li
+      = link_to "#" do
+        = @item.category.parent.name
+    %li
+      %i.fa.fa-angle-right
+    %li
+      = link_to "#" do
+        = @item.category.name
+    %li
+      %i.fa.fa-angle-right
+    %li
+      %p
+        = @item.name
