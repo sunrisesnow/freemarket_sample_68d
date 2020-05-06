@@ -1,6 +1,9 @@
 class CategoriesController < ApplicationController
+  
   before_action :set_category_brand
   before_action :find_category, except: [:index]
+  skip_before_action :authenticate_user!
+  
   def index
     
   end
