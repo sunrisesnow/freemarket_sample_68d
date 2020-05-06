@@ -299,3 +299,17 @@
   background-color: whitesmoke;;
 }
 
+.create-main__form--btn{
+  color: white;
+  display: block;
+  width: 306px;
+  height: 40px;
+  line-height: 40px;
+  background-color: $skyblue;
+  opacity: 0.8;
+  transition: 0.5s;
+  border-radius: 3px;
+  margin: 0 auto;
+  @include hover__color(white, $skyblue, 0.6)
+}
+

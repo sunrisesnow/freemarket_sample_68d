@@ -1,4 +1,7 @@
 ja:
+  recaptcha: 
+    errors: 
+      verification_failed: 'reCAPTCHA認証に失敗しました。' 
   activerecord:
     errors:
       messages:

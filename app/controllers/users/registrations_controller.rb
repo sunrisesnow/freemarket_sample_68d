@@ -34,10 +34,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render :create_address
   end
 
-  def
-    redirect_to root_path
-  end
-
   # GET /resource/sign_up
   # def new
   #   super

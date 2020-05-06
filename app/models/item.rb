@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   # belongs_to :buyer, class_name: User
   # belongs_to :saler, class_name: User
   has_many :images, dependent: :destroy
+  belongs_to :category
   accepts_nested_attributes_for :images, allow_destroy: true
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
@@ -10,8 +11,12 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_method
   belongs_to_active_hash :trading_status
   
+  #アソシエーションを組んでいるモデルのバリデーション
+  validates_associated :images
+
   # 入力必須のバリデーション
   with_options presence: true do
+    validates :images
     validates :name
     validates :explanation
     validates :status_id

@@ -3,6 +3,8 @@
   = item.name
   %span 価格
   = "#{item.price}円"
+  - category = Category.find(item.category_id)
+  = category.name
   - item.images.each do |image|
     = image_tag image.image.url
   = link_to '編集', edit_item_path(item)
