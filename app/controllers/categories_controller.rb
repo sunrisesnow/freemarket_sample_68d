@@ -10,33 +10,19 @@ class CategoriesController < ApplicationController
 
   def parent
     #親要素の子要素代入
-    children = @category.children
-    grandchildren = []
-    # ancestryに(親要素id/子要素id)が入っている要素全て取得
-    children.each do |child|
-      grandchildren << Category.where(ancestry: "#{@category.id}/#{child.id}")
-    end
-    @items = []
-    # grandchildrenは（１子要素の１孫要素、２子要素の２孫要素）という多重配列なのでeachを二回重ねることで親要素の全ての孫要素のidをwhereメソッドに渡しています。
-    grandchildren.each do |grandchild|
-      grandchild.each do |id|
-        @items += Item.where(category_id: id)
-      end
-    end
+    grandchildren_id = @category.indirect_ids 
+    find_category_item(grandchildren_id)
   end
 
   def child
-    #子要素の孫要素代入
-    grandchildren = @category.children
-    @items = []
-    #子要素の孫要素という一つの配列なのでeachは一度で孫要素のid取得
-    grandchildren.each do |grandchild|
-      @items += Item.where(category_id: grandchild.id)
-    end
+    grandchildren_id = @category.child_ids
+    find_category_item(grandchildren_id)
   end
 
   def grandchild
-    @items = Item.where(category_id: params[:id])
+    @items = []
+    category_item = Item.includes(:images).where(category_id: params[:id])
+    category_present(category_item)
   end
 
   private
@@ -48,5 +34,23 @@ class CategoriesController < ApplicationController
   def set_category_brand
     @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+  end
+  
+  def category_present(category_item)
+    if category_item.present?
+      category_item.each do |item|
+        if item.present?
+          @items += category_item
+        end
+      end
+    end
+  end
+
+  def find_category_item(grandchildren_id)
+    @items = []
+    grandchildren_id.each do |grandchild_id|
+      category_item = Item.includes(:images).where(category_id: grandchild_id)
+      category_present(category_item)
+    end
   end
 end
