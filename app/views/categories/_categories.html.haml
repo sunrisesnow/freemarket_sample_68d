@@ -1,0 +1,9 @@
+.wrapper
+  = render "tops/top-header"
+  = "#{@category.name}の商品一覧"
+  - @items.each do |item|
+  - category = Category.find(item.category_id)
+    = category.name
+    = item.name
+    = item.price
+  = render "tops/top-footer"
