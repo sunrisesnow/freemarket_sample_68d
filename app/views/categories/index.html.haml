@@ -14,28 +14,27 @@
         = link_to "##{i}", class: "box__parent--link" do
           = parent.name
     - @parents.each_with_index do |parent, i|
-      .category__container--box
-        .category__container--box--title{id: "#{i}"}
-          = parent.name
-        .category__box--child
-          .category__box--child--all
-            = link_to "#", class: "category__link--btn" do
-              すべて
-          - parent.children.each do |child|
-            .child__box
-              .child__box--name
-                = child.name  
-              .grandchild__box
-                .grandchild__link
-                  = link_to "#", class: "category__link--btn" do
-                    すべて
-                - child.children.each do |grandchild|
+      - unless parent.name.include?("カテゴリー一覧")
+        .category__container--box
+          .category__container--box--title{id: "#{i}"}
+            = parent.name
+          .category__box--child
+            .category__box--child--all
+              = link_to parent_category_path(parent.id), class: "category__link--btn" do
+                すべて
+            - parent.children.each do |child|
+              .child__box
+                .child__box--name
+                  = child.name  
+                .grandchild__box
                   .grandchild__link
-                    - unless grandchildren.name.include?("すべて")
-                      = link_to "#", class: "category__link--btn" do
-                        = grandchildr.name
+                    = link_to child_category_path(child.id), class: "category__link--btn" do
+                      すべて
+                  - child.children.each do |grandchild|
+                    .grandchild__link
+                      - unless grandchild.name.include?("すべて")
+                        = link_to grandchild_category_path(grandchild.id), class: "category__link--btn" do
+                          = grandchild.name
   = render "tops/top-footer"
-  .buy
-    .buy__btn 
-      %p.buy__btn__text 出品する
-      = image_tag "icon_camera.png", class: "buy_btn_pic", width: "54px", height: "54px"
+  = render "tops/saler-btn"
+
