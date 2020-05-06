@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:parent, :child, :grandchild]
+  before_action :set_category_brand
+  before_action :find_category, except: [:index]
   def index
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+    
   end
 
   def parent
@@ -38,7 +38,12 @@ class CategoriesController < ApplicationController
 
   private
 
-  def set_category
+  def find_category
     @category = Category.find(params[:id])
+  end
+
+  def set_category_brand
+    @parents = Category.where(ancestry: nil)
+    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
 end
