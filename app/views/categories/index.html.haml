@@ -31,7 +31,7 @@
                   .grandchild__link
                     = link_to child_category_path(child.id), class: "category__link--btn" do
                       すべて
-                  - child.children.each do |grandchild,|
+                  - child.children.each do |grandchild|
                     .grandchild__link
                       - unless grandchild.name.include?("すべて")
                         = link_to grandchild_category_path(grandchild.id), class: "category__link--btn" do
