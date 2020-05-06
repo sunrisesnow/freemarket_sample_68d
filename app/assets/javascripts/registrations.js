@@ -14,7 +14,7 @@ $(function() {
     }
   });
 
-  // 新規登録動的エラー
+  // 新規登録エラー
 
   //ニックネーム
   $("#user_nickname").keyup(function(){
@@ -188,188 +188,34 @@ $(function() {
     }
   });
 
-  //年
-  $("#user_birthday_1i").change(function(){
-    let birthday = $(this).val();
-    let day = $("#user_birthday_3i");
-    let next = day.next();
-    if(birthday == ""){
-      if(!$(".error-class").length && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        day.after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        day.after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }
-    }else{
+  //生年月日
+  $("select").on("change", function(){
+    let year  = $("#user_birthday_1i").val();
+    let month = $("#user_birthday_2i").val();
+    let day   = $("#user_birthday_3i").val();
+    let next  = $("#user_birthday_3i").next();
+    let value = $(this).val();
+    if(value != ""){
       $(this).css("border", "1px solid #00BFFF");
+    }else{
+      $(this).css("border", "1px solid red");
     }
-  });
-
-  //月
-  $("#user_birthday_2i").change(function(){
-    let birthday = $(this).val();
-    let day = $("#user_birthday_3i");
-    let next = day.next();
-    if(birthday == ""){
-      if(!$(".error-class").length && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        day.after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        day.after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
+    if(year === "" || day === "" || month === ""){
+      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
+        $("#user_birthday_3i").after(`<div class=error-class2>生年月日を入力してください</div>`);
       }
-    }else{
-      $(this).css("border", "1px solid #00BFFF");
-    }
-  });
-
-  //日
-  $("#user_birthday_3i").change(function(){
-    let birthday = $(this).val();
-    let next = $(this).next();
-    if(birthday == ""){
-      if(!$(".error-class").length && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>生年月日を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }
-    }else{
-      $(this).css("border", "1px solid #00BFFF");
+    }else {
       next.remove(".error-class2");
       next.remove(".error-class");
     }
   });
-
-  //お届け先情報入力画面入力
-
-  //郵便番号
-  $("#address_postal_code").keyup(function(){
-    let patern = /^[0-9]{7}$/;
-    let postal_code = $(this).val().match(patern);
-    let next = $(this).next();
-    if(postal_code == null) {
-      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>郵便番号を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>郵便番号を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      next.remove();
-    }
-  });
-
-  //都道府県
-  $('#address_prefectures').change(function(){
-    let prefectures = $(this).val();
-    let next = $(this).next();
-    if(prefectures == null){
-      if(!$(".error-class").length && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-      }else{
-        $(this).css("border", "1px solid red");
-      }
-    }else{
-      $(this).css("border", "1px solid #00BFFF");
-      next.remove(".error-class2");
-    }
-  });
-
-  //市区町村
-  $("#address_municipality").keyup(function(){
-    let patern = /[ |　]+/;
-    let municipality = $(this).val().match(patern);
-    let next = $(this).next();
-    if(municipality != null) {
-      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>市区町村を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>市区町村を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      next.remove();
-    }
-  });
-
-  //番地
-  $("#address_address").keyup(function(){
-    let patern = /[ |　]+/;
-    let address = $(this).val().match(patern);
-    let next = $(this).next();
-    if(address != null) {
-      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>番地を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>番地を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      next.remove();
-    }
-  });
-
-  //建物名
-  $("#address_building").keyup(function(){
-    let patern = /[ |　]+/;
-    let building = $(this).val().match(patern);
-    let next = $(this).next();
-    if(building != null) {
-      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>建物名・部屋番号を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>建物名・部屋番号を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      next.remove();
-    }
-  });
-  
-  //電話番号
-  $("#address_phone_number").keyup(function(){
-    let patern = /^(0{1}\d{9,10})$/;
-    let phone_number = $(this).val().match(patern);
-    let next = $(this).next();
-    if(phone_number == null) {
-      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>電話番号を入力してください</div>`);
-      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>電話番号を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      next.remove();
-    }
-  });
+  //画面遷移しようとした際バリデーションに引っかかった場合
+  var next = $("#user_birthday_3i").next();
+  if(next.hasClass("error-class")){
+    $("select").css("border", "1px solid red");
+    $("#user_birthday_1i").css("border", "1px solid red");
+    $("#user_birthday_2i").css("border", "1px solid red");
+    $("#user_birthday_3i").css("border", "1px solid red");
+  }
 });
 
