@@ -6,4 +6,6 @@
     = category.name
     = item.name
     = item.price
+    - item.images.each do |image|
+      = image_tag image.image.url
   = render "tops/top-footer"
