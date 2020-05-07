@@ -23,6 +23,7 @@
   padding: 3px 15px;
   font-size: 11px;
   letter-spacing: 2px;
+  z-index: 1000;
 }
 
 .categories{
@@ -38,6 +39,8 @@
         padding: 10px 20px;
         font-size: 13px;
         letter-spacing: 2px;
+        z-index: 1000;
+        position: absolute;
       }
       li {
         &:hover{
