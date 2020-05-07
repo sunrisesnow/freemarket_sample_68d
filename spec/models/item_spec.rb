@@ -45,6 +45,12 @@ describe Item do
         expect(item.errors[:explanation]).to include("を入力してください")
       end
 
+      it "商品のカテゴリー(category_id)がない場合は登録できないこと" do
+        item = build(:item_no_category)
+        item.valid?
+        expect(item.errors[:category]).to include("を入力してください")
+      end
+
       it "商品の状態(status_id)がない場合は登録できないこと" do
         item = build(:item, status_id: nil)
         item.valid?
