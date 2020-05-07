@@ -1,16 +1,14 @@
 FactoryBot.define do
-  
   factory :user do
-    password =            Faker::Internet.password(min_length: 7)
-    email                 {Faker::Internet.email}
-    password              {password}
-    password_confirmation {password}
-    nickname              {Faker::Name.name}
-    last_name             {Faker::Name.name}
-    first_name            {Faker::Name.name}
-    last_name_kana        {"テスト"}
-    first_name_kana       {"メルカリ"}
-    birthday              {Faker::Date.birthday}
-    icon_image            {"test.jpg"}
+    email                 { Faker::Internet.email }
+    password              { "abc1234" }
+    password_confirmation { "abc1234" }
+    nickname              { Faker::Name.name }
+    last_name             { ForgeryJa(:name).last_name }
+    first_name            { ForgeryJa(:name).first_name }
+    last_name_kana        { ForgeryJa(:name).last_name(to: ForgeryJa::KANA) }
+    first_name_kana       { ForgeryJa(:name).first_name(to: ForgeryJa::KANA) }
+    birthday              { Faker::Date.birthday }
+    icon_image            { "test.jpg" }
   end
 end
