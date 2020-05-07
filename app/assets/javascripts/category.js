@@ -1,14 +1,13 @@
 var parentBeforeColor = new Object();
-parentBeforeColor.backgroundColor = "white";
-parentBeforeColor.color = "black";
+    parentBeforeColor.backgroundColor = "white";
+    parentBeforeColor.color = "black";
 var parentAfterColor = new Object();
-parentAfterColor.backgroundColor = "#3ccace";
-parentAfterColor.color = "white";
+    parentAfterColor.backgroundColor = "#3ccace";
+    parentAfterColor.color = "white";
 var childBeforeColor = new Object();
-childBeforeColor.backgroundColor = "white";
+    childBeforeColor.backgroundColor = "white";
 var childAfterColor = new Object();
-childAfterColor.backgroundColor = "whitesmoke";
-
+    childAfterColor.backgroundColor = "whitesmoke";
 
 $(function(){
   // #で始まるリンクをクリックしたら実行されます

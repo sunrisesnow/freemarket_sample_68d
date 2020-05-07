@@ -57,7 +57,6 @@ $(function(){
 
   //都道府県
   $('#address_prefectures').on("change", function(){
-    console.log("ok");
     let prefectures = $(this).val();
     let next = $(this).next();
     if(prefectures === ""){
