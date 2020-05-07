@@ -59,7 +59,7 @@ $(function() {
 
   //パスワード
   $("#user_password").keyup(function(){
-    let patern = /^[0-9a-zA-Z]*$/;
+    let patern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
     let password = $(this).val().match(patern);
     let next = $(this).next();
     if(password == null || $(this).val().length < 7){
