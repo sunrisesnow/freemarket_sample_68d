@@ -9,7 +9,6 @@ class CategoriesController < ApplicationController
   end
 
   def parent
-    #親要素の子要素代入
     grandchildren_id = @category.indirect_ids 
     find_category_item(grandchildren_id)
   end
