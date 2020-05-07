@@ -2,7 +2,6 @@ $(function() {
   // パスワードチェックボックス
   if($(".field").hasClass('error-class')){
     var form = $('.field').children('input');
-    console.log("ok");
   }
   $("#checkpw").change(function(){
     if($(this).prop('checked')){
