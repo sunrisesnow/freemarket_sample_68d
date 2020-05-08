@@ -74,7 +74,7 @@ describe User do
       end
 
       describe "本人氏名バリデーションチェック" do
-        it "性（全角）（last_name）      存在しない場合登録できないこと" do
+        it "姓（全角）（last_name）      存在しない場合登録できないこと" do
           user = build(:user, last_name: nil)
           user.valid?
           expect(user.errors[:last_name]).to include("を入力してください")
@@ -86,7 +86,7 @@ describe User do
           expect(user.errors[:first_name]).to include("を入力してください")
         end
 
-        it "性（全角）（last_name）      全角以外な場合登録できないこと" do
+        it "姓（全角）（last_name）      全角以外な場合登録できないこと" do
           user = build(:user, last_name: "1-aA")
           user.valid?
           expect(user.errors[:last_name]).to include("は不正な値です")
@@ -98,7 +98,7 @@ describe User do
           expect(user.errors[:first_name]).to include("は不正な値です")
         end
     
-        it "性（カナ）（last_name_kana） 存在しない場合登録できないこと" do
+        it "姓（カナ）（last_name_kana） 存在しない場合登録できないこと" do
           user = build(:user, last_name_kana: nil)
           user.valid?
           expect(user.errors[:last_name_kana]).to include("を入力してください")
@@ -110,7 +110,7 @@ describe User do
           expect(user.errors[:first_name_kana]).to include("を入力してください")
         end
 
-        it "性（カナ）（last_name_kana） カタカナ以外な場合登録できないこと" do
+        it "姓（カナ）（last_name_kana） カタカナ以外な場合登録できないこと" do
           user = build(:user, last_name_kana: "あ青-aA")
           user.valid?
           expect(user.errors[:last_name_kana]).to include("は不正な値です")
