@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
-  
   def index
     @items = Item.includes(:images).order('created_at DESC')
   end
@@ -64,6 +64,6 @@ class ItemsController < ApplicationController
         :id,
         :image
       ]
-    ).merge(saler_id: nil)
+    ).merge(saler_id: current_user.id)
   end
 end
