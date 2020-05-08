@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
   
   def index
+    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
     @items = Item.includes(:images).order('created_at DESC')
   end
 
@@ -64,6 +65,6 @@ class ItemsController < ApplicationController
         :id,
         :image
       ]
-    ).merge(saler_id: nil)
+    ).merge(saler_id: current_user.id)
   end
 end

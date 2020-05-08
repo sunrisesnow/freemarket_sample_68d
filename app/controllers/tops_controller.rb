@@ -1,6 +1,8 @@
 class TopsController < ApplicationController
+
   def index  
     @items = Item.includes(:images).limit(5).order('created_at DESC')
+    @parents = Category.where(ancestry: nil)
     @radies = Category.find(1)
     @mens = Category.find(196)
     @kids = Category.find(327)
