@@ -1,4 +1,4 @@
-#user_nickname, #user_postal_code, #user_password, #user_password_confirmation, #user_last_name, #user_first_name, #user_last_name_kana, #user_first_name_kana{
+#address_postal_code, #address_prefectures, #address_municipality, #address_last_name, #address_first_name, #address_last_name_kana, #address_first_name_kana{
   font-size: 15px;
   color: black;
   height: 40px;
@@ -209,6 +209,7 @@
               &--prefecture {
                 width: 306px;
                 background-color: $mainWhiteColor;
+                height: 40px;
               }
             }
             &__pform {
@@ -234,7 +235,7 @@
               padding: 15px 0;
               color: white;
               transition: 1s;
-
+              @include hover(white, 0.6)
             }
           }
         }
@@ -285,6 +286,7 @@
         border: 1px solid $mainblueColor;
         background-color: $mainblueColor;
         color: $mainWhiteColor;
+        @include hover(white, 0.6)
       }
       &__for{
         padding: 40px 16px 40px;
@@ -297,5 +299,19 @@
 
 .member-footer {
   background-color: whitesmoke;;
+}
+
+.create-main__form--btn{
+  color: white;
+  display: block;
+  width: 306px;
+  height: 40px;
+  line-height: 40px;
+  background-color: $skyblue;
+  opacity: 0.8;
+  transition: 0.5s;
+  border-radius: 3px;
+  margin: 0 auto;
+  @include hover__color(white, $skyblue, 0.6)
 }
 
