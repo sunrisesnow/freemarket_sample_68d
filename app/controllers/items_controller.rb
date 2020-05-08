@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-
   before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
+  
   def index
     @items = Item.includes(:images).order('created_at DESC')
   end
@@ -44,11 +44,6 @@ class ItemsController < ApplicationController
     end
   end
 
-    
-  # def done
-  #   @item_buyer = Item.find(params[:id])
-  #   @item_buyer.update(buyer_id: current_user.id)
-  # end
 
   private
   def set_item
@@ -69,6 +64,6 @@ class ItemsController < ApplicationController
         :id,
         :image
       ]
-    ).merge(saler_id: current_user.id)
+    ).merge(saler_id: nil)
   end
 end
