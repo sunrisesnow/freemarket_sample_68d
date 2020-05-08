@@ -1,0 +1,142 @@
+.wrapper
+  = render "tops/top-header"
+  = render "categories/list"
+  .main
+    .main-item
+      .main-item__content
+        .main-item__content--form
+          .itembox
+            %h2.itembox__name
+              = @item.name
+            .itembox__image
+              %ul
+                %li
+                  = image_tag @images[0].image.url
+                    - if @item.buyer_id.present?
+                    .sold-item
+                      .sold-item__inner
+                        SOLD
+                  %ul
+                    - @images.each do |image|
+                      %li
+                        =image_tag image.image.url
+            .itembox__price
+              %span
+                ¥
+                = @item.price
+              .itembox__price--detail
+                %span
+                  (税込)
+                %span
+                  送料込み
+            .itembox__detail
+              - if @item.buyer_id.present?
+                .itembox__detail--sold
+                  .itembox__detail--sold--btn
+                    %p 売り切れました
+              - elsif user_signed_in? && @item.saler_id != current_user.id
+                .itembox__detail--buy
+                  %button.itembox__detail--buy--btn
+                    = link_to "購入する" ,  "#" ,method: :get
+              - elsif user_signed_in? && @item.saler_id = current_user.id
+                .itembox__detail--edit
+                  %button.itembox__detail--edit--btn
+                    = link_to "編集する" ,edit_item_path,method: :get
+                .itembox__detail--or or
+                .itembox__detail--delete
+                  %button.itembox__detail--delete--btn
+                    = link_to "削除する", item_path(@item.id), method: :delete
+            .itembox__explanation
+              = @item.explaination
+            .itembox__table
+              %table
+                %tbody
+                  %tr
+                    %th 出品者
+                    %td
+                      =@item.name
+                  %tr
+                    %th カテゴリー
+                    %td
+                      = link_to '#' do
+                        =@item.category.parent.parent.name
+                      %br
+                      = link_to '#' do
+                        =@item.category.parent.name
+                      %br
+                      = link_to '#' do
+                        =@item.category.name
+                  %tr
+                    %th ブランド
+                    %td
+                      /  = @item.brand
+                  %tr
+                    %th 商品の状態
+                    %td 
+                      = @item.status.name
+                  %tr
+                    %th 配送料の負担
+                    %td 
+                      = @item.delivery_charge_flag
+                  %tr
+                    %th 発送元の地域
+                    %td
+                      = link_to '#' do
+                        = @item.prefecture.name
+                  %tr
+                    %th 発送日の目安
+                    %td
+                      = @item.delivery_date.name
+                  %tr
+                    %th 配送方法
+                    %td
+                      = @item.delivery_method.name
+            .itembox__option
+              %ul
+                %li.like-btn
+                  = link_to '#' do
+                    %i.fa.fa-star
+                    お気に入り 0
+              %ul.optical
+                %li.report-btn
+                  = link_to '#' do
+                    %i.fa.fa-flag
+                    不適切な商品の通報
+          .commentbox
+            %ul.commentbox__contents
+            %form{class: 'new__comment', action: '#',method:'post', id:'new__comment'}
+              %input{type: 'hidden', value: '✓'}
+              %textarea.comment__body
+              %p.notice__message
+                相手のことを考え丁寧なコメントを心がけましょう。
+                %br
+                不快な言葉遣いなどは利用制限や退会処分となることがあります。 
+                %br             
+              %button.comment__btn
+                %i.fa.fa-comment
+                  コメントする
+        .main-item__content--links
+          %li
+            = link_to "前の商品", item_path(@item.id - 1), method: :get
+            %i.fa.fa-angle-left
+          %li
+            = link_to "後ろの商品",item_path(@item.id + 1), method: :get
+            %i.fa.fa-angle-right
+        .main-item__content--related
+          =link_to "#" do
+            = @item.category.parent.parent.name
+            をもっと見る
+  .app-banner
+    .app-banner__inner
+      %h2.app-banner__inner-title
+        人生を変えるフリマアプリ
+      %p.app-banner__inner-text
+        FURIMAは誰でもかんたんに出品・購入できるフリマアプリです
+      .app-banner__inner-icon
+        .app-banner__inner-icon__left
+          = link_to "#" do
+            = image_tag "app-store.svg"
+        .app-banner__inner-icon__right
+          = link_to "#" do
+            = image_tag "google-play.svg"  
+  = render "tops/top-footer"
