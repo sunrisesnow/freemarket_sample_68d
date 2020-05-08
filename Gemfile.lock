@@ -145,6 +145,10 @@ GEM
       nokogiri (>= 1.5.11, < 2.0.0)
     font-awesome-sass (5.12.0)
       sassc (>= 1.11)
+    forgery (0.3.12)
+      nokogiri (~> 1.4)
+    forgery_ja (0.2.2)
+      forgery (~> 0.3.8)
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -362,6 +366,7 @@ DEPENDENCIES
   faker (~> 2.8)
   fog-aws
   font-awesome-sass
+  forgery_ja
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
