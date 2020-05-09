@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
-
   def index
+    @parents = Category.where(ancestry: nil)
+    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
     @items = Item.includes(:images).order('created_at DESC')
   end
 
@@ -45,7 +46,27 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @images = @item.images
+    @categories = Category.all
+  end 
+
+  def get_category_children
+    @category_children = Category.find(params[:productcategory]).children
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:productcategory]).children
+  end
+end
+
+
   private
+
+  def category_params
+    params.require(:category).permit(:name)
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end
@@ -66,4 +87,3 @@ class ItemsController < ApplicationController
       ]
     ).merge(saler_id: current_user.id)
   end
-end

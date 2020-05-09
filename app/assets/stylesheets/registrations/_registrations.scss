@@ -9,6 +9,11 @@
   border-radius: 5px;
 }
 
+//エラーが二つ出たさいのビューの崩れを防ぐため
+#user_password_confirmation{
+  margin-top: 10px;
+}
+
 // エラー文が入れられているクラスにcssを指定
 .error-class, .error-class2{
   color: red;
