@@ -50,12 +50,12 @@ class ItemsController < ApplicationController
     @images = @item.images
   end 
 
-  def get_category_children
-    @category_children = Category.find(params[:productcategory]).children
+  def category_children
+    @children = Category.find_by(name:"#{params[:parent_name]}", ancestry: nil).children
   end
 
-  def get_category_grandchildren
-    @category_grandchildren = Category.find(params[:productcategory]).children
+  def category_grandchildren
+    @grandchildren = Category.find(params[:child_id]).children
   end
 end
 
@@ -67,10 +67,6 @@ end
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
 
-  def category_params
-    params.require(:category).permit(:name)
-  end
-
   def set_item
     @item = Item.find(params[:id])
   end
@@ -78,7 +74,7 @@ end
   def item_params
     params.require(:item).permit(
       :name, 
-      :explanation,
+      :explaination,
       :category_id,
       :status_id,
       :delivery_charge_flag,
