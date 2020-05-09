@@ -11,6 +11,11 @@ describe User do
         user = build(:user, password: "abcd1234" * 16 , password_confirmation: "abcd1234" * 16)
         expect(user).to be_valid
       end
+
+      it "メールアドレス（email）        半角英数字で構成されかつ@ドメインが存在している場合登録できること" do
+        user = build(:user, email: "test_1@domain.jp")
+        expect(user).to be_valid
+      end
     end
 
     context 'can not save' do
@@ -32,6 +37,18 @@ describe User do
           another_user = build(:user, email: "test@mercari.com")
           another_user.valid?
           expect(another_user.errors[:email]).to include("はすでに存在します")
+        end
+
+        it "メールアドレス（email）      ドメインが存在しない場合登録できないこと" do
+          user = build(:user, email: "test@domain.j")
+          user.valid?
+          expect(user.errors[:email]).to include("は不正な値です")
+        end
+
+        it "メールアドレス（email）      全角文字を含む場合登録できないこと" do
+          user = build(:user, email: "test１あア青ー@domain.jp")
+          user.valid?
+          expect(user.errors[:email]).to include("は不正な値です")
         end
       end
       
@@ -123,7 +140,7 @@ describe User do
         end
       end
 
-      it '生年月日(birthday)が存在しない場合保存できないこと' do
+      it '生年月日(birthday)             が存在しない場合保存できないこと' do
         user = build(:user, birthday: nil)
         user.valid?
         expect(user.errors[:birthday]).to include("を入力してください")

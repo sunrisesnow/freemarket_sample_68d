@@ -38,7 +38,7 @@ $(function() {
 
   //Eメール
   $('#user_email').keyup(function(){
-    let patern = /[^\s]+@[^\s]+/;
+    let patern = /[\x21-\x3f\x41-\x7e]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/;
     let email = $(this).val().match(patern);
     let next = $(this).next();
     if(email == null){
