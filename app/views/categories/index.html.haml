@@ -35,6 +35,7 @@
                       - unless grandchild.name.include?("すべて")
                         = link_to grandchild_category_path(grandchild.id), class: "category__link--btn" do
                           = grandchild.name
+  = render "tops/footer-image"
   = render "tops/top-footer"
   = render "tops/saler-btn"
 
