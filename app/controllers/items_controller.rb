@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
-  before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_item, only: [:show, :edit]
+  before_action :set_category_brand, only: [:index, :new, :show]
+
   def index
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
     @items = Item.includes(:images).order('created_at DESC')
   end
 
@@ -48,7 +48,6 @@ class ItemsController < ApplicationController
 
   def show
     @images = @item.images
-    @categories = Category.all
   end 
 
   def get_category_children
@@ -62,6 +61,11 @@ end
 
 
   private
+
+  def set_category_brand
+    @parents = Category.where(ancestry: nil)
+    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+  end
 
   def category_params
     params.require(:category).permit(:name)
@@ -86,4 +90,5 @@ end
         :image
       ]
     ).merge(saler_id: current_user.id)
+
   end
