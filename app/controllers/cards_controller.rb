@@ -16,8 +16,6 @@ class CardsController < ApplicationController
       # クレジットカードの有効期限を取得
       @exp_month = @card_info.exp_month.to_s
       @exp_year = @card_info.exp_year.to_s.slice(2,3) 
-    else
-      render :new
     end
   end
 
