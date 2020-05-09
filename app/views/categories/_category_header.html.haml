@@ -1,0 +1,27 @@
+.category__header
+  = link_to root_path,class:"back__btn" do
+    フリマ
+  %i.fas.fa-chevron-right.right__arrow.fa-xs
+  = link_to categories_path,class:"back__btn" do
+    カテゴリー一覧
+  - if @category.indirects.present?
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    %h5
+      = @category.name
+  - elsif @category.children.present?
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    = link_to parent_category_path(@category.parent.id),class:"back__btn" do
+      = @category.parent.name
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    %h5
+      = @category.name
+  - else
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    = link_to parent_category_path(@category.root.id),class:"back__btn" do
+      = @category.root.name
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    = link_to child_category_path(@category.parent.id),class:"back__btn" do
+      = @category.parent.name
+    %i.fas.fa-chevron-right.right__arrow.fa-xs
+    %h5
+      = @category.name

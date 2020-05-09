@@ -1,6 +1,5 @@
 .wrapper
   = render "tops/top-header"
-  = render "categories/list"
   .main
     .main-item
       .main-item__content
@@ -47,7 +46,7 @@
                   %button.itembox__detail--delete--btn
                     = link_to "削除する", item_path(@item.id), method: :delete
             .itembox__explanation
-              = @item.explaination
+              = @item.explanation
             .itembox__table
               %table
                 %tbody
@@ -90,7 +89,7 @@
                   %tr
                     %th 配送方法
                     %td
-                      = @item.delivery_method.name
+                      = @item.delivery_method
             .itembox__option
               %ul
                 %li.like-btn
