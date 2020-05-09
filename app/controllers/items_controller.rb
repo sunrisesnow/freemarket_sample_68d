@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   before_action :set_item, except: [:new, :create, :index, :category_children, :category_grandchildren]
   def index
+    @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
     @items = Item.includes(:images).order('created_at DESC')
   end

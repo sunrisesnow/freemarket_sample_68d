@@ -1,16 +1,16 @@
 .item-list__main{
   .category-guide{
-    .category-guide__box{
+    &__box{
       padding: 10px 100px;
       border: 1px solid lightgray;
       display: flex;
-      .category-guide__box__one{
-        .category-guide__box__one__title{
+      &__one{
+        &__title{
           font-size: 13px;
           color: gray;
           letter-spacing: 2px;
         }
-        .category-guide__box__one__sub{
+        &__sub{
           font-size: 13px;
           color: gray;
           letter-spacing: 2px;
@@ -18,7 +18,7 @@
       }
     }
   }
-  .category-guide__box__one__sub::before{
+  &__sub::before{
     content: '>';
     color: gray;
     margin: 0 5px;
@@ -28,7 +28,7 @@
     padding: 40px 0;
     background-color: #f8f8f8;
     height: 100%;
-    .category-list__title {
+    &__title {
       width: 100%;
       background-color: #3ccace;
       border-radius: 4px 4px 0 0;
@@ -37,16 +37,16 @@
       font-size: 20px;
       letter-spacing: 1px;
     }
-    .category-list__sub{
-      .category-list__sub__parents{
+    &__sub{
+      &__parents{
         padding: 10px 25px 10px;
-        .category-list__sub__parents__one{
+        &__one{
           width: 290px;
           height: 20px;
           display: inline-flex;
           margin-bottom: 10px;
           
-          .category-list__sub__parents__one__inner{
+          &__inner{
             color: #000066;
             font-weight: unset;
             font-size: 14px;
@@ -55,7 +55,7 @@
         }
       }
     }
-    .category-list__items{
+    &__items{
       max-width: 100%;
       width: 980px;
       margin: 26px auto;
@@ -76,7 +76,7 @@
         ul {
           list-style-type: none;
         }
-          .item-list__body {
+          &__body {
             max-width: 180px;
             background-color: #fff;
             color: #333;
