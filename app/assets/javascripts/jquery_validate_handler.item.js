@@ -18,6 +18,10 @@ $(function () {
       },
       "item[status_id]": {
         required: true,
+      },"item[name]": {
+        required: true,
+      },"item[explaination]": {
+        required: true,
       },
       "item[category_id]": {
         required: true,
@@ -41,6 +45,10 @@ $(function () {
       },
       "item[status_id]": {
         required: "選択してください",
+      },"item[name]": {
+        required: "商品名を入力してください",
+      },"item[explaination]": {
+        required: "商品説明を入力してください",
       },
       "item[category_id]": {
         required: "選択してください",
