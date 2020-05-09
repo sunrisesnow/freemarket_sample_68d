@@ -10,6 +10,6 @@
   = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{}, name: "exp_month", id:"exp_month"
   %span 月
   = f.label :セキュリティーコード
-  = f.text_field :cvc, name: "cvc", id:"cvc", placeholder: 'カード背面4桁もしくは3桁の番号', class: 'input-default', maxlength: "4"
+  = f.text_field :cvc, name: "cvc", id:"cvc", placeholder: 'カード背面4桁もしくは3桁の番号', maxlength: "4"
   = f.submit '次へ進む', id: "charge-form"
   .payment-errors
