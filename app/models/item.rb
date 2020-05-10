@@ -20,6 +20,7 @@ class Item < ApplicationRecord
     validates :name
     validates :explanation
     validates :status_id
+    validates :category_id
     validates :delivery_charge_flag
     validates :prefecture_id
     validates :delivery_date_id
