@@ -18,6 +18,10 @@ $(function () {
       },
       "item[status_id]": {
         required: true,
+      },"item[name]": {
+        required: true,
+      },"item[explanation]": {
+        required: true,
       },
       "item[category_id]": {
         required: true,

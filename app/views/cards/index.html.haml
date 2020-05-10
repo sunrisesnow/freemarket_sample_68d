@@ -1,0 +1,16 @@
+.hoge
+  支払い方法
+.hoge
+  クレジットカード一覧
+- if @card.present?
+  .hoge
+    = "**** **** **** " + @card_info.last4 #クレジットカードの下４桁を表示
+  .hoge
+    = @exp_month + " / " + @exp_year
+    = button_to "削除する", card_path(@card), method: :delete
+    = link_to root_path do
+      トップページへ
+- else
+  = link_to new_card_path do
+    %i.far.fa-credit-card 
+      クレジットカードを追加する
