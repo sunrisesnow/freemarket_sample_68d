@@ -6,7 +6,7 @@ class CardsController < ApplicationController
     if @card.present?
       # カードがある場合
       # PAY.JPの秘密鍵をセットする。
-      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      Payjp.api_key =  Rails.application.credentials.payjp[:payjp_private_key]
       # customerにはretrieveメソッドの引数に指定したidに一致する顧客情報を取得。
       customer = Payjp::Customer.retrieve(@card.payjp_id)
       # カード情報はdefault_cardメソッドを使うことで取得できる。
@@ -27,7 +27,7 @@ class CardsController < ApplicationController
 
   def create
     # PAY.JPの秘密鍵をセット（環境変数）
-    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    Payjp.api_key =  Rails.application.credentials.payjp[:payjp_private_key]
     # jsで作成したpayjpTokenがちゃんと入っているか？
     if params['payjpToken'].blank?
       render :new
@@ -52,7 +52,7 @@ class CardsController < ApplicationController
 
   def destroy     
     # PAY.JPの秘密鍵をセットして、PAY.JPから情報を取得。
-    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    Payjp.api_key =  Rails.application.credentials.payjp[:payjp_private_key]
     # retrieveメソッドを使うことで引数にしていされているidと一致する顧客情報を取得
     # PAY.JPの顧客情報を削除
     customer = Payjp::Customer.retrieve(@card.payjp_id)
@@ -71,7 +71,7 @@ class CardsController < ApplicationController
       render :new
     else
       # 購入者もいないし、クレジットカードもあるし、決済処理に移行
-      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      Payjp.api_key =  Rails.application.credentials.payjp[:payjp_private_key]
       # 請求を発行
       Payjp::Charge.create(
         amount: @item.price,
