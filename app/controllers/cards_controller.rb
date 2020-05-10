@@ -14,8 +14,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Card.find_by(user_id: current_user.id)
-    redirect_to cards_path if @card.present?    
+    redirect_to cards_path if @card.present?
   end
 
   def create
@@ -49,7 +48,7 @@ class CardsController < ApplicationController
 
   private
   def set_card
-    @card = Card.find_by(user_id: current_user.id) if Card.find_by(user_id: current_user.id).present?
+    @card = Card.find_by(user_id: current_user.id)
   end
 
   def set_payjp_api
