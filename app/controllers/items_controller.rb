@@ -74,7 +74,7 @@ end
   def item_params
     params.require(:item).permit(
       :name, 
-      :explaination,
+      :explanation,
       :category_id,
       :status_id,
       :delivery_charge_flag,

@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.integer "buyer_id"
     t.integer "saler_id"
     t.string "name", null: false
-    t.text "explaination"
+    t.text "explanation"
     t.string "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
