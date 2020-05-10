@@ -36,7 +36,8 @@
               - elsif user_signed_in? && @item.saler_id != current_user.id
                 .itembox__detail--buy
                   %button.itembox__detail--buy--btn
-                    = link_to "購入する" ,  "#" ,method: :get
+                    = link_to buy_card_path(@item.id) do
+                      購入する
               - elsif user_signed_in? && @item.saler_id = current_user.id
                 .itembox__detail--edit
                   %button.itembox__detail--edit--btn
