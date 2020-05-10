@@ -12,8 +12,8 @@
               = image_tag "icon-search 1.png", class: "top-header__block__inner__form__box__btn__pic"
   .top-header__bottom
     .top-header__left--content
-      = render "tops/category"                       
-      = render "tops/brand"
+      = render "shared/category"                       
+      = render "shared/brand"
     .top-header__right--content
       - if user_signed_in?
         = render 'shared/header-nav_signed-in'
