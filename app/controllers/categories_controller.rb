@@ -36,9 +36,7 @@ class CategoriesController < ApplicationController
   end
   
   def category_present(category_item)
-    if category_item.present?
-      @items += category_item
-    end
+    @items += category_item if category_item.present?
   end
 
   def find_category_item(grandchildren_id)
