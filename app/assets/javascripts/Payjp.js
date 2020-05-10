@@ -2,7 +2,7 @@ $(function(){
   // PAY.JPの公開鍵をセットします。
   Payjp.setPublicKey('pk_test_177d9ddb319e3af144dc305d');
   //formのsubmitを止めるために, クレジットカード登録のformを定義します。
-  var form = $(".form");
+  var form = $("#form");
   $("#charge-form").click(function() {
     // 二重送信防止のためdisabledをtrueに変更しイベントを止める
     form.find("input[type=submit]").prop("disabled", true);
