@@ -5,11 +5,11 @@ class CardsController < ApplicationController
   
   def index
     if @card.present?
-      customer = Payjp::Customer.retrieve(@card.payjp_id)
-      @card_info = customer.cards.retrieve(customer.default_card)
+      customer    = Payjp::Customer.retrieve(@card.payjp_id)
+      @card_info  = customer.cards.retrieve(customer.default_card)
       @card_brand = @card_info.brand
-      @exp_month = @card_info.exp_month.to_s
-      @exp_year = @card_info.exp_year.to_s.slice(2,3) 
+      @exp_month  = @card_info.exp_month.to_s
+      @exp_year   = @card_info.exp_year.to_s.slice(2,3) 
     end
   end
 
@@ -20,7 +20,7 @@ class CardsController < ApplicationController
   def create
     render :new if params[:payjpToken].blank?
     customer = Payjp::Customer.create(card: params[:payjpToken])
-    @card = Card.new(user_id: current_user.id, payjp_id: customer.id)
+    @card    = Card.new(user_id: current_user.id, payjp_id: customer.id)
     @card.save! ? (redirect_to cards_path) : (render :new)
   end
 
