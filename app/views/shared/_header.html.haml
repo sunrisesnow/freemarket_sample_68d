@@ -1,20 +1,20 @@
-.top-header
-  .top-header__block
-    .top-header__block__inner
-      .top-header__block__inner__icon
+.header
+  .header__block
+    .header__block__inner
+      .header__block__inner__icon
         = link_to root_path do
           = image_tag "logo.png", class:"furima-logo", width: "140px", height: "40px"
-      .top-header__block__inner__form
-        .top-header__block__inner__form__box
-          = text_field_tag :content, "", class: "top-header__block__inner__form__box__input", placeholder:"キーワードから探す"
-          .top-header__block__inner__form__box__btn
+      .header__block__inner__form
+        .header__block__inner__form__box
+          = text_field_tag :content, "", class: "header__block__inner__form__box__input", placeholder:"キーワードから探す"
+          .header__block__inner__form__box__btn
             = link_to '#' do
-              = image_tag "icon-search 1.png", class: "top-header__block__inner__form__box__btn__pic"
-  .top-header__bottom
-    .top-header__left--content
+              = image_tag "icon-search 1.png", class: "header__block__inner__form__box__btn__pic"
+  .header__bottom
+    .header__left--content
       = render "shared/category"                       
       = render "shared/brand"
-    .top-header__right--content
+    .header__right--content
       - if user_signed_in?
         = render 'shared/header-nav_signed-in'
       - else

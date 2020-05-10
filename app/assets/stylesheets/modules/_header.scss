@@ -1,12 +1,136 @@
 .header{
-  padding-top: 40px;
-  height: 130px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  &logo--btn{
-    &:hover{
-      opacity: 0.6;
+  padding: 0 10%;
+  &__block{
+    width: 100%;
+    min-height: 82px;
+    margin: 0 auto;
+    padding: 15px 0 0;
+    &__inner{
+      position: relative;
+      display: flex;
+      align-items: center;
+      &__icon{
+        padding: 10px 0 10px;
+        margin-right: 30px;
+        border-radius: 4px;
+        transition: 0.7s;
+        &:hover{
+          opacity: 0.6;
+        }
+      }
+      &__form{
+        margin-left: auto;
+        width: 100%;
+        &__box{
+          width: 100%;
+          display: flex;
+          margin-bottom: 5px;
+          &__input{
+            width: 100%;
+            height: 36px;
+            padding: 0 0 0 5px;
+            line-height: 36px;
+            background-color: $whitesmoke;
+          }
+          &__btn{
+            width: 36px;
+            border: 0;
+            cursor: pointer;
+            background-color: #3CCACE;
+            text-align: center;
+            line-height: 36px;
+            transition: 0.7s;
+            &:hover{
+              opacity: 0.8;
+            }
+            &__pic{
+              width: 100%;
+              vertical-align: middle;
+              max-width: 20px;
+              max-height: 20px;
+            }
+          }
+        }
+      }
     }
-  }
+  } 
+  &__bottom{
+    display: flex;
+    justify-content: space-between;
+    .header__left--content{
+      display: flex;
+      .search__btn{
+        display: inline-block;
+        padding: 5px 10px;
+        color: black;
+        font-size: 13px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        transition: 0.2s;
+        @include hover__color($mainblueColor, white, 1);
+      }
+    }
+    .header__right--content{
+      display: flex;
+      &--icon{
+        color: gray;
+        padding-right: 5px;
+      }
+      &--menu{
+        padding-top: 3px;
+        &--list{
+          display: block;
+          height: 23px;
+          line-height: 23px;
+          margin-left: 30px;
+          color: black;
+          font-weight: normal;
+          font-size: 14px;
+          @include hover__color($mainblueColor, white, 1);
+          &:hover{
+            .header__right--content--icon{
+              color: $mainblueColor;
+            }
+          }
+        }
+      }
+      .right__btn{
+        height: 30px;
+        display: inline-block;
+        padding: 5px 10px;     
+        font-size: 13px;
+        border-radius: 3px;
+        letter-spacing: 3px;
+        transition: 0.7s;
+      }
+      .signup__btn{
+        color: white;
+        background-color: $sign-up-btn;
+        opacity: 0.8;
+        margin-right: 20px;
+        @include hover__color(white, $sign-up-btn, 0.6)
+      }
+      .login__btn{
+        color: $login-btn;
+        border: 1px solid $login-btn;
+        background-color: white;
+        @include hover__color(white, $login-btn, 1)
+      }
+      .user__mypage{
+        width: 110px;
+        position: relative;
+        &--icon{
+          border-radius: 100px;
+          position: absolute;
+          top: -4px;
+        }
+        p{
+          position: absolute;
+          letter-spacing: 1px;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+  } 
 }
