@@ -32,16 +32,14 @@
                   width: 100%;
                   vertical-align: bottom;
                 }
-                & ul {
-                  display: flex;
-                  justify-content: center;
-                  margin-top: 10px;
-                  & li {
-                    margin: 0 10px 0 0;
+                .mini-image {
+                  width: 560px;
+                  font-size: 0;
+                  &s {
+                    display: inline-block;
                     & img {
-                      object-fit: cover;
-                      height: 87px;
                       width: 112px;
+                      height: 87px;
                     }
                   }
                 }

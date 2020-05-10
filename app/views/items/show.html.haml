@@ -15,9 +15,9 @@
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  %ul
+                  .mini-image
                     - @images.each do |image|
-                      %li
+                      .mini-images
                         =image_tag image.image.url
             .itembox__price
               %span
