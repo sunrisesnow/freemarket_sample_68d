@@ -28,22 +28,14 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save!
-      redirect_to items_path
-    else
-      render :new
-    end
+    @item.save! ? (redirect_to items_path) : (render :new)
   end
 
   def edit
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to items_path
-    else
-      render :edit
-    end
+    @item.update(item_params) ? (redirect_to items_path) : (render :edit)
   end
 
   def show
@@ -59,14 +51,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.saler_id
-      redirect_to item_path(@item) unless @item.destroy
-      redirect_to root_path
-    else
-      redirect_to item_path(@item)
-    end
+    redirect_to root_path  unless current_user.id == @item.saler_id
+    @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
   end
-
 
   private
 
