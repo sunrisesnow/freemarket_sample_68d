@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_item, only: [:show, :edit]
+  before_action :set_item, only: [:show, :edit, :destroy]
   before_action :set_category_brand, only: [:index, :new, :show]
 
   def index
@@ -57,7 +57,15 @@ class ItemsController < ApplicationController
   def category_grandchildren
     @grandchildren = Category.find(params[:child_id]).children
   end
-end
+
+  def destroy
+    if current_user.id == @item.saler_id
+      redirect_to item_path(@item) unless @item.destroy
+      redirect_to root_path
+    else
+      redirect_to item_path(@item)
+    end
+  end
 
 
   private
@@ -86,5 +94,5 @@ end
         :image
       ]
     ).merge(saler_id: current_user.id)
-
   end
+end
