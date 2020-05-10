@@ -1,7 +1,7 @@
 
 .wrapper, .list{
   width: 100%;
-  .header{
+  .top-header{
     padding: 0 10%;
     &__block{
       width: 100%;
@@ -60,7 +60,7 @@
     &__bottom{
       display: flex;
       justify-content: space-between;
-      .header__left--content{
+      .top-header__left--content{
         display: flex;
         .search__btn{
           display: inline-block;
@@ -73,7 +73,7 @@
           @include hover__color($mainblueColor, white, 1);
         }
       }
-      .header__right--content{
+      .top-header__right--content{
         display: flex;
         &--icon{
           color: gray;
@@ -91,7 +91,7 @@
             font-size: 14px;
             @include hover__color($mainblueColor, white, 1);
             &:hover{
-              .header__right--content--icon{
+              .top-header__right--content--icon{
                 color: $mainblueColor;
               }
             }
