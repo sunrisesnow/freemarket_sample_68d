@@ -1,0 +1,47 @@
+.register-wrapper{
+  background-color: $whitesmoke;
+  #container{
+    padding: 0 30px 30px 30px;
+    width: 100%;
+    #field__contents{
+      width: 700px;
+      justify-content: center;
+      background-color: white;
+      margin: 0 auto;
+      &--title h2{
+        text-align: center;
+        padding: 30px 0 30px;
+        border-bottom: 1px solid $whitesmoke;
+        font-weight: normal;
+      }
+      &--form{
+        padding: 30px 197px 60px;
+        .nav{
+          padding-bottom: 25px;
+          &__title{
+            font-size: 15px;
+            font-weight: bold;
+            padding-bottom: 5px;
+          }
+          &__text{
+            font-size: 12px;
+            font-weight: normal;
+          }
+        }
+        .actions{
+          padding-top: 40px;
+          .next__btn{
+            display: inline-block;
+            background-color: $skyblue;
+            width: 306px;
+            opacity: 0.8;
+            padding: 15px 0;
+            color: white;
+            transition: 1s;
+            @include hover(white, 0.6)
+          }
+        }
+      }
+    }
+  }
+}
