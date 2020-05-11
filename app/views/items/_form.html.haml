@@ -63,7 +63,7 @@
         = f.label :配送料の負担
         %span.field__label--require 必須
       .field__input
-        = f.select :delivery_charge_flag, [['送料込み(出品者負担)', '1'], ['着払い(購入者負担)', '2']], include_blank: '選択して下さい', required: :true
+        = f.select :delivery_charge_flag, [['送料込み(出品者負担)', '送料込み(出品者負担)'], ['着払い(購入者負担)', '着払い(購入者負担)']], include_blank: '選択して下さい', required: :true
     .field
       .field__label
         = f.label :発送元の地域
