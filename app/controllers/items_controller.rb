@@ -42,14 +42,6 @@ class ItemsController < ApplicationController
     @images = @item.images
   end 
 
-  def category_children
-    @children = Category.find_by(name:"#{params[:parent_name]}", ancestry: nil).children
-  end
-
-  def category_grandchildren
-    @grandchildren = Category.find(params[:child_id]).children
-  end
-
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
     @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
