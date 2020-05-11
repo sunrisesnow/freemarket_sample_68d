@@ -3,7 +3,7 @@
   -unless category.name.include?("カテゴリー一覧")
     // レディースの孫要素のidだけ昇順に入っていなかったのでsortしてます
     - grandchildren_id = category.indirect_ids.sort
-    - items = @items.where(category_id: grandchildren_id[0]..grandchildren_id[-1])
+    - items = @items.where(category_id: grandchildren_id.first..grandchildren_id.last)
     .pickup-box
       .category__title 
         = "#{category.name}新着アイテム"
