@@ -383,15 +383,31 @@
       font-weight: bold;
     }
     .pickup-box {
+      opacity : 0;
+      transform : translate(0, 100px);
+      transition : all 1s;
       .category {
         text-decoration: none;
       }
       .category__title {
         font-size: 24px;
         font-weight: bold;
-        color: #3ccace;
-        text-align: center;
+        text-align: left;
+        position: relative;
+        padding: 20px 10.5%;
+        &--items{
+          font-size: 13px;
+          position: absolute;
+          right: 11.5%;
+          color: $mainblueColor;
+          letter-spacing: 1px;
+          @include hover( $mainblueColor, 0.8)
+        }
       }
+    }
+    .pickup-box.active{
+      opacity : 1;
+      transform : translate(0, 0);
     }
     .item-lists {
       padding: 0 10%;
