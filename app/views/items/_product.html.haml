@@ -2,8 +2,8 @@
 - @parents.each do |category|
   -unless category.name.include?("カテゴリー一覧")
     // レディースの孫要素のidだけ昇順に入っていなかったのでsortしてます
-    - grandchildren_id = category.indirect_ids.sort
-    - items = @items.where(category_id: grandchildren_id.first..grandchildren_id.last)
+    - grandchildren_ids = category.indirect_ids.sort
+    - items = @items.where(category_id: grandchildren_ids.first..grandchildren_ids.last)
     .pickup-box
       .category__title 
         = "#{category.name}新着アイテム"
