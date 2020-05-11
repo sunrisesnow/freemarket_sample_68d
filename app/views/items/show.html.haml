@@ -22,7 +22,7 @@
             .itembox__price
               %span
                 ¥
-                = @item.price
+                = tax_include_price(@item.price)
               .itembox__price--detail
                 %span
                   (税込)

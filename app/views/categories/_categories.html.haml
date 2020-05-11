@@ -20,7 +20,7 @@
                 .details
                   %ul
                     %li 
-                      = "#{item.price}円"
+                      = tax_include_price(item.price)
                     %li#like 0
                   %p.detail (税込)
         -else 
