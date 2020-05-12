@@ -3,7 +3,7 @@
   -unless category.name.include?("カテゴリー一覧")
     - grandchildren_ids = category.indirect_ids.sort
     - items = @items.where(category_id: grandchildren_ids.first..grandchildren_ids.last)
-    .pickup-box
+    .pickup-box.picup-box-fadein
       .category__title 
         = "#{category.name}新着アイテム"
         = link_to parent_category_path(category), class: "category__title--items" do
