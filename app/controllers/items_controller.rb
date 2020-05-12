@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @images = @item.images
+    redirect_to root_path if @item == nil
   end 
 
   def destroy
@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by_id(params[:id])
   end
 
   def item_params
