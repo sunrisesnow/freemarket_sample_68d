@@ -8,20 +8,18 @@ class CategoriesController < ApplicationController
     
   end
 
-  def parent
-    grandchildren_id = @category.indirect_ids 
-    find_category_item(grandchildren_id)
-  end
-
-  def child
-    grandchildren_id = @category.child_ids
-    find_category_item(grandchildren_id)
-  end
-
-  def grandchild
+  def show
     @items = []
-    category_item = Item.includes(:images).where(category_id: params[:id])
-    category_present(category_item)
+    if @category.ancestry.nil?
+      grandchildren_id = @category.indirect_ids 
+      find_category_item(grandchildren_id)
+    elsif @category.ancestry.include?("/")
+      category_item = Item.includes(:images).where(category_id: params[:id])
+      category_present(category_item)
+    else
+      grandchildren_id = @category.child_ids
+      find_category_item(grandchildren_id)
+    end
   end
 
   private
@@ -40,7 +38,6 @@ class CategoriesController < ApplicationController
   end
 
   def find_category_item(grandchildren_id)
-    @items = []
     category_item = []
     grandchildren_id.each do |grandchild_id|
       category_item = Item.includes(:images).where(category_id: grandchild_id)
