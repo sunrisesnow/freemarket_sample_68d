@@ -96,7 +96,7 @@
         display: block;
         width: 100%;
         height: 70px;
-        
+        border-style: none;
         
 
         &-messages {
@@ -128,7 +128,7 @@
 
       .mypage-tabs-right-contents {
         display: none;
-        
+        border-style: none;
 
         &-messages {
           display: flex;
@@ -188,7 +188,7 @@
     left: 30px;
     
     
-    .modal-banner-app.clearfix {
+    .modal__banner-app.clearfix {
       position: absolute;
       
     }

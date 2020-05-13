@@ -120,8 +120,7 @@
         .mypage-tabs
           .mypage-tabs-left
             = link_to "#", class:"news-message" do
-              %td{:style => "border-style: none;"}
-              %input{:type => "button", :value => "お知らせ"}/
+              %input{type: "button", value: "お知らせ"}
               %ul
                 %li
                 
@@ -129,8 +128,7 @@
               
           .mypage-tabs-right
             = link_to "#", class:"news-message" do
-              %td{:style => "border-style: none;"}
-              %input{:type => "button", :value => "やることリスト"}/
+              %input{type: "button", value: "やることリスト"}
               %ul
                 %li
 
@@ -275,7 +273,7 @@
         今すぐ無料ダウンロード！
       %h2
         全ての機能を使えるスマホアプリはこちら！
-      .modal-banner-app.clearfix
+      .modal__banner-app.clearfix
         = image_tag "appstore.png" , class:"appstore-image", height:"70px", width:"200px"
         = image_tag "googleplay.png" , class:"googleplay-image", height:"70px", width:"200px"
 
