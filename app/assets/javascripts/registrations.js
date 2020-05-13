@@ -188,7 +188,7 @@ $(function() {
   });
 
   //生年月日
-  $("select").on("change", function(){
+  $(".field__birthday > select").on("change", function(){
     let year  = $("#user_birthday_1i").val();
     let month = $("#user_birthday_2i").val();
     let day   = $("#user_birthday_3i").val();
