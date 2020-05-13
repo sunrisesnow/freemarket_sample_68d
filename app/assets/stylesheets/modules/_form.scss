@@ -187,3 +187,10 @@ select:focus{
   -moz-appearance: menulist;
   -webkit-appearance: menulist; 
 }
+
+textarea {
+  padding: 8px 12px;
+  border: solid 1px $lightgray;
+  border-radius:  5px;
+  font-size: 16px;
+}
