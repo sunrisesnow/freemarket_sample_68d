@@ -6,7 +6,7 @@
     .pickup-box.picup-box-fadein
       .category__title 
         = "#{category.name}新着アイテム"
-        = link_to parent_category_path(category), class: "category__title--items" do
+        = link_to category_path(category), class: "category__title--items" do
           もっと見る
           %i.fas.fa-chevron-right
       .item-lists
