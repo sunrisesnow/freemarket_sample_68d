@@ -13,45 +13,17 @@ describe CategoriesController, type: :controller do
     end
   end
 
-  describe 'GET #parent' do
+  describe 'GET #show' do
     it "@categoryに正しい値が入っていること" do
       category = create(:category)
-      get :parent, params: { id: category }
+      get :show, params: { id: category }
       expect(assigns(:category)).to eq category
     end
 
-    it 'parent.html.hamlに遷移すること' do
+    it 'show.html.hamlに遷移すること' do
       category = create(:category)
-      get :parent, params: { id: category }
-      expect(response).to render_template :parent
-    end
-  end
-
-  describe 'GET #child' do
-    it "@categoryに正しい値が入っていること" do
-      category = create(:category)
-      get :child, params: { id: category }
-      expect(assigns(:category)).to eq category
-    end
-
-    it 'parent.html.hamlに遷移すること' do
-      category = create(:category)
-      get :child, params: { id: category }
-      expect(response).to render_template :child
-    end
-  end
-
-  describe 'GET #grandchild' do
-    it "@categoryに正しい値が入っていること" do
-      category = create(:category)
-      get :grandchild, params: { id: category }
-      expect(assigns(:category)).to eq category
-    end
-
-    it 'parent.html.hamlに遷移すること' do
-      category = create(:category)
-      get :grandchild, params: { id: category }
-      expect(response).to render_template :grandchild
+      get :show, params: { id: category }
+      expect(response).to render_template :show
     end
   end
 end
