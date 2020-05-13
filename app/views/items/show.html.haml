@@ -60,13 +60,13 @@
                   %tr
                     %th カテゴリー
                     %td
-                      = link_to parent_category_path(@item.category.root_id) do
+                      = link_to category_path(@item.category.root_id) do
                         =@item.category.root.name
                       %br
-                      = link_to child_category_path(@item.category.parent_id) do
+                      = link_to category_path(@item.category.parent_id) do
                         =@item.category.parent.name
                       %br
-                      = link_to grandchild_category_path(@item.category) do
+                      = link_to category_path(@item.category) do
                         =@item.category.name
                   %tr
                     %th ブランド
@@ -92,7 +92,7 @@
                   %tr
                     %th 配送方法
                     %td
-                      = @item.delivery_method.name
+                      = @item.delivery_method
             .itembox__option
               %ul
                 %li.like-btn
@@ -125,7 +125,7 @@
             = link_to "後ろの商品",item_path(@item.id + 1)
             %i.fa.fa-angle-right
         .main-item__content--related
-          =link_to  parent_category_path(@item.category.root_id) do
+          =link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
             をもっと見る
   .app-banner
