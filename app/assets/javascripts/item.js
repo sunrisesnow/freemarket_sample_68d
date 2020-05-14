@@ -48,9 +48,9 @@ $(function () {
 
   $(window).scroll(function (){
     $('.picup-box-fadein').each(function(){
-      var position = $(this).offset().top;
-      var scroll = $(window).scrollTop();
-      var windowHeight = $(window).height();
+      const position = $(this).offset().top;
+      const scroll = $(window).scrollTop();
+      const windowHeight = $(window).height();
       if (scroll > position - windowHeight + 100){
         $(this).addClass('active');
       }
