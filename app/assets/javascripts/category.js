@@ -60,7 +60,7 @@ $(function(){
     return html;
   }
   // 子カテゴリーの表示作成
-  function appendChidrenBox(insertHTML){
+  function appendChildrenBox(insertHTML){
     const childSelectHtml = `<li>
                               <select id="children_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
                                 <option value="">選択してください</option>
@@ -70,7 +70,7 @@ $(function(){
     $('.field__input--category').append(childSelectHtml);
   }
   // 孫カテゴリーの表示作成
-  function appendGrandchidrenBox(insertHTML){
+  function appendGrandchildrenBox(insertHTML){
     
     const grandchildSelectHtml =`<li>
                                   <select id="grandchildren_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
@@ -100,7 +100,7 @@ $(function(){
         children.forEach(function(child){
           insertHTML += appendOption(child);
         });
-        appendChidrenBox(insertHTML);
+        appendChildrenBox(insertHTML);
       })
       .fail(function(){
         alert('カテゴリー取得に失敗しました');
@@ -131,7 +131,7 @@ $(function(){
           grandchildren.forEach(function(grandchild){
             insertHTML += appendOption(grandchild);
           });
-          appendGrandchidrenBox(insertHTML);
+          appendGrandchildrenBox(insertHTML);
         }
       })
       .fail(function(){
