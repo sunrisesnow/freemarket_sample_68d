@@ -45,4 +45,15 @@ $(function () {
 
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
+
+  $(window).scroll(function (){
+    $('.pickup-box-fadein').each(function(){
+      const position = $(this).offset().top;
+      const scroll = $(window).scrollTop();
+      const windowHeight = $(window).height();
+      if (scroll > position - windowHeight + 100){
+        $(this).addClass('active');
+      }
+    });
+  });
 });
