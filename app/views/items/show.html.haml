@@ -16,9 +16,9 @@
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  %ul
+                  .mini-image
                     - @images.each do |image|
-                      %li
+                      .mini-images
                         =image_tag image.image.url
             .itembox__price
               %span
@@ -37,17 +37,17 @@
               - elsif user_signed_in? && @item.saler_id != current_user.id
                 .itembox__detail--buy
                   %button.itembox__detail--buy--btn
-                    = link_to "購入する" ,  "#" ,method: :get
+                    = link_to "購入購入画面に進む",buy_card_path(@item.id) 
               - elsif user_signed_in? && @item.saler_id = current_user.id
                 .itembox__detail--edit
                   %button.itembox__detail--edit--btn
-                    = link_to "編集する" ,edit_item_path,method: :get
+                    = link_to "商品の編集" ,edit_item_path,method: :get
                 .itembox__detail--or or
                 .itembox__detail--delete
                   %button.itembox__detail--delete--btn
-                    = link_to "削除する", item_path(@item.id), method: :delete
+                    = link_to "この出品を削除する", item_path(@item.id), method: :delete
             .itembox__explanation
-              = @item.explaination
+              = @item.explanation
             .itembox__table
               %table
                 %tbody

@@ -32,15 +32,13 @@
                   width: 100%;
                   vertical-align: bottom;
                 }
-                & ul {
-                  display: flex;
-                  justify-content: center;
-                  margin-top: 10px;
-                  & li {
-                    width: 25%;
-                    margin: 0 10px 0 0;
+                .mini-image {
+                  width: 560px;
+                  font-size: 0;
+                  &s {
+                    display: inline-block;
                     & img {
-                      object-fit: cover;
+                      width: 112px;
                       height: 87px;
                     }
                   }
@@ -296,7 +294,7 @@
 }
 
 .app-banner {
-  background-image: url(/assets/bg-appBanner-pict.jpg);
+  background-image: image_url("bg-appBanner-pict.jpg");
   padding: 100px 40px;
   position: relative;
   background-size: cover;

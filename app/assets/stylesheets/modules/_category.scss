@@ -111,7 +111,7 @@
 // カテゴリー一覧のビュー
 
 .category__header{
-  padding: 10px 100px;
+  padding: 10px 10.1%;
   border: 1px solid $lightgray;
   .back__btn{
     font-size: 13px;
@@ -200,6 +200,22 @@
       }
     }
   }
+}
+
+//カテゴリー別商品一覧のビュー
+.category__child--box,.category__items--title{
+  padding: 0 10.3%;
+}
+
+.category__child--box{
+  padding-bottom: 5%;
+}
+
+.category__child--link{
+  font-size: 13px;
+  margin-right: 10px;
+  color:$facebook-color;
+  @include hover($facebook-color, 0.7);
 }
 
 

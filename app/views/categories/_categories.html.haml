@@ -1,11 +1,31 @@
 .wrapper
   = render "tops/top-header"
-  = "#{@category.name}の商品一覧"
-  - @items.each do |item|
-  - category = Category.find(item.category_id)
-    = category.name
-    = item.name
-    = item.price
-    - item.images.each do |image|
-      = image_tag image.image.url
+  = render "category_header"
+  %section.pickup
+    .pickup-box
+      = render "category_children"
+      .item-lists
+        - if @items.present?
+          - @items.each do |item|
+            .item-list.hover
+              = link_to item_path(item),class: "item" do
+                = image_tag "#{item.images[0].image.url}", class: 'item-img'
+                -if item.buyer_id.present? 
+                  .items-box_photo__sold
+                    .items-box_photo__sold__inner
+                      SOLD
+              .item-list__body
+                %h3.name 
+                  = item.name
+                .details
+                  %ul
+                    %li 
+                      = "#{item.price}円"
+                    %li#like 0
+                  %p.detail (税込)
+        -else 
+          .item-list__nothing 
+            該当する商品が見つかりません。商品は毎日増えていますので、これからの出品に期待してください。
+  = render "tops/footer-image"
   = render "tops/top-footer"
+  = render "tops/saler-btn"
