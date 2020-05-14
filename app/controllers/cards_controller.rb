@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   require "payjp"
+  before_action :set_category_brand, only: [:index, :new]
   before_action :set_card
   before_action :set_payjp_api, except: [:new]
   
@@ -80,6 +81,11 @@ class CardsController < ApplicationController
   end
 
   private
+  def set_category_brand
+    @parents = Category.where(ancestry: nil)
+    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+  end
+
   def set_card
     @card = Card.find_by(user_id: current_user.id) if Card.find_by(user_id: current_user.id).present?
   end
