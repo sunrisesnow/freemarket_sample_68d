@@ -13,10 +13,10 @@ $(function(){
   // #で始まるリンクをクリックしたら実行されます
   $('a[href^="#"]').click(function() {
     // スクロールの速度
-    var speed = 400; // ミリ秒で記述
-    var href= $(this).attr("href");
-    var target = $(href == "#" || href == "" ? 'html' : href);
-    var position = target.offset().top;
+    const speed = 400; // ミリ秒で記述
+    const href= $(this).attr("href");
+    const target = $(href == "#" || href == "" ? 'html' : href);
+    const position = target.offset().top;
     $('body,html').animate({scrollTop:position}, speed, 'swing');
     return false;
   });
@@ -56,12 +56,12 @@ $(function(){
     parent.css(parentBeforeColor);
   });
   function appendOption(category){
-    var html = `<option value="${category.id}" >${category.name}</option>`;
+    let html = `<option value="${category.id}" >${category.name}</option>`;
     return html;
   }
   // 子カテゴリーの表示作成
-  function appendChidrenBox(insertHTML){
-    var childSelectHtml = `<li>
+  function appendChildrenBox(insertHTML){
+    const childSelectHtml = `<li>
                               <select id="children_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
                                 <option value="">選択してください</option>
                                 ${insertHTML}
@@ -70,9 +70,9 @@ $(function(){
     $('.field__input--category').append(childSelectHtml);
   }
   // 孫カテゴリーの表示作成
-  function appendGrandchidrenBox(insertHTML){
+  function appendGrandchildrenBox(insertHTML){
     
-    var grandchildSelectHtml = `<li>
+    const grandchildSelectHtml =`<li>
                                   <select id="grandchildren_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
                                     <option value="">選択してください</option>
                                     ${insertHTML}
@@ -83,24 +83,24 @@ $(function(){
   // 親カテゴリー選択後のイベント
   $('#parent_category').on('change', function(){
     //選択された親カテゴリーの名前を取得
-    var parentName =$(this).val(); 
+    const parentName =$(this).val(); 
     if (parentName != ""){ 
       //親カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_children',
+        url: '/items/category_children',
         type: 'GET',
         data: { parent_name: parentName },
         dataType: 'json'
       })
       .done(function(children){
-         //親が変更された時、子以下を削除する
-         $('#children_category').parent().remove();
-         $('#grandchildren_category').parent().remove();
-           var insertHTML = '';
+         //親が変更された時、子以下を削除するする
+        $('#children_category').remove();
+        $('#grandchildren_category').remove();
+        let insertHTML = '';
         children.forEach(function(child){
           insertHTML += appendOption(child);
         });
-        appendChidrenBox(insertHTML);
+        appendChildrenBox(insertHTML);
       })
       .fail(function(){
         alert('カテゴリー取得に失敗しました');
@@ -113,12 +113,12 @@ $(function(){
   });
   // 子カテゴリー選択後のイベント
   $('.field__input--category').on('change', '#children_category', function(){
-    var childId = $(this).val();
+    const childId = $(this).val();
     //選択された子カテゴリーのidを取得
     if (childId != ""){ 
       //子カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_grandchildren',
+        url: '/items/category_grandchildren',
         type: 'GET',
         data: { child_id:  childId},
         dataType: 'json'
@@ -126,12 +126,11 @@ $(function(){
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
           //子が変更された時、孫以下を削除する
-          $('#grandchildren_category').parent().remove();
-          var insertHTML = '';
+          let insertHTML = '';
           grandchildren.forEach(function(grandchild){
             insertHTML += appendOption(grandchild);
           });
-          appendGrandchidrenBox(insertHTML);
+          appendGrandchildrenBox(insertHTML);
         }
       })
       .fail(function(){

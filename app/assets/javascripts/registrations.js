@@ -1,8 +1,5 @@
 $(function() {
   // パスワードチェックボックス
-  if($(".field").hasClass('error-class')){
-    var form = $('.field').children('input');
-  }
   $("#checkpw").change(function(){
     if($(this).prop('checked')){
       $('#user_password').attr('type','text');
@@ -17,9 +14,9 @@ $(function() {
 
   //ニックネーム
   $("#user_nickname").keyup(function(){
-    let patern = /[ |　]+/;
-    let nickname = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /[ |　]+/;
+    const nickname = $(this).val().match(patern);
+    const next = $(this).next();
     if(nickname != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -38,9 +35,9 @@ $(function() {
 
   //Eメール
   $('#user_email').keyup(function(){
-    let patern = /[\x21-\x3f\x41-\x7e]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/;
-    let email = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /[\x21-\x3f\x41-\x7e]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/;
+    const email = $(this).val().match(patern);
+    const next = $(this).next();
     if(email == null){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -59,9 +56,9 @@ $(function() {
 
   //パスワード
   $("#user_password").keyup(function(){
-    let patern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
-    let password = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
+    const password = $(this).val().match(patern);
+    const next = $(this).next();
     if(password == null || $(this).val().length < 7){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -80,8 +77,8 @@ $(function() {
 
   //パスワード再入力
   $("#user_password_confirmation").keyup(function(){
-    let password = $("#user_password").val();
-    let next = $(this).next();
+    const password = $("#user_password").val();
+    const next = $(this).next();
     if($(this).val() != password){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -99,15 +96,15 @@ $(function() {
     }
   });
   
-  var first_name = $('[id$=first_name]');
-  var last_name = $('[id$=last_name]');
-  var first_name_kana = $('[id$=first_name_kana]');
-  var last_name_kana = $('[id$=last_name_kana]');
+  const first_name = $('[id$=first_name]');
+  const last_name = $('[id$=last_name]');
+  const first_name_kana = $('[id$=first_name_kana]');
+  const last_name_kana = $('[id$=last_name_kana]');
   //姓（全角）
   $(last_name).keyup(function(){
-    let patern = /^[ぁ-んァ-ン一-龥]/;
-    let last_name_regexp = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^[ぁ-んァ-ン一-龥]/;
+    const last_name_regexp = $(this).val().match(patern);
+    const next = $(this).next();
     if(last_name_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -126,9 +123,9 @@ $(function() {
 
   //名（全角）
   $(first_name).keyup(function(){
-    let patern = /^[ぁ-んァ-ン一-龥]/;
-    let first_name_regexp = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^[ぁ-んァ-ン一-龥]/;
+    const first_name_regexp = $(this).val().match(patern);
+    const next = $(this).next();
     if(first_name_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -147,9 +144,9 @@ $(function() {
 
   //姓（カナ）
   $(last_name_kana).keyup(function(){
-    let patern = /^[ァ-ヶー－]/;
-    let last_name_kana_regexp = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^[ァ-ヶー－]/;
+    const last_name_kana_regexp = $(this).val().match(patern);
+    const next = $(this).next();
     if(last_name_kana_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -168,9 +165,9 @@ $(function() {
 
   //名（カナ）
   $(first_name_kana).keyup(function(){
-    let patern = /^[ァ-ヶー－]/;
-    let first_name_kana_regexp = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^[ァ-ヶー－]/;
+    const first_name_kana_regexp = $(this).val().match(patern);
+    const next = $(this).next();
     if(first_name_kana_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -209,7 +206,7 @@ $(function() {
     }
   });
   //画面遷移しようとした際バリデーションに引っかかった場合
-  var next = $("#user_birthday_3i").next();
+  const next = $("#user_birthday_3i").next();
   if(next.hasClass("error-class")){
     $("select").css("border", "1px solid red");
     $("#user_birthday_1i").css("border", "1px solid red");

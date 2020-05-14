@@ -49,6 +49,7 @@ group :development, :test do
   gem 'faker', "~> 2.8"
   gem 'rails-controller-testing'
   gem 'forgery_ja'
+  gem 'capybara', '>= 2.15'
 end
 
 group :development do
