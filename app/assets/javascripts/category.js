@@ -87,7 +87,7 @@ $(function(){
     if (parentName != ""){ 
       //親カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_children',
+        url: '/items/category_children',
         type: 'GET',
         data: { parent_name: parentName },
         dataType: 'json'
@@ -118,7 +118,7 @@ $(function(){
     if (childId != ""){ 
       //子カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_grandchildren',
+        url: '/items/category_grandchildren',
         type: 'GET',
         data: { child_id:  childId},
         dataType: 'json'
