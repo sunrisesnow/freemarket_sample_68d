@@ -12,15 +12,15 @@
                 = parent.name
           - else
             %li
-              = link_to parent_category_path(id: parent.id), class: "category__parent--name" do
+              = link_to category_path(id: parent), class: "category__parent--name" do
                 = parent.name
               %ul.category__child.category__list
                 - parent.children.each do |child|
                   %li
-                    = link_to child_category_path(id: child.id), class: "category__child--name" do
+                    = link_to category_path(id: child), class: "category__child--name" do
                       = child.name
                     %ul.category__grandchild.category__list
                       - child.children.each do |grandchild|
                         %li
-                          = link_to grandchild_category_path(id: grandchild.id), class: " category__grandchild--name" do
+                          = link_to category_path(id: grandchild), class: " category__grandchild--name" do
                             = grandchild.name

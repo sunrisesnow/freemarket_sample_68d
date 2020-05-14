@@ -7,7 +7,7 @@
     = "**** **** **** " + @card_info.last4 #クレジットカードの下４桁を表示
   .hoge
     = @exp_month + " / " + @exp_year
-    = button_to "削除する", card_path(@card), method: :delete
+    = button_to "削除する", card_path(@card), method: :delete, data: {disable_with: '送信...'}
     = link_to root_path do
       トップページへ
 - else
