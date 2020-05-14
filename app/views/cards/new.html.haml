@@ -1,15 +1,28 @@
-= form_with url: cards_path, method: :post, id: "payjp__form" do |f|
-  = f.label :カード番号
-  %span
-    必須
-  = f.text_field :card_number, name: "card_number", id:"card_number", placeholder: '半角数字のみ', maxlength: "16"
-  = f.label :有効期限 
-  %span.form-require 必須
-  = f.select :exp_year, [["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029]], {}, name: "exp_year", id:"exp_year"
-  %span 年
-  = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{}, name: "exp_month", id:"exp_month"
-  %span 月
-  = f.label :セキュリティーコード
-  = f.text_field :cvc, name: "cvc", id:"cvc", placeholder: 'カード背面4桁もしくは3桁の番号', maxlength: "4"
-  = f.submit '次へ進む', id: "charge-form"
-  .payment-errors
+.wrapper
+  = render "tops/top-header"
+
+.card-container
+  .card-container__title
+    クレジットカードの登録
+
+  .card-wrapper
+    = form_with url: cards_path, method: :post, id: "payjp__form" do |f|
+      .form__upper
+        .form__upper__group
+          = f.label :カード番号
+          %span.form-require 必須
+          = f.text_field :card_number, name: "card_number", id:"card_number", placeholder: '半角数字のみ', class: 'input-default',maxlength: "16"
+        .form__upper__group.exp
+          .name
+            = f.label :有効期限 
+            %span.form-require 必須
+          = f.select :exp_year, [["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029]], {}, name: "exp_year", id:"exp_year"
+          %span 年
+          = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{}, name: "exp_month", id:"exp_month"
+          %span 月
+        .form__upper__group
+          = f.label :セキュリティーコード
+          %span.form-require 必須
+          = f.text_field :cvc, name: "cvc", id:"cvc", placeholder: '123', maxlength: "4"
+        .form__upper__group
+          = f.submit '次へ進む', class: 'btn-default',id: "charge-form"
