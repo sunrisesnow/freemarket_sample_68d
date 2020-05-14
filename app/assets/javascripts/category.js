@@ -20,9 +20,7 @@ $(function(){
     $('body,html').animate({scrollTop:position}, speed, 'swing');
     return false;
   });
-
   // カテゴリーボックスの動的背景色変化
-  
   // 親要素にmouseoverした時、親要素のcss変化（mouseoverした時も変化）
   $('.category__parent--name').mouseover(function(){
     $(this).css(parentAfterColor);
@@ -87,7 +85,7 @@ $(function(){
     if (parentName != ""){ 
       //親カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_children',
+        url: '/items/category_children',
         type: 'GET',
         data: { parent_name: parentName },
         dataType: 'json'
@@ -118,7 +116,7 @@ $(function(){
     if (childId != ""){ 
       //子カテゴリーが初期値でないことを確認
       $.ajax({
-        url: 'category_grandchildren',
+        url: '/items/category_grandchildren',
         type: 'GET',
         data: { child_id:  childId},
         dataType: 'json'

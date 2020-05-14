@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_item, only: [:show, :edit]
-  before_action :set_category_brand, only: [:index, :new, :show]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_category_brand, only: [:index, :new, :show, :edit]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -36,6 +36,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @parents = []
+    Category.where(ancestry: nil).each do |parent|
+      unless parent.name == "カテゴリー一覧"
+        @parents << parent.name
+      end
+    end
+    @category_child_array = @item.category.parent.parent.children
+    @category_grandchild_array = @item.category.parent.children
   end
 
   def update
@@ -90,5 +98,4 @@ end
         :image
       ]
     ).merge(saler_id: current_user.id)
-
   end

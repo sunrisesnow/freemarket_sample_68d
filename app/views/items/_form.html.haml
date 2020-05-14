@@ -17,7 +17,7 @@
               = image.file_field :image, class: 'js-file'
               .js-remove 削除
             - if @item.persisted?
-              = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+            = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
           - if @item.persisted?
             %div{ class: 'js-file_group', data: {index: @item.images.count}}
               = file_field_tag :image, name: "item[images_attributes][#{@item.images.count}][image]", class: 'js-file'
@@ -43,7 +43,7 @@
         %span.field__label--require 必須
       %ul.field__input--category
         %li
-          = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
+          = f.select :category_id ,@parents , {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
   
     .field
       .field__label
