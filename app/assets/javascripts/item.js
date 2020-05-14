@@ -47,7 +47,7 @@ $(function () {
   });
 
   $(window).scroll(function (){
-    $('.picup-box-fadein').each(function(){
+    $('.pickup-box-fadein').each(function(){
       const position = $(this).offset().top;
       const scroll = $(window).scrollTop();
       const windowHeight = $(window).height();
