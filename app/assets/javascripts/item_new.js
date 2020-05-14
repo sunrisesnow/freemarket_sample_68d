@@ -1,5 +1,5 @@
 // ページ遷移後のfocusを画像選択にする動作
-$(document).ready(function() {
+$(function() {
   $('.input-area').focus();
 });
 
@@ -12,29 +12,31 @@ $(function(){
   }
 
   $("input[name='item[price]']").on('change keyup', function() {
-  var price = $("input[name='item[price]']").val();
+  const price = $("input[name='item[price]']").val();
+  let fee;
+  let profit;
   if (!price){
-    var fee = '-'
-    var profit = '-'
+    fee = '-'
+    profit = '-'
   } else if (price >= 300 && price < 10000000) {
-    var calc_fee = Math.floor(price * 0.1)
-    var calc_profit = price - calc_fee
+    const calc_fee = Math.floor(price * 0.1)
+    const calc_profit = price - calc_fee
 
-    var fee = "¥" + String(calc_fee).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'); 
-    var profit = "¥" + String(calc_profit).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'); 
+    fee = "¥" + String(calc_fee).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'); 
+    profit = "¥" + String(calc_profit).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,'); 
   } else {
-    var fee = '-'
-    var profit = '-'
+    fee = '-'
+    profit = '-'
   }
   replaceFeeAndProfit(fee, profit);
   }); 
 });
 
 // 配送方法の選択フィールドを追加表示する動作
-$(document).ready(function() {
+$(function() {
   // 送料込み（出品者負担）の場合の配送方法の選択肢　→　ajax通信で取れるならとってきたい部分
   function sellerCharge() {
-    var html =`
+    const sellerChargeOptions =`
       <div class='field' id='seller-charge'>
         <div class='field__label'>
           <label for="item_delivery_method_id">配送の方法</label>
@@ -56,11 +58,11 @@ $(document).ready(function() {
         </div>
       </div>
     `
-    $('#delivery_charge').parent().append(html);
+    $('#delivery_charge').parent().append(sellerChargeOptions);
   }
   // 送料別（購入者負担）の場合の配送方法の選択肢　→　ここもajax通信で取れるならとってきたい
   function buyerCharge() {
-    var html = `
+    const buyerChargeOptions = `
       <div class='field' id='buyer-charge'>
         <div class='field__label'>
           <label for="item_delivery_method_id">配送の方法</label>
@@ -76,15 +78,15 @@ $(document).ready(function() {
         </div>
       </div>
     `
-    $('#delivery_charge').parent().append(html);
+    $('#delivery_charge').parent().append(buyerChargeOptions);
   }
 
   // 配送料の負担の選択に応じて、表示する内容を変更する動作
   $(document).on('change', '#item_delivery_charge_flag', function (){
-    var sellerChargeMethod = $('#seller-charge')
-    var buyerChargeMethod = $('#buyer-charge')  
+    const sellerChargeMethod = $('#seller-charge')
+    const buyerChargeMethod = $('#buyer-charge')  
     // $("select[name='item[delivery_method_id]'] option").attr("selected", false);
-    var chargeFlag = $(this).val();
+    const chargeFlag = $(this).val();
     if (chargeFlag == "") {
       sellerChargeMethod.remove();
       buyerChargeMethod.remove();
@@ -100,11 +102,16 @@ $(document).ready(function() {
 
 // 入力フォームのバリデーション
 $(function() {
+  let value;
+  let next;
+  let priceNext;
+  let imageNext;
+
   // blur時の動作
   function fieldBlur(input) {
-    var value = input.val();
-    var next = input.next();
-    var priceNext = input.parent().parent().next();
+    value = input.val();
+    next = input.next();
+    priceNext = input.parent().parent().next();
     // 未入力のチェック
     if (value == "" && !next.hasClass('error')) {
       input.addClass('error');
@@ -126,18 +133,18 @@ $(function() {
         if (!priceNext.hasClass('error')) {
           input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
         }
+      } else if (priceNext.hasClass('error')) {
+        priceNext.remove();
       } else {
-        if (priceNext.hasClass('error')) {
-          priceNext.remove();
-        }
+        ;
       }
     }
   }
   // keyup時の動作
   function fieldKeyup(input) {
-    var value = input.val();
-    var next = input.next();
-    var priceNext = input.parent().parent().next();
+    value = input.val();
+    next = input.next();
+    priceNext = input.parent().parent().next();
     if (value != "") {
       input.removeClass('error');
       if (input.is('#sell-price-input')) {
@@ -152,17 +159,17 @@ $(function() {
         if (priceNext.hasClass('error')) {
           priceNext.remove();
         }
+      } else if (!priceNext.hasClass('error')) {
+        input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
       } else {
-        if (!priceNext.hasClass('error')) {
-          input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-        }
+        ;
       }
     }
   }
 
   // 画像の入力チェック
   function imageCheck(num) {
-    var imageNext = $('#image-box-1').next();
+    const imageNext = $('#image-box-1').next();
     if (num == 0) {
       if (!imageNext.hasClass('error')) {
         $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
@@ -196,10 +203,10 @@ $(function() {
 
   // 出品ボタン押下時の処理
   $('.item-btn').click(function(e) {
-    var submitID = $(this).attr('id')
     e.preventDefault();
-    var flag = true;
-    var num = $('.item-image').length - 1
+    const submitID = $(this).attr('id')
+    let flag = true;
+    const num = $('.item-image').length - 1
     imageCheck(num);
 
     $('#new_item input:required').each(function(e) {
@@ -240,9 +247,28 @@ $(function() {
 
 // 画像のプレビュー、ドラッグ等の処理に関する動作
 $(function(){
+  let imageNext;
+  // 画像プレビュー関数
+  function imagePreview(src, filename, i, num) {
+    const html= `
+      <div class='item-image' data-image="${filename}" data-index="${i}">
+        <div class='item-image__content'>
+          <div class='item-image__content--icon'>
+            <img src=${src} width="114" height="80" >
+          </div>
+        </div>
+        <div class='item-image__operation'>
+          <div class='item-image__operation--delete'>削除</div>
+        </div>
+      </div>
+      `
+    $('#image-box__container').before(html);
+    $('#image-box__container').attr('class', `item-num-${num}`) 
+  }
+
   // 画像追加時のエラーチェック関数
   function errorCheckOnAdd(num) {
-    var imageNext = $('#image-box-1').next();
+    imageNext = $('#image-box-1').next();
     if (num == 0) {
       if (!imageNext.hasClass('error')) {
         $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
@@ -255,7 +281,7 @@ $(function(){
   }
   // 画像削除時のエラーチェック動作
   function errorCheckOnDel(num) {
-    var imageNext = $('#image-box-1').next();
+    imageNext = $('#image-box-1').next();
     if (num == 0) {
       if (!imageNext.hasClass('error')) {
         $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
@@ -264,22 +290,23 @@ $(function(){
   }
 
   //DataTransferオブジェクトで、データを格納する箱を作る
-  var dataBox = new DataTransfer();
+  const dataBox = new DataTransfer();
   //querySelectorでfile_fieldを取得
-  var file_field = document.querySelector('input[type=file]')
+  const file_field = document.querySelector('input[type=file]')
 
   //fileが選択された時に発火するイベント
   $(document).on('change', '.img-file', function(){
-    //選択したfileのオブジェクトをpropで取得
-    var imageNum = $('.item-image').length
+    const imageNum = $('.item-image').length
     errorCheckOnAdd(imageNum);
-    var files = $('input[type="file"]').prop('files')[0];
+
+    //選択したfileのオブジェクトをpropで取得
+    const files = $('input[type="file"]').prop('files')[0];
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file)
       file_field.files = dataBox.files
 
-      var num = $('.item-image').length + i
+      const num = $('.item-image').length + i
       fileReader.readAsDataURL(file);
 　　　 //画像が10枚になったら超えたらドロップボックスを削除する
       if (num == 10){
@@ -287,62 +314,16 @@ $(function(){
       }
       //読み込みが完了すると、srcにfileのURLを格納
       fileReader.onloadend = function() {
-        var src = fileReader.result
-        var html= `
-          <div class='item-image' data-image="${file.name}" data-index="${i}">
-            <div class='item-image__content'>
-              <div class='item-image__content--icon'>
-                <img src=${src} width="114" height="80" >
-              </div>
-            </div>
-            <div class='item-image__operation'>
-              <div class='item-image__operation--delete'>削除</div>
-            </div>
-          </div>
-          `
-        $('#image-box__container').before(html);
+        const src = fileReader.result
+        imagePreview(src, file.name, i, num)
       };
-      $('#image-box__container').attr('class', `item-num-${num}`)
-
     });
-  });
-
-  //削除ボタンをクリック時の動作
-  $(document).on("click", '.item-image__operation--delete', function(){
-    //削除を押されたプレビュー要素を取得
-    var target_image = $(this).parent().parent()
-    //削除を押されたプレビューimageのfile名を取得
-    var target_name = $(target_image).data('image')
-    //プレビューがひとつだけの場合、file_fieldをクリア
-    if (file_field.files.length==1) {
-      //inputタグに入ったファイルを削除
-      $('input[type=file]').val(null)
-      dataBox.clearData();
-    } else {
-      //プレビューが複数の場合
-      $.each(file_field.files, function(i,input){
-        //削除を押された要素と一致した時、index番号に基づいてdataBoxに格納された要素を削除する
-        if(input.name==target_name){
-          dataBox.items.remove(i) 
-        }
-      })
-      //DataTransferオブジェクトに入ったfile一覧をfile_fieldの中に再度代入
-      file_field.files = dataBox.files
-    }
-    //プレビューを削除
-    target_image.remove()
-    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-    var num = $('.item-image').length - 1 
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
-    
-    errorCheckOnDel(num);
   });
 
   // 画像ドラック時の動作
   $(window).on('load', function(e){
-    var dropArea = document.getElementById("image-box-1");
-    var dataBox = new DataTransfer();
+    const dropArea = document.getElementById("image-box-1");
+    const dataBox = new DataTransfer();
 
     //ドラッグした要素がドロップターゲットの上にある時にイベントが発火
     dropArea.addEventListener("dragover", function(e){
@@ -364,20 +345,20 @@ $(function(){
       e.preventDefault();
       $(this).children('#image-box__container').css({'border': 'none','box-shadow': '0px 0px 0px'});
 
-      var imageNum = $('.item-image').length
+      const imageNum = $('.item-image').length
       errorCheckOnAdd(imageNum);
 
-      var files = e.dataTransfer.files;
+      const files = e.dataTransfer.files;
 
       //ドラッグアンドドロップで取得したデータについて、プレビューを表示
       $.each(files, function(i,file){
         //アップロードされた画像を元に新しくfilereaderオブジェクトを生成
-        var fileReader = new FileReader();
+        const fileReader = new FileReader();
         //dataTransferオブジェクトに値を追加
         dataBox.items.add(file)
         file_field.files = dataBox.files
         //lengthで要素の数を取得
-        var num = $('.item-image').length + i
+        const num = $('.item-image').length + i
         //指定されたファイルを読み込む
         fileReader.readAsDataURL(file);
         // 10枚プレビューを出したらドロップボックスが消える
@@ -385,27 +366,42 @@ $(function(){
           $('#image-box__container').css('display', 'none')   
         }
         //image fileがロードされた時に発火するイベント
-        fileReader.onload = function() {
-          //変数srcにresultで取得したfileの内容を代入
-          var src = fileReader.result
-          var html =`
-            <div class='item-image' data-image="${file.name}" data-index="${i}">
-              <div class='item-image__content'>
-                <div class='item-image__content--icon'>
-                  <img src=${src} width="114" height="80" >
-                </div>
-              </div>
-              <div class='item-image__operation'>
-                <div class='item-image__operation--delete'>削除</div>
-              </div>
-            </div>
-            `
-        //image-box__containerの前にhtmlオブジェクトを追加　
-        $('#image-box__container').before(html);
+        fileReader.onloadend = function() {
+          const src = fileReader.result
+          imagePreview(src, file.name, i, num)
         };
-        //image-box__containerにitem-num-(変数)という名前のクラスを追加する
-        $('#image-box__container').attr('class', `item-num-${num}`)
       })
     })
+  });
+  //削除ボタンをクリック時の動作
+  $(document).on("click", '.item-image__operation--delete', function(){
+    //削除を押されたプレビュー要素を取得
+    const target_image = $(this).parent().parent()
+    //削除を押されたプレビューimageのfile名を取得
+    const target_name = $(target_image).data('image')
+    //プレビューがひとつだけの場合、file_fieldをクリア
+    if (file_field.files.length==1) {
+      //inputタグに入ったファイルを削除
+      $('input[type=file]').val(null)
+      dataBox.clearData();
+    } else {
+      //プレビューが複数の場合
+      $.each(file_field.files, function(i,input){
+        //削除を押された要素と一致した時、index番号に基づいてdataBoxに格納された要素を削除する
+        if(input.name==target_name){
+          dataBox.items.remove(i) 
+        }
+      })
+      //DataTransferオブジェクトに入ったfile一覧をfile_fieldの中に再度代入
+      file_field.files = dataBox.files
+    }
+    //プレビューを削除
+    target_image.remove()
+    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
+    const num = $('.item-image').length - 1 
+    $('#image-box__container').show()
+    $('#image-box__container').attr('class', `item-num-${num}`)
+    
+    errorCheckOnDel(num);
   });
 });
