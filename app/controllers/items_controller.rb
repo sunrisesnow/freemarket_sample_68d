@@ -28,7 +28,14 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save! ? (redirect_to items_path) : (render :new)
+    if @item.save!
+      params[:item_images][:image].each do |image|
+        @item.images.create(image: image, item_id: @item.id)
+      end
+      redirect_to items_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -65,9 +72,11 @@ class ItemsController < ApplicationController
       :category_id,
       :status_id,
       :delivery_charge_flag,
+      :delivery_method_id,
       :prefecture_id,
       :delivery_date_id,
       :price, 
+      :trading_status_id,
       images_attributes: [
         :id,
         :image

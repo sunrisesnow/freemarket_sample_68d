@@ -107,8 +107,8 @@ $(function(){
       })
     }else{
       //親カテゴリーが初期値になった時、子以下を削除する
-      $('#children_category').remove();
-      $('#grandchildren_category').remove();
+      $('#children_category').parent().remove();
+      $('#grandchildren_category').parent().remove();
     }
   });
   // 子カテゴリー選択後のイベント
@@ -125,7 +125,6 @@ $(function(){
       })
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
-          $('#grandchildren_category').remove(); 
           //子が変更された時、孫以下を削除する
           let insertHTML = '';
           grandchildren.forEach(function(grandchild){
@@ -138,8 +137,8 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
-      $('#grandchildren_category').remove(); 
       //子カテゴリーが初期値になった時、孫以下を削除する
+      $('#grandchildren_category').parent().remove();
     }
   });
 });
