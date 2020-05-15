@@ -5,8 +5,7 @@
         = image_tag "icon_brand.png", height: "15px", width: "15px", class:"icon__brand"
         ブランドから探す
       %ul.brand__parent
-      -# 9行目カードビュー実装のため一時的にコメントアウト
-        -# - @brands.each do |brand|
+        - @brands.each do |brand|
           %li
             = link_to "#", class: "brand__parent--name" do
               = brand
