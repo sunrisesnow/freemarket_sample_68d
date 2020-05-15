@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :tops, only: [:new]
-  resources :categories, only: [:index]
   resources :cards, except: [:show,:edit,:update] do
     member do
       get 'buy'
@@ -23,11 +22,6 @@ Rails.application.routes.draw do
       get 'category_grandchildren', defaults: { format: 'json' }
     end
   end
-  resources :categories, only: [:index] do
-    member do
-      get 'parent'
-      get 'child'
-      get 'grandchild'
-    end
+  resources :categories, only: [:index, :show] do
   end
 end

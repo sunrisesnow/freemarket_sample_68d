@@ -11,12 +11,9 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_method
   belongs_to_active_hash :trading_status
   
-  #アソシエーションを組んでいるモデルのバリデーション
-  validates_associated :images
 
   # 入力必須のバリデーション
   with_options presence: true do
-    validates :images
     validates :name
     validates :explanation
     validates :status_id
@@ -24,6 +21,7 @@ class Item < ApplicationRecord
     validates :delivery_charge_flag
     validates :prefecture_id
     validates :delivery_date_id
+    validates :delivery_method_id
     validates :price
   end
 

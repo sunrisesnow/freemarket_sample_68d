@@ -2,12 +2,13 @@ $(function(){
   // PAY.JPの公開鍵をセットします。
   Payjp.setPublicKey('pk_test_177d9ddb319e3af144dc305d');
   //formのsubmitを止めるために, クレジットカード登録のformを定義します。
-  var form = $("#payjp__form");
+  
   $("#charge-form").click(function() {
     // 二重送信防止のためdisabledをtrueに変更しイベントを止める
+    const form = $("#payjp__form");
     form.find("input[type=submit]").prop("disabled", true);
     // formで入力された、カード情報を取得します。
-    var card = {
+    const card = {
       number: $("#card_number").val(),
       cvc: $("#cvc").val(),
       exp_month: $("#exp_month").val(),
@@ -30,7 +31,7 @@ $(function(){
         $("#cvc").removeAttr("name");
         $("#exp_month").removeAttr("name");
         $("#exp_year").removeAttr("name");
-        var token = response.id;
+        const token = response.id;
         form.append($('<input type="hidden" name="payjpToken" />').val(token));
         form.submit();
       };

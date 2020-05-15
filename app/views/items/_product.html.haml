@@ -1,12 +1,14 @@
 %h2.pickup-title PICK UP
 - @parents.each do |category|
   -unless category.name.include?("カテゴリー一覧")
-    // レディースの孫要素のidだけ昇順に入っていなかったのでsortしてます
-    - grandchildren_id = category.indirect_ids.sort
-    - items = @items.where(category_id: grandchildren_id[0]..grandchildren_id[-1])
-    .pickup-box
+    - grandchildren_ids = category.indirect_ids.sort
+    - items = @items.where(category_id: grandchildren_ids.first..grandchildren_ids.last)
+    .pickup-box.pickup-box-fadein
       .category__title 
         = "#{category.name}新着アイテム"
+        = link_to category_path(category), class: "category__title--items" do
+          もっと見る
+          %i.fas.fa-chevron-right
       .item-lists
         -if items.present?
           - items.each do |item|
@@ -23,7 +25,7 @@
                 .details
                   %ul
                     %li 
-                      = "#{item.price}円"
+                      = item.price
                     %li#like 0
                   %p.detail (税込)
         -else 

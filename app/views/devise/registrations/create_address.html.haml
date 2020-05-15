@@ -1,28 +1,11 @@
-#top
-  #registrations__header
-    .member-header
-      %h1.member-header__logo
-        = link_to root_path, class: "member-header__logo--image" do
-          = image_tag "logo.png"
-      .member-header__progress
-        %li.member-header__progress-text
-          会員情報
-          .member-header__progress-round
-        %li.member-header__progress-text
-          お届け先情報入力
-          .member-header__progress-round
-        %li.member-header__progress-active
-          完了
-          .member-header__progress-round-blue
-        .member-header__progress-border
+.register-wrapper
+  = render 'header'
+  .create-form
+    .create-form__title
+      %h2.create-form__title--text 登録が完了しました
+    .create-form__for
+      .create-main
+        .create-main__form
+          = link_to "トップへ戻る", root_path, class: 'create-main__form--btn'
 
-    .create-form
-      .create-form__title
-        %h2.create-form__title--text 登録が完了しました
-      .create-form__for
-        .create-main
-          .create-main__form
-            = link_to "トップへ戻る", root_path, class: 'create-main__form--btn'
-
-.member-footer
-  = render "footer"
+= render "shared/form-footer"

@@ -1,20 +1,5 @@
-#top
-  #registrations__header
-    .member-header
-      %h1.member-header__logo
-        = link_to root_path, class: "member-header__logo--image" do
-          = image_tag "logo.png"
-      .member-header__progress
-        %li.member-header__progress-active
-          会員情報
-          .member-header__progress-round-blue
-        %li.member-header__progress-text
-          お届け先情報入力
-          .member-header__progress-round
-        %li.member-header__progress-text
-          完了
-          .member-header__progress-round
-        .member-header__progress-border
+.register-wrapper
+  = render 'header'
   = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
     -# 
       FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
@@ -24,8 +9,7 @@
     #container
       #field__contents
         #field__contents--title
-          %h2
-            会員情報入力
+          %h2 会員情報入力
         #field__contents--form
           .field
             .field__label
@@ -108,4 +92,4 @@
             = link_to "#", class: "nav__privacy--information--link" do
               Terms of Service
             apply.
-  = render "footer"
+  = render "shared/form-footer"
