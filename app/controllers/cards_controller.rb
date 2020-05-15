@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   require "payjp"
-  before_action :set_category_brand, only: [:index, :new]
+  before_action :set_category_brand
   before_action :set_card
   before_action :set_payjp_api, except: [:new]
   
