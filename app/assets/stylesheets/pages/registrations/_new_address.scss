@@ -6,85 +6,8 @@
   border-radius: 5px;
 }
 
-#top{
+.register-wrapper {
   background-color: $whitesmoke;
-  #registrations__header{
-    width: 700px;
-    margin: 0 auto;
-  }
-}
-
-
-.member-header {
-  height: 128px;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-around;
-  &__logo {
-    margin-top: 40px;
-    &--image {
-      & img {
-      height: 50px;
-      width: 185px;
-      }
-    }
-  }
-
-  &__progress {
-    margin-top: 40px;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    &-text {
-      margin-right: 40px;
-      z-index: 1;
-      color: $maingrayColor;
-    }
-    &-active {
-      margin-right: 40px;
-      z-index: 1;
-      font-weight: 600;
-      color: $mainblueColor;
-    }
-    &-round {
-      height: 12px;
-      width: 12px;
-      margin: 8px auto 0;
-      border-radius: 50%;
-      background-color: $maingray2Color;
-    }
-    &-round-blue {
-    height: 12px;
-    width: 12px;
-    margin: 8px auto 0;
-    border-radius: 50%;
-    background-color: $mainblueColor;
-    }
-    &-border {
-      height: 2px;
-      width: 220px;
-      position: absolute;
-      top: 30px;
-      left: 20px;
-      background-color: $maingray2Color;
-    }
-  }
-}
-    
-
-
-.nav__privacy--information{
-  background-color: $whitesmoke;
-  height: 50px;
-  padding-top: 11px;
-  font-size: 8px;
-  color: gray;
-  margin-top: 25px;
-  &--link{
-    color: $skyblue;
-    @include hover($skyblue, 0.8);
-  }
 }
 
     .member-form {
@@ -241,27 +164,6 @@
         }
       }
     }
-        
-    .registrations__footer{
-      padding-top: 35px;
-      text-align: center;
-      font-size: 11px;
-      .footer__menu{
-        text-align: center;
-        padding: 40px 0 20px;
-        &--btn{
-          color:gray;
-          margin: 10px 10px 0;
-          @include hover(black,0.8);
-        }
-      }
-      .footer__logo{
-        padding: 40px 0;
-        &--btn{
-          @include hover($lightgray,0.8);
-        }
-      }
-    }
 
     .create-form{
       background-color: $mainWhiteColor;
@@ -296,10 +198,6 @@
         }          
       }
     }
-
-.member-footer {
-  background-color: whitesmoke;;
-}
 
 .create-main__form--btn{
   color: white;

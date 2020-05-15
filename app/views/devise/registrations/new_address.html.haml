@@ -1,93 +1,75 @@
-#top
-  #registrations__header
-    .member-header
-      %h1.member-header__logo
-        = link_to root_path, class: "member-header__logo--image" do
-          = image_tag "logo.png"
-      .member-header__progress
-        %li.member-header__progress-text
-          会員情報
-          .member-header__progress-round
-        %li.member-header__progress-active
-          お届け先情報入力
-          .member-header__progress-round-blue
-        %li.member-header__progress-text
-          完了
-          .member-header__progress-round
-        .member-header__progress-border
+.register-wrapper
+  = render 'header'
+  .member-form
+    .member-form__title
+      %h2.member-form__title-text お届け先情報入力
+    = form_for( @address, url: addresses_path, html: {class: 'member-form__for'}, builder:FormHelper::FormWithErrorMessageBuilder) do |f|
+      .member-main
+        .member-main--area
+          .member-main--area__flabel
+            = f.label '送付先氏名(全角)'
+            %span.member-main__form--require 必須
+          .member-main--area__name
+            .member-main--area__name--left
+              = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--left__input'}
+            .member-main--area__name--right
+              = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--right__input'}
+        .member-main--area
+          .member-main--area__label
+            = f.label '送付先氏名(全角カナ)'
+            %span.member-main__form--require 必須
+          .member-main--area__name
+            .member-main--area__name--left
+              = f.text_field :last_name_kana, {placeholder:"例) ヤマダ",class:'member-main__name--left__input'}
+            .member-main--area__name--right
+              = f.text_field :first_name_kana, {placeholder:"例) タロウ",class:'member-main__name--right__input'}
+        .member-main--area  
+          .member-main--area__label
+            = f.label '郵便番号', {class: 'member-main__form--label'}
+            %span 必須
+            .member-main--area__label--info ※ ハイフン不要
+          .member-main--area__pform
+            = f.text_field :postal_code, {placeholder: "7ケタの半角数字", class:'member-main--area__pform--input'}              
+        .member-main--area
+          .member-main--area__label
+            = f.label '都道府県'
+            %span 必須
+          .member-main--area__form
+            = f.select :prefectures, Address.prefectures.keys, {include_blank: "選択してください"}, {class:'member-main--area__form--prefecture'}
+        .member-main--area
+          .member-main--area__label
+            = f.label '市区町村'
+            %span 必須
+          .member-main--area__form
+            = f.text_field :municipality, {placeholder: "例) 〇〇市", class:'member-main--area__form--input'}
+        .member-main--area
+          .member-main--area__label
+            = f.label '町名・番地'
+            %span 必須
+          .member-main--area__form
+            = f.text_field :address, {placeholder: "例) 〇〇町1-1-1", class:'member-main--area__form--input'}
+        .member-main--area
+          .member-main--area__label
+            = f.label '建物名・部屋番号'
+            %span 任意
+          .member-main--area__form
+            = f.text_field :building, {placeholder: "例) 〇〇ビル101", class:'member-main--area__form--input'}
+        .member-main--area
+          .member-main--area__label
+            = f.label '電話番号'
+            %span 任意
+            .member-main--area__label--info ※ ハイフン不要
+          .member-main--area__form
+            = f.text_field :phone_number, {placeholder: "半角数字で10桁または11桁の番号", class:'member-main--area__form--input'}
 
-    .member-form
-      .member-form__title
-        %h2.member-form__title-text お届け先情報入力
-      = form_for( @address, url: addresses_path, html: {class: 'member-form__for'}, builder:FormHelper::FormWithErrorMessageBuilder) do |f|
-        .member-main
-          .member-main--area
-            .member-main--area__flabel
-              = f.label '送付先氏名(全角)'
-              %span.member-main__form--require 必須
-            .member-main--area__name
-              .member-main--area__name--left
-                = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--left__input'}
-              .member-main--area__name--right
-                = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--right__input'}
-          .member-main--area
-            .member-main--area__label
-              = f.label '送付先氏名(全角カナ)'
-              %span.member-main__form--require 必須
-            .member-main--area__name
-              .member-main--area__name--left
-                = f.text_field :last_name_kana, {placeholder:"例) ヤマダ",class:'member-main__name--left__input'}
-              .member-main--area__name--right
-                = f.text_field :first_name_kana, {placeholder:"例) タロウ",class:'member-main__name--right__input'}
-          .member-main--area  
-            .member-main--area__label
-              = f.label '郵便番号', {class: 'member-main__form--label'}
-              %span 必須
-              .member-main--area__label--info ※ ハイフン不要
-            .member-main--area__pform
-              = f.text_field :postal_code, {placeholder: "7ケタの半角数字", class:'member-main--area__pform--input'}              
-          .member-main--area
-            .member-main--area__label
-              = f.label '都道府県'
-              %span 必須
-            .member-main--area__form
-              = f.select :prefectures, Address.prefectures.keys, {include_blank: "選択してください"}, {class:'member-main--area__form--prefecture'}
-          .member-main--area
-            .member-main--area__label
-              = f.label '市区町村'
-              %span 必須
-            .member-main--area__form
-              = f.text_field :municipality, {placeholder: "例) 〇〇市", class:'member-main--area__form--input'}
-          .member-main--area
-            .member-main--area__label
-              = f.label '町名・番地'
-              %span 必須
-            .member-main--area__form
-              = f.text_field :address, {placeholder: "例) 〇〇町1-1-1", class:'member-main--area__form--input'}
-          .member-main--area
-            .member-main--area__label
-              = f.label '建物名・部屋番号'
-              %span 任意
-            .member-main--area__form
-              = f.text_field :building, {placeholder: "例) 〇〇ビル101", class:'member-main--area__form--input'}
-          .member-main--area
-            .member-main--area__label
-              = f.label '電話番号'
-              %span 任意
-              .member-main--area__label--info ※ ハイフン不要
-            .member-main--area__form
-              = f.text_field :phone_number, {placeholder: "半角数字で10桁または11桁の番号", class:'member-main--area__form--input'}
-
-          .member-main--action
-            = f.submit "登録完了", {class: 'member-main--action__btn', id: "next__btn"}
-          .nav__privacy--information
-            This site is protected by reCAPTCHA and the Google
-            = link_to "#", class: "nav__privacy--information--link" do
-              Privacy Policy
-            and
-            = link_to "#", class: "nav__privacy--information--link" do
-              Terms of Service
-            apply.
-
-.member-footer
-  = render "footer"
+        .member-main--action
+          = f.submit "登録完了", {class: 'member-main--action__btn', id: "next__btn"}
+        .nav__privacy--information
+          This site is protected by reCAPTCHA and the Google
+          = link_to "#", class: "nav__privacy--information--link" do
+            Privacy Policy
+          and
+          = link_to "#", class: "nav__privacy--information--link" do
+            Terms of Service
+          apply.
+  = render "shared/form-footer"

@@ -1,5 +1,5 @@
 .wrapper
-  = render "tops/top-header"
+  = render "shared/header"
   .category__header
     = link_to root_path,class:"back__btn" do
       フリマ
@@ -35,7 +35,7 @@
                       - unless grandchild.name.include?("すべて")
                         = link_to category_path(grandchild), class: "category__link--btn" do
                           = grandchild.name
-  = render "tops/footer-image"
-  = render "tops/top-footer"
-  = render "tops/saler-btn"
+  = render "shared/footer-image"
+  = render "shared/footer"
+  = render "shared/saler-btn"
 
