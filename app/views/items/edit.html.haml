@@ -1,4 +1,4 @@
--# = form_for(@item, builder:FormHelper::FormWithErrorMessageBuilder) do |f|
+= render 'shared/header'
 = form_for @item do |f|
   .item-image
     .field
@@ -90,3 +90,7 @@
       .field__input
         = f.number_field :price, required: :true
   = f.submit '登録', id: 'item-post-btn'
+= render 'shared/footer'
+
+
+

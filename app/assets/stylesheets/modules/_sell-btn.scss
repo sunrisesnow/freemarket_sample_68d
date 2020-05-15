@@ -1,0 +1,26 @@
+.sell-btn{
+  width: 120px;
+  background: #3CCACE;
+  text-align: center;
+  border-radius: 4%;
+  bottom: 32px;
+  right: 32px;
+  position: fixed;
+  &:hover{
+    transform: scale(1.1);	/*画像の拡大率*/
+    transition-duration: 0.3s;
+  }
+  &__link{
+    display: block;
+    padding: 15px;
+    width: 120px;
+    height: 100%;
+  }
+  &__text{
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    margin-bottom: 5px;
+  }
+}

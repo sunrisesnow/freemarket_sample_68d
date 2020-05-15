@@ -19,12 +19,12 @@ $(function(){
   }
   $('input').on("keydown", function(e) {
       //全てのinputの数取得
-      var n = $("input").length;
+      const n = $("input").length;
       //13=エンターキーのキー番号らしい
       if (e.which == 13)
       {
           e.preventDefault();
-          var nextIndex = $('input').index(this) + 1;
+          const nextIndex = $('input').index(this) + 1;
           //現在フォーカスされているインプット要素のindex番号と総数を比べて条件分岐
           if(nextIndex < n) {
               //次のやつにfocus
@@ -36,9 +36,9 @@ $(function(){
 
   //郵便番号
   $("#address_postal_code").keyup(function(){
-    let patern = /^[0-9]{7}$/;
-    let postal_code = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^[0-9]{7}$/;
+    const postal_code = $(this).val().match(patern);
+    const next = $(this).next();
     if(postal_code == null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -57,8 +57,8 @@ $(function(){
 
   //都道府県
   $('#address_prefectures').on("change", function(){
-    let prefectures = $(this).val();
-    let next = $(this).next();
+    const prefectures = $(this).val();
+    const next = $(this).next();
     if(prefectures === ""){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -74,9 +74,9 @@ $(function(){
 
   //市区町村
   $("#address_municipality").keyup(function(){
-    let patern = /[ |　]+/;
-    let municipality = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /[ |　]+/;
+    const municipality = $(this).val().match(patern);
+    const next = $(this).next();
     if(municipality != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -95,9 +95,9 @@ $(function(){
 
   //番地
   $("#address_address").keyup(function(){
-    let patern = /[ |　]+/;
-    let address = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /[ |　]+/;
+    const address = $(this).val().match(patern);
+    const next = $(this).next();
     if(address != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -116,9 +116,9 @@ $(function(){
 
   //建物名
   $("#address_building").keyup(function(){
-    let patern = /[ |　]+/;
-    let building = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /[ |　]+/;
+    const building = $(this).val().match(patern);
+    const next = $(this).next();
     if(building != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
@@ -137,9 +137,9 @@ $(function(){
   
   //電話番号
   $("#address_phone_number").keyup(function(){
-    let patern = /^(0{1}\d{9,10})$/;
-    let phone_number = $(this).val().match(patern);
-    let next = $(this).next();
+    const patern = /^(0{1}\d{9,10})$/;
+    const phone_number = $(this).val().match(patern);
+    const next = $(this).next();
     if(phone_number == null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
