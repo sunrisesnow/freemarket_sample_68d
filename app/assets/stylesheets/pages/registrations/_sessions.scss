@@ -71,6 +71,11 @@
   }
   .login__form{
     width: 450px;
+    &__error{
+      color: red;
+      font-size: 13px;
+      text-align: center;
+    }
     .field{
       padding-left: 72px;
       &__recaptha{
