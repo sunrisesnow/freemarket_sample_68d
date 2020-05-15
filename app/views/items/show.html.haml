@@ -71,7 +71,7 @@
                   %tr
                     %th ブランド
                     %td
-                      /  = @item.brand
+                      -# = @caregory_brand
                   %tr
                     %th 商品の状態
                     %td 
@@ -79,7 +79,10 @@
                   %tr
                     %th 配送料の負担
                     %td 
-                      = @item.delivery_charge_flag
+                      - if @item.delivery_charge_flag = 1
+                        送料込み(出品者負担)
+                      - elsif @item.delivery_charge_flag = 2
+                        着払い(購入者負担)
                   %tr
                     %th 発送元の地域
                     %td
