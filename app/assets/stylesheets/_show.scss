@@ -1,0 +1,207 @@
+.show-contents {
+  width: 100%;
+  display: flex;
+  background-color: $whitesmoke;
+  padding: 60px;
+  .contents-mypage {
+    
+    &-link {
+      display: inline-block;
+      background-color: white;
+      color: black;
+      width: 300px;
+      border: 1px solid $whitesmoke;
+      line-height: 60px;
+      position: relative;
+      height: 60px;
+      padding: 0 15px;
+      z-index: 2;
+      
+
+      .fa-chevron-right {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        
+      }
+    }
+  }
+  .content {
+    margin-left: 30px;
+    width: 100%;
+    position: relative;
+    
+
+    .mypage-user-icon {
+      text-align: center;
+      position: absolute;
+      top: 20px;
+      left: 40%;
+      
+
+      &-image {
+        border-radius: 100px;
+        
+      }
+      &-nav {
+        display: flex;
+        
+        p {
+          padding: 5px 10px;
+          
+        }
+
+        &-link {
+          margin: 10px;
+          
+        }
+      }
+    }
+    .mypage-tab-container-notification-todo {
+      width: 100%;
+      
+      
+      .mypage-tabs {
+        display: flex;
+        width: 100%;
+        outline: none;
+        &-left {
+          height: 50px;
+          text-align: center;
+          width: 50%;
+          background-color: white;
+          line-height: 50px;
+          color: black;
+          border-top: 1px solid $sign-up-btn;
+          outline: none;
+
+          .news-message {          
+            color: black;
+            
+          }
+        } 
+
+        &-right {
+          height: 50px;
+          text-align: center;
+          width: 50%;
+          background-color: $lightgray;
+          line-height: 50px;
+          color: black;
+          list-style: none;
+          outline: none;
+        }
+      }
+      .mypage-tabs-left-contents {
+        display: block;
+        width: 100%;
+        height: 70px;
+        border-style: none;
+        
+
+        &-messages {
+          display: flex;
+          padding: 10px;
+          width: 100%;
+          background-color: white;
+          border-bottom: 1px solid $whitesmoke;
+          height: 70px;
+          
+          
+
+          
+          &-show {
+            width: 100%;
+            position: relative;
+            margin-left: 10px;
+            
+            
+            .fa-chevron-right {
+              position: absolute;
+              top: 15px;
+              right: 0;
+              
+            }
+          }
+        }
+      }
+
+      .mypage-tabs-right-contents {
+        display: none;
+        border-style: none;
+
+        &-messages {
+          display: flex;
+          padding: 10px;
+          width: 100%;
+          background-color: white;
+          border-bottom: 1px solid $whitesmoke;
+          height: 70px;
+          
+
+          &-show {
+            width: 100%;
+            position: relative;
+            margin-left: 10px;
+            
+
+            .fa-chevron-right {
+              position: absolute;
+              top: 15px;
+              right: 0;
+              
+            }
+          }
+        }
+      }
+
+      .tab-content {
+        padding: 10px;
+        background-color: white;
+        width: 100%;
+        height: 70px;
+        
+        
+        .show-message-list {
+          display: inline-block;
+          width: 100%;
+          background-color: $lightgray;
+          text-align: center;
+          height: 50px;
+          line-height: 50px;
+          color: black;
+          
+        }
+      }
+    }
+  }
+}
+.modal-inner, .modal-banner {
+  position: relative;
+  width: 100%;
+  top: 6px;
+  
+
+  .modal-banner-body {
+    position: absolute;
+    bottom: 45%;
+    left: 30px;
+    
+    
+    .modal__banner-app.clearfix {
+      position: absolute;
+      
+    }
+  }
+}
+
+.mypage-tabs-contents, .mypage-tab-content{
+  width: 100%;
+}
+.mypage-tab-content {
+  display: none;
+}
+.news-message {          
+  color: black;
+}
+
