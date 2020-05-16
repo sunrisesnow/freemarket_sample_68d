@@ -84,6 +84,9 @@ $(function(){
   $('#parent_category').on('change', function(){
     //選択された親カテゴリーの名前を取得
     const parentName =$(this).val(); 
+    const parentsError = $("#parent_category").next();
+    const childrenError = $("#children_category").next();
+    const grandChildrenError = $("#grandchildren_category").next();
     if (parentName != ""){ 
       //親カテゴリーが初期値でないことを確認
       $.ajax({
@@ -94,9 +97,9 @@ $(function(){
       })
       .done(function(children){
          //親が変更された時、子以下を削除する
-        const parentsError = $("#parent_category").next();
-        const childrenError = $("#children_category").next();
-        const grandChildrenError = $("#grandchildren_category").next();
+        parentsError = $("#parent_category").next();
+        childrenError = $("#children_category").next();
+        grandChildrenError = $("#grandchildren_category").next();
         parentsError.remove();
         childrenError.remove();
         grandChildrenError.remove();
@@ -113,13 +116,18 @@ $(function(){
       })
     }else{
       //親カテゴリーが初期値になった時、子以下を削除する
+      parentsError.remove();
+      childrenError.remove();
+      grandChildrenError.remove();
       $('#children_category').remove();
-      $('#grandchildren_category').parent().remove();
+      $('#grandchildren_category').remove();
     }
   });
   // 子カテゴリー選択後のイベント
   $('.field__input--category').on('change', '#children_category', function(){
     const childId = $(this).val();
+    const childrenError = $("#children_category").next();
+    const grandChildrenError = $("#grandchildren_category").next();
     //選択された子カテゴリーのidを取得
     if (childId != ""){ 
       //子カテゴリーが初期値でないことを確認
@@ -132,8 +140,6 @@ $(function(){
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
           //子が変更された時、孫以下を削除する
-          const childrenError = $("#children_category").next();
-          const grandChildrenError = $("#grandchildren_category").next();
           childrenError.remove();
           grandChildrenError.remove();
           $("#children_category").removeClass("error");
@@ -149,13 +155,15 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
+      childrenError.remove();
+      grandChildrenError.remove();
       $('#grandchildren_category').remove();
     }
   });
   $('.field__input--category').on('change', '#grandchildren_category', function(){
     const grandChildrenId = $(this).val();
+    const grandChildrenError = $("#grandchildren_category").next();
     if (grandChildrenId != ""){ 
-      const grandChildrenError = $("#grandchildren_category").next();
       grandChildrenError.remove();
     }
   });
