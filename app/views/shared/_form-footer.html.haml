@@ -1,0 +1,11 @@
+.form-footer
+  .form-footer__menu
+    = link_to "#", class: "form-footer__menu--btn form-footer__menu--right" do
+      %span プライバシーポリシー
+    = link_to "#", class: "form-footer__menu--btn" do
+      %span フリマ利用規約
+    = link_to "#", class: "form-footer__menu--btn form-footer__menu--left" do
+      %span 特定商取引に関する表記
+  .form-footer__logo
+    = link_to root_path, class: "form-footer__logo--btn" do
+      = image_tag "logo-white.png", height: "58px",width: "250px"

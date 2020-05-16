@@ -1,0 +1,53 @@
+#registrations__header{
+  width: 700px;
+  margin: 0 auto;
+  .member-header {
+    height: 128px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    &__logo {
+      margin-top: 40px;
+      &--image {
+        height: 50px;
+        width: 185px;
+      }
+    }
+    &__progress {
+      margin-top: 40px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      &--text {
+        margin-right: 40px;
+        z-index: 1;
+        color: $maingrayColor;
+      }
+      &--active {
+        @extend .member-header__progress--text;
+        font-weight: 600;
+        color: $mainblueColor;
+      }
+      &--round {
+        height: 12px;
+        width: 12px;
+        margin: 8px auto 0;
+        border-radius: 50%;
+        background-color: $maingray2Color;
+      }
+      &--round-blue {
+        @extend .member-header__progress--round;
+        background-color: $mainblueColor;
+      }
+      &--border {
+        height: 2px;
+        width: 220px;
+        position: absolute;
+        top: 30px;
+        left: 20px;
+        background-color: $maingray2Color;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.list
+  = render "shared/header"
+  .buy
+    .buy__btn 
+      %p.buy__btn__text 出品する
+      = image_tag "icon_camera.png", class: ".buy_btn_pic", width: "54px", height: "54px"
+  = link_to 'カシャ、シュピーン！！', new_item_path
+  .contents
+    = render @items
+
+  = render "shared/footer"

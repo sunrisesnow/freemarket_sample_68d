@@ -1,5 +1,5 @@
 .wrapper
-  = render "tops/top-header"
+  = render "shared/header"
   .category__header
     = link_to root_path,class:"back__btn" do
       フリマ
@@ -21,7 +21,7 @@
             = parent.name
           .category__box--child
             .category__box--child--all
-              = link_to "#", class: "category__link--btn" do
+              = link_to category_path(parent), class: "category__link--btn" do
                 すべて
             - parent.children.each do |child|
               .child__box
@@ -29,15 +29,14 @@
                   = child.name  
                 .grandchild__box
                   .grandchild__link
-                    = link_to "#", class: "category__link--btn" do
+                    = link_to category_path(child), class: "category__link--btn" do
                       すべて
-                  - child.children.each do |grandchild,|
+                  - child.children.each do |grandchild|
                     .grandchild__link
                       - unless grandchild.name.include?("すべて")
-                        = link_to "#", class: "category__link--btn" do
+                        = link_to category_path(grandchild), class: "category__link--btn" do
                           = grandchild.name
-  = render "tops/top-footer"
-  .buy
-    .buy__btn 
-      %p.buy__btn__text 出品する
-      = image_tag "icon_camera.png", class: "buy_btn_pic", width: "54px", height: "54px"
+  = render "shared/footer-image"
+  = render "shared/footer"
+  = render "shared/saler-btn"
+

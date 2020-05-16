@@ -1,0 +1,102 @@
+.form-container
+  = form_for @item do |f|
+    .item-area.item-image
+      .field.item-area__field
+        .field__label
+          = f.label :images, '出品画像'
+          %span.field__label--require 必須
+          %h4.field__label--supple 最大10枚までアップロードできます
+        #image-box-1
+          .item-num-0#image-box__container
+            = f.fields_for :item_images do |image|
+              %div{class: "input-area", tabindex: 0}
+                = image.file_field :image, type: 'file', class: "img-file", name: "item_images[image][]", value:"", style: "display:none", required: "required", multiple: :true
+                %label{for: "item_item_images_image", class: "input-area__label"}
+                  %i.fas.fa-camera
+    .item-area.item-info
+      .field
+        .field__label
+          = f.label :name, '商品名'
+          %span.field__label--require 必須
+        .field__form.item-area__field__form
+          = f.text_field :name, placeholder: '40文字まで', required: :true
+      .field
+        .field__label
+          = f.label :explanation, '商品の説明'
+          %span.field__label--require 必須
+        .item-area__field__form.item-area__field--textarea
+          = f.text_area :explanation, required: :true, placeholder: '商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）'
+    .item-area.item-detail
+      %h3.item-area__name 商品の詳細
+      .field
+        .field__label
+          = f.label :category_id, 'カテゴリー'
+          %span.field__label--require 必須
+        %ul.item-area__field__form.field__input--category
+          %li
+            = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
+    
+      .field
+        .field__label
+          = f.label :brand, 'ブランド'
+          %span.field__label--any 任意
+        .field__form.item-area__field__form
+          = text_field_tag('')
+      .field
+        .field__label
+          = f.label :status_id, '商品の状態'
+          %span.field__label--require 必須
+        .field__form.item-area__field__form
+          = f.collection_select :status_id, Status.all, :id, :name, prompt: "選択してください", required: :true, id: 'item-prefecture'
+    .item-area.item-delivery
+      %h3.item-area__name 配送について
+      .field-parent
+        .field#delivery_charge
+          .field__label
+            = f.label :delivery_charge_flag, '配送料の負担'
+            %span.field__label--require 必須
+          .field__form.item-area__field__form
+            = f.select :delivery_charge_flag, [['送料込み(出品者負担)', '1'], ['着払い(購入者負担)', '2']], include_blank: '選択してください', required: :true
+      .field
+        .field__label
+          = f.label :prefecture_id, '発送元の地域'
+          %span.field__label--require 必須
+        .field__form.item-area__field__form
+          = f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt: "選択してください", required: :true
+      .field
+        .field__label
+          = f.label :delivery_date_id, '発送までの日数'
+          %span.field__label--require 必須
+        .field__form.item-area__field__form
+          = f.collection_select :delivery_date_id, DeliveryDate.all, :id, :name, prompt: "選択してください", required: :true
+    .item-area.item-price
+      %h3.item-area__name 価格（¥300〜9,999,999）
+      .field.sell-price
+        .field__label
+          = f.label :price, '販売価格'
+          %span.field__label--require 必須
+        .field__form.item-area__field__form.sell-price__field
+          = f.number_field :price, required: :true, id: 'sell-price-input', class: 'item-area__field__form--price', placeholder: 0
+      .field.sell-calc
+        .sell-calc__detail.fee
+          %h4.sell-calc__detail--label 販売手数料（10%）
+          .hanbaitesuuryou
+            %span#sell-fee -
+        .sell-calc__detail.profit
+          %h4.sell-calc__detail--label 販売利益
+          .hanbairieki
+            %span#sell-profit -
+    .item-btn-area
+      .item-btn-area__container
+        .item-btn-area__container__box
+          = f.hidden_field :trading_status_id, value: 1
+          = f.submit '出品する', id: 'item-post-btn', class: 'item-btn', trade_status_id: '1'
+      .item-btn-area__container
+        .item-btn-area__container__box
+          -# = f.hidden_field :trading_status_id, value: 4
+          = f.submit '下書きに保存する', id: 'item-draft-btn', class: 'item-btn', trade_status_id: '4'
+          -# = link_to items_path(trade_status_id: 4), method: :post, id: 'item-draft-btn', class: 'item-btn' do
+          -#   %span 下書きに保存
+      .item-btn-area__container
+        .item-btn-area__container__box
+          = link_to 'もどる', root_path

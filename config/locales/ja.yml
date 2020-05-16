@@ -1,4 +1,7 @@
 ja:
+  recaptcha: 
+    errors: 
+      verification_failed: 'reCAPTCHA認証に失敗しました。' 
   activerecord:
     errors:
       messages:
@@ -18,8 +21,8 @@ ja:
         prefectures: 都道府県
         municipality: 市区町村
         address: 番地
-        building: 建物名（任意）
-        phone_number: 電話番号（任意）
+        building: 建物名
+        phone_number: 電話番号
   date:
     abbr_day_names:
     - 日

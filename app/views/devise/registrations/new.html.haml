@@ -1,6 +1,5 @@
-#top
-  #registrations__header
-    = render "tops/new/header"
+.register-wrapper
+  = render 'header'
   = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
     -# 
       FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
@@ -10,25 +9,24 @@
     #container
       #field__contents
         #field__contents--title
-          %h2
-            会員情報入力
+          %h2 会員情報入力
         #field__contents--form
           .field
             .field__label
               = f.label :nickname
-              %span 必須
+              %span.field__label--require 必須
             .field__form
               = f.text_field :nickname,  autocomplete: "nickname", placeholder: "例）メルカリ君"
           .field
             .field__label
               = f.label :email
-              %span 必須
+              %span.field__label--require 必須
             .field__form
               = f.email_field :email, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
           .field__pw
             .field__label
               = f.label :password
-              %span 必須
+              %span.field__label--require 必須
             .field__form
               = f.password_field :password, autocomplete: "password",placeholder: "7文字以上の半角英数字"
             .field__form
@@ -46,7 +44,7 @@
           .field__name
             .field__label
               = f.label :fullname
-              %span 必須
+              %span.field__label--require 必須
             .field__area
               .form__zone--left
                 .field__form--name
@@ -57,7 +55,7 @@
           .field__name
             .field__label
               = f.label :fullname_kana
-              %span 必須
+              %span.field__label--require 必須
             .field__area
               .form__zone--left
                 .field__form--name
@@ -68,7 +66,7 @@
           .field
             .field__label
               = f.label :birthday 
-              %span 必須
+              %span.field__label--require 必須
             .field__birthday
               != sprintf(f.date_select(:birthday, prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:Time.now.year - 120, date_separator:'%s'),'年','月')
               .field__birthday--day
@@ -82,7 +80,7 @@
                 .nav__information--center
                   に同意したものとみなします。      
           .actions
-            = f.submit "次へ進む", class: "next__btn"
+            = f.submit "次へ進む", class: "next__btn", id: "next__btn"
           .nav__personal--information
             = link_to "#", class: "nav__personal--information--link" do
               本人情報の登録について＞
@@ -94,4 +92,4 @@
             = link_to "#", class: "nav__privacy--information--link" do
               Terms of Service
             apply.
-  = render "footer"
+  = render "shared/form-footer"

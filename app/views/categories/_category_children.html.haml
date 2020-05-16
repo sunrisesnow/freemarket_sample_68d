@@ -1,0 +1,16 @@
+.category__child--box
+  - if @category.indirects.present?
+    - @category.children.each do |child|
+      = link_to category_path(child), class: "category__child--link" do
+        = child.name
+  - elsif @category.children.present?
+    - @category.children.each do |child|
+      = link_to category_path(child), class: "category__child--link" do
+        = child.name
+  - else
+    - @category.siblings.each do |child|
+      -unless child.name.include?(@category.name)
+        = link_to category_path(child), class: "category__child--link" do
+          = child.name
+%h3.category__items--title
+  = "#{@category.name}の商品一覧"

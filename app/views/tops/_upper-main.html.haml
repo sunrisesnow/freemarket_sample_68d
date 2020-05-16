@@ -8,9 +8,11 @@
           FURIMAは誰でもかんたんに出品・購入できるフリマアプリです
         .main__upper__leading__contents__btn
           .main__upper__leading__contents__btn__left
-            = image_tag "app-store.svg", width: "180px", height: "53px"
+            = link_to "#", class: "app__google--link" do
+              = image_tag "app-store.svg", width: "180px", height: "53px"
           .main__upper__leading__contents__btn__right
-            = image_tag "google-play.svg", width: "180px", height: "53px"
+            = link_to "#", class: "app__google--link" do
+              = image_tag "google-play.svg", width: "180px", height: "53px"
     .main__upper__reasons
       .main__upper__reasons__contents
         .main__upper__reasons__contents__title
@@ -55,7 +57,9 @@
         .main__upper__membership__contents__text
           FURIMAは、フリマアプリで最も人気。出品・購入回数も業界最多です！ほしかったあの商品に出会えるかもしれません。
         .main__upper__membership__contents__btn
-          .main__upper__membership__contents__btn__left            
-            = image_tag "app-store.svg", width: "180px", height: "53px"
+          .main__upper__membership__contents__btn__left  
+            = link_to "#", class: "app__google--link" do          
+              = image_tag "app-store.svg", width: "180px", height: "53px"
           .main__upper__membership__contents__btn__right
-            = image_tag "google-play.svg", width: "180px", height: "53px"
+            = link_to "#", class: "app__google--link" do
+              = image_tag "google-play.svg", width: "180px", height: "53px"

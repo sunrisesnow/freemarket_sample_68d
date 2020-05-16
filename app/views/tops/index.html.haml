@@ -1,11 +1,6 @@
 .wrapper
-  = render "top-header"
+  = render "shared/header"
   = render "upper-main"
   = render "lower-main"
-  = render "top-footer"
-  .buy
-    .buy__btn 
-      %p.buy__btn__text 出品する
-      = image_tag "icon_camera.png", class: "buy_btn_pic", width: "54px", height: "54px"
-
-
+  = render "shared/footer"
+  = render "shared/saler-btn"

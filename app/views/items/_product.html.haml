@@ -1,0 +1,33 @@
+%h2.pickup-title PICK UP
+- @parents.each do |category|
+  -unless category.name.include?("カテゴリー一覧")
+    - grandchildren_ids = category.indirect_ids.sort
+    - items = @items.where(category_id: grandchildren_ids.first..grandchildren_ids.last)
+    .pickup-box.pickup-box-fadein
+      .category__title 
+        = "#{category.name}新着アイテム"
+        = link_to category_path(category), class: "category__title--items" do
+          もっと見る
+          %i.fas.fa-chevron-right
+      .item-lists
+        -if items.present?
+          - items.each do |item|
+            .item-list.hover
+              = link_to item_path(item),class: "item" do
+                = image_tag "#{item.images[0].image.url}", class: 'item-img'
+                -if item.buyer_id.present? 
+                  .items-box_photo__sold
+                    .items-box_photo__sold__inner
+                      SOLD
+              .item-list__body
+                %h3.name 
+                  = item.name
+                .details
+                  %ul
+                    %li 
+                      = item.price
+                    %li#like 0
+                  %p.detail (税込)
+        -else 
+          .item-list__nothing 該当する商品が見つかりません。商品は毎日増えていますので、これからの出品に期待してください。
+
