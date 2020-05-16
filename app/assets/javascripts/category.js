@@ -1,12 +1,12 @@
-var parentBeforeColor = new Object();
+const parentBeforeColor = new Object();
     parentBeforeColor.backgroundColor = "white";
     parentBeforeColor.color = "black";
-var parentAfterColor = new Object();
+const parentAfterColor = new Object();
     parentAfterColor.backgroundColor = "#3ccace";
     parentAfterColor.color = "white";
-var childBeforeColor = new Object();
+const childBeforeColor = new Object();
     childBeforeColor.backgroundColor = "white";
-var childAfterColor = new Object();
+const childAfterColor = new Object();
     childAfterColor.backgroundColor = "whitesmoke";
 
 $(function(){
@@ -32,25 +32,25 @@ $(function(){
 
   // 子要素にmouseoverした時、子要素、子要素の親要素css変化（mouseoverした時も変化）
   $('.category__child--name').mouseover(function(){
-    let parent = $(this).parent().parent().parent().children('a');
+    const parent = $(this).parent().parent().parent().children('a');
     $(this).css(childAfterColor);
     parent.css(parentAfterColor);
   }).mouseout(function(){
-    let parent = $(this).parent().parent().parent().children('a');
+    const parent = $(this).parent().parent().parent().children('a');
     $(this).css(childBeforeColor);
     parent.css(parentBeforeColor);
   });
 
   // 孫要素にmouseoverした時、孫要素、孫要素の親要素、孫要素の祖先要素css変化（mouseoverした時も変化）
   $('.category__grandchild--name').mouseover(function(){
-    let child  = $(this).parent().parent().parent().children('a');
-    let parent = child.parent().parent().parent().children('a');
+    const child  = $(this).parent().parent().parent().children('a');
+    const parent = child.parent().parent().parent().children('a');
     $(this).css(childAfterColor);
     child.css(childAfterColor);
     parent.css(parentAfterColor);
   }).mouseout(function(){
-    let child  = $(this).parent().parent().parent().children('a');
-    let parent = child.parent().parent().parent().children('a');
+    const child  = $(this).parent().parent().parent().children('a');
+    const parent = child.parent().parent().parent().children('a');
     $(this).css(childBeforeColor);
     child.css(childBeforeColor);
     parent.css(parentBeforeColor);
@@ -62,7 +62,7 @@ $(function(){
   // 子カテゴリーの表示作成
   function appendChildrenBox(insertHTML){
     const childSelectHtml = `<li>
-                              <select id="children_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
+                              <select id="children_category" name="item[category_id]" required = required>
                                 <option value="">選択してください</option>
                                 ${insertHTML}
                               </select>
@@ -73,7 +73,7 @@ $(function(){
   function appendGrandchildrenBox(insertHTML){
     
     const grandchildSelectHtml =`<li>
-                                  <select id="grandchildren_category" name="item[category_id]" class="valid" aria-invalid="false" required = required>
+                                  <select id="grandchildren_category" name="item[category_id]" required = required>
                                     <option value="">選択してください</option>
                                     ${insertHTML}
                                   </select>
@@ -93,7 +93,13 @@ $(function(){
         dataType: 'json'
       })
       .done(function(children){
-         //親が変更された時、子以下を削除するする
+         //親が変更された時、子以下を削除する
+        const parentsError = $("#parent_category").next();
+        const childrenError = $("#children_category").next();
+        const grandChildrenError = $("#grandchildren_category").next();
+        parentsError.remove();
+        childrenError.remove();
+        grandChildrenError.remove();
         $('#children_category').remove();
         $('#grandchildren_category').remove();
         let insertHTML = '';
@@ -107,7 +113,7 @@ $(function(){
       })
     }else{
       //親カテゴリーが初期値になった時、子以下を削除する
-      $('#children_category').parent().remove();
+      $('#children_category').remove();
       $('#grandchildren_category').parent().remove();
     }
   });
@@ -126,6 +132,12 @@ $(function(){
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
           //子が変更された時、孫以下を削除する
+          const childrenError = $("#children_category").next();
+          const grandChildrenError = $("#grandchildren_category").next();
+          childrenError.remove();
+          grandChildrenError.remove();
+          $("#children_category").removeClass("error");
+          $('#grandchildren_category').remove();
           let insertHTML = '';
           grandchildren.forEach(function(grandchild){
             insertHTML += appendOption(grandchild);
@@ -137,8 +149,14 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
-      //子カテゴリーが初期値になった時、孫以下を削除する
-      $('#grandchildren_category').parent().remove();
+      $('#grandchildren_category').remove();
+    }
+  });
+  $('.field__input--category').on('change', '#grandchildren_category', function(){
+    const grandChildrenId = $(this).val();
+    if (grandChildrenId != ""){ 
+      const grandChildrenError = $("#grandchildren_category").next();
+      grandChildrenError.remove();
     }
   });
 });
