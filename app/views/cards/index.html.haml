@@ -1,16 +1,25 @@
-.hoge
-  支払い方法
-.hoge
-  クレジットカード一覧
-- if @card.present?
-  .hoge
-    = "**** **** **** " + @card_info.last4 #クレジットカードの下４桁を表示
-  .hoge
-    = @exp_month + " / " + @exp_year
-    = button_to "削除する", card_path(@card), method: :delete, data: {disable_with: '送信...'}
-    = link_to root_path do
-      トップページへ
-- else
-  = link_to new_card_path do
-    %i.far.fa-credit-card 
-      クレジットカードを追加する
+.wrapper
+  = render "shared/header"
+
+  .card-container
+    .card-wrapper
+      %h2.card-wrapper__title
+        クレジットカード照会
+      - if @card.present?
+        = image_tag "visa-card.png"
+        %h3 カード番号  
+        %p.creditcard-info__number
+          = "**** **** **** " + @card_info.last4
+        %h3 有効期限 月 / 年
+        %p.creditcard-info__period 
+          = @exp_month + " / " + @exp_year
+        .creditcard-info__period 
+          = button_to "削除する", card_path(@card), method: :delete, class: "btn-card", data: { confirm: "本当に削除しますか？" }
+          = button_to "トップページへ", root_path, method: :get, class: "btn-card"
+      - else
+        .creditcard-info__period
+          %i.far.fa-credit-card 
+          = button_to "クレジットカードを追加する", new_card_path, method: :get, class: "btn-card"
+
+  = render "shared/footer"
+
