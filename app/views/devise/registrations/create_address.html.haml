@@ -1,5 +1,20 @@
 .register-wrapper
-  = render 'header'
+  #registrations__header
+    .member-header
+      %h1.member-header__logo
+        = link_to root_path do
+          = image_tag "logo.png", class: "member-header__logo--image"
+      .member-header__progress
+        %li.member-header__progress--text
+          %span 会員情報
+          .member-header__progress--round
+        %li.member-header__progress--text
+          %span お届け先情報入力
+          .member-header__progress--round
+        %li.member-header__progress--active
+          %span 完了
+          .member-header__progress--round-blue
+        .member-header__progress--border
   .create-form
     .create-form__title
       %h2.create-form__title--text 登録が完了しました
