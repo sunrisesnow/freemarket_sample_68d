@@ -1,5 +1,20 @@
 .register-wrapper
-  = render 'header'
+  #registrations__header
+    .member-header
+      %h1.member-header__logo
+        = link_to root_path do
+          = image_tag "logo.png", class: "member-header__logo--image"
+      .member-header__progress
+        %li.member-header__progress--active
+          %span 会員情報
+          .member-header__progress--round-blue
+        %li.member-header__progress--text
+          %span お届け先情報入力
+          .member-header__progress--round
+        %li.member-header__progress--text
+          %span 完了
+          .member-header__progress--round
+        .member-header__progress--border
   = form_for(resource, as: resource_name, url: registration_path(resource_name),builder:FormHelper::FormWithErrorMessageBuilder) do |f|
     -# 
       FormHelperをapp/helpers/form_helperに指定することでエラー内容を各要素のフォームのしたに出るように設定しました。
