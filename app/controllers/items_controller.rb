@@ -10,12 +10,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
+    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
   end
 
   def category_children
