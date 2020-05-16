@@ -97,9 +97,6 @@ $(function(){
       })
       .done(function(children){
          //親が変更された時、子以下を削除する
-        parentsError = $("#parent_category").next();
-        childrenError = $("#children_category").next();
-        grandChildrenError = $("#grandchildren_category").next();
         parentsError.remove();
         childrenError.remove();
         grandChildrenError.remove();
