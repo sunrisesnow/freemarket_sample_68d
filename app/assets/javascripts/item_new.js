@@ -393,7 +393,6 @@ $(function(){
     const targetIndex = $(target_image).data('index')
     //プレビューがひとつだけの場合、file_fieldをクリア
     const images = $('.item-image');
-    console.log(dataBox)
     if (images.length==1) {
       //inputタグに入ったファイルを削除
       $('input[type=file]').val(null)
