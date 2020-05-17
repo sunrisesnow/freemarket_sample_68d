@@ -1,6 +1,5 @@
 .wrapper 
-  = render "tops/top-header"
-
+  = render "shared/header"
   .show-contents
     %ul.contents-mypage
       %li
@@ -84,7 +83,7 @@
           発送元・お届け先住所変更
           %i.fas.fa-chevron-right.fa-lg
       %li
-        = link_to "#", class:"contents-mypage-link" do
+        = link_to new_card_path, class:"contents-mypage-link" do
           支払い方法
           %i.fas.fa-chevron-right.fa-lg
       %li 
@@ -100,7 +99,7 @@
           電話番号の確認
           %i.fas.fa-chevron-right.fa-lg
       %li
-        = link_to "#", class:"contents-mypage-link" do
+        = link_to destroy_user_session_path,method: :delete, class:"contents-mypage-link" do
           ログアウト
           %i.fas.fa-chevron-right.fa-lg
 
@@ -260,21 +259,7 @@
           .tab-content
             = link_to "#", class: "show-message-list" do
               一覧を見る
+  = render "shared/footer-image"
+  = render "shared/footer"
+  = render "shared/saler-btn"
 
-
-
-          
-
-
-  .modal-inner.modal-banner
-    =image_tag "bg-topMiddleDl-pict.jpg", class: "fooder-download", height: "300px", width: "100%" 
-    .modal-banner-body
-      %h2
-        今すぐ無料ダウンロード！
-      %h2
-        全ての機能を使えるスマホアプリはこちら！
-      .modal__banner-app.clearfix
-        = image_tag "appstore.png" , class:"appstore-image", height:"70px", width:"200px"
-        = image_tag "googleplay.png" , class:"googleplay-image", height:"70px", width:"200px"
-
-  = render "tops/top-footer"
