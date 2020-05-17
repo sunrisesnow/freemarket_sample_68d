@@ -206,7 +206,7 @@ $(function() {
     e.preventDefault();
     const submitID = $(this).attr('id')
     let flag = true;
-    const num = $('.item-image').length - 1
+    const num = $('.item-image').length
     imageCheck(num);
 
     $('#new_item input:required').each(function(e) {
@@ -248,13 +248,14 @@ $(function() {
 // 画像のプレビュー、ドラッグ等の処理に関する動作
 $(function(){
   let imageNext;
+  let fileIndex = 0;
   // 画像プレビュー関数
   function imagePreview(src, filename, i, num) {
     const html= `
       <div class='item-image' data-image="${filename}" data-index="${i}">
         <div class='item-image__content'>
           <div class='item-image__content--icon'>
-            <img src=${src} width="114" height="80" >
+            <img src=${src} width="114" height="80" index="${i}">
           </div>
         </div>
         <div class='item-image__operation'>
@@ -267,16 +268,10 @@ $(function(){
   }
 
   // 画像追加時のエラーチェック関数
-  function errorCheckOnAdd(num) {
+  function errorCheckOnAdd() {
     imageNext = $('#image-box-1').next();
-    if (num == 0) {
-      if (!imageNext.hasClass('error')) {
-        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
-      }
-    } else {
-      if (imageNext.hasClass('error')) {
-        imageNext.remove();
-      }
+    if (imageNext.hasClass('error')) {
+      imageNext.remove();
     }
   }
   // 画像削除時のエラーチェック動作
@@ -290,32 +285,42 @@ $(function(){
   }
 
   //DataTransferオブジェクトで、データを格納する箱を作る
-  const dataBox = new DataTransfer();
+  var dataBox = new DataTransfer();
   //querySelectorでfile_fieldを取得
   const file_field = document.querySelector('input[type=file]')
 
   //fileが選択された時に発火するイベント
   $(document).on('change', '.img-file', function(){
-    const imageNum = $('.item-image').length
-    errorCheckOnAdd(imageNum);
+    errorCheckOnAdd();
 
     //選択したfileのオブジェクトをpropで取得
     const files = $('input[type="file"]').prop('files')[0];
+    const currentNum = $('.item-image').length
+    const add_files_length = file_field.files.length
+    const inputNum = currentNum + add_files_length
+
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file)
       file_field.files = dataBox.files
-
-      const num = $('.item-image').length + i
+      
+      const num = $('.item-image').length + i + 1
       fileReader.readAsDataURL(file);
-　　　 //画像が10枚になったら超えたらドロップボックスを削除する
+    //画像が10枚になったら超えたらドロップボックスを削除する
       if (num == 10){
-        $('#image-box__container').css('display', 'none')   
+        $('#image-box__container').css('display', 'none')
+        fileReader.onloadend = function() {
+          fileIndex += 1;
+          const src = fileReader.result
+          imagePreview(src, file.name, fileIndex, inputNum)
+        };  
+        return false;      
       }
       //読み込みが完了すると、srcにfileのURLを格納
       fileReader.onloadend = function() {
+        fileIndex += 1;
         const src = fileReader.result
-        imagePreview(src, file.name, i, num)
+        imagePreview(src, file.name, fileIndex, inputNum)
       };
     });
   });
@@ -323,7 +328,6 @@ $(function(){
   // 画像ドラック時の動作
   $(window).on('load', function(e){
     const dropArea = document.getElementById("image-box-1");
-    const dataBox = new DataTransfer();
 
     //ドラッグした要素がドロップターゲットの上にある時にイベントが発火
     dropArea.addEventListener("dragover", function(e){
@@ -335,7 +339,7 @@ $(function(){
     //ドラッグした要素がドロップターゲットから離れた時に発火するイベント
     dropArea.addEventListener("dragleave", function(e){
       e.preventDefault();
-  　　 //ドロップエリアの影が消える
+    //ドロップエリアの影が消える
       $(this).children('#image-box__container').css({'border': 'none','box-shadow': '0px 0px 0px'})      
     },false);
 
@@ -345,10 +349,10 @@ $(function(){
       e.preventDefault();
       $(this).children('#image-box__container').css({'border': 'none','box-shadow': '0px 0px 0px'});
 
-      const imageNum = $('.item-image').length
-      errorCheckOnAdd(imageNum);
+      errorCheckOnAdd();
 
       const files = e.dataTransfer.files;
+      const add_files_length = files.length;
 
       //ドラッグアンドドロップで取得したデータについて、プレビューを表示
       $.each(files, function(i,file){
@@ -357,18 +361,26 @@ $(function(){
         //dataTransferオブジェクトに値を追加
         dataBox.items.add(file)
         file_field.files = dataBox.files
-        //lengthで要素の数を取得
-        const num = $('.item-image').length + i
+        //lengthでイベントが発火した時点での要素(image)の数に、追加するファイルの数を足す
+        const inputNum = $('.item-image').length + add_files_length
+        const num = $('.item-image').length + i + 1
         //指定されたファイルを読み込む
         fileReader.readAsDataURL(file);
         // 10枚プレビューを出したらドロップボックスが消える
         if (num==10){
-          $('#image-box__container').css('display', 'none')   
+          $('#image-box__container').css('display', 'none')
+          fileReader.onloadend = function() {
+            fileIndex += 1;
+            const src = fileReader.result
+            imagePreview(src, file.name, fileIndex, inputNum)
+          };  
+          return false;
         }
         //image fileがロードされた時に発火するイベント
         fileReader.onloadend = function() {
+          fileIndex += 1;
           const src = fileReader.result
-          imagePreview(src, file.name, i, num)
+          imagePreview(src, file.name, fileIndex, inputNum)
         };
       })
     })
@@ -377,19 +389,21 @@ $(function(){
   $(document).on("click", '.item-image__operation--delete', function(){
     //削除を押されたプレビュー要素を取得
     const target_image = $(this).parent().parent()
-    //削除を押されたプレビューimageのfile名を取得
-    const target_name = $(target_image).data('image')
+    //削除を押されたプレビューimageのindexを取得
+    const targetIndex = $(target_image).data('index')
     //プレビューがひとつだけの場合、file_fieldをクリア
-    if (file_field.files.length==1) {
+    const images = $('.item-image');
+    console.log(dataBox)
+    if (images.length==1) {
       //inputタグに入ったファイルを削除
       $('input[type=file]').val(null)
       dataBox.clearData();
     } else {
       //プレビューが複数の場合
-      $.each(file_field.files, function(i,input){
-        //削除を押された要素と一致した時、index番号に基づいてdataBoxに格納された要素を削除する
-        if(input.name==target_name){
-          dataBox.items.remove(i) 
+      $.each(images, function(i,input){
+        //削除を押されたindexと一致した時、index番号に基づいてdataBoxに格納された要素を削除する
+        if($(input).data('index')==targetIndex){
+          dataBox.items.remove(i)
         }
       })
       //DataTransferオブジェクトに入ったfile一覧をfile_fieldの中に再度代入
@@ -398,7 +412,7 @@ $(function(){
     //プレビューを削除
     target_image.remove()
     //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-    const num = $('.item-image').length - 1 
+    const num = $('.item-image').length
     $('#image-box__container').show()
     $('#image-box__container').attr('class', `item-num-${num}`)
     
