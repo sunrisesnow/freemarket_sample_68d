@@ -16,11 +16,7 @@
       = render "shared/brand"
     .header__right--content
       - if user_signed_in?
-
-        =  link_to "マイページ", user_path(current_user.id), class: "right__btn logout__btn"
-
         = render 'shared/header-nav_signed-in'
-
       - else
         = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
         = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 
