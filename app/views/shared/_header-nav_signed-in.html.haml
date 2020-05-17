@@ -17,7 +17,7 @@
     %i.fas.fa-clipboard-check.fa-4x
     %p 現在やることリストはありません
 .header__right--content--menu.mypage__content--link
-  =  link_to "#", class: "user__mypage header__right--content--menu--list" do
+  =  link_to user_path(current_user.id), class: "user__mypage header__right--content--menu--list" do
     = image_tag "member_photo_noimage.png", class: "user__mypage--icon",height: "30px", width: "30px"
     %p マイページ
   .mypage__container
@@ -32,8 +32,8 @@
           %span 出品数：１   
     .mypage__container--menu
       .menu__sales
-        = link_to  destroy_user_session_path,method: :delete, class: "proceeds__link " do
-          %span ログアウト
+        = link_to  "#", class: "proceeds__link " do
+          %span 売上金
           %i.fas.fa-chevron-right
         = link_to "#", class: "proceeds__link" do
           %span フリマポイント
