@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :tops, only: [:new]
+
+  resources :categories, only: [:index]
+  resources :users, only: [:show]
+
   resources :cards, except: [:show,:edit,:update] do
     member do
       get 'buy'
@@ -24,4 +28,5 @@ Rails.application.routes.draw do
   end
   resources :categories, only: [:index, :show] do
   end
+
 end
