@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category_brand, only: [:index, :new, :show, :edit]
+  before_action :set_category_brand, only: [:index, :new, :show, :edit, :update]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item.images.all
     @parents = []
     Category.where(ancestry: nil).each do |parent|
       unless parent.name == "カテゴリー一覧"
@@ -50,7 +51,15 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params) ? (redirect_to items_path) : (render :edit)
+    @parents = []
+    Category.where(ancestry: nil).each do |parent|
+      unless parent.name == "カテゴリー一覧"
+        @parents << parent.name
+      end
+    end
+    @category_child_array = @item.category.parent.parent.children
+    @category_grandchild_array = @item.category.parent.children
+    @item.update(item_params) ? (redirect_to item_path) : (render :edit)
   end
 
   def show
