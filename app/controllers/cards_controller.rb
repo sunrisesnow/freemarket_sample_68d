@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   before_action :set_category_brand
   before_action :set_card
   before_action :set_payjp_api, except: [:new]
-  before_action :set_item
+  before_action :set_item, only: [:buy, :check]
   
   def index
     if @card.present?
