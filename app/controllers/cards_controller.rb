@@ -45,8 +45,17 @@ class CardsController < ApplicationController
         customer: @card.payjp_id,
         currency: 'jpy'
       )
-      @item.update(buyer_id: current_user.id) ? (redirect_to root_path) : (redirect_to item_path(@item))
+      @item.update(buyer_id: current_user.id) ? (redirect_to item_path(@item)) : (redirect_to root_path)
     end
+  end
+
+  def check
+    @item = Item.find(params[:id])
+    customer    = Payjp::Customer.retrieve(@card.payjp_id)
+      @card_info  = customer.cards.retrieve(customer.default_card)
+      @card_brand = @card_info.brand
+      @exp_month  = @card_info.exp_month.to_s
+      @exp_year   = @card_info.exp_year.to_s.slice(2,3) 
   end
 
   private
