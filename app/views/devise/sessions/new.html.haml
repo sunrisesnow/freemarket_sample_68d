@@ -15,6 +15,8 @@
         Googleで登録する
     .login__form
       = form_for( resource, url: user_session_path) do |f|
+        .login__form__error
+          = flash[:alert]
         .field
           .field__form
             = f.email_field :email, {autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class:'field__form--input'}
