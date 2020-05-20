@@ -3,6 +3,7 @@ class CardsController < ApplicationController
   before_action :set_category_brand
   before_action :set_card
   before_action :set_payjp_api, except: [:new]
+  before_action :set_item, only: [:buy, :check]
   
   def index
     if @card.present?
@@ -34,7 +35,6 @@ class CardsController < ApplicationController
   end
 
   def buy
-    @item = Item.find(params[:id])
     if @item.buyer_id.present? 
       redirect_to item_path(@item)
     elsif @card.blank?
@@ -45,11 +45,24 @@ class CardsController < ApplicationController
         customer: @card.payjp_id,
         currency: 'jpy'
       )
-      @item.update(buyer_id: current_user.id) ? (redirect_to root_path) : (redirect_to item_path(@item))
+      @item.update(buyer_id: current_user.id) ? (redirect_to item_path(@item)) : (redirect_to root_path)
     end
   end
 
+  def check
+    customer    = Payjp::Customer.retrieve(@card.payjp_id)
+      @card_info  = customer.cards.retrieve(customer.default_card)
+      @card_brand = @card_info.brand
+      @exp_month  = @card_info.exp_month.to_s
+      @exp_year   = @card_info.exp_year.to_s.slice(2,3) 
+  end
+
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
   def set_category_brand
     @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
