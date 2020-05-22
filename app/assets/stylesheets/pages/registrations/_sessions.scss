@@ -1,12 +1,12 @@
 .session__login{
   background-color: white;
   width: 450px;
+  height: 610px;
   margin: 0 auto;
-  padding: 30px 0;
   &--new{
     width: 100%;
     border-bottom: 1px solid $lightgray;
-    padding-bottom: 30px;
+    padding: 30px 0;
     &--link{
       text-align: center;
       p{
@@ -84,8 +84,7 @@
         color: red;
         font-size: 13px;
       }
-      .next__btn{
-        margin-bottom: 30px;
+      .login__next__btn{
         display: block;
         letter-spacing: 2px;
         width: 306px;
@@ -96,6 +95,7 @@
         background-color: $skyblue;
         border-radius: 3px;
         transition: 0.5s;
+        margin-bottom: 15px;
         @include hover__color(white, $skyblue, 0.6);
       }
       &__password--forgot{
@@ -106,4 +106,3 @@
     }
   }
 }
-    
