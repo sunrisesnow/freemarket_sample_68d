@@ -39,9 +39,7 @@ class CategoriesController < ApplicationController
 
   def find_category_item(grandchildren_id)
     category_item = []
-    grandchildren_id.each do |grandchild_id|
-      category_item = Item.includes(:images).where(category_id: grandchild_id)
-      category_present(category_item)
-    end
+    category_item = Item.includes(:images).where(category_id: grandchildren_id[0].. grandchildren_id[-1])
+    category_present(category_item)
   end
 end
