@@ -5,9 +5,11 @@
   padding: 0 10px;
   border-radius: 5px;
 }
-
-.register-wrapper {
+.registration__completed__wrapper{
   background-color: $whitesmoke;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
     .member-form {
