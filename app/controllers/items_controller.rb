@@ -54,7 +54,16 @@ class ItemsController < ApplicationController
     end
     @category_child_array = @item.category.parent.parent.children
     @category_grandchild_array = @item.category.parent.children
-    @item.update(item_params) ? (redirect_to item_path) : (render :edit)
+    if @item.update!(item_params)
+      if add_item_images = params[:item_images]
+        add_item_images.each do|image|
+          @item.images.create(image: image, item_id: @item.id)
+        end
+      end
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
 
   def show
@@ -91,7 +100,8 @@ class ItemsController < ApplicationController
       :trading_status_id,
       images_attributes: [
         :id,
-        :image
+        :image,
+        :_destroy
       ]
     ).merge(saler_id: current_user.id)
   end
