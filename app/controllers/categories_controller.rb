@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   def show
     @items = []
     if @category.ancestry.nil?
-      grandchildren_id = @category.indirect_ids 
+      grandchildren_id = @category.indirect_ids.sort
       find_category_item(grandchildren_id)
     elsif @category.ancestry.include?("/")
       category_item = Item.includes(:images).where(category_id: params[:id])
