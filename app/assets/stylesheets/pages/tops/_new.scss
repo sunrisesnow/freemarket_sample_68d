@@ -3,9 +3,11 @@
 
 .new__wrapper{
   width: 100%;
+  height: 100%;
   background-color: $whitesmoke; 
+  position: relative;
   .main__new{
-    height: calc(100vh - 130px - 200px);
+    height: 400px;
     width: 700px;
     margin: 0 auto;
     background-color: white;
