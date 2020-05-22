@@ -158,6 +158,7 @@
               padding: 15px 0;
               color: white;
               transition: 1s;
+              margin-bottom: 84px;
               @include hover(white, 0.6)
             }
           }
@@ -168,6 +169,8 @@
     .create-form{
       background-color: $mainWhiteColor;
       height: 374px ;
+      margin: 0 auto;
+      width: 700px;
       &__title{
         border-bottom: 1px solid $mainWhite2Color;
         height: 160px;
