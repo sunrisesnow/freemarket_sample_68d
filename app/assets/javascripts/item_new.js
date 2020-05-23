@@ -296,13 +296,13 @@ $(function(){
     //選択したfileのオブジェクトをpropで取得
     const files = $('input[type="file"]').prop('files')[0];
     const currentNum = $('.item-image').length
-    const add_files_length = file_field.files.length
+    const add_files_length = this.files.length
+    
     const inputNum = currentNum + add_files_length
 
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
-      dataBox.items.add(file)
-      file_field.files = dataBox.files
+      file_field.files = this.files
       
       const num = $('.item-image').length + i + 1
       fileReader.readAsDataURL(file);
@@ -329,61 +329,64 @@ $(function(){
   $(window).on('load', function(e){
     const dropArea = document.getElementById("image-box-1");
 
-    //ドラッグした要素がドロップターゲットの上にある時にイベントが発火
-    dropArea.addEventListener("dragover", function(e){
-      e.preventDefault();
-      //ドロップエリアに影がつく
-      $(this).children('#image-box__container').css({'border': '1px solid rgb(204, 204, 204)','box-shadow': '0px 0px 4px'})
-    },false);
+    if (dropArea) {
 
-    //ドラッグした要素がドロップターゲットから離れた時に発火するイベント
-    dropArea.addEventListener("dragleave", function(e){
-      e.preventDefault();
-    //ドロップエリアの影が消える
-      $(this).children('#image-box__container').css({'border': 'none','box-shadow': '0px 0px 0px'})      
-    },false);
+      //ドラッグした要素がドロップターゲットの上にある時にイベントが発火
+      dropArea.addEventListener("dragover", function(e){
+        e.preventDefault();
+        //ドロップエリアに影がつく
+        $(this).children('.drag-area').css({'border': '1px solid rgb(204, 204, 204)','box-shadow': '0px 0px 4px'})
+      },false);
 
-    //ドラッグした要素をドロップした時に発火するイベント
-    dropArea.addEventListener("drop", function(e) {
+      //ドラッグした要素がドロップターゲットから離れた時に発火するイベント
+      dropArea.addEventListener("dragleave", function(e){
+        e.preventDefault();
+      //ドロップエリアの影が消える
+        $(this).children('.drag-area').css({'border': 'none','box-shadow': '0px 0px 0px'})      
+      },false);
 
-      e.preventDefault();
-      $(this).children('#image-box__container').css({'border': 'none','box-shadow': '0px 0px 0px'});
+      //ドラッグした要素をドロップした時に発火するイベント
+      dropArea.addEventListener("drop", function(e) {
 
-      errorCheckOnAdd();
+        e.preventDefault();
+        $(this).children('.drag-area').css({'border': 'none','box-shadow': '0px 0px 0px'});
 
-      const files = e.dataTransfer.files;
-      const add_files_length = files.length;
+        errorCheckOnAdd();
 
-      //ドラッグアンドドロップで取得したデータについて、プレビューを表示
-      $.each(files, function(i,file){
-        //アップロードされた画像を元に新しくfilereaderオブジェクトを生成
-        const fileReader = new FileReader();
-        //dataTransferオブジェクトに値を追加
-        dataBox.items.add(file)
-        file_field.files = dataBox.files
-        //lengthでイベントが発火した時点での要素(image)の数に、追加するファイルの数を足す
-        const inputNum = $('.item-image').length + add_files_length
-        const num = $('.item-image').length + i + 1
-        //指定されたファイルを読み込む
-        fileReader.readAsDataURL(file);
-        // 10枚プレビューを出したらドロップボックスが消える
-        if (num==10){
-          $('#image-box__container').css('display', 'none')
+        const files = e.dataTransfer.files;
+        const add_files_length = files.length;
+
+        //ドラッグアンドドロップで取得したデータについて、プレビューを表示
+        $.each(files, function(i,file){
+          //アップロードされた画像を元に新しくfilereaderオブジェクトを生成
+          const fileReader = new FileReader();
+          //dataTransferオブジェクトに値を追加
+          dataBox.items.add(file)
+          file_field.files = dataBox.files
+          //lengthでイベントが発火した時点での要素(image)の数に、追加するファイルの数を足す
+          const inputNum = $('.item-image').length + add_files_length
+          const num = $('.item-image').length + i + 1
+          //指定されたファイルを読み込む
+          fileReader.readAsDataURL(file);
+          // 10枚プレビューを出したらドロップボックスが消える
+          if (num==10){
+            $('#image-box__container').css('display', 'none')
+            fileReader.onloadend = function() {
+              fileIndex += 1;
+              const src = fileReader.result
+              imagePreview(src, file.name, fileIndex, inputNum)
+            };  
+            return false;
+          }
+          //image fileがロードされた時に発火するイベント
           fileReader.onloadend = function() {
             fileIndex += 1;
             const src = fileReader.result
             imagePreview(src, file.name, fileIndex, inputNum)
-          };  
-          return false;
-        }
-        //image fileがロードされた時に発火するイベント
-        fileReader.onloadend = function() {
-          fileIndex += 1;
-          const src = fileReader.result
-          imagePreview(src, file.name, fileIndex, inputNum)
-        };
+          };
+        })
       })
-    })
+    }
   });
   //削除ボタンをクリック時の動作
   $(document).on("click", '.item-image__operation--delete', function(){
@@ -391,6 +394,8 @@ $(function(){
     const target_image = $(this).parent().parent()
     //削除を押されたプレビューimageのindexを取得
     const targetIndex = $(target_image).data('index')
+    const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
+    if (hiddenCheck) hiddenCheck.prop('checked', true);
     //プレビューがひとつだけの場合、file_fieldをクリア
     const images = $('.item-image');
     if (images.length==1) {
@@ -413,7 +418,7 @@ $(function(){
     //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
     const num = $('.item-image').length
     $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
+    $('#image-box__container').attr('class', `item-num-${num} drag-area`)
     
     errorCheckOnDel(num);
   });
