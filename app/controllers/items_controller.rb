@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category_brand, only: [:index, :new, :show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :destroy]
+  before_action :set_category_brand, only: [:index, :new, :show]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save!
-      params[:item][:image].each do |image|
+      params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
       redirect_to items_path
@@ -34,36 +34,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item.images.all
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
   end
 
   def update
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
-    if @item.update!(item_params)
-      if add_item_images = params[:item][:image]
-        add_item_images.each do|image|
-          @item.images.create(image: image, item_id: @item.id) if @item.images.count <= 10
-        end
-      end
-      redirect_to item_path
-    else
-      render :edit
-    end
+    @item.update(item_params) ? (redirect_to items_path) : (render :edit)
   end
 
   def show
@@ -100,8 +74,7 @@ class ItemsController < ApplicationController
       :trading_status_id,
       images_attributes: [
         :id,
-        :image,
-        :_destroy
+        :image
       ]
     ).merge(saler_id: current_user.id)
   end
