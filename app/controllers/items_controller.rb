@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save!
-      params[:item_images][:image].each do |image|
+      params[:item][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
       redirect_to items_path
@@ -55,9 +55,9 @@ class ItemsController < ApplicationController
     @category_child_array = @item.category.parent.parent.children
     @category_grandchild_array = @item.category.parent.children
     if @item.update!(item_params)
-      if add_item_images = params[:item_images]
+      if add_item_images = params[:item][:image]
         add_item_images.each do|image|
-          @item.images.create(image: image, item_id: @item.id)
+          @item.images.create(image: image, item_id: @item.id) if @item.images.count <= 10
         end
       end
       redirect_to item_path
