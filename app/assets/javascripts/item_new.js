@@ -60,7 +60,7 @@ $(function() {
     `
     $('#delivery_charge').parent().append(sellerChargeOptions);
   }
-  // 送料別（購入者負担）の場合の配送方法の選択肢　→　ここもajax通信で取れるならとってきたい
+  // 送料別（購入者負担）の場合の配送方法の選択肢 → ここもajax通信で取れるならとってきたい
   function buyerCharge() {
     const buyerChargeOptions = `
       <div class='field' id='buyer-charge'>
@@ -85,7 +85,7 @@ $(function() {
   $(document).on('change', '#item_delivery_charge_flag', function (){
     const sellerChargeMethod = $('#seller-charge')
     const buyerChargeMethod = $('#buyer-charge')  
-    // $("select[name='item[delivery_method_id]'] option").attr("selected", false);
+    $("select[name='item[delivery_method_id]'] option").attr("selected", false);
     const chargeFlag = $(this).val();
     if (chargeFlag == "") {
       sellerChargeMethod.remove();
