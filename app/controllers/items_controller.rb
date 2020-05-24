@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category_brand, only: [:index, :new, :show, :edit, :update]
+  before_action :set_category_brand, only: [:index, :new, :create, :show, :edit, :update]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save!
-      params[:item][:image].each do |image|
+      params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
       redirect_to items_path
@@ -67,6 +67,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: @item.saler_id)
     redirect_to root_path if @item == nil
   end 
 

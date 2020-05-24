@@ -56,7 +56,8 @@
                   %tr
                     %th 出品者
                     %td
-                      =@item.name
+                      = link_to user_path do
+                        = @user.nickname
                   %tr
                     %th カテゴリー
                     %td
