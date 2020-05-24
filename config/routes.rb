@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :items do
+    resources :likes, only: [:index, :create, :destroy]
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
