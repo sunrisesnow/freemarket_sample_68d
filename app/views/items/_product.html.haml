@@ -26,7 +26,8 @@
                   %ul
                     %li 
                       = item.price
-                    %li#like 0
+                    %li#like
+                      = item.likes.count
                   %p.detail (税込)
         -else 
           .item-list__nothing 該当する商品が見つかりません。商品は毎日増えていますので、これからの出品に期待してください。

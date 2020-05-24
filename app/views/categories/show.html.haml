@@ -21,7 +21,8 @@
                   %ul
                     %li 
                       = item.price
-                    %li#like 0
+                    %li#like
+                      = item.likes.count
                   %p.detail (税込)
         -else 
           .item-list__nothing 
