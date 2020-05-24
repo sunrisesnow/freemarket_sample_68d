@@ -67,6 +67,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: @item.saler_id)
     redirect_to root_path if @item == nil
   end 
 
