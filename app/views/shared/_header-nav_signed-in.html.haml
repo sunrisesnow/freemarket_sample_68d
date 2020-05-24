@@ -1,7 +1,7 @@
 .header__right--content--menu
-  = link_to "#", class: "user__liked--list header__right--content--menu--list" do
-    %i.far.fa-heart.header__right--content--icon.fa-lg
-    %span いいね！一覧
+  = link_to item_likes_path(current_user), class: "user__liked--list header__right--content--menu--list" do
+    %i.far.fa-star.header__right--content--icon.fa-lg
+    %span お気に入り！一覧
 .header__right--content--menu.news__content--link
   = link_to "#", class: "user__news--list header__right--content--menu--list" do
     %i.far.fa-bell.header__right--content--icon.fa-lg
@@ -38,8 +38,8 @@
         = link_to "#", class: "proceeds__link" do
           %span フリマポイント
           %i.fas.fa-chevron-right
-      = link_to "#", class: "mypage__container--menu--link" do
-        %span いいね！一覧
+      = link_to item_likes_path(current_user), class: "mypage__container--menu--link" do
+        %span お気に入り！一覧
         %i.fas.fa-chevron-right    
       = link_to "#", class: "mypage__container--menu--link" do
         %span 出品した商品-出品中
