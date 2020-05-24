@@ -1,6 +1,6 @@
 .form-container
   = form_for @item do |f|
-    .item-area.item-image
+    .item-area
       .field.item-area__field
         .field__label
           = f.label :images, '出品画像'
@@ -100,3 +100,4 @@
       .item-btn-area__container
         .item-btn-area__container__box
           = link_to 'もどる', root_path
+

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show] 
   resources :cards, except: [:show,:edit,:update] do
     member do
+      get 'check'
       get 'buy'
     end
   end
