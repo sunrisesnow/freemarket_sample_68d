@@ -86,11 +86,17 @@
           color: black;
           font-weight: normal;
           font-size: 14px;
+          position: relative;
           @include hover__color($mainblueColor, white, 1);
           &:hover{
             .header__right--content--icon{
               color: $mainblueColor;
             }
+          }
+          .fa-star{
+            position: absolute;
+            top: 1.3px;
+            left: -25px;
           }
         }
       }
