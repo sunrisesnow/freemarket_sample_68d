@@ -15,9 +15,13 @@
       position: relative;
       height: 60px;
       padding: 0 15px;
-      z-index: 2;
-      
-
+      &:hover{
+        background-color: #EEEEEE;
+        .fa-chevron-right{
+          transform: scale(1.5);
+          transition-duration: 0.3s;
+        }
+      }
       .fa-chevron-right {
         position: absolute;
         right: 15px;
