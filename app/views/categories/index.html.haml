@@ -11,9 +11,8 @@
       %h3
         カテゴリー一覧
       - @parents.each_with_index do |parent, i|
-        - unless parent.name.include?("カテゴリー一覧")
-          = link_to "##{i}", class: "box__parent--link" do
-            = parent.name
+        = link_to "##{i}", class: "box__parent--link" do
+          = parent.name
     - @parents.each_with_index do |parent, i|
       - unless parent.name.include?("カテゴリー一覧")
         .category__container--box

@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   # belongs_to :buyer, class_name: User
   # belongs_to :saler, class_name: User
   has_many :images, dependent: :destroy
+  has_many :likes, dependent: :destroy
   belongs_to :category
   accepts_nested_attributes_for :images, allow_destroy: true
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -16,6 +17,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :explanation
+    validates :category_id
     validates :status_id
     validates :category_id
     validates :delivery_charge_flag

@@ -2,7 +2,7 @@
   %span 商品名
   = item.name
   %span 価格
-  = "#{item.price}円"
+  = "#{item.price.to_s(:delimited)}円"
   - category = Category.find(item.category_id)
   = category.name
   - item.images.each do |image|

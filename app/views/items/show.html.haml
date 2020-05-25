@@ -25,7 +25,7 @@
             .itembox__price
               %span
                 ¥
-                = @item.price
+                = @item.price.to_s(:delimited)
               .itembox__price--detail
                 %span
                   (税込)
@@ -98,11 +98,7 @@
                     %td
                       = @item.delivery_method.name
             .itembox__option
-              %ul
-                %li.like-btn
-                  = link_to '#' do
-                    %i.fa.fa-star
-                    お気に入り 0
+              = render partial: 'likes/like', locals: { item: @item}
               %ul.optical
                 %li.report-btn
                   = link_to '#' do

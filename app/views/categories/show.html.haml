@@ -20,8 +20,9 @@
                 .details
                   %ul
                     %li 
-                      = item.price
-                    %li#like 0
+                      = item.price.to_s(:delimited)
+                    %li#like
+                      = item.likes.count
                   %p.detail (税込)
         -else 
           .item-list__nothing 
