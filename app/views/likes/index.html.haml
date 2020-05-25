@@ -20,7 +20,7 @@
               .user__liked__item__price
                 %span
                   ¥
-                = item.price
+                = item.price.to_s(:delimited)
             %i.fas.fa-chevron-right
         = paginate @items
       - else
