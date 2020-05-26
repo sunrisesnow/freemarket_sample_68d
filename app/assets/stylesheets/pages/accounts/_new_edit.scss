@@ -42,6 +42,13 @@
       }
     }
   }
+  .account__delete__btn{
+    background-color: $sign-up-btn;
+    opacity: 0.8;
+    &:hover{
+      opacity: 0.6;
+    }
+  }
 }
 
 
