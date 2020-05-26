@@ -39,7 +39,7 @@ class CategoriesController < ApplicationController
 
   def find_category_item(grandchildren_id)
     category_item = []
-    category_item = Item.includes(:images).where(category_id: grandchildren_id[0].. grandchildren_id[-1])
+    category_item = Item.includes(:images).where(category_id: grandchildren_id[0].. grandchildren_id[-1]).where.not(trading_status_id: 4)
     category_present(category_item)
   end
 end
