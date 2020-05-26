@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
+    # @q = Item.ransack(params[:q])
+    # @items = @q.result(distinct: true)
   end
 
   def new
@@ -74,6 +76,11 @@ class ItemsController < ApplicationController
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
     @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
+  end
+
+  def search
+    @q = Item.search(search_params)
+    @items = @q.result(distinct: true)
   end
 
   private
