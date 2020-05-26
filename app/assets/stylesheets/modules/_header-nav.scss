@@ -13,11 +13,17 @@
     height: 165px;
     background-color: white;
     text-align: center;
+    .mypage__background{
+      height: 75px;
+      width: 100%;
+    }
     .user__mypage--big--icon{
       border-radius: 100px;
       position: absolute;
       top: 6%;
       right: 42%;
+      height: 50px;
+      width: 50px;
     }
     .user__details{
       padding-top: 20px;
