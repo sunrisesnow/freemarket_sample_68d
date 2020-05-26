@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
       params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
-      redirect_to items_path
+      redirect_to item_path(@item)
     else
       render :new
     end
