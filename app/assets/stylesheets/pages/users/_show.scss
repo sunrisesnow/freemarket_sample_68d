@@ -2,31 +2,33 @@
   width: 100%;
   display: flex;
   background-color: $whitesmoke;
-  padding: 60px;
+  padding: 60px 10%;
   .contents-mypage {
     
     &-link {
       display: inline-block;
       background-color: white;
       color: black;
-      width: 300px;
+      width: 270px;
       border: 1px solid $whitesmoke;
-      line-height: 60px;
+      line-height: 50px;
       position: relative;
-      height: 60px;
+      height: 50px;
       padding: 0 15px;
+      font-size: 14px;
       &:hover{
         background-color: #EEEEEE;
         .fa-chevron-right{
           transform: scale(1.5);
           transition-duration: 0.3s;
+          color: black;
         }
       }
       .fa-chevron-right {
         position: absolute;
         right: 15px;
         top: 18px;
-        
+        color: $lightgray;
       }
     }
   }

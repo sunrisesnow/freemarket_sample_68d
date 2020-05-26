@@ -58,6 +58,6 @@
   outline: none;
   margin-top: 20px;
 }
-#introduction:focus, #account_introduction{
+#introduction:focus, #account_introduction:focus{
   border: 1px solid $skyblue;
 }
