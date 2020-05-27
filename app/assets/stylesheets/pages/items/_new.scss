@@ -1,5 +1,6 @@
 .sell-form-wrapper {
   background-color: $whitesmoke;
+  height: 100vh;
   position: relative;
   .form-container {
     width: 700px;
@@ -61,19 +62,23 @@
         margin: 24px;
         &__box {
           margin: 0 auto;
-          #item-post-btn {
-            background-color: $skyblue;
-          }
-          #item-draft-btn {
-            background-color: $gray;
-            padding: 12px 0;
-          }
           .item-btn {
             display: inline-block;
             height: 50px;
             width: 360px;
             border: solid 1px $lightgray;
+            background-color: $skyblue;
             color: white;
+            &:hover {
+              opacity: 0.5;
+              transition: 1s;
+            }
+          }
+          #item-post-btn {
+          }
+          #item-draft-btn {
+            background-color: $gray;
+            padding: 12px 0;
           }
         }
       }
