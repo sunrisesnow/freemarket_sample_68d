@@ -35,26 +35,12 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path unless current_user.id == @item.saler_id
-    @item.images.all
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
+    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @category_child_array = @item.category.parent.siblings
+    @category_grandchild_array = @item.category.siblings
   end
 
   def update
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
     if @item.update!(item_params)
       if add_item_images = params[:item][:image]
         add_item_images.each do|image|
