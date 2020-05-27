@@ -5,8 +5,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
-    # @q = Item.ransack(params[:q])
-    # @items = @q.result(distinct: true)
   end
 
   def new
@@ -29,7 +27,6 @@ class ItemsController < ApplicationController
       params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
-      redirect_to item_path(@item)
     else
       render :new
     end
