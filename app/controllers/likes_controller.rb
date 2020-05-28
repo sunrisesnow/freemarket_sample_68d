@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
     items = []
-    likes = Like.where(user_id: params[:item_id])
+    likes = Like.where(user_id: params[:user_id])
     if likes.present?
       likes.each { |like| items << Item.find(like.item_id)}
     end

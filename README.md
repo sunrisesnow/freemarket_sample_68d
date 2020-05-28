@@ -32,12 +32,11 @@ Things you may want to cover:
 |email|string|null: false, unique: true|
 |password|string|null: false, unique: true|
 |password_confirm|string|null, false|
-|last_name|string|null: false, /\A[ぁ-んァ-ン一-龥]/|
-|first_name|string|null: false, /\A[ぁ-んァ-ン一-龥]/|
-|last_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
-|first_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
+|last_name|string|null: false|
+|first_name|string|null: false|
+|last_name_kana|string|null: false|
+|first_name_kana|string|null: false|
 |birthday|date|null: false|
-|icon_image|string|-------|
 
 ### Association
 - has_many :saling_items, -> { where(buyer_id is NULL) }, foreign_key: saler_id,     class_name: item
@@ -46,22 +45,35 @@ Things you may want to cover:
 - has_many :likes
 - has_many :comments
 - has_one  :address
-- has_one  :creadit_card
+- has_one  :card
+- has_one  :account
+
+## accountsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|foreign_key: true, null: false|
+|icon_image|string|----|
+|background_image|string|----|
+|introduction|text|----|
+
+
+### Association
+- belongs_to :user
 
 ##  addressテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|last_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
-|first_name|string|null: false,  /\A[ぁ-んァ-ン一-龥]/|
-|last_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
-|first_name_kana|string|null: false, /\A[ァ-ヶー－]+\z/|
-|postal_code|string|null: false, /\A\d{7}\z/|
+|user_id|references|null: false, foreign_key: true|
+|last_name|string|null: false|
+|first_name|string|null: false|
+|last_name_kana|string|null: false|
+|first_name_kana|string|null: false|
+|postal_code|string|null: false|
 |prefectures|integer|null: false|
 |municipality|string|null: false|
 |address|string|null: false|
-|building|string|-----|
-|phone_number|string|/\A\d{10,11}\z/|
+|building|string|----|
+|phone_number|string|----|
 
 ### Association
 - belongs_to :user
@@ -70,16 +82,15 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|buyer_id|integer|foreign_key: true|
-|saler_id|integer|foreign_key: true, null: false|
-|category_id|integer|null: false, foreign_key: true|
-|brand_id|integer|foreign_key: true|
+|buyer_id|references|foreign_key: true|
+|saler_id|references|foreign_key: true, null: false|
+|category_id|references|null: false, foreign_key: true|
 |name|string|null: false|
-|explaination|text|null, false|
+|explanation|text|null, false|
 |status|string|null: false|
 |delivery_charge_flag|string|null: false|
 |prefectures|integer|null: false|
-|delivery_data|string|null: fasle|
+|delivery_data|string|null: false|
 |price|integer|null: false|
 |delivery_method|string|null: false|
 
@@ -96,7 +107,7 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|item_id|integer|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
 |image|string|null: false|
 
 ### Association
@@ -107,7 +118,7 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|path|string|-----|
+|path|string|----|
 |name|string|null: false|
 
 ### Association
@@ -119,8 +130,8 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|item_id|integer|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
 |text|text|null: false|
 
 ### Association
@@ -132,31 +143,20 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|item_id|integer|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
 
-##  brandsテーブル
+## cardsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
-
-### Association
-
-- has_many :items
-
-## creadit_cardsテーブル
-
-|Column|Type|Options|
-|------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|card_id|string|null: false|
-|customer_id|string|null: false|
+|user_id|references|null: false, foreign_key: true|
+|payjp_id_id|string|null: false|
 
 ### Association
 
