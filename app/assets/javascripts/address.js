@@ -155,4 +155,43 @@ $(function(){
       next.remove();
     }
   });
+  
+  //発送元・お届け先住所変更時のバリデーションチェック
+
+  $('.change__address__btn').click(function(e) {
+    e.preventDefault();
+    let flag = true;
+    const patern = /^(0{1}\d{9,10})$/;
+    const phone_number = $("#address_phone_number").val()
+    if(phone_number != "" && phone_number.match(patern) == null){
+      flag = false;
+    }
+    $('#edit_address input:required').each(function(e) {
+      if ($('#edit_address input:required').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    $('#edit_address textarea:required').each(function(e) {
+      if ($('#edit_address textarea:required').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    $('#edit_address select').each(function(e) {
+      if ($('#edit_address select').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    
+    if (flag) {
+      $('#edit_address').submit();
+    } else {
+      const errorInput = $(".error-class2:first").prev();
+      const position = errorInput.offset().top - 40;
+      const speed = 400;
+      $(this).off('submit');
+      $('body,html').animate({scrollTop:position}, speed, 'swing');
+      errorInput.focus();
+      return false;
+    }
+  });
 });
