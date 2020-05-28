@@ -5,7 +5,7 @@
     .content
       .likes__title
         = "#{current_user.nickname}さんのプロフィール"
-      = form_with url: accounts_path, method: :post, id: "account__form", local: true do |f|
+      = form_with model: @account, id: "account__form", local: true do |f|
         .account__field
           = f.label :background_image do
             = image_tag "user-background.jpg", class: "account__image__form__background", height: "200px", width: "100%" 
