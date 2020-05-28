@@ -138,9 +138,9 @@ $(function(){
   //電話番号
   $("#address_phone_number").keyup(function(){
     const patern = /^(0{1}\d{9,10})$/;
-    const phone_number = $(this).val().match(patern);
+    const phone_number = $(this).val();
     const next = $(this).next();
-    if(phone_number == null) {
+    if(phone_number != "" && phone_number.match(patern) == null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
         $(this).after(`<div class=error-class2>電話番号を入力してください</div>`);
