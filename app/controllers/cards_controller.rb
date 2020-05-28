@@ -6,15 +6,7 @@ class CardsController < ApplicationController
   before_action :set_item, only: [:buy, :check]
   
   def index
-    if @card.present?
-      customer    = Payjp::Customer.retrieve(@card.payjp_id)
-      @card_info  = customer.cards.retrieve(customer.default_card)
-      @card_brand = @card_info.brand
-      @exp_month  = @card_info.exp_month.to_s
-      @exp_year   = @card_info.exp_year.to_s.slice(2,3) 
-    else
-      render :new
-    end
+    check_card
   end
 
   def new
@@ -28,7 +20,7 @@ class CardsController < ApplicationController
     @card.save! ? (redirect_to cards_path) : (render :new)
   end
 
-  def destroy     
+  def destroy    
     customer = Payjp::Customer.retrieve(@card.payjp_id)
     customer.delete 
     redirect_to cards_path if @card.destroy
@@ -52,15 +44,7 @@ class CardsController < ApplicationController
   end
 
   def check
-    if @card.present?
-      customer    = Payjp::Customer.retrieve(@card.payjp_id)
-      @card_info  = customer.cards.retrieve(customer.default_card)
-      @card_brand = @card_info.brand
-      @exp_month  = @card_info.exp_month.to_s
-      @exp_year   = @card_info.exp_year.to_s.slice(2,3)
-    else
-      render :new
-    end
+    check_card
   end
 
   private
@@ -81,4 +65,17 @@ class CardsController < ApplicationController
   def set_payjp_api
     Payjp.api_key =  Rails.application.credentials.payjp[:payjp_private_key]
   end
+
+  def check_card
+    if @card.present?
+      customer    = Payjp::Customer.retrieve(@card.payjp_id)
+      @card_info  = customer.cards.retrieve(customer.default_card)
+      @card_brand = @card_info.brand
+      @exp_month  = @card_info.exp_month.to_s
+      @exp_year   = @card_info.exp_year.to_s.slice(2,3)
+    else
+      render :new
+    end
+  end
+
 end
