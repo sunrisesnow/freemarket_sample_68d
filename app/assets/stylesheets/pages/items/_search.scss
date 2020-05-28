@@ -1,0 +1,16 @@
+.search-wrapper {
+  display: flex;
+  height: 100vh;
+  padding: 48px 0;
+  background-color: $whitesmoke;
+  .search-content {
+    display: flex;
+    margin: 0 auto;
+    .sc-side {
+      width: 280px;
+    }
+    .sc-content {
+      width: 700px;
+    }
+  }
+}

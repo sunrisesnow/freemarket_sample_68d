@@ -1,1 +1,10 @@
-検索結果
+.wrapper
+  = render "shared/header"
+  .search-wrapper
+    .search-content
+      .sc-side
+        %div 並び替え
+        %div 詳細検索
+      .sc-content
+        = search_result(@keyword)
+        = render @items
