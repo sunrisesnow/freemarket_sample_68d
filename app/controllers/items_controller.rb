@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @keyword = params[:name_or_explanation_cont]
+    @keyword = params.require(:q)[:name_or_explanation_cont]
     @q = Item.includes(:images).search(search_params)
     @items = @q.result(distinct: true)
   end
