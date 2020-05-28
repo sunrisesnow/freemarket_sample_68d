@@ -1,4 +1,5 @@
 .card-container{
+  width: 100%;
   text-align: center;
   background-color: #f8f8f8;
   .card-wrapper{
@@ -14,15 +15,13 @@
     .creditcard-info__period{
       .btn-card{
         font-size:16px;
-        width:220px;
-        font-weight:bold;
+        width:100%;
         text-decoration:none;
         text-align:center;
         padding:8px 0 10px;
         margin: 10px 0;
         color:#fff;
         background-color:$mainblueColor;
-        border-radius:5px;
       }
     }
   }
@@ -36,9 +35,8 @@
       font-size: 16px;
       color: #333;
       .btn-default {
-        width: 50%;
+        width: 100%;
         height: 50px;
-        border-radius: 10px;
         background-color: $mainblueColor;
         color: #FFFFFF;
         font-size: 15px;
