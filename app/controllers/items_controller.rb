@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
 
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
-    @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
+    @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
   end
 
   def draft
