@@ -14,11 +14,6 @@ class AddressesController < ApplicationController
 
   private
 
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
-  end
-
   def set_address
     @address = Address.find_by(user_id: current_user.id)
   end

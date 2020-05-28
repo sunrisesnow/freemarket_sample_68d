@@ -53,11 +53,6 @@ class CardsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
-  end
-
   def set_card
     @card = Card.find_by(user_id: current_user.id)
   end

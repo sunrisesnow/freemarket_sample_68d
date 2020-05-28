@@ -81,11 +81,6 @@ class ItemsController < ApplicationController
 
   private
 
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
-  end
-
   def set_item
     @item = Item.find_by_id(params[:id])
   end
