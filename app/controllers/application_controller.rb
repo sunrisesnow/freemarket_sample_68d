@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
       username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
     end
   end
+
+  def set_item_search_query
+    @q = Item.search(params[:q])
+    @items = @q.result(distinct: true)
+  end
 end
