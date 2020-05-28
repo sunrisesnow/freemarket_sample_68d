@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
 
   def destroy
     redirect_to root_path unless current_user.id == @account.user_id
-    @account.destroy! ? (redirect_to user_path(current_user)) : (redirect_to edit_account_path(@account))
+    @account.destroy! ? (redirect_to edit_account_path(@account)) : (render :edit)
   end
 
   private
