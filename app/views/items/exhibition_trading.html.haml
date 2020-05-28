@@ -4,13 +4,13 @@
     = render "shared/show-contents"
     .content
       .likes__title
-        お気に入り！一覧
+        出品した商品-取引中一覧
       - if @items.present?
         = render "shared/mypage-items-show"
       - else
         .user__liked__not__items
           %i.fas.fa-box.fa-6x
-          %p お気に入り！がありません
+          %p 出品した商品-取引中はありません
   = render "shared/footer-image"
   = render "shared/footer"
   = render "shared/saler-btn"

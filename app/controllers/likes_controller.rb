@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
-  before_action :set_item, only: [:create, :destroy]
+  before_action :set_item, except: [:index]
+  before_action :move_show_item, except: [:index]
 
   def index
     @parents = Category.where(ancestry: nil)
@@ -25,5 +26,9 @@ class LikesController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def move_show_item
+    redirect_to item_path(@item) if current_user.id == @item.saler_id
   end
 end

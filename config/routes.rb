@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
+      get 'draft'
+      get 'exhibition'
+      get 'exhibition_trading'
+      get 'bought'
     end
   end
 end

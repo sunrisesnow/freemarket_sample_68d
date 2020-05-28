@@ -17,19 +17,19 @@
       お気に入り！一覧
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to new_item_path, class:"contents-mypage-link" do
       出品する
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to draft_items_path, class:"contents-mypage-link" do
       下書き一覧
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to exhibition_items_path, class:"contents-mypage-link" do
       出品した商品-出品中
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to exhibition_trading_items_path, class:"contents-mypage-link" do
       出品した商品-取引中
       %i.fas.fa-chevron-right
   %li 
@@ -37,7 +37,7 @@
       出品した商品-売却済み
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to bought_items_path, class:"contents-mypage-link" do
       購入した商品-取引中
       %i.fas.fa-chevron-right
   %li 

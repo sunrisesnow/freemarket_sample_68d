@@ -35,8 +35,10 @@ class CardsController < ApplicationController
   end
 
   def buy
-    if @item.buyer_id.present? 
+    if @item.buyer_id.present?
       redirect_to item_path(@item)
+    elsif @item.trading_status_id != 1
+      redirect_to root_path
     elsif @card.blank?
       render :new
     else
