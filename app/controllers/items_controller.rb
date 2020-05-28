@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category_brand, only: [:index, :new, :create, :show, :edit, :update]
+  before_action :set_category_brand, only: [:index, :new, :create, :show, :edit, :update, :search]
 
   def index
-    @items = Item.includes(:images).order('created_at DESC')
   end
 
   def new
@@ -76,7 +76,8 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @q = Item.search(search_params)
+    @keyword = params[:name_or_explanation_cont]
+    @q = Item.includes(:images).search(search_params)
     @items = @q.result(distinct: true)
   end
 
@@ -109,5 +110,9 @@ class ItemsController < ApplicationController
         :_destroy
       ]
     ).merge(saler_id: current_user.id)
+  end
+
+  def search_params
+    params.require(:q).permit!
   end
 end
