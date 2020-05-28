@@ -76,6 +76,7 @@ $(function() {
   });
 
   //パスワード再入力
+  
   $("#user_password_confirmation").keyup(function(){
     const password = $("#user_password").val();
     const next = $(this).next();
@@ -95,6 +96,27 @@ $(function() {
       next.remove();
     }
   });
+  //現在のパスワード
+  $("#user_current_password").keyup(function(){
+    const patern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
+    const password = $(this).val().match(patern);
+    const next = $(this).next();
+    if(password == null || $(this).val().length < 7){
+      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
+        $(this).css("border", "1px solid red");
+        $(this).after(`<div class=error-class2>フォーマットが正しくありません</div>`);
+      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
+        $(this).css("border", "1px solid red");
+        $(this).after(`<div class=error-class2>パスワードが一致しません</div>`);
+      }else{
+        $(this).css("border", "1px solid red");
+      }
+    }else{
+      $(this).css("border", "1px solid #00BFFF");
+      next.remove();
+    }
+  });
+
   
   const first_name = $('[id$=first_name]');
   const last_name = $('[id$=last_name]');
