@@ -120,7 +120,7 @@
               = f.submit '下書きを変更する', id: 'item-draft-btn', class: 'item-btn', trade_status_id: '4'
           .item-btn-area__container
             .item-btn-area__container__box
-              = link_to "下書きを削除する", item_path(@item.id), method: :delete, class: "item-btn item-btn-red"
+              = link_to "下書きを削除する", item_path(@item), method: :delete, class: "item-btn item-btn-red", data: { confirm: '削除してよろしいですか？' }
         - else
           .item-btn-area__container
             .item-btn-area__container__box
