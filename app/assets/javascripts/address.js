@@ -163,6 +163,9 @@ $(function(){
     let flag = true;
     const pattern = /^(0{1}\d{9,10})$/;
     const phone_number = $("#address_phone_number").val()
+    if($(".error-class2").length){
+      flag = false;
+    }
     if(phone_number != "" && phone_number.match(pattern) == null){
       flag = false;
     }
