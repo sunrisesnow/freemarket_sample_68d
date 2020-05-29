@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_category_brand, only: [:index, :new, :create, :show, :edit, :update, :search]
+  before_action :set_category_brand,  except: [:destroy]
 
   def index
   end
@@ -27,39 +27,27 @@ class ItemsController < ApplicationController
       params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
+      @item.trading_status_id == 4 ? (redirect_to draft_items_path) : (redirect_to items_path)
     else
       render :new
     end
   end
 
   def edit
-    @item.images.all
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
+    redirect_to root_path unless current_user.id == @item.saler_id
+    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @category_child_array = @item.category.parent.siblings
+    @category_grandchild_array = @item.category.siblings
   end
 
   def update
-    @parents = []
-    Category.where(ancestry: nil).each do |parent|
-      unless parent.name == "カテゴリー一覧"
-        @parents << parent.name
-      end
-    end
-    @category_child_array = @item.category.parent.parent.children
-    @category_grandchild_array = @item.category.parent.children
     if @item.update!(item_params)
       if add_item_images = params[:item][:image]
         add_item_images.each do|image|
           @item.images.create(image: image, item_id: @item.id) if @item.images.count <= 10
         end
       end
-      redirect_to item_path
+      @item.trading_status_id == 4 ? (redirect_to draft_items_path) : (redirect_to item_path(@item))
     else
       render :edit
     end
@@ -67,12 +55,12 @@ class ItemsController < ApplicationController
 
   def show
     @user = User.find_by(id: @item.saler_id)
-    redirect_to root_path if @item == nil
+    redirect_to root_path if @item == nil || @item.trading_status_id != 1
   end 
 
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
-    @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
+    @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
   end
 
   def search
@@ -82,10 +70,20 @@ class ItemsController < ApplicationController
   end
 
   private
+  def draft
+    @items = Item.includes(:images).where(trading_status_id: 4).where(saler_id: current_user.id).page(params[:page]).per(15)
+  end
 
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
+  def exhibition
+    @items = Item.includes(:images).where(saler_id: current_user.id).where(buyer_id: nil).where(trading_status_id: 1).page(params[:page]).per(15)
+  end
+
+  def exhibition_trading
+    @items = Item.includes(:images).where(saler_id: current_user.id).where.not(buyer_id: nil).page(params[:page]).per(15)
+  end
+
+  def bought
+    @items = Item.includes(:images).where(buyer_id: current_user.id).page(params[:page]).per(15)
   end
 
   def set_item

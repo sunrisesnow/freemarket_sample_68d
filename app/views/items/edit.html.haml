@@ -110,13 +110,28 @@
             .hanbairieki
               %span#sell-profit -
       .item-btn-area
-        .item-btn-area__container
-          .item-btn-area__container__box
-            = f.hidden_field :trading_status_id, value: 1
-            = f.submit '変更を適用する', id: 'item-post-btn', class: 'item-btn', trade_status_id: '1'
+        - if @item.trading_status_id == 4
+          .item-btn-area__container
+            .item-btn-area__container__box
+              = f.hidden_field :trading_status_id, value: 1
+              = f.submit '出品する', id: 'item-post-btn', class: 'item-btn', trade_status_id: '1'
+          .item-btn-area__container
+            .item-btn-area__container__box
+              = f.submit '下書きを変更する', id: 'item-draft-btn', class: 'item-btn', trade_status_id: '4'
+          .item-btn-area__container
+            .item-btn-area__container__box
+              = link_to "下書きを削除する", item_path(@item), method: :delete, class: "item-btn item-btn-red", data: { confirm: '削除してよろしいですか？' }
+        - else
+          .item-btn-area__container
+            .item-btn-area__container__box
+              = f.hidden_field :trading_status_id, value: 1
+              = f.submit '変更を適用する', id: 'item-post-btn', class: 'item-btn', trade_status_id: '1'
+          .item-btn-area__container
+            .item-btn-area__container__box
+              = f.submit '下書きにする', id: 'item-draft-btn', class: 'item-btn', trade_status_id: '4'
         .item-btn-area__container
           .item-btn-area__container__box
             = link_to 'もどる', root_path
-  = render 'shared/footer'
+  = render 'shared/form-footer'
 
 

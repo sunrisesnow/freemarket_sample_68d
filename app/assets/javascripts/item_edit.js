@@ -66,18 +66,6 @@ $(function() {
   }
 
   // 画像の入力チェック
-  function imageCheck(num) {
-    const imageNext = $('#image-box-1').next();
-    if (num == 0) {
-      if (!imageNext.hasClass('error')) {
-        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
-      }
-    } else {
-      if (imageNext.hasClass('error')) {
-        imageNext.remove();
-      }
-    }
-  }
 
   $('.edit_item input:required').on('blur', function() {
     fieldBlur($(this));
@@ -99,14 +87,27 @@ $(function() {
     fieldBlur($(this));
   });
 
+  function imageCheck(num, flag) {
+    const imageNext = $('#image-box-1').next();
+    if (num == 0) {
+      flag = false;
+      if (!imageNext.hasClass('error')) {
+        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
+      }
+    } else {
+      if (imageNext.hasClass('error')) {
+        imageNext.remove();
+      }
+    }
+    return flag;
+  }
+
   // 出品ボタン押下時の処理
   $('.item-form-btn').click(function(e) {
     e.preventDefault();
     const submitID = $(this).attr('id')
+    const num = $('.item-image').length
     let flag = true;
-    const num = $('.item-image').length - 1
-    imageCheck(num);
-
     $('.edit_item input:required').each(function(e) {
       if ($('.edit_item input:required').eq(e).val() === "") {
         fieldBlur($('.edit_item input:required').eq(e));
@@ -125,8 +126,7 @@ $(function() {
         flag = false;
       }
     });
-
-    if (flag) {
+    if (flag && imageCheck(num, flag)) {
       if (submitID == 'item-post-btn') {
         $("input[name='item[trading_status_id]']").val(1);
         $('.edit_item').submit();
