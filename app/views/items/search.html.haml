@@ -6,5 +6,13 @@
         %div 並び替え
         %div 詳細検索
       .sc-content
-        = search_result(@keyword)
-        = render @items
+        %h2
+          - if @keyword.present?
+            %span.sc-content__keyword= @keyword
+            %span.sc-content__result-title の検索結果
+          - else
+            %span.sc-content__result-title 検索結果
+        .item-lists
+          = render @items
+  = render "shared/footer"
+  = render "shared/saler-btn"
