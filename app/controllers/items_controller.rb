@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
 
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
-    @item.destroy ? (redirect_to root_path) : (redirect_to item_path(@item)) 
+    @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
   end
 
   def draft
@@ -80,11 +80,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
-  end
 
   def set_item
     @item = Item.find_by_id(params[:id])

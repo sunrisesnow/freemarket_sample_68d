@@ -47,7 +47,7 @@
                 .itembox__detail--or or
                 .itembox__detail--delete
                   %button.itembox__detail--delete--btn
-                    = link_to "この出品を削除する", item_path(@item.id), method: :delete
+                    = link_to "この出品を削除する", item_path(@item.id), method: :delete, data: { confirm: '削除してよろしいですか？' }
             .itembox__explanation
               = @item.explanation
             .itembox__table

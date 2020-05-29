@@ -4,8 +4,8 @@ $(function(){
     postcode : [ "#address_postal_code" ],
     address  : {
                   "#address_prefectures" : "%3",
-                  "#address_municipality"            : "%4",
-                  "#address_address"          : "%5%6%7"
+                  "#address_municipality": "%4",
+                  "#address_address"     : "%5%6%7"
                 }
   });
   
@@ -36,8 +36,8 @@ $(function(){
 
   //郵便番号
   $("#address_postal_code").keyup(function(){
-    const patern = /^[0-9]{7}$/;
-    const postal_code = $(this).val().match(patern);
+    const pattern = /^[0-9]{7}$/;
+    const postal_code = $(this).val().match(pattern);
     const next = $(this).next();
     if(postal_code == null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -74,8 +74,8 @@ $(function(){
 
   //市区町村
   $("#address_municipality").keyup(function(){
-    const patern = /[ |　]+/;
-    const municipality = $(this).val().match(patern);
+    const pattern = /[ |　]+/;
+    const municipality = $(this).val().match(pattern);
     const next = $(this).next();
     if(municipality != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -95,8 +95,8 @@ $(function(){
 
   //番地
   $("#address_address").keyup(function(){
-    const patern = /[ |　]+/;
-    const address = $(this).val().match(patern);
+    const pattern = /[ |　]+/;
+    const address = $(this).val().match(pattern);
     const next = $(this).next();
     if(address != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -116,8 +116,8 @@ $(function(){
 
   //建物名
   $("#address_building").keyup(function(){
-    const patern = /[ |　]+/;
-    const building = $(this).val().match(patern);
+    const pattern = /[ |　]+/;
+    const building = $(this).val().match(pattern);
     const next = $(this).next();
     if(building != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -137,10 +137,10 @@ $(function(){
   
   //電話番号
   $("#address_phone_number").keyup(function(){
-    const patern = /^(0{1}\d{9,10})$/;
-    const phone_number = $(this).val().match(patern);
+    const pattern = /^(0{1}\d{9,10})$/;
+    const phone_number = $(this).val();
     const next = $(this).next();
-    if(phone_number == null) {
+    if(phone_number != "" && phone_number.match(pattern) == null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
         $(this).after(`<div class=error-class2>電話番号を入力してください</div>`);
@@ -153,6 +153,45 @@ $(function(){
     }else{
       $(this).css("border", "1px solid #00BFFF")
       next.remove();
+    }
+  });
+  
+  //発送元・お届け先住所変更時のバリデーションチェック
+
+  $('.change__address__btn').click(function(e) {
+    e.preventDefault();
+    let flag = true;
+    const pattern = /^(0{1}\d{9,10})$/;
+    const phone_number = $("#address_phone_number").val()
+    if(phone_number != "" && phone_number.match(pattern) == null){
+      flag = false;
+    }
+    $('#edit_address input:required').each(function(e) {
+      if ($('#edit_address input:required').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    $('#edit_address textarea:required').each(function(e) {
+      if ($('#edit_address textarea:required').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    $('#edit_address select').each(function(e) {
+      if ($('#edit_address select').eq(e).val() === "") {
+        flag = false;
+      }
+    });
+    
+    if (flag) {
+      $('#edit_address').submit();
+    } else {
+      const errorInput = $(".error-class2:first").prev();
+      const position = errorInput.offset().top - 40;
+      const speed = 400;
+      $(this).off('submit');
+      $('body,html').animate({scrollTop:position}, speed, 'swing');
+      errorInput.focus();
+      return false;
     }
   });
 });

@@ -27,11 +27,6 @@ class CategoriesController < ApplicationController
   def find_category
     @category = Category.find(params[:id])
   end
-
-  def set_category_brand
-    @parents = Category.where(ancestry: nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
-  end
   
   def category_present(category_item)
     @items += category_item if category_item.present?
