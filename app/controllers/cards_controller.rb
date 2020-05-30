@@ -39,7 +39,7 @@ class CardsController < ApplicationController
         customer: @card.payjp_id,
         currency: 'jpy'
       )
-      @item.update(buyer_id: current_user.id) ? (redirect_to item_path(@item)) : (redirect_to root_path)
+      @item.update(buyer_id: current_user.id) ? (redirect_to item_trading_path(@item, current_user)) : (redirect_to root_path)
     end
   end
 
