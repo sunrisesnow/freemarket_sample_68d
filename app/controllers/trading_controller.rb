@@ -1,6 +1,7 @@
 class TradingController < ApplicationController
   before_action :set_category_brand
   before_action :set_trading_item
+  before_action :set_item_search_query
   before_action :item_user?
   
   def show
