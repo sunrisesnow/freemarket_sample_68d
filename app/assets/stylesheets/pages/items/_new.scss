@@ -100,6 +100,10 @@
     height: 160px;
     border: dashed 1px $lightgray;
     background-color: $whitesmoke;
+    &:focus {
+      border: 1px solid $skyblue;
+      outline: 0;
+    }
     &__label {
       display: block;
       width: 100%;
