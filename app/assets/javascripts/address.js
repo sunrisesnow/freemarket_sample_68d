@@ -17,10 +17,10 @@ $(function(){
   //errorを含むinput要素がない時ページ先頭のinput要素フォーカス
     $('input[type=text]:first').focus();
   }
-  $('input').on("keydown", function(e) {
+  $('#new_address > input').on("keydown", function(e) {
       //全てのinputの数取得
       const n = $("input").length;
-      //13=エンターキーのキー番号らしい
+      //13=エンターキーのキー番号
       if (e.which == 13)
       {
           e.preventDefault();

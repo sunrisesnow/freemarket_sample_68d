@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_item_search_query
+    @q = Item.search(params[:q])
+    @items = @q.result(distinct: true)
+  end
+
   def set_category_brand
     @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
