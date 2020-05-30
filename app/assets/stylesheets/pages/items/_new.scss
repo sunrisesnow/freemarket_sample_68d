@@ -99,6 +99,7 @@
     width: 100%;
     height: 160px;
     border: dashed 1px $lightgray;
+    border-radius: 3px;
     background-color: $whitesmoke;
     &:focus {
       border: 1px solid $skyblue;
