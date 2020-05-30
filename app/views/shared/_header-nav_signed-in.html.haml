@@ -1,5 +1,5 @@
 .header__right--content--menu
-  = link_to item_likes_path(current_user), class: "user__liked--list header__right--content--menu--list" do
+  = link_to user_likes_path(current_user), class: "user__liked--list header__right--content--menu--list" do
     %i.far.fa-star.header__right--content--icon.fa-lg
     %span お気に入り！一覧
 .header__right--content--menu.news__content--link
@@ -18,12 +18,12 @@
     %p 現在やることリストはありません
 .header__right--content--menu.mypage__content--link
   =  link_to user_path(current_user.id), class: "user__mypage header__right--content--menu--list" do
-    = image_tag "member_photo_noimage.png", class: "user__mypage--icon",height: "30px", width: "30px"
+    = header_icon_image_present?(current_user.account)
     %p マイページ
   .mypage__container
     .mypage__container--top
-      = image_tag "user-background.jpg", height: "75px", width: "100%", class: "mypage__background" 
-      = image_tag "member_photo_noimage.png", class: "user__mypage--big--icon",height: "50px", width: "50px"
+      = tab_icon_image_present?(current_user.account)
+      = tab_background_image_present?(current_user.account)
       = current_user.nickname
       .user__details
         = link_to "#", class: "user__detaild--evaluation user__details--link" do
@@ -38,21 +38,21 @@
         = link_to "#", class: "proceeds__link" do
           %span フリマポイント
           %i.fas.fa-chevron-right
-      = link_to item_likes_path(current_user), class: "mypage__container--menu--link" do
+      = link_to user_likes_path(current_user), class: "mypage__container--menu--link" do
         %span お気に入り！一覧
         %i.fas.fa-chevron-right    
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to exhibition_items_path, class: "mypage__container--menu--link" do
         %span 出品した商品-出品中
         %i.fas.fa-chevron-right
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to  exhibition_trading_items_path, class: "mypage__container--menu--link" do
         %span 出品した商品-取引中
         %i.fas.fa-chevron-right  
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to exhibition_completed_items_path, class: "mypage__container--menu--link" do
         %span 出品した商品-売却済
         %i.fas.fa-chevron-right  
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to bought_items_path, class: "mypage__container--menu--link" do
         %span 購入した商品-取引中
         %i.fas.fa-chevron-right 
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to  bought_completed_items_path, class: "mypage__container--menu--link" do
         %span 購入した商品-過去の取引
         %i.fas.fa-chevron-right                         

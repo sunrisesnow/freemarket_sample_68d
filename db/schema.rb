@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_112340) do
+ActiveRecord::Schema.define(version: 2020_05_26_102712) do
+
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "icon_image"
+    t.string "background_image"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -91,7 +101,6 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
     t.date "birthday", null: false
-    t.string "icon_image"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -101,6 +110,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "addresses", "users"
   add_foreign_key "cards", "users"
   add_foreign_key "images", "items"
