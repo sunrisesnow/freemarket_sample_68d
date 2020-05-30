@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, except: [:create]
+  before_action :set_item_search_query
   before_action :set_category_brand
   def new
     redirect_to edit_account_path(current_user) if @account.present?

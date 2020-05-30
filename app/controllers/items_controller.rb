@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category_brand,  except: [:destroy]
 
   def index
-    @items = Item.includes(:images).order('created_at DESC').where.not(trading_status_id: 4)
   end
 
   def new
@@ -63,6 +63,13 @@ class ItemsController < ApplicationController
     @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
   end
 
+  def search
+    @keyword = params.require(:q)[:name_or_explanation_cont]
+    @q = Item.includes(:images).search(search_params)
+    @items = @q.result(distinct: true)
+  end
+
+  private
   def draft
     @items = Item.includes(:images).where(trading_status_id: 4).where(saler_id: current_user.id).page(params[:page]).per(15)
   end
@@ -88,7 +95,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
   def set_item
     @item = Item.find_by_id(params[:id])
   end
@@ -111,5 +117,9 @@ class ItemsController < ApplicationController
         :_destroy
       ]
     ).merge(saler_id: current_user.id)
+  end
+
+  def search_params
+    params.require(:q).permit!
   end
 end
