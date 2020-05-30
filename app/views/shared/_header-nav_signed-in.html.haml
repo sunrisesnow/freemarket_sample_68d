@@ -47,12 +47,12 @@
       = link_to  exhibition_trading_items_path, class: "mypage__container--menu--link" do
         %span 出品した商品-取引中
         %i.fas.fa-chevron-right  
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to exhibition_completed_items_path, class: "mypage__container--menu--link" do
         %span 出品した商品-売却済
         %i.fas.fa-chevron-right  
       = link_to bought_items_path, class: "mypage__container--menu--link" do
         %span 購入した商品-取引中
         %i.fas.fa-chevron-right 
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to  bought_completed_items_path, class: "mypage__container--menu--link" do
         %span 購入した商品-過去の取引
         %i.fas.fa-chevron-right                         
