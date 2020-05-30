@@ -203,7 +203,6 @@ $(function() {
 
   // 出品ボタン押下時の処理
   $('.item-form-btn').click(function(e) {
-    console.log("OK")
     e.preventDefault();
     const submitID = $(this).attr('id')
     let flag = true;
