@@ -69,7 +69,6 @@ class ItemsController < ApplicationController
     @items = @q.result(distinct: true)
   end
 
-  private
   def draft
     @items = Item.includes(:images).where(trading_status_id: 4).where(saler_id: current_user.id).page(params[:page]).per(15)
   end
