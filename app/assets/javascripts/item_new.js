@@ -113,14 +113,16 @@ $(function() {
     next = input.next();
     priceNext = input.parent().parent().next();
     // 未入力のチェック
-    if (value == "" && !next.hasClass('error')) {
-      input.addClass('error');
-      if (input.is('select')) {
-        input.after(`<p class='error'>選択してください</p>`);
-      } else if (input.is('#sell-price-input') || input.is('.img-file')) {
-        ;
-      } else {
-        input.after(`<p class='error'>入力してください</p>`);  
+    if (value == "") {
+      if (!next.hasClass('error')) {
+        input.addClass('error');
+        if (input.is('select')) {
+          input.after(`<p class='error'>選択してください</p>`);
+        } else if (input.is('#sell-price-input') || input.is('.img-file')) {
+          ;
+        } else {
+          input.after(`<p class='error'>入力してください</p>`)
+        }
       }
     } else {
       input.removeClass('error');
