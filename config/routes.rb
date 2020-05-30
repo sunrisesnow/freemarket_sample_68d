@@ -32,7 +32,10 @@ Rails.application.routes.draw do
       get 'draft'
       get 'exhibition'
       get 'exhibition_trading'
+      get 'exhibition_completed'
       get 'bought'
+      get 'bought_completed'
     end
+    resources :trading, only: [:show, :update]
   end
 end
