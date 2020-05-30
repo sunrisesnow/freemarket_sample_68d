@@ -78,6 +78,10 @@
           #item-draft-btn {
             background-color: $gray;
             padding: 12px 0;
+            transition: 0.5s;
+            &:hover{
+              opacity: 0.7;
+            }
           }
         }
       }
@@ -230,4 +234,10 @@ margin: 0;
 
 .drag-area {
   height: 160px;
+}
+
+.item-btn-red{
+  display: block;
+  background-color: $sign-up-btn;
+  line-height: 50px;
 }

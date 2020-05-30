@@ -14,8 +14,8 @@ $(function() {
 
   //ニックネーム
   $("#user_nickname").keyup(function(){
-    const patern = /[ |　]+/;
-    const nickname = $(this).val().match(patern);
+    const pattern = /[ |　]+/;
+    const nickname = $(this).val().match(pattern);
     const next = $(this).next();
     if(nickname != null) {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -35,8 +35,8 @@ $(function() {
 
   //Eメール
   $('#user_email').keyup(function(){
-    const patern = /[\x21-\x3f\x41-\x7e]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/;
-    const email = $(this).val().match(patern);
+    const pattern = /[\x21-\x3f\x41-\x7e]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/;
+    const email = $(this).val().match(pattern);
     const next = $(this).next();
     if(email == null){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -56,8 +56,8 @@ $(function() {
 
   //パスワード
   $("#user_password").keyup(function(){
-    const patern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
-    const password = $(this).val().match(patern);
+    const pattern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
+    const password = $(this).val().match(pattern);
     const next = $(this).next();
     if(password == null || $(this).val().length < 7){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -76,6 +76,7 @@ $(function() {
   });
 
   //パスワード再入力
+  
   $("#user_password_confirmation").keyup(function(){
     const password = $("#user_password").val();
     const next = $(this).next();
@@ -95,6 +96,27 @@ $(function() {
       next.remove();
     }
   });
+  //現在のパスワード
+  $("#user_current_password").keyup(function(){
+    const pattern = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,128}$/i;
+    const password = $(this).val().match(pattern);
+    const next = $(this).next();
+    if(password == null || $(this).val().length < 7){
+      if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
+        $(this).css("border", "1px solid red");
+        $(this).after(`<div class=error-class2>フォーマットが正しくありません</div>`);
+      }else if(!next.hasClass("error-class") && !next.hasClass("error-class2")&&$(this).hasClass("error-class")){
+        $(this).css("border", "1px solid red");
+        $(this).after(`<div class=error-class2>パスワードが一致しません</div>`);
+      }else{
+        $(this).css("border", "1px solid red");
+      }
+    }else{
+      $(this).css("border", "1px solid #00BFFF");
+      next.remove();
+    }
+  });
+
   
   const first_name = $('[id$=first_name]');
   const last_name = $('[id$=last_name]');
@@ -102,8 +124,8 @@ $(function() {
   const last_name_kana = $('[id$=last_name_kana]');
   //姓（全角）
   $(last_name).keyup(function(){
-    const patern = /^[ぁ-んァ-ン一-龥]/;
-    const last_name_regexp = $(this).val().match(patern);
+    const pattern = /^[ぁ-んァ-ン一-龥]/;
+    const last_name_regexp = $(this).val().match(pattern);
     const next = $(this).next();
     if(last_name_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -123,8 +145,8 @@ $(function() {
 
   //名（全角）
   $(first_name).keyup(function(){
-    const patern = /^[ぁ-んァ-ン一-龥]/;
-    const first_name_regexp = $(this).val().match(patern);
+    const pattern = /^[ぁ-んァ-ン一-龥]/;
+    const first_name_regexp = $(this).val().match(pattern);
     const next = $(this).next();
     if(first_name_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -144,8 +166,8 @@ $(function() {
 
   //姓（カナ）
   $(last_name_kana).keyup(function(){
-    const patern = /^[ァ-ヶー－]/;
-    const last_name_kana_regexp = $(this).val().match(patern);
+    const pattern = /^[ァ-ヶー－]/;
+    const last_name_kana_regexp = $(this).val().match(pattern);
     const next = $(this).next();
     if(last_name_kana_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
@@ -165,8 +187,8 @@ $(function() {
 
   //名（カナ）
   $(first_name_kana).keyup(function(){
-    const patern = /^[ァ-ヶー－]/;
-    const first_name_kana_regexp = $(this).val().match(patern);
+    const pattern = /^[ァ-ヶー－]/;
+    const first_name_kana_regexp = $(this).val().match(pattern);
     const next = $(this).next();
     if(first_name_kana_regexp == null ){
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){

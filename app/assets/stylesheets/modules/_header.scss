@@ -79,6 +79,14 @@
       }
       &--menu{
         padding-top: 3px;
+        &:hover{
+          .header__right--content--menu--list{
+            color:  $mainblueColor;
+          }
+          .header__right--content--icon{
+            color: $mainblueColor;
+          }
+        }
         &--list{
           display: block;
           height: 23px;
@@ -88,12 +96,6 @@
           font-weight: normal;
           font-size: 14px;
           position: relative;
-          @include hover__color($mainblueColor, white, 1);
-          &:hover{
-            .header__right--content--icon{
-              color: $mainblueColor;
-            }
-          }
           .fa-star{
             position: absolute;
             top: 1.3px;
@@ -130,6 +132,8 @@
           border-radius: 100px;
           position: absolute;
           top: -4px;
+          height: 30px;
+          width: 30px;
         }
         p{
           position: absolute;

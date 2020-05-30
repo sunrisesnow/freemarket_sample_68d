@@ -1,7 +1,7 @@
 
 %ul.contents-mypage
   %li
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to user_path(current_user.id), class:"contents-mypage-link" do
       マイページ
       %i.fas.fa-chevron-right
   %li 
@@ -13,23 +13,23 @@
       やることリスト
       %i.fas.fa-chevron-right
   %li 
-    = link_to item_likes_path(current_user), class:"contents-mypage-link" do
+    = link_to user_likes_path(current_user), class:"contents-mypage-link" do
       お気に入り！一覧
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to new_item_path, class:"contents-mypage-link" do
       出品する
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to draft_items_path, class:"contents-mypage-link" do
       下書き一覧
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to exhibition_items_path, class:"contents-mypage-link" do
       出品した商品-出品中
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to exhibition_trading_items_path, class:"contents-mypage-link" do
       出品した商品-取引中
       %i.fas.fa-chevron-right
   %li 
@@ -37,7 +37,7 @@
       出品した商品-売却済み
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to bought_items_path, class:"contents-mypage-link" do
       購入した商品-取引中
       %i.fas.fa-chevron-right
   %li 
@@ -73,11 +73,11 @@
       
   %h4 設定
   %li
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to edit_account_path(current_user), class:"contents-mypage-link" do
       プロフィール
       %i.fas.fa-chevron-right
   %li
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to edit_address_path(current_user), class:"contents-mypage-link" do
       発送元・お届け先住所変更
       %i.fas.fa-chevron-right
   %li
@@ -85,18 +85,18 @@
       支払い方法
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to edit_user_registration_path, class:"contents-mypage-link" do
       メール/パスワード
       %i.fas.fa-chevron-right
   %li
-    = link_to "#", class:"contents-mypage-link" do
+    = link_to users_path, class:"contents-mypage-link" do
       本人情報
       %i.fas.fa-chevron-right
   %li 
-    = link_to "#", class:"contents-mypage-link" do
-      電話番号の確認
+    = link_to address_path(current_user), class:"contents-mypage-link" do
+      送付先情報
       %i.fas.fa-chevron-right
   %li
-    = link_to destroy_user_session_path,method: :delete, class:"contents-mypage-link" do
+    = link_to destroy_user_session_path,method: :delete, class:"contents-mypage-link", data: { confirm: 'ログアウトしてよろしいですか？' } do
       ログアウト
       %i.fas.fa-chevron-right

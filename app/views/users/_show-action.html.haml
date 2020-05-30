@@ -1,7 +1,7 @@
 .content
-  = image_tag "f_25_topimg1.jpg", class: "content_image", height: "200px", width: "100%" 
+  = mypage_background_image_present?(current_user.account)
   .mypage-user-icon
-    = image_tag "risu.jpg", class: "mypage-user-icon-image", height: "70px", width: "70px" 
+    = mypage_icon_image_present?(current_user.account)
     .mypage-user-icon-name
       = current_user.nickname
     .mypage-user-icon-nav
