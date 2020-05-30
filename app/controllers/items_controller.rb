@@ -54,8 +54,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    redirect_to root_path if @item == nil || @item.trading_status_id == 4
     @user = User.find_by(id: @item.saler_id)
-    redirect_to root_path if @item == nil || @item.trading_status_id != 1
   end 
 
   def destroy
@@ -75,8 +75,16 @@ class ItemsController < ApplicationController
     @items = Item.includes(:images).where(saler_id: current_user.id).where.not(buyer_id: nil).page(params[:page]).per(15)
   end
 
+  def exhibition_completed
+    @items = Item.includes(:images).where(saler_id: current_user.id).where(trading_status_id: 5).page(params[:page]).per(15)
+  end
+
   def bought
     @items = Item.includes(:images).where(buyer_id: current_user.id).page(params[:page]).per(15)
+  end
+
+  def bought_completed
+    @items = Item.includes(:images).where(buyer_id: current_user.id).where(trading_status_id: 5).page(params[:page]).per(15)
   end
 
   private
