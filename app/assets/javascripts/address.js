@@ -10,28 +10,8 @@ $(function(){
   });
   
   //input要素の中でerrorが出たクラスがあった際errorが出たinput要素にフォーカス
-  if($('input').hasClass("error-class")){
-    $(".error-class:first").focus();
-    $("input[class=error-class]").css("border", "1px solid red");
-  }else{
-  //errorを含むinput要素がない時ページ先頭のinput要素フォーカス
-    $('input[type=text]:first').focus();
-  }
-  $('#new_address > input').on("keydown", function(e) {
-      //全てのinputの数取得
-      const n = $("input").length;
-      //13=エンターキーのキー番号
-      if (e.which == 13)
-      {
-          e.preventDefault();
-          const nextIndex = $('input').index(this) + 1;
-          //現在フォーカスされているインプット要素のindex番号と総数を比べて条件分岐
-          if(nextIndex < n) {
-              //次のやつにfocus
-              $('input')[nextIndex].focus();
-          }
-      }
-  });
+  
+  
   //お届け先情報入力画面入力
 
   //郵便番号
