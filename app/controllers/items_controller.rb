@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category_brand,  except: [:destroy]
+  
 
   def index
   end
@@ -78,7 +79,7 @@ class ItemsController < ApplicationController
   end
 
   def exhibition_trading
-    @items = Item.includes(:images).where(saler_id: current_user.id).where.not(buyer_id: nil).page(params[:page]).per(15)
+    @items = Item.includes(:images).where(saler_id: current_user.id).where.not(buyer_id: nil).where.not(trading_status_id: 4..5).page(params[:page]).per(15)
   end
 
   def exhibition_completed
