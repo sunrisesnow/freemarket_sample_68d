@@ -63,6 +63,10 @@ class ItemsController < ApplicationController
     @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
   end
 
+  def delivery_method
+    @delivery_method = DeliveryMethod.find_all_by_flag(params[:flag])
+  end
+
   def search
     @keyword = params.require(:q)[:name_or_explanation_cont]
     @q = Item.includes(:images).search(search_params)
