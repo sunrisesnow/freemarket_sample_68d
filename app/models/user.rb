@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_one :card, dependent: :destroy
   has_one :account, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :from_messages,class_name: "Message" ,foreign_key: "from_id"
   
-
   with_options presence: true do
     validates :nickname
     validates :last_name

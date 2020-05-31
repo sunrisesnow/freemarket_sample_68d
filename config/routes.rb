@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get 'buy'
     end
   end
+  
   resources :items do
     resources :likes, only: [:create, :destroy]
     collection do
@@ -37,5 +38,6 @@ Rails.application.routes.draw do
       get 'bought_completed'
     end
     resources :trading, only: [:show, :update]
+    resources :messages, only: [:create, :destroy]
   end
 end
