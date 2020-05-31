@@ -70,8 +70,9 @@ class ItemsController < ApplicationController
 
   def search
     @keyword = params.require(:q)[:name_or_explanation_cont]
+    sort = params[:sort] || "created_at DESC"
     @q = Item.includes(:images).search(search_params)
-    @items = @q.result(distinct: true)
+    @items = @q.result(distinct: true).order(sort)
   end
 
   def draft
