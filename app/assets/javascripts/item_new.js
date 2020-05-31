@@ -34,68 +34,56 @@ $(function(){
 
 // 配送方法の選択フィールドを追加表示する動作
 $(function() {
-  // 送料込み（出品者負担）の場合の配送方法の選択肢　→　ajax通信で取れるならとってきたい部分
-  function sellerCharge() {
-    const sellerChargeOptions =`
-      <div class='field' id='seller-charge'>
-        <div class='field__label'>
-          <label for="item_delivery_method_id">配送の方法</label>
-          <span class='field__label--require'>必須</span>
-        </div>
-        <div class='field__form item-area__field__form'>
-          <select name="item[delivery_method_id]" id="item_delivery_method_id"><option value="">選択してください</option>
-            <option value="1">未定</option>
-            <option value="2">らくらくメルカリ便</option>
-            <option value="3">ゆうゆうメルカリ便</option>
-            <option value="4">ゆうメール</option>
-            <option value="5">レターパック</option>
-            <option value="6">普通郵便(定形、定形外)</option>
-            <option value="7">クロネコヤマト</option>
-            <option value="8">ゆうパック</option>
-            <option value="9">クリックポスト</option>
-            <option value="10">ゆうパケット</option>
-          </select>
-        </div>
-      </div>
-    `
-    $('#delivery_charge').parent().append(sellerChargeOptions);
+
+  function appendMethod(method) {
+    const html = `<option value="${method.id}" >${method.name}</option>`;
+    return html;
   }
-  // 送料別（購入者負担）の場合の配送方法の選択肢 → ここもajax通信で取れるならとってきたい
-  function buyerCharge() {
-    const buyerChargeOptions = `
-      <div class='field' id='buyer-charge'>
+  function appendDeliveryMethod(insertHTML, flag) {
+    const html = `
+      <div class='field' id='charge-${flag}'>
         <div class='field__label'>
           <label for="item_delivery_method_id">配送の方法</label>
           <span class='field__label--require'>必須</span>
         </div>
         <div class='field__form item-area__field__form'>
           <select name="item[delivery_method_id]" id="item_delivery_method_id"><option value="">選択してください</option>
-            <option value="11">未定</option>
-            <option value="12">クロネコヤマト</option>
-            <option value="13">ゆうパック</option>
-            <option value="14">ゆうメール</option>
+            ${insertHTML}
           </select>
         </div>
       </div>
     `
-    $('#delivery_charge').parent().append(buyerChargeOptions);
+    $('#delivery_charge').parent().append(html);
   }
 
   // 配送料の負担の選択に応じて、表示する内容を変更する動作
   $(document).on('change', '#item_delivery_charge_flag', function (){
-    const sellerChargeMethod = $('#seller-charge')
-    const buyerChargeMethod = $('#buyer-charge')  
+    const sellerChargeMethod = $('#charge-1')
+    const buyerChargeMethod = $('#charge-2')  
     $("select[name='item[delivery_method_id]'] option").attr("selected", false);
     const chargeFlag = $(this).val();
-    if (chargeFlag == "") {
-      sellerChargeMethod.remove();
-      buyerChargeMethod.remove();
-    } else if (chargeFlag == 1) {
-      sellerCharge();
-      buyerChargeMethod.remove();
+    if (chargeFlag != "") {
+      $.ajax({
+        url: '/items/delivery_method',
+        type: 'GET',
+        data: { flag: chargeFlag},
+        dataType: 'json'
+      })
+      .done(function(methods){  
+        buyerChargeMethod.remove();
+        sellerChargeMethod.remove();
+        let insertHTML;
+        methods.forEach(function(method) {
+          insertHTML += appendMethod(method);
+        })
+        appendDeliveryMethod(insertHTML, chargeFlag)
+    })
+      .fail(function() {
+        alert('配送方法の取得に失敗しました')
+      })
     } else {
-      buyerCharge();
       sellerChargeMethod.remove();
+      buyerChargeMethod.remove();
     }
   });
 });
