@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
     @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
     @category_child_array = @item.category.parent.siblings
     @category_grandchild_array = @item.category.siblings
+    @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag)
   end
 
   def update
