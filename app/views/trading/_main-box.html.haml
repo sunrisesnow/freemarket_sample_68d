@@ -7,3 +7,9 @@
       = trading_status_check(@item ,@saler_user,  @buyer_user)
     .content__trading__box
       = transaction_button(@item ,@saler_user, @buyer_user)
+  .dm__box
+    #trading__messages
+      = render partial: 'messages/index', locals: { messages: @messages , item: @item}
+    .trading__message__form
+      - unless @item.trading_status_id == 5
+        = render "form"
