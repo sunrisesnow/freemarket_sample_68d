@@ -87,7 +87,7 @@ class ItemsController < ApplicationController
   end
 
   def bought
-    @items = Item.includes(:images).where(buyer_id: current_user.id).page(params[:page]).per(15)
+    @items = Item.includes(:images).where(buyer_id: current_user.id).where.not(trading_status_id: 4..5).page(params[:page]).per(15)
   end
 
   def bought_completed
