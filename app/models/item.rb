@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   # belongs_to :saler, class_name: User
   has_many :images, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :messages, class_name: "Message" ,foreign_key: "room_id", dependent: :destroy
   belongs_to :category
   accepts_nested_attributes_for :images, allow_destroy: true
   extend ActiveHash::Associations::ActiveRecordExtensions
