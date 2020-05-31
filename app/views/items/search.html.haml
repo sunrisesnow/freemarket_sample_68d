@@ -3,8 +3,18 @@
   .search-wrapper
     .search-content
       .sc-side
-        %div 並び替え
-        %div 詳細検索
+        .sc-side__sort
+          %select{name: :sort_order, class: 'sort-order .sc-side__sort__select'}
+            %option{value: "location.pathname", name: "location.pathname"}
+              並び替え
+            %option{value: "price-asc"}
+              価格の安い順
+            %option{value: "price-desc"}
+              価格の高い順
+            %option{value: "created_at-asc"}
+              出品の古い順
+            %option{value: "created_at-desc"}
+              出品の新しい順
       .sc-content
         %h2
           - if @keyword.present?
@@ -12,7 +22,7 @@
             %span.sc-content__result-title の検索結果
           - else
             %span.sc-content__result-title 検索結果
-        .item-lists
+        .sc-content__item-lists
           = render @items
   = render "shared/footer"
   = render "shared/saler-btn"
