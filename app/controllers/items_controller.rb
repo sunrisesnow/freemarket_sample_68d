@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       params[:item_images][:image].each do |image|
         @item.images.create(image: image, item_id: @item.id)
       end
-      @item.trading_status_id == 4 ? (redirect_to draft_items_path) : (redirect_to items_path)
+      redirect_to draft_items_path if @item.trading_status_id == 4
     else
       render :new
     end
