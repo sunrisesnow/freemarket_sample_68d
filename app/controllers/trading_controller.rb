@@ -5,7 +5,8 @@ class TradingController < ApplicationController
   before_action :item_user?
   
   def show
-    
+    @message  = Message.new
+    @messages = @item.messages.includes(:from).order('created_at ASC')
   end
 
   def update
@@ -18,15 +19,5 @@ class TradingController < ApplicationController
     else
       redirect_to root_path
     end
-  end
-
-  private
-
-  def set_trading_item
-    @item = Item.find(params[:item_id])
-  end
-
-  def item_user?
-    redirect_to root_path unless @item.saler_id == current_user.id || @item.buyer_id == current_user.id
   end
 end
