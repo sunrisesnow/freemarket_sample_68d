@@ -8,13 +8,13 @@ class MessagesController < ApplicationController
   before_action :set_message, only: :destroy
 
   def create
-    Message.create!(message_params)
+    redirect_to root_path unless Message.create!(message_params)
     @messages = @item.messages.includes(:from).order('created_at ASC')
   end
 
   def destroy
     redirect_to root_path unless @message.from_id == current_user.id
-    @message.destroy
+    redirect_to root_path unless @message.destroy
   end
 
 
