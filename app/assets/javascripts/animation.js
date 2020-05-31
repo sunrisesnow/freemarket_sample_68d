@@ -8,3 +8,8 @@ $(window).scroll(function (){
     }
   });
 });
+$(function(){
+  $("#message-send-btn").on('click', function(){
+    $('#trading__messages').animate({ scrollTop: $('#trading__messages')[0].scrollHeight});
+  })
+})
