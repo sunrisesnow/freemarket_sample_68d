@@ -36,4 +36,12 @@ class ApplicationController < ActionController::Base
     @parents = Category.where(ancestry: nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
+
+  def item_user?
+    redirect_to root_path unless @item.saler_id == current_user.id || @item.buyer_id == current_user.id
+  end
+
+  def set_trading_item
+    @item = Item.find(params[:item_id])
+  end
 end
