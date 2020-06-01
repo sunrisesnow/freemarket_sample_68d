@@ -1,31 +1,24 @@
 $(function(){
-  // PAY.JPの公開鍵をセットします。
   Payjp.setPublicKey('pk_test_177d9ddb319e3af144dc305d');
-  //formのsubmitを止めるために, クレジットカード登録のformを定義します。
-  
   $("#charge-form").click(function() {
-    // 二重送信防止のためdisabledをtrueに変更しイベントを止める
+    const btnAfterColor = new Object();
+    btnAfterColor.backgroundColor = "#3ccace";
+    btnAfterColor.color = "white";
     const form = $("#payjp__form");
     form.find("input[type=submit]").prop("disabled", true);
-    // formで入力された、カード情報を取得します。
+    $(".btn-default").css(btnAfterColor);
     const card = {
       number: $("#card_number").val(),
       cvc: $("#cvc").val(),
       exp_month: $("#exp_month").val(),
       exp_year: $("#exp_year").val(),
     };
-
-    // PAYJPに登録するためのトークン作成
     Payjp.createToken(card, function(status, response) {
       if (response.error){
-        // エラーがある場合処理しない。
         alert(`登録に失敗しました。\n存在しないクレジットカードです。`);
-        //もう一度入力できるようにページをリロードする
-        window.location.href = "/cards/new";
+        $("#charge-form").prop('disabled', false);
       }   
       else {
-        // エラーなく問題なく進めた場合
-        // formで取得したカード情報を削除して、Appにカード情報を残さない。
         alert("登録に成功しました。");
         $("#card_number").removeAttr("name");
         $("#cvc").removeAttr("name");

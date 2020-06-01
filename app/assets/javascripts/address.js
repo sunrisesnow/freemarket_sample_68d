@@ -9,10 +9,6 @@ $(function(){
                 }
   });
   
-  //input要素の中でerrorが出たクラスがあった際errorが出たinput要素にフォーカス
-  
-  
-  //お届け先情報入力画面入力
 
   //郵便番号
   $("#address_postal_code").keyup(function(){
@@ -78,7 +74,7 @@ $(function(){
     const pattern = /[ |　]+/;
     const address = $(this).val().match(pattern);
     const next = $(this).next();
-    if(address != null) {
+    if(address != null ||  $(this).val() === "") {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
         $(this).after(`<div class=error-class2>番地を入力してください</div>`);
