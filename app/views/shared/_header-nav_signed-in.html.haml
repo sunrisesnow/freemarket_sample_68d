@@ -24,7 +24,8 @@
     .mypage__container--top
       = tab_icon_image_present?(current_user.account)
       = tab_background_image_present?(current_user.account)
-      = current_user.nickname
+      .user__nickname
+        = current_user.nickname.truncate(15, omission: '...')
       .user__details
         = link_to "#", class: "user__detaild--evaluation user__details--link" do
           %span 評価：１
