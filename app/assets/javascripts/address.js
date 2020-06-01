@@ -15,7 +15,7 @@ $(function(){
     const pattern = /^[0-9]{7}$/;
     const postal_code = $(this).val().match(pattern);
     const next = $(this).next();
-    if(postal_code == null) {
+    if(postal_code == null || $(this).val() === "") {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
         $(this).after(`<div class=error-class2>郵便番号を入力してください</div>`);
@@ -53,7 +53,7 @@ $(function(){
     const pattern = /[ |　]+/;
     const municipality = $(this).val().match(pattern);
     const next = $(this).next();
-    if(municipality != null) {
+    if(municipality != null || $(this).val() === "") {
       if(!next.hasClass("error-class") && !next.hasClass("error-class2")){
         $(this).css("border", "1px solid red");
         $(this).after(`<div class=error-class2>市区町村を入力してください</div>`);
