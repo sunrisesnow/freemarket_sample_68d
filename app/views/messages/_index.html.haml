@@ -6,7 +6,7 @@
         %p
           %i.far.fa-clock
           = "#{time_ago_in_words(message.created_at)}前"
-        = link_to item_message_path(item, message), method: :delete, remote: true, class: "message__delete__btn", data: { confirm: '削除してよろしいですか？' } do
+        = link_to item_message_path(item, message), method: :delete, remote: true, class: "message__delete__btn" do
           %i.far.fa-trash-alt
         = tab_icon_image_present?(current_user.account)
     - else
