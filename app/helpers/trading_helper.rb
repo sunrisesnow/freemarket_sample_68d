@@ -48,9 +48,9 @@ module TradingHelper
     when saler_user
       case item.trading_status_id
         when 1
-          link_to "商品を発送する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn"
+          link_to "商品を発送する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 3
-          link_to "取引を完了する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn"
+          link_to "取引を完了する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 5
           "取引は完了しました"
         else
@@ -59,7 +59,7 @@ module TradingHelper
     when buyer_user
       case item.trading_status_id
         when 2
-          link_to "受け取り評価完了", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn"
+          link_to "受け取り評価完了", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 5
           "取引は完了しました"
         else
