@@ -71,6 +71,10 @@ class ItemsController < ApplicationController
     @delivery_method = DeliveryMethod.find_all_by_flag(params[:flag])
   end
 
+  def price_range
+    @price_range = PriceRange.find(params[:id])
+  end
+
   def search
     @keyword = params.require(:q)[:name_or_explanation_cont]
     sort = params[:sort] || "created_at DESC"
