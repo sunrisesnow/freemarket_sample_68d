@@ -97,6 +97,6 @@
       送付先情報
       %i.fas.fa-chevron-right
   %li
-    = link_to destroy_user_session_path,method: :delete, class:"contents-mypage-link", data: { confirm: 'ログアウトしてよろしいですか？' } do
+    = link_to destroy_user_session_path,method: :delete, class:"contents-mypage-link", data:  { confirm: 'ログアウトしてよろしいですか?',cancel: 'やめる',commit: 'ログアウトする'}, title: 'ログアウト確認' do
       ログアウト
       %i.fas.fa-chevron-right
