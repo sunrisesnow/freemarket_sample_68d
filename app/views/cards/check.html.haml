@@ -9,9 +9,8 @@
               = @item.name
               .itembox__image
               .mini-image
-                - @item.images.each do |image|
-                  .mini-images
-                    =image_tag image.image.url
+                .mini-images
+                  =image_tag @item.images[0].image.url
             .itembox__price
               %span
                 ¥
