@@ -208,11 +208,11 @@ $(function() {
 
   //生年月日
   $(".field__birthday > select").on("change", function(){
-    let year  = $("#user_birthday_1i").val();
-    let month = $("#user_birthday_2i").val();
-    let day   = $("#user_birthday_3i").val();
-    let next  = $("#user_birthday_3i").next();
-    let value = $(this).val();
+    const year  = $("#user_birthday_1i").val();
+    const month = $("#user_birthday_2i").val();
+    const day   = $("#user_birthday_3i").val();
+    const next  = $("#user_birthday_3i").next();
+    const value = $(this).val();
     if(value != ""){
       $(this).css("border", "1px solid #00BFFF");
     }else{
