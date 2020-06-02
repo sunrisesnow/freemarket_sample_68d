@@ -61,7 +61,7 @@ $(function(){
     form.find("input[type=submit]").prop("disabled", true);
     $(".btn-default").css(btnAfterColor);
     const card = {
-      number: $("#cardNumber").val(),
+      number: $("#card_number").val(),
       cvc: $("#cvc").val(),
       exp_month: $("#exp_month").val(),
       exp_year: $("#exp_year").val(),
@@ -73,7 +73,7 @@ $(function(){
       }   
       else {
         alert("登録に成功しました。");
-        $("#cardNumber").removeAttr("name");
+        $("#card_number").removeAttr("name");
         $("#cvc").removeAttr("name");
         $("#exp_month").removeAttr("name");
         $("#exp_year").removeAttr("name");
