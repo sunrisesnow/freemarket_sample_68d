@@ -77,7 +77,7 @@ $(function() {
           insertHTML += appendMethod(method);
         })
         appendDeliveryMethod(insertHTML, chargeFlag)
-    })
+      })
       .fail(function() {
         alert('配送方法の取得に失敗しました')
       })
