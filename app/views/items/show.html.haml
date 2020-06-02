@@ -15,13 +15,11 @@
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  %ul
-                    - @item.images.each do |image|
-                      %li
                   .mini-image
-                    - @item.images.each do |image|
-                      .mini-images
-                        =image_tag image.image.url
+                    - @item.images.each_with_index do |image, i|
+                      - unless i == 0
+                        .mini-images
+                          =image_tag image.image.url
             .itembox__price
               %span
                 ¥
