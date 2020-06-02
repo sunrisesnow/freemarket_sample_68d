@@ -1,22 +1,31 @@
 $(function(){
   Payjp.setPublicKey('pk_test_177d9ddb319e3af144dc305d');
-  
-  $("#card_number").keyup(function(){
-    const pattern        = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47]{13}|(?:2131|1800|35[0-9]{3})[0-9]{11})$/;
-    const cardNumber     = $(this).val();
-    const cardNumberNext = $(this).next();
+
+  function errorCheck(input, regex) {
+    const pattern        = regex;
+    const cardNumber     = $(input).val();
+    const cardNumberNext = $(input).next();
     if(cardNumber.match(pattern) == null || cardNumber === "") {
       if(!cardNumberNext.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>有効な値を入力してください</div>`);
+        $(input).css("border", "1px solid red");
+        $(input).after(`<div class=error-class2>有効な値を入力してください</div>`);
       }else{
-        $(this).css("border", "1px solid red");
+        $(input).css("border", "1px solid red");
       }  
     }else{
-      $(this).css("border", "1px solid #00BFFF")
+      $(input).css("border", "1px solid #00BFFF")
       cardNumberNext.remove();
     }
+  }
+  
+  $("#card_number").keyup(function(){
+    errorCheck($(this), /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47]{13}|(?:2131|1800|35[0-9]{3})[0-9]{11})$/);
   });
+
+  $("#cvc").keyup(function(){
+    errorCheck($(this), /^\d{3,4}$/)
+  });
+
   $(".form__upper__group > select").on("change", function(){
     const nowTime         = new Date();
     const nowYear         = nowTime.getFullYear();
@@ -37,22 +46,6 @@ $(function(){
     }
   });
   
-  $("#cvc").keyup(function(){
-    const pattern = /^\d{3,4}$/;
-    const cvcNumber      = $(this).val();
-    const cvcNumberNext = $(this).next();
-    if(cvcNumber.match(pattern) == null || cvcNumber === "") {
-      if(!cvcNumberNext.hasClass("error-class2")){
-        $(this).css("border", "1px solid red");
-        $(this).after(`<div class=error-class2>有効な値を入力してください</div>`);
-      }else{
-        $(this).css("border", "1px solid red");
-      }  
-    }else{
-      $(this).css("border", "1px solid #00BFFF")
-      cvcNumberNext.remove();
-    }
-  });
   $("#charge-form").click(function() {
     const btnAfterColor = new Object();
     btnAfterColor.backgroundColor = "#3ccace";
