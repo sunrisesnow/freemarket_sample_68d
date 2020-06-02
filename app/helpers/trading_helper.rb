@@ -52,7 +52,7 @@ module TradingHelper
         when 3
           link_to "取引を完了する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 5
-          link_to "この商品を削除する", item_path(@item), method: :delete, class: "content__trading__box__btn", data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
+          link_to "この商品を削除する", item_path(item), method: :delete, class: "content__trading__box__btn", data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
         else
           "取引の進展をお待ちください"
       end
