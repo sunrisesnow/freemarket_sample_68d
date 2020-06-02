@@ -1,5 +1,6 @@
 FactoryBot.define do
-  factory :message do
-    
-  end
+  factory :message, class: Message do
+    message {"message"}
+    to_id   {1}
+  end 
 end
