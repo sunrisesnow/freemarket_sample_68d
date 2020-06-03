@@ -48,14 +48,16 @@ Things you may want to cover:
 - has_one  :address
 - has_one  :card
 - has_one  :account
+- has_one  :point
+- has_one  :sales_price
 
 ## accountsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|references|foreign_key: true, null: false|
-|icon_image|string|----|
-|background_image|string|----|
-|introduction|text|----|
+|icon_image|string||
+|background_image|string||
+|introduction|text||
 
 
 ### Association
@@ -73,8 +75,8 @@ Things you may want to cover:
 |prefectures|integer|null: false|
 |municipality|string|null: false|
 |address|string|null: false|
-|building|string|----|
-|phone_number|string|----|
+|building|string||
+|phone_number|string||
 
 ### Association
 - belongs_to :user
@@ -120,7 +122,7 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|path|string|----|
+|path|string||
 |name|string|null: false|
 
 ### Association
@@ -177,3 +179,25 @@ Things you may want to cover:
 
 - belongs_to :from, class_name: "User"
 - belongs_to :room, class_name: "Item"
+
+## sales_pricesテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|user|references|null: false, foreign_key: true|
+|price|integer|null: false|
+
+### Association
+
+- belongs_to :user
+
+## pointsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|user|references|null: false, foreign_key: true|
+|point|integer|null: false|
+
+### Association
+
+- belongs_to :user
