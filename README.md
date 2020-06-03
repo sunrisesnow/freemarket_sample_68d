@@ -43,6 +43,7 @@ Things you may want to cover:
 - has_many :sold_items, -> { where(buyer_id is not NULL) }, foreign_key: saler_id, class_name: item
 - has_many :buyed_items, foreign_key: buyer_id, class_name: Item
 - has_many :likes
+- has_many :from_messages, class_name: "Message", foreign_key: "from_id"
 - has_many :comments
 - has_one  :address
 - has_one  :card
@@ -102,6 +103,7 @@ Things you may want to cover:
 - has_many   :likes
 - has_many   :comment
 - has_many   :images
+- has_many   :messages, class_name: "Message", foreign_key: "room_id"
 
 ## imagesテーブル
 
@@ -161,3 +163,17 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
+
+## messagesテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|from|references|null: false, foreign_key: {to_table: users}|
+|to|references|null: false, foreign_key: {to_table: users}|
+|room|references|null: false, foreign_key: {to_table: items}|
+|message|text|null: false|
+
+### Association
+
+- belongs_to :from, class_name: "User"
+- belongs_to :room, class_name: "Item"

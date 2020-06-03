@@ -6,10 +6,10 @@ class MessagesController < ApplicationController
   before_action :send_message_to_user?
   before_action :item_user?
   before_action :set_message, only: :destroy
+  before_action :set_all_messages
 
   def create
     redirect_to root_path unless Message.create!(message_params)
-    @messages = @item.messages.includes(:from).order('created_at ASC')
   end
 
   def destroy
@@ -23,6 +23,10 @@ class MessagesController < ApplicationController
   def send_message_to_user?
     trading_item_users(@item)
     @to_user = @saler_user == current_user ?  @buyer_user : @saler_user
+  end
+
+  def set_all_messages
+    @messages = @item.messages.includes(:from).order('created_at ASC')
   end
 
   def set_message
