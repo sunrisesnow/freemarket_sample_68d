@@ -19,7 +19,12 @@ class TradingController < ApplicationController
       when 1
         redirect_to root_path unless @item.update!(trading_status_id: 2) 
       when 3
-        redirect_to root_path unless @item.update!(trading_status_id: 5)
+        if @item.update!(trading_status_id: 5)
+          sales_prices(@saler_user, @item)
+          gives_point(@buyer_user, @item)
+        else
+          redirect_to root_path
+        end
       else
         redirect_to root_path
       end
@@ -41,5 +46,27 @@ class TradingController < ApplicationController
 
   def set_new_message
     @message  = Message.new
+  end
+
+  def sales_prices(saler_user, item)
+    trading_item_fee(item)
+    sales_price = SalesPrice.find_by(user_id: saler_user.id)
+    if sales_price.present?
+      sum_price = sales_price.price + @sales_profit
+      redirect_to root_path unless sales_price.update(price: sum_price) 
+    else
+      redirect_to root_path unless SalesPrice.create(user_id: saler_user.id, price: @sales_profit)
+    end
+  end
+
+  def gives_point(buyer_user, item)
+    trading_item_fee(item)
+    point = Point.find_by(user_id: buyer_user.id)
+    if point.present?
+      sum_point = point.point + @sales_commission
+      redirect_to root_path unless point.update(point: sum_point) 
+    else
+      redirect_to root_path unless Point.create(user_id: buyer_user.id, point: @sales_commission)
+    end
   end
 end
