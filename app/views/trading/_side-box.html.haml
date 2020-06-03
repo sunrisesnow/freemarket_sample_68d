@@ -9,9 +9,9 @@
       .item__information__box
         = image_tag @item.images[0].image.url, height:"70px", width: "70px", class: "item__image"
         .item__name
-          = @item.name
+          = @item.name.truncate(15, omission: '...')
         .saler__user
-          = @saler_user.nickname
+          = @saler_user.nickname.truncate(15, omission: '...')
     .item__information
       .item__information__title
         発送日数
@@ -56,7 +56,7 @@
           .item__information__title
             購入者ニックネーム
           .item__information__box
-            = @buyer_user.nickname
+            = @buyer_user.nickname.truncate(15, omission: '...')
       .trading__information__box
         .item__information
           .item__information__title
@@ -72,7 +72,7 @@
           .item__information__title
             出品者ニックネーム
           .item__information__box
-            = @saler_user.nickname
+            = @saler_user.nickname.truncate(15, omission: '...')
       .trading__information__box
         .item__information
           .item__information__title

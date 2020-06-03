@@ -6,7 +6,7 @@
         .main-item__content--form
           .itembox
             %h2.itembox__name
-              = @item.name
+              = @item.name.truncate(30, omission: '...')
               .itembox__image
               .mini-image
                 .mini-images
