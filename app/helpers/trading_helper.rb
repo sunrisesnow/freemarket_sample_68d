@@ -12,7 +12,7 @@ module TradingHelper
 
   def sales_price_present?(sales_price)
     if sales_price.present?
-      "¥#{sales_price.price}"
+      "¥#{sales_price.price.to_s(:delimited)}"
     else
       "¥0"
     end
@@ -20,7 +20,7 @@ module TradingHelper
 
   def point_present?(point)
     if point.present?
-      "P#{point.point}"
+      "P#{point.point.to_s(:delimited)}"
     else
       "P0"
     end
