@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
       grandchildren_id = @category.indirect_ids.sort
       find_category_item(grandchildren_id)
     elsif @category.ancestry.include?("/")
-      category_item = Item.includes(:images).where(category_id: params[:id])
+      category_item = Item.includes(:images).where(category_id: params[:id]).where.not(trading_status_id: 4)
       category_present(category_item)
     else
       grandchildren_id = @category.child_ids
