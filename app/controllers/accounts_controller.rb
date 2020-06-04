@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
   private
 
   def set_account
-    @account = Account.user(current_user.id)
+    @account = current_user.account
   end
 
   def account_params

@@ -16,7 +16,7 @@ class AddressesController < ApplicationController
   private
 
   def set_address
-    @address = Address.user(current_user.id)
+    @address = current_user.address
   end
 
   def address_params
