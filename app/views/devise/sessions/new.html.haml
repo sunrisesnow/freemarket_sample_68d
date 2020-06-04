@@ -28,7 +28,7 @@
             = flash[:recaptcha_error]
             = recaptcha_tags
         .field
-          = f.submit "ログイン", class: "login__next__btn"
+          = f.submit "ログイン", class: "login__next__btn", data: { disable_with: "ログイン中..." }
         .field.field__forgot__password__block
           = link_to new_user_password_path, class: "field__password--forgot" do
             パスワードをお忘れの方
