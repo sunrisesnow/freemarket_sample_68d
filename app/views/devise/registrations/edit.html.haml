@@ -31,7 +31,7 @@
               %input{ type: "checkbox", id: "checkpw" }
                 パスワードを表示する
           .actions
-            = f.submit "変更する", class: "change__btn"
+            = f.submit "変更する", class: "change__btn", data: {disable_with: "処理中..."}
   = render "shared/footer-image"
   = render "shared/footer"
   = render "shared/saler-btn"
