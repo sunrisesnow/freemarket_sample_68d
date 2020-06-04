@@ -18,7 +18,7 @@ class Item < ApplicationRecord
   scope :trading_not,          -> {where.not(trading_status_id: 4..5)}
   scope :category,             -> (category_id)       {where(category_id: category_id)}
   scope :draft,                -> (saler_id)          {including.where(saler_id: saler_id).where(trading_status_id: 4)}
-  scope :exhibition,           -> (saler_id)          {including.where(saler_id: saler_id).where(buyer_id: nil)}
+  scope :exhibition,           -> (saler_id)          {including.where(saler_id: saler_id).where(buyer_id: nil).trading_not}
   scope :exhibition_trading,   -> (saler_id)          {including.where(saler_id: saler_id).where.not(buyer_id: nil).trading_not}
   scope :exhibition_completed, -> (saler_id)          {including.where(saler_id: saler_id).where(trading_status_id: 5)}
   scope :bought,               -> (buyer_id)          {including.where(buyer_id: buyer_id).trading_not}
