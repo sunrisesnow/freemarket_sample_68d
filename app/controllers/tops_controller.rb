@@ -4,7 +4,7 @@ class TopsController < ApplicationController
   before_action :set_category_brand,  only: [:index]
   
   def index  
-    @items = Item.includes(:images).limit(5).order('created_at DESC').where.not(trading_status_id: 4)
+    @items = Item.including.limit(5).desc.trading_not(4)
   end
   
   def new

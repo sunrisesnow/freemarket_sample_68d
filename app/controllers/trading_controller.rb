@@ -8,7 +8,7 @@ class TradingController < ApplicationController
   before_action :item_user?
   
   def show
-    @messages = @item.messages.includes(:from).order('created_at ASC')
+    @messages = @item.messages.includes(:from).asc
     trading_item_fee(@item)
   end
 
@@ -50,7 +50,7 @@ class TradingController < ApplicationController
 
   def sales_prices(saler_user, item)
     trading_item_fee(item)
-    sales_price = SalesPrice.find_by(user_id: saler_user.id)
+    sales_price = SalesPrice.user(saler_user.id)
     if sales_price.present?
       sum_price = sales_price.price + @sales_profit
       redirect_to root_path unless sales_price.update(price: sum_price) 
@@ -61,7 +61,7 @@ class TradingController < ApplicationController
 
   def gives_point(buyer_user, item)
     trading_item_fee(item)
-    point = Point.find_by(user_id: buyer_user.id)
+    point = Point.user(buyer_user.id)
     if point.present?
       sum_point = point.point + @sales_commission
       redirect_to root_path unless point.update(point: sum_point) 

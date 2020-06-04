@@ -55,7 +55,7 @@ class CardsController < ApplicationController
   end
 
   def set_card
-    @card = Card.find_by(user_id: current_user.id)
+    @card = Card.user(current_user.id)
   end
 
   def set_payjp_api
