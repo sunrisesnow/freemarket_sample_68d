@@ -39,6 +39,12 @@ module TradingHelper
           "受け取り評価がありました！取引評価をしてください"
         when 5
           "この取引はすでに完了しています"
+        when 6
+          "取引キャンセル願いの通知がありました"
+        when 7
+          "取引キャンセル願いを送りました"
+        when 8
+          "取引はキャンセルされました"
       end
     when buyer_user
       case item.trading_status_id
@@ -51,6 +57,12 @@ module TradingHelper
           "取引相手からの評価をお待ちください"
         when 5
           "この取引はすでに完了しています"
+        when 6
+          "取引キャンセル願いを送りました"
+        when 7
+          "取引キャンセル願いの通知がありました"
+        when 8
+          "取引はキャンセルされました"
       end
     else
       "あなたはこの取引に参加していません"
@@ -67,6 +79,10 @@ module TradingHelper
           link_to "取引を完了する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 5
           link_to "この商品を削除する", item_path(item), method: :delete, class: "content__trading__box__btn", data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
+        when 6
+          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
+        when 8
+          link_to "再度この商品を出品する", relist_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn"
         else
           "取引の進展をお待ちください"
       end
@@ -76,6 +92,10 @@ module TradingHelper
           link_to "受け取り評価完了", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
         when 5
           "取引は完了しました"
+        when 7
+          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true
+        when 8
+          "取引は正常にキャンセルされました"
         else
           "取引の進展をお待ちください"
       end
