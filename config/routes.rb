@@ -39,7 +39,12 @@ Rails.application.routes.draw do
       get 'category_grandchildren', defaults: { format: 'json' }
       get 'search'
     end
-    resources :trading, only: [:show, :update]
+    resources :trading, only: [:show, :update] do
+      member do
+        patch 'cancel'
+        patch 'relist'
+      end
+    end
     resources :messages, only: [:create, :destroy]
   end
 end
