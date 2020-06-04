@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
   end
 
   def category_children
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path unless current_user.id == @item.saler_id
-    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
     @category_child_array = @item.category.parent.siblings
     @category_grandchild_array = @item.category.siblings
   end
@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
 
   def search
     @keyword = params.require(:q)[:name_or_explanation_cont]
-    @q = Item.includes(:images).search(search_params)
+    @q = Item.including.search(search_params)
     @items = @q.result(distinct: true)
   end
 

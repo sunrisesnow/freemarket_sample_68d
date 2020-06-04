@@ -9,7 +9,6 @@ class AccountsController < ApplicationController
   
   def create
     Account.create!(account_params) ? (redirect_to edit_account_path(current_user)) : (render :new)
-    
   end
 
   def edit
@@ -28,10 +27,14 @@ class AccountsController < ApplicationController
   private
 
   def set_account
-    @account = Account.find_by(user_id: current_user.id)
+    @account = current_user.account
   end
 
   def account_params
-    params.require(:account).permit(:icon_image, :background_image, :introduction).merge(user_id: current_user.id)
+    params.require(:account).permit(
+      :icon_image, 
+      :background_image, 
+      :introduction
+    ).merge(user_id: current_user.id)
   end
 end

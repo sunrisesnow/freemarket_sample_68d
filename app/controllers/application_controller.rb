@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_category_brand
-    @parents = Category.where(ancestry: nil)
+    @parents = Category.ancestries(nil)
     @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
 

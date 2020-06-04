@@ -54,6 +54,11 @@
         font-weight: normal;
         font-size: 13px;
         position: relative;
+        &__price{
+          position: absolute;
+          right: 25px;
+          top: 10px;
+        }
         &:hover{
           opacity: 0.6;
           .fa-chevron-right{
@@ -67,7 +72,7 @@
           color: $lightgray;
           position: absolute;
           right: 10px;
-          top: 12.5px;
+          top: 11.5px;
         }
       }
     }

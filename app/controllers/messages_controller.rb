@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   end
 
   def set_all_messages
-    @messages = @item.messages.includes(:from).order('created_at ASC')
+    @messages = @item.messages.including.asc
   end
 
   def set_message
@@ -34,6 +34,8 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:message).merge(from_id: current_user.id, to_id: @to_user.id, room_id: @item.id)
+    params.require(:message).permit(
+      :message
+    ).merge(from_id: current_user.id, to_id: @to_user.id, room_id: @item.id)
   end
 end

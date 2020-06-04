@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   def index
     items = []
-    likes = Like.where(user_id: params[:user_id])
+    likes = Like.users(params[:user_id])
     if likes.present?
       likes.each { |like| items << Item.find(like.item_id)}
     end

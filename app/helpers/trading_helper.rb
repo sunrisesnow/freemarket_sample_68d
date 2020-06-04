@@ -10,6 +10,22 @@ module TradingHelper
     @sales_profit = item.price - @sales_commission
   end
 
+  def sales_price_present?(sales_price)
+    if sales_price.present?
+      "¥#{sales_price.price.to_s(:delimited)}"
+    else
+      "¥0"
+    end
+  end
+
+  def point_present?(point)
+    if point.present?
+      "P#{point.point.to_s(:delimited)}"
+    else
+      "P0"
+    end
+  end
+
   def trading_status_check(item ,saler_user,  buyer_user)
     case current_user
     when saler_user
@@ -40,8 +56,6 @@ module TradingHelper
       "あなたはこの取引に参加していません"
     end
   end
-
-  
 
   def transaction_button(item ,saler_user,  buyer_user)
     case current_user

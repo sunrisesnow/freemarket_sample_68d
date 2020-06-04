@@ -33,12 +33,7 @@
           %span 出品数：１   
     .mypage__container--menu
       .menu__sales
-        = link_to  "#", class: "proceeds__link " do
-          %span 売上金
-          %i.fas.fa-chevron-right
-        = link_to "#", class: "proceeds__link" do
-          %span フリマポイント
-          %i.fas.fa-chevron-right
+        = render "shared/header-price_point"
       = link_to user_likes_path(current_user), class: "mypage__container--menu--link" do
         %span お気に入り！一覧
         %i.fas.fa-chevron-right    
