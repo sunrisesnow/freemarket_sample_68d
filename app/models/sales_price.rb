@@ -4,4 +4,6 @@ class SalesPrice < ApplicationRecord
     validates :price
     validates :user_id
   end
+
+  scope :user, ->(user_id) {find_by(user_id: user_id)}
 end

@@ -1,7 +1,8 @@
 class Address < ApplicationRecord
   belongs_to :user, optional: true
-
-
+  
+  scope :user, ->(user_id) {find_by(user_id: user_id)}
+  
   with_options presence: true do
     validates :last_name
     validates :first_name
