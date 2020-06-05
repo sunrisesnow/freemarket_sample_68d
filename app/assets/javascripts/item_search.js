@@ -131,6 +131,45 @@ $(function(){
     allCheckboxChange(target_checkboxes, all_checkbox, $(this));
   });
 
+
+  // ページ読み込み時の、チェックボックス「すべて」にチェックを入れるか判定する関数
+  function loadCheckboxSlection(target, all_checkbox) {
+    let flag = true;
+    target.each(function(e) {
+      if (target.eq(e).prop("checked") == false) {
+        flag = false;
+      }
+    });
+    if (flag) {
+      all_checkbox.prop("checked", true);
+    }
+  }
+
+  // ページ読み込み時に、チェックボックス「すべて」にチェックを入れるか判定する関数を走らせる
+  if ($('#item_search_form').length) {
+    loadCheckboxSlection(grandchild_category_checkboxes ,grandchild_category_all_checkbox)
+    loadCheckboxSlection(status_checkboxes, status_all_checkbox)
+    loadCheckboxSlection(delivery_charge_checkboxes, delivery_charge_all_checkbox)
+    loadCheckboxSlection(trading_status_checkboxes, trading_status_all_checkbox)
+
+    if (min_price.val() != "" && max_price.val() != "") {
+      $.ajax({
+        url: '/items/price_range',
+        type: 'GET',
+        data: { min: min_price.val(), max: max_price.val()},
+        dataType: 'json'
+      })
+      .done(function(range) {
+        if (range) {
+          $('#price_range').val(range.id);
+        }
+      })
+      .fail(function() {
+        alert('価格帯の取得に失敗しました')
+      })
+    }
+  }
+
   // 価格帯を選択したら、minとmaxに値を
   $('#price_range').on('change', function() {
     const price_range = $(this).val();
