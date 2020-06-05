@@ -126,6 +126,32 @@ class ItemsController < ApplicationController
         @q = Item.includes(:images).search(search_params_for_trading_status)
       end
     end
+
+    # カテゴリが検索条件にあるとき
+    if category_key = params.require(:q)[:category_id]
+      if category_key.to_i == 0
+        @search_category = Category.find_by(name: category_key, ancestry: nil)
+      else
+        @search_category = Category.find(category_key)
+      end
+
+      if @search_category.present?
+        if @search_category.ancestry.nil?
+          #親カテゴリ
+          @category_child_array = Category.where(ancestry: @search_category.id).pluck(:name, :id)
+          grandchildren_id = @search_category.indirect_ids.sort
+          find_category_item(grandchildren_id)
+        elsif @search_category.ancestry.exclude?("/")
+          #子カテゴリ
+          @category_child = @search_category
+          @category_child_array = @search_category.siblings.pluck(:name, :id)
+          @category_grandchild_array = @search_category.children
+          grandchildren_id = @search_category.child_ids
+          find_category_item(grandchildren_id)
+        end
+          #孫カテゴリはransackで拾う → category_id_in
+      end
+    end
   end
 
   private
@@ -176,5 +202,17 @@ class ItemsController < ApplicationController
       delivery_charge_flag_in: [],
       trading_status_id_in: [],
     )
+  end
+
+  def find_category_item(grandchildren_id)
+    category_item = Item.where(category_id: grandchildren_id[0].. grandchildren_id[-1]).where.not(trading_status_id: 4)
+    category_search_items = []
+    category_search_items += category_item if category_item.present?
+    if category_search_items.length == 0
+      @q = Item.search(search_params)
+      sort = params[:sort] || "created_at DESC"
+      @items = @q.result(distinct: true).order(sort)
+    end
+    @items = @items & category_search_items
   end
 end
