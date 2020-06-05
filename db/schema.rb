@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_102712) do
+ActiveRecord::Schema.define(version: 2020_06_04_090604) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_102712) do
     t.integer "saler_id"
     t.string "name", null: false
     t.text "explanation"
-    t.string "delivery_charge_flag", null: false
+    t.integer "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -84,12 +84,10 @@ ActiveRecord::Schema.define(version: 2020_05_26_102712) do
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "item_id", null: false
+    t.integer "user_id"
+    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_likes_on_item_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -115,6 +113,4 @@ ActiveRecord::Schema.define(version: 2020_05_26_102712) do
   add_foreign_key "cards", "users"
   add_foreign_key "images", "items"
   add_foreign_key "items", "categories"
-  add_foreign_key "likes", "items"
-  add_foreign_key "likes", "users"
 end
