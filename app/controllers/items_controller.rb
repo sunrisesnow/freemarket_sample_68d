@@ -103,6 +103,31 @@ class ItemsController < ApplicationController
     @items = Item.includes(:images).where(buyer_id: current_user.id).where(trading_status_id: 5).page(params[:page]).per(15)
   end
 
+  def search
+    @trading_status = TradingStatus.find [1,3]
+    @keyword = params.require(:q)[:name_or_explanation_cont]
+    @search_parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+
+    sort = params[:sort] || "created_at DESC"
+    @q = Item.includes(:images).search(search_params)
+    @items = @q.result(distinct: true).order(sort)
+
+    # 販売状況が検索条件にあるとき
+    if trading_status_key = params.require(:q)[:trading_status_id_in]
+      if trading_status_key.count == 1 && trading_status_key == ["3"]
+        sold_items = Item.where.not(buyer_id: nil)
+        @items = @items & sold_items
+        @q = Item.includes(:images).search(search_params_for_trading_status)
+      elsif trading_status_key.count == 1 && trading_status_key == ["1"]
+        selling_items = Item.where(buyer_id: nil)
+        @items = @items & selling_items
+        @q = Item.includes(:images).search(search_params_for_trading_status)
+      elsif trading_status_key.count == 2
+        @q = Item.includes(:images).search(search_params_for_trading_status)
+      end
+    end
+  end
+
   private
   def set_item
     @item = Item.find_by_id(params[:id])
@@ -129,5 +154,27 @@ class ItemsController < ApplicationController
   end
 
   def search_params
+    params.require(:q).permit(
+      :name_or_explanation_cont,
+      :category_id,
+      :price_gteq,
+      :price_lteq,
+      category_id_in: [],
+      status_id_in: [],
+      delivery_charge_flag_in: [],
+    )
+  end
+
+  def search_params_for_trading_status
+    params.require(:q).permit(
+      :name_or_explanation_cont,
+      :category_id,
+      :category_id_in,
+      :price_gteq,
+      :price_lteq,
+      status_id_in: [],
+      delivery_charge_flag_in: [],
+      trading_status_id_in: [],
+    )
   end
 end
