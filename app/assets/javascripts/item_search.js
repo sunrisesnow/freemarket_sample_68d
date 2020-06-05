@@ -302,6 +302,12 @@ $(function(){
       $('#grandchildren_category_search').remove();
     }
   });
+
+  $('#detail_search_btn').click(function(e) {
+    if ($('#children_category_search').val() == "") {
+      $('#children_category_search').remove();
+    }
+  });
 });
 
 "use strict";
