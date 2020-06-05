@@ -2,7 +2,6 @@
 $(function() {
   // プルダウンメニューを選択することでイベントが発生
   $('select[name=sort_order]').change(function() {
-    console.log('OK')
     // 選択したoptionタグのvalue属性を取得する
     const sort_order = $(this).val();
     // value属性の値により、ページ遷移先の分岐
@@ -298,7 +297,6 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
-      console.log('OK')
       $('#grandchildren_category_search').remove();
     }
   });

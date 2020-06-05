@@ -273,7 +273,6 @@ $(function() {
         $('.edit_item').submit();
       }
     } else {
-      console.log('NO')
       $(this).off('submit');
       $('body,html').animate({ scrollTop: 0 }, 500);
       return false;
