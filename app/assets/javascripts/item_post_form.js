@@ -94,65 +94,69 @@ $(function() {
   let next;
   let priceNext;
   let imageNext;
+  let input_column;
 
   // blur時の動作
   function fieldBlur(input) {
     value = input.val();
     next = input.next();
     priceNext = input.parent().parent().next();
+    input_column = input.prop('id');
     // 未入力のチェック
-    if (value == "") {
-      if (!next.hasClass('error')) {
-        input.addClass('error');
-        if (input.is('select')) {
-          input.after(`<p class='error'>選択してください</p>`);
-        } else if (input.is('#sell-price-input') || input.is('.img-file')) {
-          ;
+    switch (input_column) {
+      case "sell-price-input":
+        if (value == "" || value < 300 || value >= 10000000) {
+          if (!priceNext.hasClass('error')) {
+            input.addClass('error')
+            input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
+          }
+        } else if (priceNext.hasClass('error')) {
+          priceNext.remove();
         } else {
-          input.after(`<p class='error'>入力してください</p>`)
+          ;
         }
-      }
-    } else {
-      input.removeClass('error');
-      next.remove();
+        break;
+      case "item_item_images_image":
+        break;
+      default: 
+        if (value == "" && !next.hasClass('error')) {
+          input.addClass('error')
+          if (input.is('select')) {
+            input.after(`<p class='error'>選択してください</p>`);
+          } else {
+            input.after(`<p class='error'>入力してください</p>`)
+          }
+        } else if (value != "") {
+          input.removeClass('error');
+          next.remove();
+        }
+        break;
     }
 
-    // 金額入力の入力チェック
-    if (input.is('#sell-price-input')) {
-      if (value == "" || value < 300 || value >= 10000000) {
-        if (!priceNext.hasClass('error')) {
-          input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-        }
-      } else if (priceNext.hasClass('error')) {
-        priceNext.remove();
-      } else {
-        ;
-      }
-    }
   }
   // keyup時の動作
   function fieldKeyup(input) {
+    let cnt;
     value = input.val();
     next = input.next();
     priceNext = input.parent().parent().next();
+    input_column = input.prop('id');
+
     if (value != "") {
-      input.removeClass('error');
-      if (input.is('#sell-price-input')) {
-        ;
-      } else {
-        next.remove();
-      }
-    }
-    // 金額入力の入力チェック
-    if (input.is('#sell-price-input')) {
-      if (value >= 300 && value < 10000000) {
-        if (priceNext.hasClass('error')) {
-          priceNext.remove();
-        }
-      } else if (!priceNext.hasClass('error')) {
-        input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-      } else {
-        ;
+      switch (input_column) {
+        case "sell-price-input":
+          if (value < 300 || value >= 10000000) {
+            if (!priceNext.hasClass('error')) {
+              input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
+            }
+          } else if (priceNext.hasClass('error')) {
+            priceNext.remove();
+          } else {
+            ;
+          }
+          break;
+        default:
+          ;
       }
     }
   }
@@ -171,23 +175,23 @@ $(function() {
     }
   }
 
-  $('#new_item input:required').on('blur', function() {
+  $('#new_item input:required, .edit_item input:required').on('blur', function() {
     fieldBlur($(this));
   });
 
-  $('#new_item input:required').on('keyup', function() {
+  $('#new_item input:required, .edit_item input:required').on('keyup', function() {
     fieldKeyup($(this));
   });
 
-  $('#new_item textarea').on('blur', function() {
+  $('#new_item textarea, .edit_item textarea').on('blur', function() {
     fieldBlur($(this));
   });
 
-  $('#new_item textarea').on('keyup', function() {
+  $('#new_item textarea, .edit_item textarea').on('keyup', function() {
     fieldKeyup($(this));
   });
 
-  $('#new_item select').on('blur change', function() {
+  $('#new_item select, .edit_item select').on('blur change', function() {
     fieldBlur($(this));
   });
 
@@ -199,21 +203,21 @@ $(function() {
     const num = $('.item-image').length
     imageCheck(num);
 
-    $('#new_item input:required').each(function(e) {
-      if ($('#new_item input:required').eq(e).val() === "") {
-        fieldBlur($('#new_item input:required').eq(e));
+    $('input:required').each(function(e) {
+      if ($('input:required').eq(e).val() === "") {
+        fieldBlur($('input:required').eq(e));
         flag = false;
       }
     });
-    $('#new_item textarea:required').each(function(e) {
-      if ($('#new_item textarea:required').eq(e).val() === "") {
-        fieldBlur($('#new_item textarea:required').eq(e));
+    $('textarea:required').each(function(e) {
+      if ($('textarea:required').eq(e).val() === "") {
+        fieldBlur($('textarea:required').eq(e));
         flag = false;
       }
     });
-    $('#new_item select').each(function(e) {
-      if ($('#new_item select').eq(e).val() === "") {
-        fieldBlur($('#new_item select').eq(e));
+    $('select').each(function(e) {  
+      if ($('select').eq(e).val() === "") {
+        fieldBlur($('select').eq(e));
         flag = false;
       }
     });
@@ -222,11 +226,14 @@ $(function() {
       if (submitID == 'item-post-btn') {
         $("input[name='item[trading_status_id]']").val(1);
         $('#new_item').submit();
+        $('.edit_item').submit();
       } else {
         $("input[name='item[trading_status_id]']").val(4);
         $('#new_item').submit();
+        $('.edit_item').submit();
       }
     } else {
+      console.log('NO')
       $(this).off('submit');
       $('body,html').animate({ scrollTop: 0 }, 500);
       return false;
