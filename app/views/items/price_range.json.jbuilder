@@ -1,6 +1,4 @@
-json.array! @price_range do |range|
-  json.id range.id
-  json.name range.name
-  json.min range.min
-  json.max range.max
-end
+json.id @price_range.id
+json.name @price_range.name
+json.min @price_range.min
+json.max @price_range.max
