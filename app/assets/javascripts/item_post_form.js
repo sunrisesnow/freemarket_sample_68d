@@ -105,7 +105,7 @@ $(function() {
     // 未入力のチェック
     switch (input_column) {
       case "item_name":
-        if (value == "") {
+        if (value === "") {
           input.addClass('error')
           next.remove();
           input.after(`<p class='error'>入力してください</p>`)
@@ -114,7 +114,7 @@ $(function() {
         }
         break;
       case "item_explanation":
-        if (value == "") {
+        if (value === "") {
           input.addClass('error')
           next.remove();
           input.after(`<p class='error'>入力してください</p>`)
@@ -123,7 +123,7 @@ $(function() {
         }
         break;
       case "sell-price-input":
-        if (value == "" || value < 300 || value >= 10000000) {
+        if (value === "" || value < 300 || value >= 10000000) {
           if (!priceNext.hasClass('error')) {
             input.addClass('error')
             input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
@@ -137,7 +137,7 @@ $(function() {
       case "item_item_images_image":
         break;
       default: 
-        if (value == "" && !next.hasClass('error')) {
+        if (value === "" && !next.hasClass('error')) {
           input.addClass('error')
           if (input.is('select')) {
             input.after(`<p class='error'>選択してください</p>`);
