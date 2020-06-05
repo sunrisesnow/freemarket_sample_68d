@@ -10,8 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :status
   belongs_to_active_hash :delivery_date
   belongs_to_active_hash :delivery_method
-  belongs_to_active_hash :trading_status
-  
+  belongs_to_active_hash :trading_status  
 
   # 入力必須のバリデーション
   with_options presence: true do
@@ -30,5 +29,8 @@ class Item < ApplicationRecord
   # 販売価格の数値範囲のバリデーション
   validates :price, numericality: {greater_than_or_equal_to: 300}
   validates :price, numericality: {less_than: 10000000}
-  belongs_to :category
+
+  # 文字数のバリデーション
+  validates :name, length: { maximum: 40 }
+  validates :explanation, length: { maximum: 1000 }
 end
