@@ -104,6 +104,24 @@ $(function() {
     input_column = input.prop('id');
     // 未入力のチェック
     switch (input_column) {
+      case "item_name":
+        if (value == "") {
+          input.addClass('error')
+          next.remove();
+          input.after(`<p class='error'>入力してください</p>`)
+        } else if (next.hasClass('error')) {
+          input.addClass('error')
+        }
+        break;
+      case "item_explanation":
+        if (value == "") {
+          input.addClass('error')
+          next.remove();
+          input.after(`<p class='error'>入力してください</p>`)
+        } else if (next.hasClass('error')) {
+          input.addClass('error')
+        }
+        break;
       case "sell-price-input":
         if (value == "" || value < 300 || value >= 10000000) {
           if (!priceNext.hasClass('error')) {
@@ -144,6 +162,28 @@ $(function() {
 
     if (value != "") {
       switch (input_column) {
+        case "item_name":
+          cnt = input.val().length;
+          if (cnt <= 40) {
+            next.remove();
+          } else {
+            if (!next.hasClass('error')) {
+              input.addClass('error');
+              input.after(`<p class='error'>40文字以下で入力してください</p>`)
+            }
+          }
+          break;
+        case "item_explanation":
+          cnt = input.val().length;
+          if (cnt <= 1000) {
+            next.remove();
+          } else {
+            if (!next.hasClass('error')) {
+              input.addClass('error');
+              input.after(`<p class='error'>1000文字以下で入力してください</p>`)
+            }
+          }
+          break;
         case "sell-price-input":
           if (value < 300 || value >= 10000000) {
             if (!priceNext.hasClass('error')) {
