@@ -16,6 +16,6 @@
             = flash[:recaptcha_error]
             = recaptcha_tags
         .actions
-          = f.submit "送信する", class: "send__btn"
+          = f.submit "送信する", class: "send__btn", data: {disable_with: "処理中..."}
   = render "shared/form-footer"
 

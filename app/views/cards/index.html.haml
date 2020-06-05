@@ -16,7 +16,7 @@
             %p.creditcard-info__period 
               = @exp_month + " / " + @exp_year
             .creditcard-info__period 
-              = button_to "削除する", card_path(@card), method: :delete, class: "btn-card", data: { confirm: 'カードを削除してよろしいですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
+              = button_to "削除する", card_path(@card), method: :delete, class: "btn-card", data: { confirm: 'カードを削除してよろしいですか?',cancel: 'やめる',commit: '削除する',disable_with: "処理中..."}, title: '削除確認'
               = button_to "トップページへ", root_path, method: :get, class: "btn-card"
           - else
             .creditcard-info__period
