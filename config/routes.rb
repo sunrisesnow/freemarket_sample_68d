@@ -15,6 +15,14 @@ Rails.application.routes.draw do
   resources :addresses, only: [:edit, :update, :show]
   resources :users, only: [:show, :index] do
     resources :likes, only: [:index]
+    collection do
+      get 'draft'
+      get 'exhibition'
+      get 'exhibition_trading'
+      get 'exhibition_completed'
+      get 'bought'
+      get 'bought_completed'
+    end
   end
   resources :categories, only: [:index, :show] 
   resources :cards, except: [:show,:edit,:update] do
@@ -23,6 +31,7 @@ Rails.application.routes.draw do
       get 'buy'
     end
   end
+  
   resources :items do
     resources :likes, only: [:create, :destroy]
     collection do
@@ -31,13 +40,13 @@ Rails.application.routes.draw do
       get 'delivery_method', defaults: { format: 'json' }
       get 'price_range', defaults: { format: 'json' }
       get 'search'
-      get 'draft'
-      get 'exhibition'
-      get 'exhibition_trading'
-      get 'exhibition_completed'
-      get 'bought'
-      get 'bought_completed'
     end
-    resources :trading, only: [:show, :update]
+    resources :trading, only: [:show, :update] do
+      member do
+        patch 'cancel'
+        patch 'relist'
+      end
+    end
+    resources :messages, only: [:create, :destroy]
   end
 end

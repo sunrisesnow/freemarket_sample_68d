@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :set_category_brand, only: [:edit, :update]
+  before_action :set_item_search_query, expect: [:new, :create, :create_address]
 
   def new
     @user = User.new

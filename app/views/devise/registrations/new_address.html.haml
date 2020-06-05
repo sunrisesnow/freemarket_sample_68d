@@ -78,7 +78,7 @@
             = f.text_field :phone_number, {placeholder: "半角数字で10桁または11桁の番号", class:'member-main--area__form--input'}
 
         .member-main--action
-          = f.submit "登録完了", {class: 'member-main--action__btn', id: "next__btn"}
+          = f.submit "登録完了", class: 'member-main--action__btn', id: "next__btn", data: {disable_with: "処理中..."}
         .nav__privacy--information
           This site is protected by reCAPTCHA and the Google
           = link_to "#", class: "nav__privacy--information--link" do

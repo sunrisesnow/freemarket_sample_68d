@@ -91,3 +91,6 @@ gem 'payjp'
 gem 'kaminari'
 gem 'ransack'
 gem 'tel_formatter'
+gem 'bootstrap-sass'
+gem 'data-confirm-modal'
+

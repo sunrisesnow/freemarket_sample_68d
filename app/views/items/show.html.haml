@@ -6,7 +6,7 @@
         .main-item__content--form
           .itembox
             %h2.itembox__name
-              = @item.name
+              = @item.name.truncate(30, omission: '...')
             .itembox__image
               %ul
                 %li
@@ -15,13 +15,11 @@
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  %ul
-                    - @item.images.each do |image|
-                      %li
                   .mini-image
-                    - @item.images.each do |image|
-                      .mini-images
-                        =image_tag image.image.url
+                    - @item.images.each_with_index do |image, i|
+                      - unless i == 0
+                        .mini-images
+                          =image_tag image.image.url
             .itembox__price
               %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
@@ -45,7 +43,7 @@
                 .itembox__detail--or or
                 .itembox__detail--delete
                   %button.itembox__detail--delete--btn
-                    = link_to "この出品を削除する", item_path(@item.id), method: :delete, data: { confirm: '削除してよろしいですか？' }
+                    = link_to "この出品を削除する", item_path(@item.id), method: :delete, data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する',disable_with: "処理中..."}, title: '削除確認'
             .itembox__explanation
               = @item.explanation
             .itembox__table

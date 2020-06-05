@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category_brand,  except: [:destroy]
+  
 
   def index
   end
@@ -10,7 +11,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
   end
 
   def category_children
@@ -35,7 +36,7 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path unless current_user.id == @item.saler_id
-    @parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+    @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
     @category_child_array = @item.category.parent.siblings
     @category_grandchild_array = @item.category.siblings
     @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag)
@@ -48,7 +49,7 @@ class ItemsController < ApplicationController
           @item.images.create(image: image, item_id: @item.id) if @item.images.count <= 10
         end
       end
-      @item.trading_status_id == 4 ? (redirect_to draft_items_path) : (redirect_to item_path(@item))
+      @item.trading_status_id == 4 ? (redirect_to draft_users_path) : (redirect_to item_path(@item))
     else
       render :edit
     end
@@ -64,7 +65,11 @@ class ItemsController < ApplicationController
 
   def destroy
     redirect_to root_path  unless current_user.id == @item.saler_id
-    @item.destroy && @item.trading_status_id == 4? (redirect_to draft_items_path) : (redirect_to exhibition_items_path) 
+    if @item.trading_status_id == 5
+      @item.destroy ? (redirect_to exhibition_completed_users_path) : (redirect_to item_trading_path(@item, current_user)) 
+      return
+    end
+    @item.destroy && @item.trading_status_id == 4 ? (redirect_to draft_users_path) : (redirect_to exhibition_users_path) 
   end
 
   def delivery_method
@@ -77,30 +82,6 @@ class ItemsController < ApplicationController
     else
       @price_range = PriceRange.find(params[:price_id])
     end
-  end
-
-  def draft
-    @items = Item.includes(:images).where(trading_status_id: 4).where(saler_id: current_user.id).page(params[:page]).per(15)
-  end
-
-  def exhibition
-    @items = Item.includes(:images).where(saler_id: current_user.id).where(buyer_id: nil).where(trading_status_id: 1).page(params[:page]).per(15)
-  end
-
-  def exhibition_trading
-    @items = Item.includes(:images).where(saler_id: current_user.id).where.not(buyer_id: nil).page(params[:page]).per(15)
-  end
-
-  def exhibition_completed
-    @items = Item.includes(:images).where(saler_id: current_user.id).where(trading_status_id: 5).page(params[:page]).per(15)
-  end
-
-  def bought
-    @items = Item.includes(:images).where(buyer_id: current_user.id).page(params[:page]).per(15)
-  end
-
-  def bought_completed
-    @items = Item.includes(:images).where(buyer_id: current_user.id).where(trading_status_id: 5).page(params[:page]).per(15)
   end
 
   def search
