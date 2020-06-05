@@ -72,14 +72,11 @@ class ItemsController < ApplicationController
   end
 
   def price_range
-    @price_range = PriceRange.find(params[:id])
-  end
-
-  def search
-    @keyword = params.require(:q)[:name_or_explanation_cont]
-    sort = params[:sort] || "created_at DESC"
-    @q = Item.includes(:images).search(search_params)
-    @items = @q.result(distinct: true).order(sort)
+    if params[:price_id].nil?
+      @price_range = PriceRange.find_by_min_and_max(params[:min], params[:max])
+    else
+      @price_range = PriceRange.find(params[:price_id])
+    end
   end
 
   def draft
@@ -127,11 +124,10 @@ class ItemsController < ApplicationController
         :id,
         :image,
         :_destroy
-      ]
+      ],
     ).merge(saler_id: current_user.id)
   end
 
   def search_params
-    params.require(:q).permit!
   end
 end
