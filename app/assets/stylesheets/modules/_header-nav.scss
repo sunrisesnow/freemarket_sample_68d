@@ -25,6 +25,9 @@
       height: 50px;
       width: 50px;
     }
+    .user__nickname{
+      padding-top: 10px;
+    }
     .user__details{
       padding-top: 20px;
       font-size: 13px;
@@ -51,6 +54,11 @@
         font-weight: normal;
         font-size: 13px;
         position: relative;
+        &__price{
+          position: absolute;
+          right: 25px;
+          top: 10px;
+        }
         &:hover{
           opacity: 0.6;
           .fa-chevron-right{
@@ -64,7 +72,7 @@
           color: $lightgray;
           position: absolute;
           right: 10px;
-          top: 12.5px;
+          top: 11.5px;
         }
       }
     }

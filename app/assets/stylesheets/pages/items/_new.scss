@@ -77,8 +77,6 @@
               transition: 1s;
             }
           }
-          #item-post-btn {
-          }
           #item-draft-btn {
             background-color: $gray;
             padding: 12px 0;
@@ -246,7 +244,15 @@ margin: 0;
 }
 
 .item-btn-red{
-  display: block;
   background-color: $sign-up-btn;
   line-height: 50px;
+  display: inline-block;
+  height: 50px;
+  width: 360px;
+  color: white;
+  &:hover {
+    opacity: 0.5;
+    transition: 1s;
+    color: white;
+  }
 }
