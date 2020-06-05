@@ -152,6 +152,7 @@ class ItemsController < ApplicationController
           #孫カテゴリはransackで拾う → category_id_in
       end
     end
+    @items = Kaminari.paginate_array(@items).page(params[:page]).per(20)
   end
 
   private
