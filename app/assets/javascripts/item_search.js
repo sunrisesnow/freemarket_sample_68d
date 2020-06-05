@@ -51,6 +51,85 @@ $(function() {
 $(function(){
   const min_price = $('#q_price_gteq');
   const max_price = $('#q_price_lteq');
+  let grandchild_category_all_checkbox = $('#grandchildren_category_all');
+  let grandchild_category_checkboxes = $('input[name="q[category_id_in][]"]');
+  const status_all_checkbox = $('#status_all');
+  const status_checkboxes = $('input[name="q[status_id_in][]"]')
+  const delivery_charge_all_checkbox = $('#delivery_charge_flag_all')
+  const delivery_charge_checkboxes = $('input[name="q[delivery_charge_flag_in][]"]')
+  const trading_status_all_checkbox = $('#trading_status_all')
+  const trading_status_checkboxes = $('input[name="q[trading_status_id_in][]"]')
+
+  // 「すべて」をクリックした時の挙動
+  $(document).on('change', '.js-checkbox-all', function() {
+    function targetCheckboxesChage(target, trigger) {
+      if (trigger.prop("checked") == true) {
+        target.prop("checked", true);
+      } else {
+        target.prop("checked", false);
+      }
+    }
+
+    let target_checkboxes;
+    switch ($(this).prop('id')) {
+      case $('#grandchildren_category_all').prop('id'):
+        target_checkboxes = $('input[name="q[category_id_in][]"]');
+        break;
+      case status_all_checkbox.prop('id'):
+        target_checkboxes = status_checkboxes;
+        break;
+      case delivery_charge_all_checkbox.prop('id'):
+        target_checkboxes = delivery_charge_checkboxes;
+        break;
+      case trading_status_all_checkbox.prop('id'):
+        target_checkboxes = trading_status_checkboxes;
+        break;
+      default: ;
+    }
+    targetCheckboxesChage(target_checkboxes, $(this));
+  });
+
+  // 「すべて」以外をクリックした時の挙動
+  $(document).on('change', '.js_search_checkbox > input:checkbox', function() {
+    function allCheckboxChange(target, all_checkbox, trigger) {
+      if (trigger.prop("checked") == false) {
+        all_checkbox.prop("checked", false);
+      } else {
+        let flag = true
+        target.each(function(e) {
+          if (target.eq(e).prop("checked") == false) {
+            flag = false;
+          }
+        });
+        if (flag) {
+          all_checkbox.prop("checked", true);
+        }
+      }
+    }  
+    let all_checkbox;
+    grandchild_category_all_checkbox = $('#grandchildren_category_all');
+    grandchild_category_checkboxes = $('input[name="q[category_id_in][]"]');
+    switch ($(this).prop('name')) {
+      case grandchild_category_checkboxes.prop('name'):
+        target_checkboxes = grandchild_category_checkboxes;
+        all_checkbox = grandchild_category_all_checkbox;
+        break;
+      case status_checkboxes.prop('name'):
+        target_checkboxes = status_checkboxes;
+        all_checkbox = status_all_checkbox;
+        break;
+      case delivery_charge_checkboxes.prop('name'):
+        target_checkboxes = delivery_charge_checkboxes;
+        all_checkbox = delivery_charge_all_checkbox;
+        break;
+      case trading_status_checkboxes.prop('name'):
+        target_checkboxes = trading_status_checkboxes;
+        all_checkbox = trading_status_all_checkbox;
+        break;
+      default: ;
+    }
+    allCheckboxChange(target_checkboxes, all_checkbox, $(this));
+  });
 
   // 価格帯を選択したら、minとmaxに値を
   $('#price_range').on('change', function() {
