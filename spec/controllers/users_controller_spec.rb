@@ -9,7 +9,7 @@ describe UsersController, type: :controller do
         get :index
       end
       it "正常にレルポンスを返すこと" do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
     context 'ログインしていない場合' do
@@ -26,7 +26,7 @@ describe UsersController, type: :controller do
         get :show, params: {id: 1}
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
     context 'ログインしていない場合' do
@@ -43,7 +43,7 @@ describe UsersController, type: :controller do
         get :draft
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '下書き商品（saler_id: current, buyer_id: nil, trading_status_id: 4）' do
@@ -72,7 +72,7 @@ describe UsersController, type: :controller do
         get :exhibition
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '出品商品（saler_id: current, buyer_id: nil, trading_status_id: 1）' do
@@ -105,7 +105,7 @@ describe UsersController, type: :controller do
         get :exhibition_trading
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '取引商品（saler_id: current, buyer_id: 1, trading_status_id: 1..3）' do
@@ -138,7 +138,7 @@ describe UsersController, type: :controller do
         get :exhibition_completed
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '取引終了商品（saler_id: current, buyer_id: 1, trading_status_id: 1..3）' do
@@ -171,7 +171,7 @@ describe UsersController, type: :controller do
         get :bought
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '購入商品（saler_id: 1, buyer_id: current, trading_status_id: 1..3）' do
@@ -208,7 +208,7 @@ describe UsersController, type: :controller do
         get :bought_completed
       end
       it '正常にレスポンスを返すこと' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       context '@itemsに代入されるべき値' do
         it '取引完了済み購入商品' do

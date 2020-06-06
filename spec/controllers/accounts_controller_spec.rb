@@ -17,7 +17,7 @@ describe AccountsController, type: :controller do
       context 'accountを作成していない場合' do
         it '正常にレスポンスを返すこと' do
           get :new
-          expect(response).to be_success
+          expect(response).to be_successful
         end
         it '@accountには意図した値が代入されていること' do
           get :new
@@ -96,7 +96,7 @@ describe AccountsController, type: :controller do
         it '正常にレスポンスを返すこと' do
           account = create(:account, user_id: user.id)
           get :edit, params: {id: 1}
-          expect(response).to be_success
+          expect(response).to be_successful
         end
         it '@accountには意図した値が代入されている事' do
           account = create(:account, user_id: user.id)
