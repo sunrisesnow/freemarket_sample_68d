@@ -4,9 +4,11 @@ describe UsersController, type: :controller do
   let(:user) { create(:user) }
   describe 'GET #index' do
     context 'ログインしている場合' do
-      it "正常にレルポンスを返すこと" do
+      before do
         login user
         get :index
+      end
+      it "正常にレルポンスを返すこと" do
         expect(response).to be_success
       end
     end
@@ -19,9 +21,11 @@ describe UsersController, type: :controller do
   end
   describe 'GET #show' do
     context 'ログインしている場合' do
-      it '正常にレスポンスを返すこと' do
+      before do
         login user
-        get :show, params: {id: user}
+        get :show, params: {id: 1}
+      end
+      it '正常にレスポンスを返すこと' do
         expect(response).to be_success
       end
     end
