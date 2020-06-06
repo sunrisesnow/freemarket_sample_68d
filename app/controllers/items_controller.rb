@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_category_brand,  except: [:destroy]
   
-
   def index
   end
 

@@ -93,13 +93,18 @@ $(function() {
   let value;
   let next;
   let priceNext;
-  let imageNext;
+  let textNext;
   let input_column;
+  let cnt;
+  const cnt_area_name = $('.now_cnt_name')
+  const cnt_area_explanation = $('.now_cnt_explanation')
 
   // blur時の動作
   function fieldBlur(input) {
+    cnt = input.val().length;
     value = input.val();
     next = input.next();
+    textNext = input.next().next();
     priceNext = input.parent().parent().next();
     input_column = input.prop('id');
     // 未入力のチェック
@@ -107,19 +112,21 @@ $(function() {
       case "item_name":
         if (value === "") {
           input.addClass('error')
-          next.remove();
-          input.after(`<p class='error'>入力してください</p>`)
-        } else if (next.hasClass('error')) {
-          input.addClass('error')
+          textNext.remove();
+          input.parent().append(`<p class='error'>入力してください</p>`)
+        } else if (cnt <= 40) {
+          input.removeClass('error')
+          textNext.remove();
         }
         break;
       case "item_explanation":
         if (value === "") {
           input.addClass('error')
-          next.remove();
-          input.after(`<p class='error'>入力してください</p>`)
-        } else if (next.hasClass('error')) {
-          input.addClass('error')
+          textNext.remove();
+          input.parent().append(`<p class='error'>入力してください</p>`)
+        } else if (cnt <= 1000) {
+          input.removeClass('error')
+          textNext.remove();
         }
         break;
       case "sell-price-input":
@@ -154,50 +161,58 @@ $(function() {
   }
   // keyup時の動作
   function fieldKeyup(input) {
-    let cnt;
+    cnt = input.val().length;
     value = input.val();
     next = input.next();
+    textNext = input.next().next();
     priceNext = input.parent().parent().next();
     input_column = input.prop('id');
 
-    if (value != "") {
-      switch (input_column) {
-        case "item_name":
-          cnt = input.val().length;
+    switch (input_column) {
+      case "item_name":
+        cnt_area_name.text(cnt);
+        if (value != "") {
+          cnt_area_name.text(cnt);
           if (cnt <= 40) {
-            next.remove();
+            input.removeClass('error')
+            cnt_area_name.parent().css('color', 'gray')
+            textNext.remove();
           } else {
-            if (!next.hasClass('error')) {
-              input.addClass('error');
-              input.after(`<p class='error'>40文字以下で入力してください</p>`)
-            }
-          }
-          break;
-        case "item_explanation":
-          cnt = input.val().length;
+            textNext.remove();
+            cnt_area_name.parent().css('color', 'red')
+            input.addClass('error');
+            input.parent().append(`<p class='error'>40文字以下で入力してください</p>`)
+          }  
+        }
+        break;
+      case "item_explanation":
+        cnt_area_explanation.text(cnt);
+        if (value != "") {
           if (cnt <= 1000) {
-            next.remove();
+            input.removeClass('error')
+            cnt_area_explanation.parent().css('color', 'gray')
+            textNext.remove();
           } else {
-            if (!next.hasClass('error')) {
-              input.addClass('error');
-              input.after(`<p class='error'>1000文字以下で入力してください</p>`)
-            }
+            textNext.remove();
+            cnt_area_explanation.parent().css('color', 'red')
+            input.addClass('error');
+            input.parent().append(`<p class='error'>1000文字以下で入力してください</p>`)
+          }  
+        }
+        break;
+      case "sell-price-input":
+        if (value < 300 || value >= 10000000) {
+          if (!priceNext.hasClass('error')) {
+            input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
           }
-          break;
-        case "sell-price-input":
-          if (value < 300 || value >= 10000000) {
-            if (!priceNext.hasClass('error')) {
-              input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-            }
-          } else if (priceNext.hasClass('error')) {
-            priceNext.remove();
-          } else {
-            ;
-          }
-          break;
-        default:
+        } else if (priceNext.hasClass('error')) {
+          priceNext.remove();
+        } else {
           ;
-      }
+        }
+        break;
+      default:
+        ;
     }
   }
 
