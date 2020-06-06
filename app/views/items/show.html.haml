@@ -23,10 +23,8 @@
             .itembox__price
               %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
-                %span
-                  (税込)
-                %span
-                  送料込み
+                %span (税込)
+                %span= delivery_charge(@item)
             .itembox__detail
               - if @item.buyer_id.present?
                 .itembox__detail--sold
@@ -66,20 +64,13 @@
                       = link_to category_path(@item.category) do
                         =@item.category.name
                   %tr
-                    %th ブランド
-                    %td
-                      -# = @caregory_brand
-                  %tr
                     %th 商品の状態
                     %td 
                       = @item.status.name
                   %tr
                     %th 配送料の負担
                     %td 
-                      - if @item.delivery_charge_flag = 1
-                        送料込み(出品者負担)
-                      - elsif @item.delivery_charge_flag = 2
-                        着払い(購入者負担)
+                      = delivery_charge_full(@item)
                   %tr
                     %th 発送元の地域
                     %td
