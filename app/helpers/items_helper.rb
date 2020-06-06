@@ -21,4 +21,23 @@ module ItemsHelper
     end
   end
 
+  def item_sell_fee(item)
+    if item.persisted?
+      fee = (item.price * 0.1).floor
+      "¥#{number_to_currency(fee, unit: "", strip_insignificant_zeros: true)}"
+    else
+      "-"
+    end
+  end
+
+  def item_sell_profit(item)
+    if item.persisted?
+      fee = (item.price * 0.1).floor
+      profit = item.price - fee
+      "¥#{number_to_currency(profit, unit: "", strip_insignificant_zeros: true)}"
+    else
+      "-"
+    end
+  end
+
 end
