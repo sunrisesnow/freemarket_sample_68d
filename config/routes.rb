@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
+      get 'delivery_method', defaults: { format: 'json' }
+      get 'price_range', defaults: { format: 'json' }
       get 'search'
     end
     resources :trading, only: [:show, :update] do
