@@ -17,18 +17,18 @@
               出品の新しい順
         .sc-side__detail
           = search_form_for(@q, url: search_items_path, id: 'item_search_form') do |f|
-            %h3.sc-side__detail__title
+            %h4.sc-side__detail__title
               %span 詳細検索
             -# キーワードの検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-plus
                 = f.label :name_or_explanation_cont, 'キーワードを追加する'
               .sc-side__detail__field__form
                 = f.text_field :name_or_explanation_cont, placeholder: '例）値下げ', id: 'js_search_keyword', class: 'sc-side__detail__field__form__input'
             -# カテゴリーの検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-list-ul
                 = f.label :category_id, 'カテゴリーを選択する'
               .sc-side__detail__field__form
@@ -59,7 +59,7 @@
                       = f.select :category_id, @search_parents, {include_blank: "選択してください"}, {id: 'parent_category_search'}
             -# 価格の検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-search-dollar
                 = f.label :price, '価格'
               .sc-side__detail__field__form
@@ -70,7 +70,7 @@
                 = f.number_field :price_lteq, placeholder: "¥ Max", class: 'price-range__input'
             -# 商品の状態の検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-star
                 = f.label :status_id_eq, '商品の状態'
               .sc-side__detail__field__form.checkbox-list
@@ -87,7 +87,7 @@
                       = b.label { b.text}
             -# 配送料の検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-truck
                 = f.label :delivery_charge_flag, '配送料の負担'
               .sc-side__detail__field__form.checkbox-list
@@ -104,7 +104,7 @@
                       = b.label { b.text}
             -# 販売状況の検索条件
             .sc-side__detail__field
-              %h4.sc-side__detail__field__label
+              %h5.sc-side__detail__field__label
                 %i.fas.fa-shopping-cart
                 = f.label :trading_status_id_in, '販売状況'
               .sc-side__detail__field__form.checkbox-list
