@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_item_search_query
-  before_action :set_category_brand
+  before_action :set_categories
   before_action :set_address, except: [:show]
 
   def show
