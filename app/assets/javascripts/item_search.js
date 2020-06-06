@@ -285,7 +285,7 @@ $(function(){
       .done(function(grandchildren){
         if (grandchildren.length != 0) {
           //子が変更された時、孫以下を削除する
-          $('#grandchild_category_checkboxes').remove();
+          $('#grandchildren_category_checkboxes').remove();
           let insertHTML = '';
           grandchildren.forEach(function(grandchild){
             insertHTML += appendCheckbox(grandchild);
