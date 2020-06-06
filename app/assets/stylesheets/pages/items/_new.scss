@@ -20,6 +20,7 @@
       }
       &__field {
         &__form {
+          height: 100%;
           input {
             width: 100%;
             height: 40px;
@@ -31,7 +32,6 @@
           textarea {
             width: 100%;
             height: 120px;
-            // border: 1px solid $lightgray;
           }
           select {
             width: 100%;
@@ -39,9 +39,10 @@
           &--price {
             text-align: right;
           }
-        }
-        &--textarea {
-          height: 140px;
+          &__cnt {
+            text-align: right;
+            color: $gray;
+          }
         }
       }
       .field {
