@@ -118,11 +118,11 @@
         .sell-calc__detail.fee
           %h4.sell-calc__detail--label 販売手数料（10%）
           .hanbaitesuuryou
-            %span#sell-fee -
+            %span#sell-fee= item_sell_fee(@item)
         .sell-calc__detail.profit
           %h4.sell-calc__detail--label 販売利益
           .hanbairieki
-            %span#sell-profit -
+            %span#sell-profit= item_sell_profit(@item)
     .item-btn-area
       - if @item.persisted? && @item.trading_status_id == 1
         .item-btn-area__container
