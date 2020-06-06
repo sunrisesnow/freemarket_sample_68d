@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
     @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
     @category_child_array = @item.category.parent.siblings
     @category_grandchild_array = @item.category.siblings
-    @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag)
+    @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag.to_s)
   end
 
   def update
