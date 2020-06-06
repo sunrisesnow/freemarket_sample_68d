@@ -297,7 +297,7 @@ $(function(){
         alert('カテゴリー取得に失敗しました');
       })
     }else{
-      $('#grandchildren_category_search').remove();
+      $('#grandchildren_category_checkboxes').remove();
     }
   });
 
