@@ -213,20 +213,6 @@ $(function() {
     }
   }
 
-  // 画像の入力チェック
-  function imageCheck(num) {
-    const imageNext = $('#image-box-1').next();
-    if (num == 0) {
-      if (!imageNext.hasClass('error')) {
-        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
-      }
-    } else {
-      if (imageNext.hasClass('error')) {
-        imageNext.remove();
-      }
-    }
-  }
-
   $('#new_item input:required, .edit_item input:required').on('blur', function() {
     fieldBlur($(this));
   });
@@ -253,7 +239,17 @@ $(function() {
     const submitID = $(this).attr('id')
     let flag = true;
     const num = $('.item-image').length
-    imageCheck(num);
+    const imageNext = $('#image-box-1').next();
+    if (num == 0) {
+      flag = false;
+      if (!imageNext.hasClass('error')) {
+        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
+      }
+    } else {
+      if (imageNext.hasClass('error')) {
+        imageNext.remove();
+      }
+    }
 
     $('input:required').each(function(e) {
       if ($('input:required').eq(e).val() === "") {
@@ -277,12 +273,12 @@ $(function() {
     if (flag) {
       if (submitID == 'item-post-btn') {
         $("input[name='item[trading_status_id]']").val(1);
-        $('#new_item').submit();
-        $('.edit_item').submit();
+        // $('#new_item').submit();
+        // $('.edit_item').submit();
       } else {
         $("input[name='item[trading_status_id]']").val(4);
-        $('#new_item').submit();
-        $('.edit_item').submit();
+        // $('#new_item').submit();
+        // $('.edit_item').submit();
       }
     } else {
       $(this).off('submit');
