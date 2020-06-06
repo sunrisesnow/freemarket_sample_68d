@@ -19,6 +19,11 @@ describe Account do
         account.valid?
         expect(account.errors[:user_id]).to include("を入力してください")
       end
+      it "自己紹介文（introduction）1000文字以上な場合登録できないこと" do
+        account = build(:account, introduction: "あ" * 1001)
+        account.valid?
+        expect(account.errors[:introduction]).to include("は1000文字以内で入力してください")
+      end
     end
   end
 end
