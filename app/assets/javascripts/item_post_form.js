@@ -39,9 +39,9 @@ $(function() {
     const html = `<option value="${method.id}" >${method.name}</option>`;
     return html;
   }
-  function appendDeliveryMethod(insertHTML, flag) {
+  function appendDeliveryMethod(insertHTML) {
     const html = `
-      <div class='field' id='charge-${flag}'>
+      <div class='field' id='delivery_method'>
         <div class='field__label'>
           <label for="item_delivery_method_id">配送の方法</label>
           <span class='field__label--require'>必須</span>
@@ -58,8 +58,7 @@ $(function() {
 
   // 配送料の負担の選択に応じて、表示する内容を変更する動作
   $(document).on('change', '#item_delivery_charge_flag', function (){
-    const sellerChargeMethod = $('#charge-1')
-    const buyerChargeMethod = $('#charge-2')  
+    const delivery_method = $('#delivery_method')
     $("select[name='item[delivery_method_id]'] option").attr("selected", false);
     const chargeFlag = $(this).val();
     if (chargeFlag != "") {
@@ -70,20 +69,18 @@ $(function() {
         dataType: 'json'
       })
       .done(function(methods){  
-        buyerChargeMethod.remove();
-        sellerChargeMethod.remove();
+        delivery_method.remove();
         let insertHTML;
         methods.forEach(function(method) {
           insertHTML += appendMethod(method);
         })
-        appendDeliveryMethod(insertHTML, chargeFlag)
+        appendDeliveryMethod(insertHTML)
       })
       .fail(function() {
         alert('配送方法の取得に失敗しました')
       })
     } else {
-      sellerChargeMethod.remove();
-      buyerChargeMethod.remove();
+      delivery_method.remove();
     }
   });
 });
