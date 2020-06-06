@@ -177,9 +177,9 @@ class ItemsController < ApplicationController
     params.require(:q).permit(
       :name_or_explanation_cont,
       :category_id,
-      :category_id_in,
       :price_gteq,
       :price_lteq,
+      category_id_in: [],
       status_id_in: [],
       delivery_charge_flag_in: [],
       trading_status_id_in: [],
