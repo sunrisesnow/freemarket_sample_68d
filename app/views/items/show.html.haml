@@ -21,9 +21,7 @@
                         .mini-images
                           =image_tag image.image.url
             .itembox__price
-              %span
-                ¥
-                = @item.price.to_s(:delimited)
+              %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
                 %span
                   (税込)
