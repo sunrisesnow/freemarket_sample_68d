@@ -200,12 +200,14 @@ $(function() {
       case "sell-price-input":
         if (value < 300 || value >= 10000000) {
           if (!priceNext.hasClass('error')) {
+            input.addClass('error');
             input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
           }
         } else if (priceNext.hasClass('error')) {
+          input.removeClass('error')
           priceNext.remove();
         } else {
-          ;
+          input.removeClass('error')
         }
         break;
       default:
