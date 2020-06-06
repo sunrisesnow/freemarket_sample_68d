@@ -32,9 +32,8 @@ class ApplicationController < ActionController::Base
     @items = @q.result(distinct: true)
   end
 
-  def set_category_brand
+  def set_categories
     @parents = Category.ancestries(nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
 
   def item_user?
