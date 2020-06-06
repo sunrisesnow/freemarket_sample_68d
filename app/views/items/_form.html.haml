@@ -20,12 +20,18 @@
           %span.field__label--require 必須
         .field__form.item-area__field__form
           = f.text_field :name, placeholder: '40文字まで', required: :true
+          .item-area__field__form__cnt
+            %span.now_cnt_name 0
+            %span / 40
       .field
         .field__label
           = f.label :explanation, '商品の説明'
           %span.field__label--require 必須
         .item-area__field__form.item-area__field--textarea
           = f.text_area :explanation, required: :true, placeholder: '商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）'
+          .item-area__field__form__cnt
+            %span.now_cnt_explanation 0
+            %span / 1000
     .item-area.item-detail
       %h3.item-area__name 商品の詳細
       .field
