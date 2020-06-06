@@ -240,6 +240,7 @@ $(function() {
     let flag = true;
     const num = $('.item-image').length
     const imageNext = $('#image-box-1').next();
+
     if (num == 0) {
       flag = false;
       if (!imageNext.hasClass('error')) {
@@ -273,12 +274,12 @@ $(function() {
     if (flag) {
       if (submitID == 'item-post-btn') {
         $("input[name='item[trading_status_id]']").val(1);
-        // $('#new_item').submit();
-        // $('.edit_item').submit();
+        $('#new_item').submit();
+        $('.edit_item').submit();
       } else {
         $("input[name='item[trading_status_id]']").val(4);
-        // $('#new_item').submit();
-        // $('.edit_item').submit();
+        $('#new_item').submit();
+        $('.edit_item').submit();
       }
     } else {
       $(this).off('submit');
