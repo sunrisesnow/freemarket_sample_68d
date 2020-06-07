@@ -30,7 +30,7 @@ class EvaluationsController < ApplicationController
       params.require(:evaluation).permit(
         :comment,
         :evaluation).merge(user_id: @saler_user.id, saler_id: @saler_user.id, buyer_id: @buyer_user.id)
-    else
+    elsif @item.trading_status_id == 3
       params.require(:evaluation).permit(
         :comment,
         :evaluation).merge(user_id: @buyer_user.id, saler_id: @saler_user.id, buyer_id: @buyer_user.id)
