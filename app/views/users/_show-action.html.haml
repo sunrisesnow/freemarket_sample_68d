@@ -7,8 +7,10 @@
     .mypage-user-icon-nav
       %p
         評価
+        = current_user.evaluations.count
       %p
         出品数
+        = Item.where(saler_id: current_user.id).including.count
 
   .mypage-tab-container-notification-todo
     .mypage-tabs

@@ -75,8 +75,6 @@ module TradingHelper
       case item.trading_status_id
         when 1
           link_to "商品を発送する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
-        when 3
-          link_to "取引を完了する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
         when 5
           link_to "この商品を削除する", item_path(item), method: :delete, class: "content__trading__box__btn", data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
         when 6
@@ -88,8 +86,6 @@ module TradingHelper
       end
     when buyer_user
       case item.trading_status_id
-        when 2
-          link_to "受け取り評価完了", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
         when 5
           "取引は完了しました"
         when 7

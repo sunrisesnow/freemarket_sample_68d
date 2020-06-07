@@ -41,3 +41,22 @@
     color: white;
   }
 }
+
+@mixin radio__btn($color) {
+  text-align: center;
+  height: 80px;
+  width: 70px;
+  padding-top: 10px;
+  border: 2px solid $lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+  p{
+    font-size: 15px;
+  }
+  .fas{
+    color: $color;
+  }
+}
+@mixin checked__radio($color) {
+  border: 2px solid $color;
+}

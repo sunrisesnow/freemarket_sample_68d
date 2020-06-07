@@ -1,10 +1,16 @@
+
 .content__trading__nav
   %i.fas.fa-truck-moving
   = trading_status_check(item ,saler_user,  buyer_user)
-.content__trading__box
-  = transaction_button(item ,saler_user, buyer_user)
+- if item.trading_status_id == 2 && buyer_user == current_user
+  = render partial: 'evaluation-form', locals: { item: item , saler_user: saler_user, buyer_user: buyer_user, evaluation: evaluation}
+- elsif item.trading_status_id == 3 && saler_user == current_user
+  = render partial: 'evaluation-form', locals: { item: item , saler_user: saler_user, buyer_user: buyer_user, evaluation: evaluation}
+- else
+  .content__trading__box
+    = transaction_button(item ,saler_user, buyer_user)
 - if item.trading_status_id == 1
   .content__trading__cancel__box
     = link_to "取引キャンセル申請を送る", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__cancel__box__btn", remote: true, data: { disable_with: "送信中..." }
     %p
-      ※商品発送後は、お取引キャンセルは出来兼ねますのでお取引キャンセルを行いたい場合は速やかに、取引キャンセル願いを送ってください
+      ※商品発送後は、お取引キャンセルは出来兼ねますのでお取引キャンセルを行いたい場合は速やかに、取引キャンセル申請を送ってください
