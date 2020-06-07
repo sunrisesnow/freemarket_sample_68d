@@ -13,11 +13,20 @@
     height: 165px;
     background-color: white;
     text-align: center;
+    .mypage__background{
+      height: 75px;
+      width: 100%;
+    }
     .user__mypage--big--icon{
       border-radius: 100px;
       position: absolute;
       top: 6%;
       right: 42%;
+      height: 50px;
+      width: 50px;
+    }
+    .user__nickname{
+      padding-top: 10px;
     }
     .user__details{
       padding-top: 20px;
@@ -45,6 +54,11 @@
         font-weight: normal;
         font-size: 13px;
         position: relative;
+        &__price{
+          position: absolute;
+          right: 25px;
+          top: 10px;
+        }
         &:hover{
           opacity: 0.6;
           .fa-chevron-right{
@@ -58,7 +72,7 @@
           color: $lightgray;
           position: absolute;
           right: 10px;
-          top: 12.5px;
+          top: 11.5px;
         }
       }
     }
@@ -75,7 +89,7 @@
         opacity: 0.8;
         .fa-chevron-right{
           color: black;
-          transform: scale(1.5);	/*画像の拡大率*/
+          transform: scale(1.5);
 	        transition-duration: 0.3s;
         }
       }
@@ -96,4 +110,57 @@
       display: block;
     }
   }
+}
+
+.todo__content{
+  right: 14%;
+  display: none;
+}
+.news__content{
+  right: 26.5%;
+  display: none;
+}
+.nothice__list{
+  z-index: 1000;
+  width: 300px;
+  background-color: white;
+  border-top: 1px solid $whitesmoke;
+  top: 40px;
+  position: absolute;
+  padding: 55px 30px;
+  text-align: center;
+  color:$lightgray;
+  p{
+    padding-top: 35px;
+  }
+}
+
+.news__content--link{
+  position: relative;
+  &:hover{
+    .news__content{
+      display: block;
+      right: -110px;
+
+      &:hover{
+        .user__news--list{
+          color: $mainblueColor;
+        }
+      }
+    }
+  }
+}
+.todo__content--link{
+  position: relative;
+  &:hover{
+    .todo__content{
+      display: block;
+      right: -90px;
+    }
+  }
+}
+
+.item-list__nothing{
+  font-size: 18px;
+  color: gray;
 }

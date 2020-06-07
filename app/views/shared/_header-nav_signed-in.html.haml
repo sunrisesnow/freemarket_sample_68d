@@ -1,7 +1,7 @@
 .header__right--content--menu
-  = link_to "#", class: "user__liked--list header__right--content--menu--list" do
-    %i.far.fa-heart.header__right--content--icon.fa-lg
-    %span いいね！一覧
+  = link_to user_likes_path(current_user), class: "user__liked--list header__right--content--menu--list" do
+    %i.far.fa-star.header__right--content--icon.fa-lg
+    %span お気に入り！一覧
 .header__right--content--menu.news__content--link
   = link_to "#", class: "user__news--list header__right--content--menu--list" do
     %i.far.fa-bell.header__right--content--icon.fa-lg
@@ -18,41 +18,39 @@
     %p 現在やることリストはありません
 .header__right--content--menu.mypage__content--link
   =  link_to user_path(current_user.id), class: "user__mypage header__right--content--menu--list" do
-    = image_tag "member_photo_noimage.png", class: "user__mypage--icon",height: "30px", width: "30px"
+    = header_icon_image_present?(current_user.account)
     %p マイページ
   .mypage__container
     .mypage__container--top
-      = image_tag "user-background.jpg", height: "75px", width: "100%", class: "mypage__background" 
-      = image_tag "member_photo_noimage.png", class: "user__mypage--big--icon",height: "50px", width: "50px"
-      = current_user.nickname
+      = tab_icon_image_present?(current_user.account)
+      = tab_background_image_present?(current_user.account)
+      .user__nickname
+        = current_user.nickname.truncate(15, omission: '...')
       .user__details
         = link_to "#", class: "user__detaild--evaluation user__details--link" do
-          %span 評価：１
+          %span 評価：
+          = current_user.evaluations.count
         = link_to "#", class: "user__detaild--saled user__details--link" do
-          %span 出品数：１   
+          %span 出品数：
+          = Item.where(saler_id: current_user.id).including.count 
     .mypage__container--menu
       .menu__sales
-        = link_to  "#", class: "proceeds__link " do
-          %span 売上金
-          %i.fas.fa-chevron-right
-        = link_to "#", class: "proceeds__link" do
-          %span フリマポイント
-          %i.fas.fa-chevron-right
-      = link_to "#", class: "mypage__container--menu--link" do
-        %span いいね！一覧
+        = render "shared/header-price_point"
+      = link_to user_likes_path(current_user), class: "mypage__container--menu--link" do
+        %span お気に入り！一覧
         %i.fas.fa-chevron-right    
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to exhibition_users_path, class: "mypage__container--menu--link" do
         %span 出品した商品-出品中
         %i.fas.fa-chevron-right
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to  exhibition_trading_users_path, class: "mypage__container--menu--link" do
         %span 出品した商品-取引中
         %i.fas.fa-chevron-right  
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to exhibition_completed_users_path, class: "mypage__container--menu--link" do
         %span 出品した商品-売却済
         %i.fas.fa-chevron-right  
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to bought_users_path, class: "mypage__container--menu--link" do
         %span 購入した商品-取引中
         %i.fas.fa-chevron-right 
-      = link_to "#", class: "mypage__container--menu--link" do
+      = link_to  bought_completed_users_path, class: "mypage__container--menu--link" do
         %span 購入した商品-過去の取引
         %i.fas.fa-chevron-right                         

@@ -1,3 +1,7 @@
+.item-sell-wrapper {
+  height: 100%;
+  background-color: $whitesmoke;
+}
 .sell-form-wrapper {
   background-color: $whitesmoke;
   position: relative;
@@ -16,6 +20,7 @@
       }
       &__field {
         &__form {
+          height: 100%;
           input {
             width: 100%;
             height: 40px;
@@ -27,7 +32,6 @@
           textarea {
             width: 100%;
             height: 120px;
-            // border: 1px solid $lightgray;
           }
           select {
             width: 100%;
@@ -35,9 +39,10 @@
           &--price {
             text-align: right;
           }
-        }
-        &--textarea {
-          height: 140px;
+          &__cnt {
+            text-align: right;
+            color: $gray;
+          }
         }
       }
       .field {
@@ -61,19 +66,25 @@
         margin: 24px;
         &__box {
           margin: 0 auto;
-          #item-post-btn {
-            background-color: $skyblue;
-          }
-          #item-draft-btn {
-            background-color: $gray;
-            padding: 12px 0;
-          }
           .item-btn {
             display: inline-block;
             height: 50px;
             width: 360px;
             border: solid 1px $lightgray;
+            background-color: $skyblue;
             color: white;
+            &:hover {
+              opacity: 0.5;
+              transition: 1s;
+            }
+          }
+          #item-draft-btn {
+            background-color: $gray;
+            padding: 12px 0;
+            transition: 0.5s;
+            &:hover{
+              opacity: 0.7;
+            }
           }
         }
       }
@@ -91,7 +102,12 @@
     width: 100%;
     height: 160px;
     border: dashed 1px $lightgray;
+    border-radius: 3px;
     background-color: $whitesmoke;
+    &:focus {
+      border: 1px solid $skyblue;
+      outline: 0;
+    }
     &__label {
       display: block;
       width: 100%;
@@ -226,4 +242,18 @@ margin: 0;
 
 .drag-area {
   height: 160px;
+}
+
+.item-btn-red{
+  background-color: $sign-up-btn;
+  line-height: 50px;
+  display: inline-block;
+  height: 50px;
+  width: 360px;
+  color: white;
+  &:hover {
+    opacity: 0.5;
+    transition: 1s;
+    color: white;
+  }
 }

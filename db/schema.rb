@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_112340) do
+ActiveRecord::Schema.define(version: 2020_06_07_051917) do
+
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "icon_image"
+    t.string "background_image"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -45,6 +55,19 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "saler_id", null: false
+    t.bigint "buyer_id", null: false
+    t.text "comment"
+    t.integer "evaluation", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_evaluations_on_buyer_id"
+    t.index ["saler_id"], name: "index_evaluations_on_saler_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
+
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.string "image", null: false
@@ -58,7 +81,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.integer "saler_id"
     t.string "name", null: false
     t.text "explanation"
-    t.string "delivery_charge_flag", null: false
+    t.integer "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -74,10 +97,40 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_likes_on_item_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "from_id", null: false
+    t.bigint "to_id", null: false
+    t.bigint "room_id", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id"], name: "index_messages_on_from_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["to_id"], name: "index_messages_on_to_id"
+  end
+
+  create_table "points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "point", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_points_on_user_id"
+  end
+
+  create_table "sales_prices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sales_prices_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,7 +142,6 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
     t.date "birthday", null: false
-    t.string "icon_image"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -99,8 +151,19 @@ ActiveRecord::Schema.define(version: 2020_05_09_112340) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "addresses", "users"
   add_foreign_key "cards", "users"
+  add_foreign_key "evaluations", "users"
+  add_foreign_key "evaluations", "users", column: "buyer_id"
+  add_foreign_key "evaluations", "users", column: "saler_id"
   add_foreign_key "images", "items"
   add_foreign_key "items", "categories"
+  add_foreign_key "likes", "items"
+  add_foreign_key "likes", "users"
+  add_foreign_key "messages", "items", column: "room_id"
+  add_foreign_key "messages", "users", column: "from_id"
+  add_foreign_key "messages", "users", column: "to_id"
+  add_foreign_key "points", "users"
+  add_foreign_key "sales_prices", "users"
 end

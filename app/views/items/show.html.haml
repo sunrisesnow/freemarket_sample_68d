@@ -6,7 +6,7 @@
         .main-item__content--form
           .itembox
             %h2.itembox__name
-              = @item.name
+              = @item.name.truncate(30, omission: '...')
             .itembox__image
               %ul
                 %li
@@ -15,22 +15,16 @@
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  %ul
-                    - @item.images.each do |image|
-                      %li
                   .mini-image
-                    - @item.images.each do |image|
-                      .mini-images
-                        =image_tag image.image.url
+                    - @item.images.each_with_index do |image, i|
+                      - unless i == 0
+                        .mini-images
+                          =image_tag image.image.url
             .itembox__price
-              %span
-                ¥
-                = @item.price
+              %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
-                %span
-                  (税込)
-                %span
-                  送料込み
+                %span (税込)
+                %span= delivery_charge(@item)
             .itembox__detail
               - if @item.buyer_id.present?
                 .itembox__detail--sold
@@ -39,7 +33,7 @@
               - elsif user_signed_in? && @item.saler_id != current_user.id
                 .itembox__detail--buy
                   %button.itembox__detail--buy--btn
-                    = link_to "購入する",check_card_path(@item.id) 
+                    = link_to "購入画面に進む",check_card_path(@item.id) 
               - elsif user_signed_in? && @item.saler_id = current_user.id
                 .itembox__detail--edit
                   %button.itembox__detail--edit--btn
@@ -47,7 +41,7 @@
                 .itembox__detail--or or
                 .itembox__detail--delete
                   %button.itembox__detail--delete--btn
-                    = link_to "この出品を削除する", item_path(@item.id), method: :delete
+                    = link_to "この出品を削除する", item_path(@item.id), method: :delete, data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する',disable_with: "処理中..."}, title: '削除確認'
             .itembox__explanation
               = @item.explanation
             .itembox__table
@@ -70,20 +64,13 @@
                       = link_to category_path(@item.category) do
                         =@item.category.name
                   %tr
-                    %th ブランド
-                    %td
-                      -# = @caregory_brand
-                  %tr
                     %th 商品の状態
                     %td 
                       = @item.status.name
                   %tr
                     %th 配送料の負担
                     %td 
-                      - if @item.delivery_charge_flag = 1
-                        送料込み(出品者負担)
-                      - elsif @item.delivery_charge_flag = 2
-                        着払い(購入者負担)
+                      = delivery_charge_full(@item)
                   %tr
                     %th 発送元の地域
                     %td
@@ -98,11 +85,7 @@
                     %td
                       = @item.delivery_method.name
             .itembox__option
-              %ul
-                %li.like-btn
-                  = link_to '#' do
-                    %i.fa.fa-star
-                    お気に入り 0
+              = render partial: 'likes/like', locals: { item: @item}
               %ul.optical
                 %li.report-btn
                   = link_to '#' do
@@ -132,17 +115,5 @@
           =link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
             をもっと見る
-  .app-banner
-    .app-banner__inner
-      %h2.app-banner__inner-title
-        人生を変えるフリマアプリ
-      %p.app-banner__inner-text
-        FURIMAは誰でもかんたんに出品・購入できるフリマアプリです
-      .app-banner__inner-icon
-        .app-banner__inner-icon__left
-          = link_to "#" do
-            = image_tag "app-store.svg"
-        .app-banner__inner-icon__right
-          = link_to "#" do
-            = image_tag "google-play.svg"  
+  = render "shared/footer-image"
   = render "shared/footer"
