@@ -1,0 +1,21 @@
+= form_with model: [item, evaluation], id: "evaluation__form" do |f|
+  .field__radio
+    = f.radio_button :evaluation, 1, id: "good", required: true
+    = f.label :良い, for: "good" do
+      %i.fas.fa-laugh.fa-2x
+      %p 良い
+    = f.radio_button :evaluation, 2, id: "normal", required: true
+    = f.label :普通, for: "normal" do
+      %i.fas.fa-meh.fa-2x
+      %p 普通
+    = f.radio_button :evaluation, 3, id: "bad", required: true
+    = f.label :悪い, for: "bad" do
+      %i.fas.fa-frown.fa-2x
+      %p 悪い
+  .field__comment
+    = f.text_area :comment, placeholder: "例）お取引ありがとうございました。"
+  .field__action
+    - if item.trading_status_id == 2
+      = f.submit "受け取り評価を完了する", id: "evaluation__btn", data: { disable_with: "処理中..." }
+    - else
+      = f.submit "取引評価を完了する", id: "evaluation__btn", data: { disable_with: "処理中..." }

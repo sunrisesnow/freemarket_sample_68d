@@ -39,12 +39,10 @@ Things you may want to cover:
 |birthday|date|null: false|
 
 ### Association
-- has_many :saling_items, -> { where(buyer_id is NULL) }, foreign_key: saler_id,     class_name: item
-- has_many :sold_items, -> { where(buyer_id is not NULL) }, foreign_key: saler_id, class_name: item
-- has_many :buyed_items, foreign_key: buyer_id, class_name: Item
 - has_many :likes
 - has_many :from_messages, class_name: "Message", foreign_key: "from_id"
 - has_many :comments
+- has_many :evaluations
 - has_one  :address
 - has_one  :card
 - has_one  :account
@@ -85,8 +83,8 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|buyer_id|references|foreign_key: true|
-|saler_id|references|foreign_key: true, null: false|
+|buyer_id|integer||
+|saler_id|references|integer, null: false|
 |category_id|references|null: false, foreign_key: true|
 |name|string|null: false|
 |explanation|text|null, false|
@@ -98,8 +96,6 @@ Things you may want to cover:
 |delivery_method|string|null: false|
 
 ### Association
-- belongs_to :buyer, class_name: User
-- belongs_to :saler, class_name: User
 - belongs_to :category
 - belongs_to :brand
 - has_many   :likes
@@ -201,3 +197,19 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
+
+## evaluationsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|user|references|null: false, foreign_key: true|
+|saler|references|null: false, foreign_key: {to_table: users}|
+|buyer|references|null: false, foreign_key: {to_table: users}|
+|comment|text||
+|evaluation|integer|null: false|
+
+## Association
+
+- belongs_to :user
+- belongs_to :saler, class_name: "User"
+- belongs_to :buyer, class_name: "User"

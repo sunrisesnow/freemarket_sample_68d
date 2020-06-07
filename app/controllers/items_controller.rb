@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
     @parents = Category.ancestries(nil).name_not("カテゴリー一覧")
     @category_child_array = @item.category.parent.siblings
     @category_grandchild_array = @item.category.siblings
-    @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag)
+    @delivery_methods = DeliveryMethod.find_all_by_flag(@item.delivery_charge_flag.to_s)
   end
 
   def update
@@ -89,7 +89,7 @@ class ItemsController < ApplicationController
     @search_parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
 
     sort = params[:sort] || "created_at DESC"
-    @q = Item.includes(:images).search(search_params)
+    @q = Item.includes(:images).where.not(trading_status_id: 4).search(search_params)
     @items = @q.result(distinct: true).order(sort)
 
     # 販売状況が検索条件にあるとき

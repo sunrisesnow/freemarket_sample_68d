@@ -1,5 +1,5 @@
 - unless item.trading_status_id == 5 || item.trading_status_id == 8
-  = form_with model: [item, message], remote: true do |f|
+  = form_with model: [item, message] do |f|
     .field
       = f.text_area :message, placeholder: "取引に関する連絡を取ろう！", required: true, rows: 7
     .field

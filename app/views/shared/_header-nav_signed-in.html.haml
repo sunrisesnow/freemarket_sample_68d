@@ -28,9 +28,11 @@
         = current_user.nickname.truncate(15, omission: '...')
       .user__details
         = link_to "#", class: "user__detaild--evaluation user__details--link" do
-          %span 評価：１
+          %span 評価：
+          = current_user.evaluations.count
         = link_to "#", class: "user__detaild--saled user__details--link" do
-          %span 出品数：１   
+          %span 出品数：
+          = Item.where(saler_id: current_user.id).including.count 
     .mypage__container--menu
       .menu__sales
         = render "shared/header-price_point"

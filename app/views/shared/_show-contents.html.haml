@@ -1,7 +1,7 @@
 
 %ul.contents-mypage
   %li
-    = link_to user_path(current_user.id), class:"contents-mypage-link" do
+    = link_to user_path(current_user), class:"contents-mypage-link" do
       マイページ
       %i.fas.fa-chevron-right
   %li 
@@ -44,23 +44,10 @@
     = link_to bought_completed_users_path, class:"contents-mypage-link" do
       購入した商品-過去の取引
       %i.fas.fa-chevron-right
-  %li
-    = link_to "#", class:"contents-mypage-link" do
-      ニュース一覧
-      %i.fas.fa-chevron-right
   %li 
     = link_to "#", class:"contents-mypage-link" do
       評価一覧
       %i.fas.fa-chevron-right
-  %li 
-    = link_to "#", class:"contents-mypage-link" do
-      ガイド
-      %i.fas.fa-chevron-right
-  %li
-    = link_to "#", class:"contents-mypage-link" do
-      お問い合わせ
-      %i.fas.fa-chevron-right
-
   %h4 メルペイ
   %li 
     = link_to "#", class:"contents-mypage-link" do
