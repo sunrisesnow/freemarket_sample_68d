@@ -11,6 +11,6 @@
     = transaction_button(item ,saler_user, buyer_user)
 - if item.trading_status_id == 1
   .content__trading__cancel__box
-    = link_to "取引キャンセル申請を送る", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__cancel__box__btn", remote: true, data: { disable_with: "送信中..." }
+    = link_to "取引キャンセル申請を送る", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__cancel__box__btn", remote: true, data: { confirm: '取引キャンセル申請してよろしいですか?',cancel: 'やめる',commit: '申請する', disable_with: "処理中..." }, title: '申請確認'
     %p
       ※商品発送後は、お取引キャンセルは出来兼ねますのでお取引キャンセルを行いたい場合は速やかに、取引キャンセル申請を送ってください

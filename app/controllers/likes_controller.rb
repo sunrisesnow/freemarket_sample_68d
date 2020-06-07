@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   before_action :set_item_search_query
   before_action :set_item, except: [:index]
-  before_action :set_category_brand,  only: [:index]
+  before_action :set_categories,  only: [:index]
   before_action :move_show_item, except: [:index]
 
   def index

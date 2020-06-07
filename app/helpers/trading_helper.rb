@@ -74,11 +74,11 @@ module TradingHelper
     when saler_user
       case item.trading_status_id
         when 1
-          link_to "商品を発送する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
+          link_to "商品を発送する", item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true,data: { confirm: '商品発送通知を送信してよろしいですか?',cancel: 'やめる',commit: '承認する', disable_with: "処理中..." }, title: '発送確認'
         when 5
           link_to "この商品を削除する", item_path(item), method: :delete, class: "content__trading__box__btn", data: { confirm: '本当に削除して良いですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
         when 6
-          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
+          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { confirm: '取引キャンセルを承認してよろしいですか?',cancel: 'やめる',commit: '承認する', disable_with: "処理中..." }, title: '承認確認'
         when 8
           link_to "再度この商品を出品する", relist_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", data: { disable_with: "処理中..." }
         else
@@ -89,7 +89,7 @@ module TradingHelper
         when 5
           "取引は完了しました"
         when 7
-          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { disable_with: "処理中..." }
+          link_to "取引キャンセルを承認する", cancel_item_trading_path(item, current_user), method: :patch, class: "content__trading__box__btn", remote: true, data: { confirm: '取引キャンセルを承認してよろしいですか?',cancel: 'やめる',commit: '承認する', disable_with: "処理中..." }, title: '承認確認'
         when 8
           "取引は正常にキャンセルされました"
         else

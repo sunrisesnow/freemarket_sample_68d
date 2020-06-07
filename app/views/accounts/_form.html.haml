@@ -14,7 +14,7 @@
           = image_tag "member_photo_noimage.png", class: "account__image__form__icon",  height: "70px", width: "70px" 
         = f.file_field :icon_image, class: 'hidden__file'
   .account__text__field
-    = f.text_area :introduction, placeholder: "例）こんにちは！ご覧いただきありがとうございます！かっこいいものや便利な小道具を中心に出品しています。服のサイズはほとんどがMサイズです！気持ちよくお取引できるように心がけていますので、商品や配送方法などご質問ありましたらお気軽にどうぞ！"
+    = f.text_area :introduction, placeholder: "例）こんにちは！ご覧いただきありがとうございます！かっこいいものや便利な小道具を中心に出品しています。服のサイズはほとんどがMサイズです！気持ちよくお取引できるように心がけていますので、商品や配送方法などご質問ありましたらお気軽にどうぞ！", maxlength: "1000"
   - if @account.persisted?
     .account__submit__field
       = f.submit "プロフィールを編集する", class: "account__submit__field__btn", data: {disable_with: "処理中..."}
