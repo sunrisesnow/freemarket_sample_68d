@@ -11,7 +11,19 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :tops, only: [:new]
-  resources :users, only: [:show]
+  resources :accounts, except: [:show, :index]
+  resources :addresses, only: [:edit, :update, :show]
+  resources :users, only: [:show, :index] do
+    resources :likes, only: [:index]
+    collection do
+      get 'draft'
+      get 'exhibition'
+      get 'exhibition_trading'
+      get 'exhibition_completed'
+      get 'bought'
+      get 'bought_completed'
+    end
+  end
   resources :categories, only: [:index, :show] 
   resources :cards, except: [:show,:edit,:update] do
     member do
@@ -19,10 +31,23 @@ Rails.application.routes.draw do
       get 'buy'
     end
   end
+  
   resources :items do
+    resources :likes, only: [:create, :destroy]
+    resources :evaluations, only: [:create]
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
+      get 'delivery_method', defaults: { format: 'json' }
+      get 'price_range', defaults: { format: 'json' }
+      get 'search'
     end
+    resources :trading, only: [:show, :update] do
+      member do
+        patch 'cancel'
+        patch 'relist'
+      end
+    end
+    resources :messages, only: [:create, :destroy]
   end
 end

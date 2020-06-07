@@ -1,3 +1,5 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import "reset";
 @import "config/color";
 @import "mixin/mixin";
@@ -10,17 +12,29 @@
 @import "modules/form";
 @import "modules/category";
 @import "modules/brand";
+@import "modules/pagination";
 @import "pages/tops/index";
 @import "pages/tops/new";
 @import "pages/items/index";
 @import "pages/items/new";
 @import "pages/items/show";
+@import "pages/items/create";
+@import "pages/items/search";
+@import "pages/likes/index";
 @import "pages/registrations/header";
 @import "pages/registrations/new_address";
 @import "pages/registrations/new";
 @import "pages/registrations/sessions";
 @import "pages/users/cards";
 @import "pages/users/show";
+@import "pages/users/edit";
+@import "pages/users/index";
+@import "pages/users/password_forgot";
+@import "pages/accounts/new_edit";
+@import "pages/addresses/edit";
+@import "pages/trading/show";
+@import "pages/trading/messages";
+@import "pages/evaluations/create";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 

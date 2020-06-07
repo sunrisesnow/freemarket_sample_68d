@@ -1,0 +1,19 @@
+- if user_signed_in? && item.saler_id != current_user.id
+  - if current_user.already_liked?(item)
+    - like = Like.find_by(user_id: current_user, item_id: item)
+    .like-btn
+      = link_to item_like_path(item, like),  method: :delete, remote: true, class: "like-btn-delete-link" do
+        %i.fa.fa-star
+        お気に入り！
+        = item.likes.count
+  - else 
+    .like-btn
+      = link_to item_likes_path(item), method: :post, remote: true, class: "like-btn-link" do
+        %i.fa.fa-star
+        お気に入り！
+        = item.likes.count
+-else
+  .like-btn.like-btn-link
+    %i.fa.fa-star
+    お気に入り！
+    = item.likes.count

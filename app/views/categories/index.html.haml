@@ -8,7 +8,7 @@
       カテゴリー一覧
   .category__container
     .category__container--top
-      %h3
+      .category__container--top__title
         カテゴリー一覧
       - @parents.each_with_index do |parent, i|
         - unless parent.name.include?("カテゴリー一覧")

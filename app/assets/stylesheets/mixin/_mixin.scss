@@ -11,3 +11,52 @@
     opacity: $opacity;
   }
 }
+@mixin messages__box{
+  margin-top: 50px;
+  width: 90%;
+  padding: 10px 20px;
+  border-radius: 7px;
+  position: relative;
+  word-wrap: break-word;
+}
+@mixin message__user__icon{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  position: absolute;
+  top: -35px;
+}
+@mixin trading__btn{
+  display: inline-block;
+  background-color: $sign-up-btn;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  width: 50%;
+  transition: 0.5s;
+  &:hover{
+    opacity: 0.6;
+    color: white;
+  }
+}
+
+@mixin radio__btn($color) {
+  text-align: center;
+  height: 80px;
+  width: 70px;
+  padding-top: 10px;
+  border: 2px solid $lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+  p{
+    font-size: 15px;
+  }
+  .fas{
+    color: $color;
+  }
+}
+@mixin checked__radio($color) {
+  border: 2px solid $color;
+}

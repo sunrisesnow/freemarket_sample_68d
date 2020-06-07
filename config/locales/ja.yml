@@ -1,4 +1,11 @@
 ja:
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前へ"
+      next: "次へ &rsaquo;"
+      truncate: "..."
   recaptcha: 
     errors: 
       verification_failed: 'reCAPTCHA認証に失敗しました。' 
