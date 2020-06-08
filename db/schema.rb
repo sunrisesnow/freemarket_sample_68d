@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_143341) do
+ActiveRecord::Schema.define(version: 2020_06_05_101600) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -102,6 +102,18 @@ ActiveRecord::Schema.define(version: 2020_06_03_143341) do
     t.index ["from_id"], name: "index_messages_on_from_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["to_id"], name: "index_messages_on_to_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.integer "item_id"
+    t.integer "comment_id"
+    t.integer "like_id"
+    t.string "action"
+    t.boolean "checked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

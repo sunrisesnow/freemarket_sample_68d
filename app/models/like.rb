@@ -7,4 +7,16 @@ class Like < ApplicationRecord
   validates :user_id, presence: true
   validates :item_id, presence: true
   validates_uniqueness_of :item_id, scope: :user_id
+
+  has_many :notifications, dependent: :destroy
+
+  def create_notification_by(current_user)
+    notification = current_user.active_notifications.new(
+      item_id: item.id,
+      receiver_id: item.saler_id,
+      like_id: self.id,
+      action: "like"
+    )
+    notification.save
+  end
 end
