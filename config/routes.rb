@@ -42,4 +42,5 @@ Rails.application.routes.draw do
     resources :trading, only: [:show, :update]
     resources :messages, only: [:create, :destroy]
   end
+  resources :notifications, only: [:index]
 end

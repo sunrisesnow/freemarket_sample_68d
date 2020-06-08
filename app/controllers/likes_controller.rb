@@ -14,7 +14,7 @@ class LikesController < ApplicationController
   end
 
   def create
-    like = Like.create(user_id: current_user.id, item_id: params[:item_id])
+    like = Like.create(user_id: current_user.id, item_id: params[:item_id])&.create_notification_by(current_user)
   end
 
   def destroy
