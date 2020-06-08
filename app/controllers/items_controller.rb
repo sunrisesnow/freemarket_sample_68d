@@ -94,16 +94,13 @@ class ItemsController < ApplicationController
 
     # 販売状況が検索条件にあるとき
     if trading_status_key = params.require(:q)[:trading_status_id_in]
+      @q = Item.includes(:images).search(search_params_for_trading_status)
       if trading_status_key.count == 1 && trading_status_key == ["3"]
         sold_items = Item.where.not(buyer_id: nil)
         @items = @items & sold_items
-        @q = Item.includes(:images).search(search_params_for_trading_status)
       elsif trading_status_key.count == 1 && trading_status_key == ["1"]
         selling_items = Item.where(buyer_id: nil)
         @items = @items & selling_items
-        @q = Item.includes(:images).search(search_params_for_trading_status)
-      elsif trading_status_key.count == 2
-        @q = Item.includes(:images).search(search_params_for_trading_status)
       end
     end
 
