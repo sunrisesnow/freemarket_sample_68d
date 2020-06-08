@@ -1,0 +1,35 @@
+.notification
+  .notification__contents
+    .notification__contents__message
+      -if @notifications.present?
+        - @notifications.each do |notice|
+          -# -if notice.comment_id.present?
+          -#   .notification__contents__message__box
+          -#     .notification__contents__message__box--icon
+          -#       = icon('far', 'user', class:"notification--icon") 
+          -#     .notification__contents__message__box--text
+          -#       %span.notification--user= "#{notice.sender.nickname}"
+          -#       が
+          -#       %a.notification--item(href="item_path(notice.item_id")="#{notice.item.name}"
+          -#       にコメントしました
+          -#     .notification__contents__message__box--time
+          -#       = icon('far', 'clock', class:"notification--clock") 
+          -#       = time_ago_in_words(notice.created_at) + "前"
+          -#     = icon('fas', 'chevron-right', class:"notification--chevron")
+          -if notice.like_id.present?
+            = link_to "/items/#{notice.item.id}" do
+              .notification__contents__message__box
+                .notification__contents__message__box--icon
+                  = icon('far', 'user', class:"notification--icon") 
+                .notification__contents__message__box--text
+                  %span.notification--user= "#{notice.sender.nickname}"
+                  が
+                  %span.notification--item= "#{notice.item.name}"
+                  にイイねしました
+                .notification__contents__message__box--time
+                  = icon('far', 'clock', class:"notification--clock") 
+                  = time_ago_in_words(notice.created_at) + "前"
+                = icon('fas', 'chevron-right', class:"notification--chevron")
+.tab-content
+  = link_to "#", class: "show-message-list" do
+    一覧を見る 
