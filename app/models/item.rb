@@ -15,6 +15,7 @@ class Item < ApplicationRecord
 
   scope :desc,                 -> {order('created_at DESC')}
   scope :including,            -> {includes(:images)}
+  scope :not_draft,            -> {including.where.not(trading_status_id: 4)}
   scope :trading_not,          -> {where.not(trading_status_id: 4..5)}
   scope :category,             -> (category_id)       {where(category_id: category_id)}
   scope :draft,                -> (saler_id)          {including.where(saler_id: saler_id).where(trading_status_id: 4)}
