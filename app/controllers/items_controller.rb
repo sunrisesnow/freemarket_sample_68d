@@ -88,10 +88,16 @@ class ItemsController < ApplicationController
     @keyword = params.require(:q)[:name_or_explanation_cont]
     @search_parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
 
-    sort = params[:sort] || "created_at DESC"
+    sort = params[:sort] || "created_at DESC"      
     @q = Item.includes(:images).where.not(trading_status_id: 4).search(search_params)
-    @items = @q.result(distinct: true).order(sort)
-
+    if sort == "likes_count_desc"
+      @items = @q.result(distinct: true).select('items.*', 'count(likes.id) AS likes')
+        .left_joins(:likes)
+        .group('items.id')
+        .order('likes DESC').order('created_at DESC')
+    else
+      @items = @q.result(distinct: true).order(sort)
+    end
     # 販売状況が検索条件にあるとき
     if trading_status_key = params.require(:q)[:trading_status_id_in]
       @q = Item.includes(:images).search(search_params_for_trading_status)
