@@ -326,6 +326,7 @@ $(function () {
         .prop("checked", false)
         .prop("selected", false)
     ;
+    $('select[name=sort_order]').children().first().attr('selected', true);
     $('#children_category_search').remove();
     $('#grandchildren_category_checkboxes').remove();
   }
