@@ -1,6 +1,4 @@
 class Item < ApplicationRecord
-  # belongs_to :buyer, class_name: User
-  # belongs_to :saler, class_name: User
   has_many :images, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :messages, class_name: "Message" ,foreign_key: "room_id", dependent: :destroy
@@ -15,6 +13,7 @@ class Item < ApplicationRecord
 
   scope :desc,                 -> {order('created_at DESC')}
   scope :including,            -> {includes(:images)}
+  scope :not_draft,            -> {including.where.not(trading_status_id: 4)}
   scope :trading_not,          -> {where.not(trading_status_id: 4..5)}
   scope :category,             -> (category_id)       {where(category_id: category_id)}
   scope :draft,                -> (saler_id)          {including.where(saler_id: saler_id).where(trading_status_id: 4)}

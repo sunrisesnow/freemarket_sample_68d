@@ -11,6 +11,7 @@ $(function() {
       case 'price-desc': html = "&sort=price+desc"; break;
       case 'created_at-asc': html = "&sort=created_at+asc"; break;
       case 'created_at-desc': html = "&sort=created_at+desc"; break;
+      case 'likes-desc': html = "&sort=likes_count_desc"; break;
       default: html = "&sort=created_at+desc"; 
     }
     // 現在の表示ページ
@@ -38,7 +39,8 @@ $(function() {
         case "price+desc": var sort = 2; break;
         case "created_at+asc": var sort = 3; break;
         case "created_at+desc": var sort = 4; break;
-        default: var sort = 4
+        case "likes_count_desc": var sort = 5; break;
+        default: var sort = 0
       }
       const add_selected = $('select[name=sort_order]').children()[sort]
       $(add_selected).attr('selected', true)
@@ -324,6 +326,7 @@ $(function () {
         .prop("checked", false)
         .prop("selected", false)
     ;
+    $('select[name=sort_order]').children().first().attr('selected', true);
     $('#children_category_search').remove();
     $('#grandchildren_category_checkboxes').remove();
   }
