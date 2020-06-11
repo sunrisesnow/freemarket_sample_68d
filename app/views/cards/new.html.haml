@@ -1,9 +1,9 @@
 
 .wrapper 
   = render "shared/header"
-  .show-contents
-    = render "shared/show-contents"
-    .content
+  .mypage-wrapper
+    = render "shared/mypage-side_bar"
+    .mp-content
       .likes__title
         クレジットカード登録
       = form_with url: cards_path, method: :post, id: "payjp__form" do |f|
