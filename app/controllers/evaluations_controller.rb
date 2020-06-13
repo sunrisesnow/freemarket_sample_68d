@@ -1,11 +1,15 @@
 class EvaluationsController < ApplicationController
   include TradingHelper
   before_action :set_categories
-  before_action :set_trading_item
+  before_action :set_trading_item, only: %i[create]
   before_action :set_item_search_query
-  before_action :set_trading_item_users
-  before_action :set_new_message
-  before_action :item_user?
+  before_action :set_trading_item_users, only: %i[create]
+  before_action :set_new_message, only: %i[create]
+  before_action :item_user?, only: %i[create]
+
+  def index
+    @evaluations = current_user.evaluations.includes(:saler,:buyer).page(params[:page]).per(9)
+  end
 
   def create
     @evaluation = Evaluation.new
