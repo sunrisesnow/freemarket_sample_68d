@@ -8,7 +8,7 @@ class EvaluationsController < ApplicationController
   before_action :item_user?, only: %i[create]
 
   def index
-    @evaluations = current_user.evaluations.includes(:saler,:buyer).page(params[:page]).per(9)
+    @evaluations = current_user.evaluations.eager_load(saler: :account, buyer: :account).page(params[:page]).per(9)
   end
 
   def create
