@@ -16,7 +16,7 @@ module UsersHelper
   end
 
   def tab_icon_image_present?(account)
-    if account&.icon_image&.present?
+    if account&.icon_image.present?
       image_tag account.icon_image.url, class: "user__mypage--big--icon"
     else
       image_tag "member_photo_noimage.png", class: "user__mypage--big--icon"
