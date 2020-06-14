@@ -25,7 +25,7 @@ Things you may want to cover:
 
 # 初回起動手順
 
-```ターミナル
+```
 git clone https://github.com/masato-teshita/freemarket_sample_68d.git
 cd freemarket_sample_68d
 bundle
@@ -39,9 +39,10 @@ rails s
 # pass: furima1234
 ```
 
-# sample_users
+# サンプルユーザー一覧
 
 |email|pass|
+|-----|----|
 |user1@furima.com|furima1234|
 |user2@furima.com|furima1234|
 |user3@furima.com|furima1234|
@@ -54,7 +55,7 @@ rails s
 |user10@furima.com|furima1234|
 
 
-# テーブル構成
+# DBテーブル構成
 
 ## usersテーブル
 
