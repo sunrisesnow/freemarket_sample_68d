@@ -16,6 +16,6 @@
       - if user_signed_in?
         = render 'shared/header-nav_signed-in'
       - else
-        = link_to "新規会員登録",new_top_path, class: "right__btn signup__btn" 
-        = link_to "ログイン",new_user_session_path, class: "right__btn login__btn" 
+        = link_to "新規会員登録", new_user_registration_path, class: "right__btn signup__btn" 
+        = link_to "ログイン", new_user_session_path, class: "right__btn login__btn" 
       

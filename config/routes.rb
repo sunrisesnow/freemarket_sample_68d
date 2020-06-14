@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :tops, only: [:new]
   resources :accounts, except: [:show, :index]
   resources :addresses, only: [:edit, :update, :show]
   resources :users, only: [:show, :index] do
@@ -50,4 +49,5 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create, :destroy]
   end
+  get  '*unmatched_route', to: 'application#render_404', format: false
 end

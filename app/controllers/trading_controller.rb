@@ -2,6 +2,7 @@ class TradingController < ApplicationController
   include TradingHelper
   before_action :set_categories
   before_action :set_trading_item
+  before_action :item_present?
   before_action :set_item_search_query
   before_action :set_trading_item_users
   before_action :set_new_message

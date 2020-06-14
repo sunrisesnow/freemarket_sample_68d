@@ -2,6 +2,7 @@ class EvaluationsController < ApplicationController
   include TradingHelper
   before_action :set_categories
   before_action :set_trading_item, only: %i[create]
+  before_action :item_present?, only: %i[create]
   before_action :set_item_search_query
   before_action :set_trading_item_users, only: %i[create]
   before_action :set_new_message, only: %i[create]

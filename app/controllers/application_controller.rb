@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth, if: :production?
   before_action :set_host
-  
+
+  def render_404
+    redirect_to root_path
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -41,6 +45,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_trading_item
-    @item = Item.find(params[:item_id])
+    @item = Item.find_by_id(params[:item_id])
   end
+
+  def item_present?
+    redirect_to root_path unless @item.present?
+  end
+
 end
