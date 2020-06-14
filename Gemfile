@@ -46,7 +46,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'faker', "~> 2.8"
   gem 'rails-controller-testing'
   gem 'forgery_ja'
   gem 'capybara', '>= 2.15'
@@ -93,4 +92,5 @@ gem 'ransack'
 gem 'tel_formatter'
 gem 'bootstrap-sass'
 gem 'data-confirm-modal'
+gem 'faker', "~> 2.8"
 
