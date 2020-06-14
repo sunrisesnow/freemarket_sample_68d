@@ -348,7 +348,7 @@
 # items
 (1..1315).each do |i|
   
-  saler_id             = 1
+  saler_id             = Faker::Number.between(from: 1, to: 27)
   name                 = "サンプル#{i}"
   explanation          = "サンプル#{i}の説明"
   delivery_charge_flag = Faker::Number.between(from: 1, to: 2)
