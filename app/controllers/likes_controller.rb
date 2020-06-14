@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     if likes.present?
       likes.each { |like| items << Item.find(like.item_id)}
     end
-    @items = Kaminari.paginate_array(items).page(params[:page]).per(15)
+    @items = Kaminari.paginate_array(items).page(params[:page]).per(14)
   end
 
   def create
