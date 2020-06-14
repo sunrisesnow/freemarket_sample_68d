@@ -63,7 +63,7 @@
           .item__information__title
             取引評価数
           .item__information__box
-            今後実装する？？
+            = @buyer_user.evaluations.count
   - else
     .trading__information
       .trading__information__title
@@ -79,4 +79,4 @@
           .item__information__title
             取引評価数
           .item__information__box
-            今後実装する？？
+            = @saler_user.evaluations.count
