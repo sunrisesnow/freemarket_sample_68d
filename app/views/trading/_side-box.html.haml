@@ -12,6 +12,7 @@
           = @item.name.truncate(15, omission: '...')
         .saler__user
           = @saler_user.nickname.truncate(15, omission: '...')
+        = link_to "商品ページを確認する", item_path(@item)
     .item__information
       .item__information__title
         発送日数
