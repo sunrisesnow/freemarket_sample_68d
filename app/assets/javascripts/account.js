@@ -21,3 +21,25 @@ $(function(){
     }
   });
 });
+
+$(function() {
+  const notif_tab = $('#notif_tab')
+  const notif_tab_box =$('#notif_tab_box')
+  const todo_tab = $('#todo_tab')
+  const todo_tab_box = $('#todo_tab_box')
+
+  notif_tab.on('click', function() {
+    notif_tab.addClass('active_tab')
+    notif_tab_box.addClass('active_box')
+    todo_tab.removeClass('active_tab')
+    todo_tab_box.removeClass('active_box')
+  });
+
+  todo_tab.on('click', function() {
+    todo_tab.addClass('active_tab')
+    todo_tab_box.addClass('active_box')
+    notif_tab.removeClass('active_tab')
+    notif_tab_box.removeClass('active_box')
+  });
+
+});

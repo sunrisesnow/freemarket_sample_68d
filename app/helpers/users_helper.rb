@@ -33,17 +33,17 @@ module UsersHelper
 
   def mypage_icon_image_present?(account)
     if account&.icon_image.present?
-      image_tag account.icon_image.url, class: "mypage-user-icon-image"
+      image_tag account.icon_image.url, class: "mp-content__user_info--icon_img"
     else
-      image_tag "member_photo_noimage.png", class: "mypage-user-icon-image"
+      image_tag "member_photo_noimage.png", class: "mp-content__user_info--icon_img"
     end
   end
 
   def mypage_background_image_present?(account)
     if account&.background_image.present?
-      image_tag account.background_image.url, class: "content_image"
+      image_tag account.background_image.url, class: "mp-content__background_img"
     else
-      image_tag "user-background.jpg", class: "content_image" 
+      image_tag "user-background.jpg", class: "mp-content__background_img"
     end
   end
 
