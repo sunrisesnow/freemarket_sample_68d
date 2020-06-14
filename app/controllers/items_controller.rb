@@ -140,6 +140,60 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @trading_status = TradingStatus.find [1,3]
+    @keyword = params.require(:q)[:name_or_explanation_cont]
+    @search_parents = Category.where(ancestry: nil).where.not(name: "カテゴリー一覧").pluck(:name)
+
+    sort = params[:sort] || "created_at DESC"      
+    @q = Item.not_draft.search(search_params)
+    if sort == "likes_count_desc"
+      @items = @q.result(distinct: true).select('items.*', 'count(likes.id) AS likes')
+        .left_joins(:likes)
+        .group('items.id')
+        .order('likes DESC')
+        .desc
+    else
+      @items = @q.result(distinct: true).order(sort)
+    end
+    # 販売状況が検索条件にあるとき
+    if trading_status_key = params.require(:q)[:trading_status_id_in]
+      @q = Item.including.search(search_params_for_trading_status)
+      if trading_status_key.count == 1 && trading_status_key == ["3"]
+        sold_items = Item.where.not(buyer_id: nil)
+        @items = @items & sold_items
+      elsif trading_status_key.count == 1 && trading_status_key == ["1"]
+        selling_items = Item.where(buyer_id: nil)
+        @items = @items & selling_items
+      end
+    end
+
+    # カテゴリが検索条件にあるとき
+    if category_key = params.require(:q)[:category_id]
+      if category_key.to_i == 0
+        @search_category = Category.find_by(name: category_key, ancestry: nil)
+      else
+        @search_category = Category.find(category_key)
+      end
+
+      if @search_category.present?
+        if @search_category.ancestry.nil?
+          #親カテゴリ
+          @category_child_array = Category.where(ancestry: @search_category.id).pluck(:name, :id)
+          find_category_item( @search_category.subtree_ids)
+        elsif @search_category.ancestry.exclude?("/")
+          #子カテゴリ
+          @category_child = @search_category
+          @category_child_array = @search_category.siblings.pluck(:name, :id)
+          @category_grandchild_array = @search_category.children
+          find_category_item( @search_category.subtree_ids)
+        end
+          # 孫カテゴリはransackで拾う → category_id_in
+      end
+    end
+    @items = Kaminari.paginate_array(@items).page(params[:page]).per(20)
+  end
+
   private
   def set_item
     @item = Item.find_by_id(params[:id])
@@ -190,8 +244,8 @@ class ItemsController < ApplicationController
     )
   end
 
-  def find_category_item(grandchildren_id)
-    category_item = Item.where(category_id: grandchildren_id[0].. grandchildren_id[-1]).where.not(trading_status_id: 4)
+  def find_category_item(subtree_ids)
+    category_item = Item.where(category_id: subtree_ids).where.not(trading_status_id: 4)
     category_search_items = []
     category_search_items += category_item if category_item.present?
     if category_search_items.length == 0
