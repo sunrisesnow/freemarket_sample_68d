@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, except: [:new, :edit, :create, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show, :search]
   before_action :set_item_search_query, expect: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :item_present?, only: [:show, :edit]
@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
   
 # 未ログインで行えるアクション
   def index
+    redirect_to root_path
   end
 
   def show
