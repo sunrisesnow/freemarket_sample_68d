@@ -1,0 +1,11 @@
+.wrapper 
+  = render "shared/header"
+  .mypage-wrapper
+    = render "shared/mypage-side_bar"
+    .mp-content
+      .likes__title
+        評価一覧
+      = render partial: "evaluations", locals: {evaluations: @evaluations}
+  = render "shared/footer-image"
+  = render "shared/footer"
+  = render "shared/saler-btn"
