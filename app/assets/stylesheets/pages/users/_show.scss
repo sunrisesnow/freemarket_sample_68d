@@ -1,211 +1,146 @@
-.show-contents {
-  width: 100%;
+.mypage-wrapper {
   display: flex;
-  background-color: $whitesmoke;
+  width: 100%;
   padding: 60px 10%;
-  .contents-mypage {
-    h4{
-      font-weight: bold;
-    }
-    &-link {
-      display: inline-block;
-      background-color: white;
-      color: black;
-      width: 270px;
-      border: 1px solid $whitesmoke;
-      line-height: 50px;
-      position: relative;
-      height: 50px;
-      padding: 0 15px;
-      font-size: 14px;
-      &:hover{
-        background-color: #EEEEEE;
-        .fa-chevron-right{
-          transform: scale(1.5);
-          transition-duration: 0.3s;
-          color: black;
-        }
+  background-color: $whitesmoke;
+  .mp-side_bar {
+    &__nav_list {
+      margin-bottom: 32px;
+      h4{
+        font-weight: bold;
       }
-      .fa-chevron-right {
-        position: absolute;
-        right: 15px;
-        top: 18px;
-        color: $lightgray;
+      &__link {
+        display: inline-block;
+        position: relative;
+        width: 270px;
+        height: 50px;
+        padding: 16px;
+        border: 1px solid $whitesmoke;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        &:hover{
+          background-color: #EEEEEE;
+          .fa-chevron-right{
+            transform: scale(1.5);
+            transition-duration: 0.3s;
+            color: black;
+          }
+        }
+        .fa-chevron-right {
+          position: absolute;
+          right: 15px;
+          top: 18px;
+          color: $lightgray;
+        }
       }
     }
   }
-  .content {
-    margin-left: 30px;
-    width: 100%;
+  .mp-content {
     position: relative;
-    &_image{
-      height: 200px;
+    width: 100%;
+    margin-left: 30px;
+    &__background_img{
       width: 100%;
+      height: 200px;
     }
-    .mypage-user-icon {
-      text-align: center;
+    &__user_info {
       position: absolute;
       top: 20px;
       left: 40%;
-      &-image {
-        border-radius: 100px;
-        height: 70px;
+      text-align: center;
+      &--icon_img {
         width: 70px;
+        height: 70px;
+        border-radius: 50%;
       }
-      &-nav {
+      &--performance {
         display: flex;
         p {
           padding: 5px 10px;
         }
-        &-link {
-          margin: 10px;
-          
-        }
       }
     }
-    .mypage-tab-container-notification-todo {
+    &__todo_info {
       width: 100%;
-      .mypage-tabs {
+      background-color: white;
+      &__tabs {
         display: flex;
         width: 100%;
         outline: none;
-        &-left {
-          height: 50px;
-          text-align: center;
+        &__tab {
           width: 50%;
-          background-color: white;
+          height: 50px;
           line-height: 50px;
-          color: black;
+          cursor: pointer;
+          background-color: $lightgray;
+          text-align: center;
+          &:hover {
+            opacity: 0.8;
+          }
+          &__info_box {
+            display: none;
+          }
+        }
+        .active_tab {
           border-top: 1px solid $sign-up-btn;
-          outline: none;
-
-          .news-message {          
+          background-color: white;
+        }
+      }
+      &__todo_notif {
+        &__box {
+          display: none;
+        }
+        .active_box {
+          display: block;
+          .mp-notif {
+            background-color: white;
+            height: 80px;
+            border-bottom: 1px solid #EEEEEE;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            position: relative;
             color: black;
-            
-          }
-        } 
-
-        &-right {
-          height: 50px;
-          text-align: center;
-          width: 50%;
-          background-color: $lightgray;
-          line-height: 50px;
-          color: black;
-          list-style: none;
-          outline: none;
-        }
-      }
-      .mypage-tabs-left-contents {
-        display: block;
-        width: 100%;
-        height: 70px;
-        border-style: none;
-        
-
-        &-messages {
-          display: flex;
-          padding: 10px;
-          width: 100%;
-          background-color: white;
-          border-bottom: 1px solid $whitesmoke;
-          height: 70px;
-          
-          
-
-          
-          &-show {
-            width: 100%;
-            position: relative;
-            margin-left: 10px;
-            
-            
-            .fa-chevron-right {
+            @include hover__color(black, #EEEEEE, 0.8);
+            &:hover{
+              .fa-chevron-right{
+                color: black;
+                transform: scale(1.5);
+                transition-duration: 0.3s;
+              }
+            }
+            .fa-chevron-right{
               position: absolute;
-              top: 15px;
-              right: 0;
-              
+              right: 10px;
+              color: $lightgray;
+            }
+            &__img{
+              margin: 6px 25px 0 15px;
+            }
+            &__details {
+              &__message {
+                padding-right: 40px;
+              }
+              &__time {
+                color: gray;
+              }
             }
           }
         }
-      }
-
-      .mypage-tabs-right-contents {
-        display: none;
-        border-style: none;
-
-        &-messages {
-          display: flex;
-          padding: 10px;
-          width: 100%;
-          background-color: white;
-          border-bottom: 1px solid $whitesmoke;
-          height: 70px;
-          
-
-          &-show {
-            width: 100%;
-            position: relative;
-            margin-left: 10px;
-            
-
-            .fa-chevron-right {
-              position: absolute;
-              top: 15px;
-              right: 0;
-              
-            }
-          }
-        }
-      }
-
-      .tab-content {
-        padding: 10px;
-        background-color: white;
-        width: 100%;
-        height: 70px;
-        
-        
-        .show-message-list {
-          display: inline-block;
-          width: 100%;
-          background-color: $lightgray;
+        &__list_link {
+          padding: 16px;
           text-align: center;
-          height: 50px;
-          line-height: 50px;
-          color: black;
-          
+          &--btn {
+            display: block;
+            height: 48px;
+            padding: 14px;
+            background-color: whitesmoke;
+            color: black;
+            @include hover__color(black, white, 1);
+          }
         }
       }
     }
   }
 }
-.modal-inner,.modal-banner {
-  position: relative;
-  width: 100%;
-  top: 6px;
-  
-
-  .modal-banner-body {
-    position: absolute;
-    bottom: 45%;
-    left: 30px;
-    
-    
-    .modal__banner-app.clearfix {
-      position: absolute;
-      
-    }
-  }
-}
-
-.mypage-tabs-contents, .mypage-tab-content{
-  width: 100%;
-}
-.mypage-tab-content {
-  display: none;
-}
-.news-message {          
-  color: black;
-}
-

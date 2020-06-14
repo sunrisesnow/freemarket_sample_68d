@@ -1,0 +1,13 @@
+-# - @infomations.each do |info|
+%li
+  = link_to "#", class: "mp-notif" do
+    .mp-notif__img
+      = image_tag "risu.jpg", height:"50px", width: "50px"
+    .mp-notif__details
+      .mp-notif__details__message
+        %span 「Maison Margiela」がお気に入り！されました
+      .mp-notif__details__time
+        %i.far.fa-clock
+        %span 1分前
+    %i.fas.fa-chevron-right
+-# = paginate @infomations

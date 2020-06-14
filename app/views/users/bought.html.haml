@@ -1,8 +1,8 @@
 .wrapper 
   = render "shared/header"
-  .show-contents
-    = render "shared/show-contents"
-    .content
+  .mypage-wrapper
+    = render "shared/mypage-side_bar"
+    .mp-content
       .likes__title
         購入した商品-取引中一覧
       - if @items.present?
