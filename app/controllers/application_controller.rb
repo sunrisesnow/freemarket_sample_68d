@@ -43,4 +43,9 @@ class ApplicationController < ActionController::Base
   def set_trading_item
     @item = Item.find_by_id(params[:item_id])
   end
+
+  def item_present?
+    redirect_to root_path unless @item.present?
+  end
+
 end
