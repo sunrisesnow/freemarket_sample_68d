@@ -41,6 +41,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_trading_item
-    @item = Item.find(params[:item_id])
+    @item = Item.find_by_id(params[:item_id])
   end
 end
