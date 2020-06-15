@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :from_messages,class_name: "Message" ,foreign_key: "from_id", dependent: :destroy
   has_many :evaluations
   
-  
   with_options presence: true do
     validates :nickname
     validates :last_name
