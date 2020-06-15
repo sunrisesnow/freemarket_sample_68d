@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_101600) do
+ActiveRecord::Schema.define(version: 2020_06_15_073747) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -108,8 +108,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_101600) do
     t.integer "sender_id"
     t.integer "receiver_id"
     t.integer "item_id"
-    t.integer "comment_id"
-    t.integer "like_id"
     t.string "action"
     t.boolean "checked"
     t.datetime "created_at", null: false
