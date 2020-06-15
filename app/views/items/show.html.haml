@@ -50,70 +50,58 @@
                   %tr
                     %th 出品者
                     %td
-                      = link_to user_path do
-                        = @user.nickname
+                      = link_to '#' do
+                        %span= @user.nickname
                   %tr
                     %th カテゴリー
                     %td
-                      = link_to category_path(@item.category.root_id) do
-                        =@item.category.root.name
+                      = link_to category_path(@item.category.root_id), class: "itembox__table__link" do
+                        %span= @item.category.root.name
                       %br
-                      = link_to category_path(@item.category.parent_id) do
-                        =@item.category.parent.name
+                      = link_to category_path(@item.category.parent_id), class: "itembox__table__link" do
+                        %i.fas.fa-chevron-right
+                        %span= @item.category.parent.name
                       %br
-                      = link_to category_path(@item.category) do
-                        =@item.category.name
+                      = link_to category_path(@item.category), class: "itembox__table__link" do
+                        %i.fas.fa-chevron-right
+                        %span= @item.category.name
                   %tr
                     %th 商品の状態
                     %td 
-                      = @item.status.name
+                      %span= @item.status.name
                   %tr
                     %th 配送料の負担
                     %td 
-                      = delivery_charge_full(@item)
+                      %span= delivery_charge_full(@item)
                   %tr
                     %th 発送元の地域
                     %td
-                      = link_to '#' do
-                        = @item.prefecture.name
+                      %span= @item.prefecture.name
                   %tr
                     %th 発送日の目安
                     %td
-                      = @item.delivery_date.name
+                      %span= @item.delivery_date.name
                   %tr
                     %th 配送方法
                     %td
-                      = @item.delivery_method.name
+                      %span= @item.delivery_method.name
             .itembox__option
               = render partial: 'likes/like', locals: { item: @item}
-              %ul.optical
-                %li.report-btn
-                  = link_to '#' do
-                    %i.fa.fa-flag
-                    不適切な商品の通報
           .commentbox
             %ul.commentbox__contents
             %form{class: 'new__comment', action: '#',method:'post', id:'new__comment'}
               %input{type: 'hidden', value: '✓'}
               %textarea.comment__body
               %p.notice__message
-                相手のことを考え丁寧なコメントを心がけましょう。
+                %span 相手のことを考え丁寧なコメントを心がけましょう。
                 %br
-                不快な言葉遣いなどは利用制限や退会処分となることがあります。 
-                %br             
+                %span 不快な言葉遣いなどは利用制限や退会処分となることがあります。 
               %button.comment__btn
                 %i.fa.fa-comment
-                  コメントする
-        .main-item__content--links
-          %li
-            = link_to "前の商品", item_path(@item.id - 1)
-            %i.fa.fa-angle-left
-          %li
-            = link_to "後ろの商品",item_path(@item.id + 1)
-            %i.fa.fa-angle-right
+                %span コメントする
         .main-item__content--related
-          =link_to  category_path(@item.category.root_id) do
+          = link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
-            をもっと見る
+            %span をもっと見る
   = render "shared/footer-image"
   = render "shared/footer"
