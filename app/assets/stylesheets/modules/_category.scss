@@ -1,5 +1,9 @@
 
-.category__child, .category__parent, .category__grandchild{
+.category__parent {
+  display: none;
+  border-top: solid 1px $lightgray;
+}
+.category__child, .category__grandchild{
   display: none;
 }
 
@@ -27,9 +31,10 @@
 // カテゴリーの大枠の要素の共通項
 .category__list{
   position: absolute;
-  height: 560px;
+  height: 588px;
   background-color: white;
-  border-right: 1px solid $whitesmoke;
+  border-right: 1px solid $lightgray;
+  border-bottom: solid 1px $lightgray;
   z-index: 1000;
 }
 
@@ -39,7 +44,7 @@
   color: black;
   display: block;
   padding: 5px 15px;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 2px;
   z-index: 1000;
 }
@@ -55,7 +60,7 @@
         width: 100%;
         color: black;
         display: block;
-        padding: 11px 20px;
+        padding: 12px 20px;
         font-size: 13px;
         letter-spacing: 2px;
       }
