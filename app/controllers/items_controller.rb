@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, expect: [:new, :create, :edit, :update, :destory]
-  before_action :set_item_search_query, expect: [:search]
+  skip_before_action :authenticate_user!, except: [:new, :create, :edit, :update, :destory]
+  before_action :set_item_search_query, except: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :item_present?, only: [:show, :edit]
-  before_action :set_categories,  except: [:destroy]
+  before_action :set_categories, except: [:destroy]
   
 # 未ログインで行えるアクション
   def index
