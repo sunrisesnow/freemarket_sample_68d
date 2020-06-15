@@ -339,7 +339,183 @@ others_8.children.create([{name: "オフィス用品一般"},{name: "オフィ�
 others_9 = others.children.create(name: "その他")
 others_9.children.create([{name: "すべて"}])
 
-# カテゴリー一覧
-
+#カテゴリー一覧
 categories = Category.create(name: "カテゴリー一覧")
+
+#users
+password              = "furima1234" 
+password_confirmation = "furima1234" 
+municipality          = "足立区" 
+address               = "123-456" 
+phone_number          = "0123456789" 
+building              = "草薙ビル"
+
+(1..10).each { |i|
+  user = User.create(
+    email: "user#{i}@furima.com",
+    password: password,
+    password_confirmation: password_confirmation,
+    nickname: Faker::Name.name,
+    last_name: ForgeryJa(:name).last_name,
+    last_name_kana: ForgeryJa(:name).last_name(to: ForgeryJa::KANA),
+    first_name: ForgeryJa(:name).first_name,
+    first_name_kana: ForgeryJa(:name).first_name(to: ForgeryJa::KANA),
+    birthday: Faker::Date.birthday 
+  )
+  Address.create(
+    user_id: user.id,
+    last_name: user.last_name,
+    last_name_kana: user.last_name_kana,
+    first_name: user.first_name,
+    first_name_kana: user.first_name_kana,
+    postal_code: Faker::Number.number(digits: 7).to_s,
+    prefectures: Faker::Number.between(from: 1, to: 47),
+    municipality: municipality,
+    address: address,
+    phone_number: phone_number,
+    building: building
+  )
+}
+
+# items
+(1..1315).each do |i|
+  
+  saler_id             = Faker::Number.between(from: 1, to: 10)
+  name                 = "サンプル#{i}"
+  explanation          = "サンプル#{i}の説明"
+  delivery_charge_flag = Faker::Number.between(from: 1, to: 2)
+  price                = Faker::Number.between(from: 300, to: 9999999)
+  prefecture_id        = Faker::Number.between(from: 1, to: 47)
+  status_id            = Faker::Number.between(from: 1, to: 6)
+  delivery_date_id     = Faker::Number.between(from: 1, to: 3)
+  delivery_method_id   = Faker::Number.between(from: 1, to: 2)
+  category_id          = i
+  trading_status_id    = 1
+  created_at           = Faker::Time.between(from: DateTime.now - 10, to: DateTime.now)
+  item = Item.create(
+    saler_id: saler_id,
+    buyer_id: nil,
+    name: name,
+    explanation: explanation,
+    delivery_charge_flag: delivery_charge_flag,
+    price: price,
+    prefecture_id: prefecture_id,
+    status_id: status_id,
+    delivery_date_id: delivery_date_id,
+    delivery_method_id: delivery_method_id,
+    category_id: category_id,
+    trading_status_id: trading_status_id,
+    created_at: created_at
+  )
+
+  c = Category.find(category_id)
+  def search_category(c)
+    if c.ancestry == nil
+      category = c
+    elsif c.ancestry.include?("/")
+      category = c.root
+    else
+      category = c.parent
+    end
+  end
+  def seed(category, i)
+    case category.name
+    when "レディース"
+      case i % 2
+      when 1
+        open("./db/images/Tシャツ1.jpg")
+      when 0
+        open("./db/images/コート.jpg")
+      end
+    when "メンズ"
+      case i % 2
+      when 1
+        open("./db/images/シャツ1.jpeg")
+      when 0
+        open("./db/images/ブルゾン1.jpg")
+      end
+    when "ベビー・キッズ"
+      case i % 2
+      when 1
+        open("./db/images/スカート.jpeg")
+      when 0
+        open("./db/images/トップス.jpg")
+      end
+    when "インテリア・住まい・小物"
+      case i % 2
+      when 1
+        open("./db/images/靴1.jpg")
+      when 0
+        open("./db/images/靴2.jpg")
+      end
+    when "本・音楽・ゲーム"
+      case i % 2
+      when 1
+        open("./db/images/時計.jpeg")
+      when 0
+        open("./db/images/バッグ1.jpg")
+      end
+    when "おもちゃ・ホビー・グッズ"
+      case i % 2
+      when 1
+        open("./db/images/ロングシャツ1.jpg")
+      when 0
+        open("./db/images/ブルゾン2.jpeg")
+      end
+    when "コスメ・香水・美容"
+      case i % 2
+      when 1
+        open("./db/images/靴3.jpg")
+      when 0
+        open("./db/images/靴4.jpeg")
+      end
+    when "家電・スマホ・カメラ"
+      case i % 2
+      when 1
+        open("./db/images/ロングシャツ2.jpg")
+      when 0
+        open("./db/images/バッグ2.jpeg")
+      end
+    when "スポーツ・レジャー"
+      case i % 2
+      when 1
+        open("./db/images/靴5.jpg")
+      when 0
+        open("./db/images/ゴルフ.jpeg")
+      end
+    when "ハンドメイド"
+      case i % 2
+      when 1
+        open("./db/images/ハンドメイド1.jpg")
+      when 0
+        open("./db/images/ハンドメイド2.jpeg")
+      end
+    when "チケット"
+      case i % 2
+      when 1
+        open("./db/images/チケット1.png")
+      when 0
+        open("./db/images/チケット2.jpeg")
+      end
+    when "自動車・オートバイ"
+      case i % 2
+      when 1
+        open("./db/images/オートバイ.jpeg")
+      when 0
+        open("./db/images/自転車.jpg")
+      end
+    when "その他"
+      case i % 2
+      when 1
+        open("./db/images/財布.jpg")
+      when 0
+        open("./db/images/その他.jpg")
+      end
+    end
+  end
+  Image.create(
+    item_id: item.id,
+    image: seed(search_category(c), i)
+  )
+end
 

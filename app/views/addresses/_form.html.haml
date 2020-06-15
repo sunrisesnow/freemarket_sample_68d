@@ -58,4 +58,4 @@
     .field__form
       = f.text_field :phone_number, placeholder: "半角数字で10桁または11桁の番号"
   .actions
-    = f.submit "変更する", class: "change__address__btn"
+    = f.submit "変更する", class: "change__address__btn", data: {disable_with: "処理中..."}

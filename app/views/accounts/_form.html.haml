@@ -14,13 +14,13 @@
           = image_tag "member_photo_noimage.png", class: "account__image__form__icon",  height: "70px", width: "70px" 
         = f.file_field :icon_image, class: 'hidden__file'
   .account__text__field
-    = f.text_area :introduction, placeholder: "例）こんにちは！ご覧いただきありがとうございます！かっこいいものや便利な小道具を中心に出品しています。服のサイズはほとんどがMサイズです！気持ちよくお取引できるように心がけていますので、商品や配送方法などご質問ありましたらお気軽にどうぞ！"
+    = f.text_area :introduction, placeholder: "例）こんにちは！ご覧いただきありがとうございます！かっこいいものや便利な小道具を中心に出品しています。服のサイズはほとんどがMサイズです！気持ちよくお取引できるように心がけていますので、商品や配送方法などご質問ありましたらお気軽にどうぞ！", maxlength: "1000"
   - if @account.persisted?
     .account__submit__field
-      = f.submit "プロフィールを編集する", class: "account__submit__field__btn"
+      = f.submit "プロフィールを編集する", class: "account__submit__field__btn", data: {disable_with: "処理中..."}
     .account__submit__field
-      = link_to "プロフィールを削除する", account_path(current_user), method: :delete, class: "account__submit__field__btn account__delete__btn", data:  { confirm: 'プロフィールを削除してよろしいですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
+      = link_to "プロフィールを削除する", account_path(current_user), method: :delete, class: "account__submit__field__btn account__delete__btn", data:  { confirm: 'プロフィールを削除してよろしいですか?',cancel: 'やめる',commit: '削除する',disable_with: "処理中..."}, title: '削除確認'
   - else
     .account__submit__field
-      = f.submit "プロフィールを登録する", class: "account__submit__field__btn"
+      = f.submit "プロフィールを登録する", class: "account__submit__field__btn", data: {disable_with: "処理中..."}
     

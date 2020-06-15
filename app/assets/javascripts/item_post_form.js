@@ -34,68 +34,53 @@ $(function(){
 
 // 配送方法の選択フィールドを追加表示する動作
 $(function() {
-  // 送料込み（出品者負担）の場合の配送方法の選択肢　→　ajax通信で取れるならとってきたい部分
-  function sellerCharge() {
-    const sellerChargeOptions =`
-      <div class='field' id='seller-charge'>
-        <div class='field__label'>
-          <label for="item_delivery_method_id">配送の方法</label>
-          <span class='field__label--require'>必須</span>
-        </div>
-        <div class='field__form item-area__field__form'>
-          <select name="item[delivery_method_id]" id="item_delivery_method_id"><option value="">選択してください</option>
-            <option value="1">未定</option>
-            <option value="2">らくらくメルカリ便</option>
-            <option value="3">ゆうゆうメルカリ便</option>
-            <option value="4">ゆうメール</option>
-            <option value="5">レターパック</option>
-            <option value="6">普通郵便(定形、定形外)</option>
-            <option value="7">クロネコヤマト</option>
-            <option value="8">ゆうパック</option>
-            <option value="9">クリックポスト</option>
-            <option value="10">ゆうパケット</option>
-          </select>
-        </div>
-      </div>
-    `
-    $('#delivery_charge').parent().append(sellerChargeOptions);
+
+  function appendMethod(method) {
+    const html = `<option value="${method.id}" >${method.name}</option>`;
+    return html;
   }
-  // 送料別（購入者負担）の場合の配送方法の選択肢 → ここもajax通信で取れるならとってきたい
-  function buyerCharge() {
-    const buyerChargeOptions = `
-      <div class='field' id='buyer-charge'>
+  function appendDeliveryMethod(insertHTML) {
+    const html = `
+      <div class='field' id='delivery_method'>
         <div class='field__label'>
           <label for="item_delivery_method_id">配送の方法</label>
           <span class='field__label--require'>必須</span>
         </div>
         <div class='field__form item-area__field__form'>
           <select name="item[delivery_method_id]" id="item_delivery_method_id"><option value="">選択してください</option>
-            <option value="11">未定</option>
-            <option value="12">クロネコヤマト</option>
-            <option value="13">ゆうパック</option>
-            <option value="14">ゆうメール</option>
+            ${insertHTML}
           </select>
         </div>
       </div>
     `
-    $('#delivery_charge').parent().append(buyerChargeOptions);
+    $('#delivery_charge').parent().append(html);
   }
 
   // 配送料の負担の選択に応じて、表示する内容を変更する動作
   $(document).on('change', '#item_delivery_charge_flag', function (){
-    const sellerChargeMethod = $('#seller-charge')
-    const buyerChargeMethod = $('#buyer-charge')  
+    const delivery_method = $('#delivery_method')
     $("select[name='item[delivery_method_id]'] option").attr("selected", false);
     const chargeFlag = $(this).val();
-    if (chargeFlag == "") {
-      sellerChargeMethod.remove();
-      buyerChargeMethod.remove();
-    } else if (chargeFlag == 1) {
-      sellerCharge();
-      buyerChargeMethod.remove();
+    if (chargeFlag != "") {
+      $.ajax({
+        url: '/items/delivery_method',
+        type: 'GET',
+        data: { flag: chargeFlag},
+        dataType: 'json'
+      })
+      .done(function(methods){  
+        delivery_method.remove();
+        let insertHTML;
+        methods.forEach(function(method) {
+          insertHTML += appendMethod(method);
+        })
+        appendDeliveryMethod(insertHTML)
+      })
+      .fail(function() {
+        alert('配送方法の取得に失敗しました')
+      })
     } else {
-      buyerCharge();
-      sellerChargeMethod.remove();
+      delivery_method.remove();
     }
   });
 });
@@ -105,101 +90,148 @@ $(function() {
   let value;
   let next;
   let priceNext;
-  let imageNext;
+  let textNext;
+  let input_column;
+  let cnt;
+  const cnt_area_name = $('.now_cnt_name')
+  const cnt_area_explanation = $('.now_cnt_explanation')
 
   // blur時の動作
   function fieldBlur(input) {
+    cnt = input.val().length;
     value = input.val();
     next = input.next();
+    textNext = input.next().next();
     priceNext = input.parent().parent().next();
+    input_column = input.prop('id');
     // 未入力のチェック
-    if (value == "") {
-      if (!next.hasClass('error')) {
-        input.addClass('error');
-        if (input.is('select')) {
-          input.after(`<p class='error'>選択してください</p>`);
-        } else if (input.is('#sell-price-input') || input.is('.img-file')) {
-          ;
-        } else {
-          input.after(`<p class='error'>入力してください</p>`)
+    switch (input_column) {
+      case "item_name":
+        if (value === "") {
+          input.addClass('error')
+          textNext.remove();
+          input.parent().append(`<p class='error'>入力してください</p>`)
+        } else if (cnt <= 40) {
+          input.removeClass('error')
+          textNext.remove();
         }
-      }
-    } else {
-      input.removeClass('error');
-      next.remove();
+        break;
+      case "item_explanation":
+        if (value === "") {
+          input.addClass('error')
+          textNext.remove();
+          input.parent().append(`<p class='error'>入力してください</p>`)
+        } else if (cnt <= 1000) {
+          input.removeClass('error')
+          textNext.remove();
+        }
+        break;
+      case "sell-price-input":
+        if (value === "" || value < 300 || value >= 10000000) {
+          if (!priceNext.hasClass('error')) {
+            input.addClass('error')
+            input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
+          }
+        } else if (priceNext.hasClass('error')) {
+          priceNext.remove();
+        } else {
+          ;
+        }
+        break;
+      case "item_item_images_image":
+        break;
+      default: 
+        if (value === "" && !next.hasClass('error')) {
+          input.addClass('error')
+          if (input.is('select')) {
+            input.after(`<p class='error'>選択してください</p>`);
+          } else {
+            input.after(`<p class='error'>入力してください</p>`)
+          }
+        } else if (value != "") {
+          input.removeClass('error');
+          next.remove();
+        }
+        break;
     }
 
-    // 金額入力の入力チェック
-    if (input.is('#sell-price-input')) {
-      if (value == "" || value < 300 || value >= 10000000) {
-        if (!priceNext.hasClass('error')) {
-          input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-        }
-      } else if (priceNext.hasClass('error')) {
-        priceNext.remove();
-      } else {
-        ;
-      }
-    }
   }
   // keyup時の動作
   function fieldKeyup(input) {
+    cnt = input.val().length;
     value = input.val();
     next = input.next();
+    textNext = input.next().next();
     priceNext = input.parent().parent().next();
-    if (value != "") {
-      input.removeClass('error');
-      if (input.is('#sell-price-input')) {
-        ;
-      } else {
-        next.remove();
-      }
-    }
-    // 金額入力の入力チェック
-    if (input.is('#sell-price-input')) {
-      if (value >= 300 && value < 10000000) {
-        if (priceNext.hasClass('error')) {
-          priceNext.remove();
+    input_column = input.prop('id');
+
+    switch (input_column) {
+      case "item_name":
+        cnt_area_name.text(cnt);
+        if (value != "") {
+          cnt_area_name.text(cnt);
+          if (cnt <= 40) {
+            input.removeClass('error')
+            cnt_area_name.parent().css('color', 'gray')
+            textNext.remove();
+          } else {
+            textNext.remove();
+            cnt_area_name.parent().css('color', 'red')
+            input.addClass('error');
+            input.parent().append(`<p class='error'>40文字以下で入力してください</p>`)
+          }  
         }
-      } else if (!priceNext.hasClass('error')) {
-        input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
-      } else {
+        break;
+      case "item_explanation":
+        cnt_area_explanation.text(cnt);
+        if (value != "") {
+          if (cnt <= 1000) {
+            input.removeClass('error')
+            cnt_area_explanation.parent().css('color', 'gray')
+            textNext.remove();
+          } else {
+            textNext.remove();
+            cnt_area_explanation.parent().css('color', 'red')
+            input.addClass('error');
+            input.parent().append(`<p class='error'>1000文字以下で入力してください</p>`)
+          }  
+        }
+        break;
+      case "sell-price-input":
+        if (value < 300 || value >= 10000000) {
+          if (!priceNext.hasClass('error')) {
+            input.addClass('error');
+            input.parent().parent().after(`<p class='error price-error'>300以上10,000,000未満で入力してください</p>`);
+          }
+        } else if (priceNext.hasClass('error')) {
+          input.removeClass('error')
+          priceNext.remove();
+        } else {
+          input.removeClass('error')
+        }
+        break;
+      default:
         ;
-      }
     }
   }
 
-  // 画像の入力チェック
-  function imageCheck(num) {
-    const imageNext = $('#image-box-1').next();
-    if (num == 0) {
-      if (!imageNext.hasClass('error')) {
-        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
-      }
-    } else {
-      if (imageNext.hasClass('error')) {
-        imageNext.remove();
-      }
-    }
-  }
-
-  $('#new_item input:required').on('blur', function() {
+  $('#new_item input:required, .edit_item input:required').on('blur', function() {
     fieldBlur($(this));
   });
 
-  $('#new_item input:required').on('keyup', function() {
+  $('#new_item input:required, .edit_item input:required').on('keyup', function() {
     fieldKeyup($(this));
   });
 
-  $('#new_item textarea').on('blur', function() {
+  $('#new_item textarea, .edit_item textarea').on('blur', function() {
     fieldBlur($(this));
   });
 
-  $('#new_item textarea').on('keyup', function() {
+  $('#new_item textarea, .edit_item textarea').on('keyup', function() {
     fieldKeyup($(this));
   });
 
-  $('#new_item select').on('blur change', function() {
+  $('#new_item select, .edit_item select').on('blur change', function() {
     fieldBlur($(this));
   });
 
@@ -209,23 +241,34 @@ $(function() {
     const submitID = $(this).attr('id')
     let flag = true;
     const num = $('.item-image').length
-    imageCheck(num);
+    const imageNext = $('#image-box-1').next();
 
-    $('#new_item input:required').each(function(e) {
-      if ($('#new_item input:required').eq(e).val() === "") {
-        fieldBlur($('#new_item input:required').eq(e));
+    if (num == 0) {
+      flag = false;
+      if (!imageNext.hasClass('error')) {
+        $('#image-box-1').after(`<p class='error'>画像がありません</p>`);
+      }
+    } else {
+      if (imageNext.hasClass('error')) {
+        imageNext.remove();
+      }
+    }
+
+    $('input:required').each(function(e) {
+      if ($('input:required').eq(e).val() === "") {
+        fieldBlur($('input:required').eq(e));
         flag = false;
       }
     });
-    $('#new_item textarea:required').each(function(e) {
-      if ($('#new_item textarea:required').eq(e).val() === "") {
-        fieldBlur($('#new_item textarea:required').eq(e));
+    $('textarea:required').each(function(e) {
+      if ($('textarea:required').eq(e).val() === "") {
+        fieldBlur($('textarea:required').eq(e));
         flag = false;
       }
     });
-    $('#new_item select').each(function(e) {
-      if ($('#new_item select').eq(e).val() === "") {
-        fieldBlur($('#new_item select').eq(e));
+    $('select').each(function(e) {  
+      if ($('select').eq(e).val() === "") {
+        fieldBlur($('select').eq(e));
         flag = false;
       }
     });
@@ -234,9 +277,11 @@ $(function() {
       if (submitID == 'item-post-btn') {
         $("input[name='item[trading_status_id]']").val(1);
         $('#new_item').submit();
+        $('.edit_item').submit();
       } else {
         $("input[name='item[trading_status_id]']").val(4);
         $('#new_item').submit();
+        $('.edit_item').submit();
       }
     } else {
       $(this).off('submit');

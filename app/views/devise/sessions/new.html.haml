@@ -5,14 +5,7 @@
       .session__login--new--link
         %p
           アカウントをお持ちでない方はこちら
-        = link_to "新規会員登録",new_top_path, class: "new__user--btn"
-    .facebook__google--login
-      = link_to "#", class: "facebook__google--login--btn facebook__btn" do
-        %i.fab.fa-facebook.fa-lg
-        Facebookで登録する
-      = link_to "#", class: "facebook__google--login--btn google__btn" do
-        %i.fab.fa-google.fa-lg
-        Googleで登録する
+        = link_to "新規会員登録", new_user_registration_path, class: "new__user--btn"
     .login__form
       = form_for( resource, url: user_session_path) do |f|
         .login__form__error
@@ -28,7 +21,7 @@
             = flash[:recaptcha_error]
             = recaptcha_tags
         .field
-          = f.submit "ログイン", class: "login__next__btn"
+          = f.submit "ログイン", class: "login__next__btn", data: { disable_with: "ログイン中..." }
         .field.field__forgot__password__block
           = link_to new_user_password_path, class: "field__password--forgot" do
             パスワードをお忘れの方

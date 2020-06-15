@@ -55,6 +55,19 @@ ActiveRecord::Schema.define(version: 2020_06_15_073747) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "saler_id", null: false
+    t.bigint "buyer_id", null: false
+    t.text "comment"
+    t.integer "evaluation", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_evaluations_on_buyer_id"
+    t.index ["saler_id"], name: "index_evaluations_on_saler_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
+
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.string "image", null: false
@@ -68,7 +81,7 @@ ActiveRecord::Schema.define(version: 2020_06_15_073747) do
     t.integer "saler_id"
     t.string "name", null: false
     t.text "explanation"
-    t.string "delivery_charge_flag", null: false
+    t.integer "delivery_charge_flag", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -151,6 +164,9 @@ ActiveRecord::Schema.define(version: 2020_06_15_073747) do
   add_foreign_key "accounts", "users"
   add_foreign_key "addresses", "users"
   add_foreign_key "cards", "users"
+  add_foreign_key "evaluations", "users"
+  add_foreign_key "evaluations", "users", column: "buyer_id"
+  add_foreign_key "evaluations", "users", column: "saler_id"
   add_foreign_key "images", "items"
   add_foreign_key "items", "categories"
   add_foreign_key "likes", "items"

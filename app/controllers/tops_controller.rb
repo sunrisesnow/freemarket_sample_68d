@@ -1,9 +1,7 @@
 class TopsController < ApplicationController
   before_action :authenticate_user!, only: [:set_notice]
   before_action :set_item_search_query
-  before_action :set_category_brand,  only: [:index]
-  before_action :set_notice
-
+  before_action :set_categories,  only: [:index]
   
   def index  
     @items = Item.including.limit(5).desc.trading_not

@@ -95,7 +95,7 @@
                 .nav__information--center
                   に同意したものとみなします。      
           .actions
-            = f.submit "次へ進む", class: "next__btn", id: "next__btn"
+            = f.submit "次へ進む", class: "next__btn", id: "next__btn", data: {disable_with: "処理中..."}
           .nav__personal--information
             = link_to "#", class: "nav__personal--information--link" do
               本人情報の登録について＞

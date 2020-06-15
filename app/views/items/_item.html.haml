@@ -1,5 +1,5 @@
 .item-list.hover
-  = link_to item_path(item),class: "item" do
+  = link_to item_path(item), class: "item" do
     = image_tag "#{item.images[0].image.url}", class: 'item-img'
     -if item.buyer_id.present? 
       .items-box_photo__sold
@@ -11,7 +11,7 @@
       .details
         %ul
           %li 
-            = item.price.to_s(:delimited)
+            = "¥#{item.price.to_s(:delimited)}"
           %li#like
             = item.likes.count
         %p.detail (税込)

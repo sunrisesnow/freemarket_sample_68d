@@ -1,0 +1,74 @@
+#evaluation__form{
+  width: 100%;
+  padding-bottom: 30px;
+  .field__radio{
+    padding: 30px 0 20px;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    input[type=radio]{
+      display: none;
+    }
+    #good{
+      &:checked + label[for=good]{
+        @include checked__radio(#FF5192)
+      }
+    }
+    label[for=good]{
+      @include radio__btn(#FF5192);
+      
+    }
+    #normal{
+      &:checked + label[for=normal]{
+        @include checked__radio(#FFD700)
+      }
+    }
+    label[for=normal]{
+      @include radio__btn(#FFD700);
+      margin: 0 50px;
+    }
+    #bad{
+      &:checked + label[for=bad]{
+        @include checked__radio(#3399FF)
+      }
+    }
+    label[for=bad]{
+      @include radio__btn(#3399FF);
+    }
+  }
+  .field__comment{
+    width: 80%;
+    margin: 0 auto;
+    textarea{
+      width: 100%;
+      height: 100px;
+    }
+  }
+  .field__action{
+    width: 80%;
+    margin: 0 auto;
+    input[type=submit]{
+      @include trading__btn();
+      width: 100%;
+      margin-top: 5px;
+    }
+  }
+}
+
+.radio-error-class{
+  color: red;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 3px;
+  padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+

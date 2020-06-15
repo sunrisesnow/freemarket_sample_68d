@@ -3,8 +3,7 @@ require 'rails_helper'
 feature 'user', type: :feature do
   feature 'ユーザー登録前' do
     scenario '会員情報入力ができるか' do
-      visit new_top_path
-      click_on "メールアドレスで登録"
+      visit new_user_registration_path
       fill_in "user_nickname",with: "メルカリさん"
       fill_in "user_email",with: "email@gmail.com"
       fill_in "user_password",with: "abc1234"

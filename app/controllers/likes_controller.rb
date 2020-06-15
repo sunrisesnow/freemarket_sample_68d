@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   before_action :set_item_search_query
   before_action :set_item, except: [:index]
-  before_action :set_category_brand,  only: [:index]
+  before_action :set_categories,  only: [:index]
   before_action :move_show_item, except: [:index]
 
   def index
@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     if likes.present?
       likes.each { |like| items << Item.find(like.item_id)}
     end
-    @items = Kaminari.paginate_array(items).page(params[:page]).per(15)
+    @items = Kaminari.paginate_array(items).page(params[:page]).per(14)
   end
 
   def create

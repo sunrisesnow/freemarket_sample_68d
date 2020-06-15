@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   require "payjp"
   before_action :set_item_search_query
-  before_action :set_category_brand
+  before_action :set_categories
   before_action :set_card
   before_action :set_payjp_api, except: [:new]
   before_action :set_item, only: [:buy, :check]
@@ -18,7 +18,7 @@ class CardsController < ApplicationController
     render :new if params[:payjpToken].blank?
     customer = Payjp::Customer.create(card: params[:payjpToken])
     @card    = Card.new(user_id: current_user.id, payjp_id: customer.id)
-    @card.save! ? (redirect_to cards_path) : (render :new)
+    @card.save! ? (redirect_to request.referer) : (render :new)
   end
 
   def destroy    

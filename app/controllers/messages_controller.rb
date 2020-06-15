@@ -1,8 +1,9 @@
 class MessagesController < ApplicationController
   include TradingHelper
   before_action :set_item_search_query
-  before_action :set_category_brand
+  before_action :set_categories
   before_action :set_trading_item
+  before_action :item_present?
   before_action :send_message_to_user?
   before_action :item_user?
   before_action :set_message, only: :destroy

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :tops, only: [:new]
   resources :accounts, except: [:show, :index]
   resources :addresses, only: [:edit, :update, :show]
   resources :users, only: [:show, :index] do
@@ -34,13 +33,23 @@ Rails.application.routes.draw do
   
   resources :items do
     resources :likes, only: [:create, :destroy]
+    resources :evaluations, only: [:create, :index]
     collection do
       get 'category_children', defaults: { format: 'json' }
       get 'category_grandchildren', defaults: { format: 'json' }
+      get 'delivery_method', defaults: { format: 'json' }
+      get 'price_range', defaults: { format: 'json' }
       get 'search'
     end
-    resources :trading, only: [:show, :update]
+    resources :trading, only: [:show, :update] do
+      member do
+        patch 'cancel'
+        patch 'relist'
+      end
+    end
     resources :messages, only: [:create, :destroy]
   end
   resources :notifications, only: [:index]
+  
+  get  '*unmatched_route', to: 'application#render_404', format: false
 end

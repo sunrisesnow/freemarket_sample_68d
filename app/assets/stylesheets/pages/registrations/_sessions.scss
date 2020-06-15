@@ -1,107 +1,113 @@
-.session__login{
-  background-color: white;
-  width: 450px;
-  margin: 0 auto;
-  padding-bottom: 20px;
-  &--new{
-    width: 100%;
-    border-bottom: 1px solid $lightgray;
-    padding: 30px 0;
-    &--link{
-      text-align: center;
-      p{
-        font-size: 13px;
-        padding-bottom: 5px;
+.new__wrapper{
+  width: 100%;
+  background-color: $whitesmoke; 
+  position: relative;
+  .session__login{
+    background-color: white;
+    width: 450px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    &--new{
+      width: 100%;
+      border-bottom: 1px solid $lightgray;
+      padding: 30px 0;
+      &--link{
+        text-align: center;
+        p{
+          font-size: 13px;
+          padding-bottom: 5px;
+        }
+        .new__user--btn{
+          display: inline-block;
+          letter-spacing: 1px;
+          width: 306px;
+          height: 40px;
+          background-color: $sign-up-btn;
+          line-height: 40px;
+          color: white;
+          opacity: 0.8;
+          transition: 0.5s;
+          font-size: 13px;
+          border-radius: 3px;
+          @include hover__color(white, $sign-up-btn, 0.5);
+        }
       }
-      .new__user--btn{
-        display: inline-block;
+    }
+    .facebook__google--login{
+      width: 100%;
+      padding: 30px 0 50px;
+      &--btn{
         letter-spacing: 1px;
+        display: block;
         width: 306px;
         height: 40px;
-        background-color: $sign-up-btn;
         line-height: 40px;
+        transition: 0.5s;
+        font-size: 13px;
+        position: relative;
+        text-align: center;
+        border-radius: 3px;
+        margin: 0 auto;
+        .fa-facebook, .fa-google{
+          position: absolute;
+          left: 12px;
+          padding-top: 11px;
+        }
+        .fa-google{
+          background: -webkit-linear-gradient(0deg, red, #FF8C00, green, blue);
+          -webkit-background-clip:text;
+          -webkit-text-fill-color: transparent;
+          height: 30px;
+        }
+      }
+      .facebook__btn{
+        background-color: $facebook-color;
         color: white;
         opacity: 0.8;
-        transition: 0.5s;
-        font-size: 13px;
-        border-radius: 3px;
-        @include hover__color(white, $sign-up-btn, 0.5);
+        @include hover__color(white, $facebook-color, 0.5)
+      }
+      .google__btn{
+        margin-top: 15px;
+        border: 1px solid black;
+        color: black;
+        @include hover__color(black, white, 0.5)
       }
     }
-  }
-  .facebook__google--login{
-    width: 100%;
-    padding: 30px 0 50px;
-    &--btn{
-      letter-spacing: 1px;
-      display: block;
-      width: 306px;
-      height: 40px;
-      line-height: 40px;
-      transition: 0.5s;
-      font-size: 13px;
-      position: relative;
-      text-align: center;
-      border-radius: 3px;
-      margin: 0 auto;
-      .fa-facebook, .fa-google{
-        position: absolute;
-        left: 12px;
-        padding-top: 11px;
-      }
-      .fa-google{
-        background: -webkit-linear-gradient(0deg, red, #FF8C00, green, blue);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color: transparent;
-        height: 30px;
-      }
-    }
-    .facebook__btn{
-      background-color: $facebook-color;
-      color: white;
-      opacity: 0.8;
-      @include hover__color(white, $facebook-color, 0.5)
-    }
-    .google__btn{
-      margin-top: 15px;
-      border: 1px solid black;
-      color: black;
-      @include hover__color(black, white, 0.5)
-    }
-  }
-  .login__form{
-    width: 450px;
-    &__error{
-      color: red;
-      font-size: 13px;
-      text-align: center;
-    }
-    .field{
-      padding-left: 72px;
-      &__recaptha{
-        margin-left: 1.5px;
-        margin-bottom: 15px;
+    .login__form{
+      width: 450px;
+      padding-top: 32px;
+      &__error{
         color: red;
         font-size: 13px;
-      }
-      .login__next__btn{
-        display: block;
-        letter-spacing: 2px;
-        width: 306px;
-        height: 40px;
-        color: white;
         text-align: center;
-        line-height: 40px;
-        background-color: $skyblue;
-        border-radius: 3px;
-        transition: 0.5s;
-        margin-bottom: 15px;
-        @include hover__color(white, $skyblue, 0.6);
       }
-      &__password--forgot{
-        font-size: 13px;
-        color: $skyblue;
-        @include hover($skyblue, 0.6)
+      .field{
+        padding-left: 72px;
+        &__recaptha{
+          margin-left: 1.5px;
+          margin-bottom: 15px;
+          color: red;
+          font-size: 13px;
+        }
+        .login__next__btn{
+          display: block;
+          letter-spacing: 2px;
+          width: 306px;
+          height: 40px;
+          color: white;
+          text-align: center;
+          line-height: 40px;
+          background-color: $skyblue;
+          border-radius: 3px;
+          transition: 0.5s;
+          margin-bottom: 15px;
+          @include hover__color(white, $skyblue, 0.6);
+        }
+        &__password--forgot{
+          font-size: 13px;
+          color: $skyblue;
+          @include hover($skyblue, 0.6)
+        }
       }
     }
   }

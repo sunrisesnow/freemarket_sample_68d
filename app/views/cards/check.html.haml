@@ -32,6 +32,6 @@
         %p.creditcard-info__period 
           = @exp_month + " / " + @exp_year
         .creditcard-info__period
-          = button_to "このカードで買う", buy_card_path(@item.id),method: :get ,class: "btn-card", data: { confirm: 'この商品を購入してよろしいですか?',cancel: 'やめる',commit: '購入する'}, title: '購入確認'
+          = button_to "このカードで買う", buy_card_path(@item.id),method: :get ,class: "btn-card", data: { confirm: 'この商品を購入してよろしいですか?',cancel: 'やめる',commit: '購入する',  disable_with: "処理中..."}, title: '購入確認'
           = button_to "トップページへ", root_path, method: :get, class: "btn-card"
   = render "shared/form-footer"

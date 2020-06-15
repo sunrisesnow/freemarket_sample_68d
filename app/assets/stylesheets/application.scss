@@ -15,7 +15,6 @@
 @import "modules/pagination";
 @import "modules/notice";
 @import "pages/tops/index";
-@import "pages/tops/new";
 @import "pages/items/index";
 @import "pages/items/new";
 @import "pages/items/show";
@@ -35,5 +34,7 @@
 @import "pages/addresses/edit";
 @import "pages/trading/show";
 @import "pages/trading/messages";
+@import "pages/evaluations/index";
+@import "pages/evaluations/create";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';

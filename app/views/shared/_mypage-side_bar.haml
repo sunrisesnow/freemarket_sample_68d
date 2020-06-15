@@ -1,0 +1,90 @@
+.mp-side_bar
+  %ul.mp-side_bar__nav_list
+    %li
+      = link_to user_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span マイページ
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to "#", class: "mp-side_bar__nav_list__link" do
+        %span お知らせ
+        %i.fas.fa-chevron-right
+    %li
+      = link_to "#", class: "mp-side_bar__nav_list__link" do
+        %span やることリスト
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to user_likes_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span お気に入り！一覧
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to new_item_path, class: "mp-side_bar__nav_list__link" do
+        %span 出品する
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to draft_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 下書き一覧
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to exhibition_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 出品した商品-出品中
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to exhibition_trading_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 出品した商品-取引中
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to exhibition_completed_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 出品した商品-売却済み
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to bought_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 購入した商品-取引中
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to bought_completed_users_path, class: "mp-side_bar__nav_list__link" do
+        %span 購入した商品-過去の取引
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to item_evaluations_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span 評価一覧
+        %i.fas.fa-chevron-right
+  %ul.mp-side_bar__nav_list
+    %h4 メルペイ
+    %li 
+      = link_to "#", class: "mp-side_bar__nav_list__link" do
+        %span 売上・振込申請
+        %i.fas.fa-chevron-right
+    %li
+      = link_to "#", class: "mp-side_bar__nav_list__link" do
+        %span ポイント
+        %i.fas.fa-chevron-right
+  %ul.mp-side_bar__nav_list        
+    %h4 設定
+    %li
+      = link_to edit_account_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span プロフィール
+        %i.fas.fa-chevron-right
+    %li
+      = link_to edit_address_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span 発送元・お届け先住所変更
+        %i.fas.fa-chevron-right
+    %li
+      = link_to new_card_path, class: "mp-side_bar__nav_list__link" do
+        %span 支払い方法
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to edit_user_registration_path, class: "mp-side_bar__nav_list__link" do
+        %span メール/パスワード
+        %i.fas.fa-chevron-right
+    %li
+      = link_to users_path, class: "mp-side_bar__nav_list__link" do
+        %span 本人情報
+        %i.fas.fa-chevron-right
+    %li 
+      = link_to address_path(current_user), class: "mp-side_bar__nav_list__link" do
+        %span 送付先情報
+        %i.fas.fa-chevron-right
+    %li
+      = link_to destroy_user_session_path,method: :delete, class: "mp-side_bar__nav_list__link", data:  { confirm: 'ログアウトしてよろしいですか?',cancel: 'やめる',commit: 'ログアウトする',disable_with: "ログアウト中..." }, title: 'ログアウト確認' do
+        %span ログアウト
+        %i.fas.fa-chevron-right

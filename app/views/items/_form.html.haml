@@ -7,12 +7,29 @@
           %span.field__label--require 必須
           %h4.field__label--supple 最大10枚までアップロードできます
         #image-box-1
-          .item-num-0#image-box__container
-            = f.fields_for :item_images do |image|
+          - if @item.persisted? && @item.images.count > 0
+            - @item.images.each_with_index do |image, i|
+              %div{class: "item-image", data:{ image: image.image.filename, index: i}}
+                .item-image__content
+                  .item-image__content--icon
+                    = image_tag image.image.url, data: { index: i }, width: "114", height: '80'
+                .item-image__operation
+                  .item-image__operation--delete 削除
+            = f.fields_for :images do |i|
+              = i.file_field :image, type: 'file', class: "img-file", name: "item[image][]", value:"", style: "display:none", multiple: :true
+              = i.check_box :_destroy, data: {index: i.index}, class: 'hidden-destroy'
+            %div{class: "item-num-#{@item.images.count} drag-area", id: "image-box__container"}
               %div{class: "input-area", tabindex: 0}
-                = image.file_field :image, type: 'file', class: "img-file", name: "item_images[image][]", value:"", style: "display:none", required: "required", multiple: :true
-                %label{for: "item_item_images_image", class: "input-area__label"}
+                = file_field_tag :image, name: "item[image][]", class: "img-file", value:"", style: "display:none", multiple: :true
+                %label{for: "image", class: "input-area__label"}
                   %i.fas.fa-camera
+          - else
+            .item-num-0#image-box__container
+              = f.fields_for :item_images do |image|
+                %div{class: "input-area", tabindex: 0}
+                  = image.file_field :image, type: 'file', class: "img-file", name: "item_images[image][]", value:"", style: "display:none", required: "required", multiple: :true
+                  %label{for: "item_item_images_image", class: "input-area__label"}
+                    %i.fas.fa-camera
     .item-area.item-info
       .field
         .field__label
@@ -20,12 +37,24 @@
           %span.field__label--require 必須
         .field__form.item-area__field__form
           = f.text_field :name, placeholder: '40文字まで', required: :true
+          .item-area__field__form__cnt
+            - if @item.persisted?
+              %span.now_cnt_name= @item.name.length
+            - else
+              %span.now_cnt_name 0
+            %span / 40
       .field
         .field__label
           = f.label :explanation, '商品の説明'
           %span.field__label--require 必須
         .item-area__field__form.item-area__field--textarea
           = f.text_area :explanation, required: :true, placeholder: '商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）'
+          .item-area__field__form__cnt
+            - if @item.persisted?
+              %span.now_cnt_explanation= @item.explanation.length
+            - else
+              %span.now_cnt_explanation 0
+            %span / 1000
     .item-area.item-detail
       %h3.item-area__name 商品の詳細
       .field
@@ -33,15 +62,16 @@
           = f.label :category_id, 'カテゴリー'
           %span.field__label--require 必須
         %ul.item-area__field__form.field__input--category
-          %li
-            = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
-    
-      .field
-        .field__label
-          = f.label :brand, 'ブランド'
-          %span.field__label--any 任意
-        .field__form.item-area__field__form
-          = text_field_tag('')
+          - if @item.persisted?
+            %li
+              = f.select :category_id ,options_for_select(@parents, @item.category.root.name),{include_blank: "選択してください"}, {id: 'parent_category', required: :true}
+            %li
+              = f.select :category_id ,options_for_select(@category_child_array.map{|c|[c[:name], c[:id]]}, @item.category.parent.id),{include_blank: "選択してください"}, {id: 'children_category', required: :true}
+            %li
+              = f.select :category_id ,options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id]]}, @item.category.id),{include_blank: "選択してください"}, {id: 'grandchildren_category', required: :true}
+          - else
+            %li
+              = f.select :category_id , @parents, {include_blank: "選択してください"}, {id: 'parent_category', required: :true}
       .field
         .field__label
           = f.label :status_id, '商品の状態'
@@ -57,6 +87,13 @@
             %span.field__label--require 必須
           .field__form.item-area__field__form
             = f.select :delivery_charge_flag, [['送料込み(出品者負担)', '1'], ['着払い(購入者負担)', '2']], include_blank: '選択してください', required: :true
+        - if @item.persisted?
+          .field#delivery_method
+            .field__label
+              = f.label :delivery_method_id, '配送の方法'
+              %span.field__label--require 必須
+            .field__form.item-area__field__form
+              = f.collection_select :delivery_method_id, @delivery_methods, :id, :name, prompt: "選択してください", required: :true, id: 'item-prefecture'
       .field
         .field__label
           = f.label :prefecture_id, '発送元の地域'
@@ -81,20 +118,41 @@
         .sell-calc__detail.fee
           %h4.sell-calc__detail--label 販売手数料（10%）
           .hanbaitesuuryou
-            %span#sell-fee -
+            %span#sell-fee= item_sell_fee(@item)
         .sell-calc__detail.profit
           %h4.sell-calc__detail--label 販売利益
           .hanbairieki
-            %span#sell-profit -
+            %span#sell-profit= item_sell_profit(@item)
     .item-btn-area
-      .item-btn-area__container
-        .item-btn-area__container__box
-          = f.hidden_field :trading_status_id, value: 1
-          = f.submit '出品する', id: 'item-post-btn', class: 'item-btn item-form-btn', trade_status_id: '1'
-      .item-btn-area__container
-        .item-btn-area__container__box
-          = f.submit '下書きに保存する', id: 'item-draft-btn', class: 'item-btn item-form-btn', trade_status_id: '4'
+      - if @item.persisted? && @item.trading_status_id == 1
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.hidden_field :trading_status_id, value: 1
+            = f.submit '変更を適用する', id: 'item-post-btn', class: 'item-btn item-form-btn', trade_status_id: '1'
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.submit '下書きにする', id: 'item-draft-btn', class: 'item-btn item-form-btn', trade_status_id: '4'
+      - elsif @item.persisted? && @item.trading_status_id == 4
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.hidden_field :trading_status_id, value: 1
+            = f.submit '出品する', id: 'item-post-btn', class: 'item-btn item-form-btn', trade_status_id: '1'
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.submit '下書きを変更する', id: 'item-draft-btn', class: 'item-btn item-form-btn', trade_status_id: '4'
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = link_to "下書きを削除する", item_path(@item), method: :delete, class: "item-btn-red", data: { confirm: '下書きを削除してよろしいですか?',cancel: 'やめる',commit: '削除する'}, title: '削除確認'
+      - else
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.hidden_field :trading_status_id, value: 1
+            = f.submit '出品する', id: 'item-post-btn', class: 'item-btn item-form-btn', trade_status_id: '1'
+        .item-btn-area__container
+          .item-btn-area__container__box
+            = f.submit '下書きに保存する', id: 'item-draft-btn', class: 'item-btn item-form-btn', trade_status_id: '4'
       .item-btn-area__container
         .item-btn-area__container__box
           = link_to 'もどる', root_path
+
 

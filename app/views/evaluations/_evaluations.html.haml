@@ -1,0 +1,41 @@
+- if evaluations.present?
+  - evaluations.each do |evaluation|
+    = link_to "#", class: "user__evaluations" do
+      - if evaluation.user == evaluation.saler
+        .user__icon
+          = evaluations_user_icon_image(evaluation.buyer.account)
+        .evaluation__details
+          .which__evaluation
+            = which_evaluation?(evaluation.evaluation)
+            購入者
+          .user__nickname
+            = evaluation.buyer.nickname.truncate(30, omission: '...')
+          .evaluation__comment
+            %p
+              = comment_present?(evaluation.comment)
+          .evaluation__date
+            %i.far.fa-clock
+            = "#{time_ago_in_words(evaluation.created_at)}前"
+        %i.fas.fa-chevron-right
+      - else
+        .user__icon
+          = evaluations_user_icon_image(evaluation.saler.account)
+        .evaluation__details
+          .which__evaluation
+            = which_evaluation?(evaluation.evaluation)
+            出品者
+          .user__nickname
+            = evaluation.saler.nickname.truncate(30, omission: '...')
+          .evaluation__comment
+            %p
+              = comment_present?(evaluation.comment)
+          .evaluation__date
+            %i.far.fa-clock
+            = "#{time_ago_in_words(evaluation.created_at)}前"
+        %i.fas.fa-chevron-right
+  = paginate @evaluations
+- else
+  .user__liked__not__items
+    %i.fas.fa-box.fa-6x
+    %p 
+      評価一覧はありません

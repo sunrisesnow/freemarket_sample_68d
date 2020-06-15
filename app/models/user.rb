@@ -10,8 +10,7 @@ class User < ApplicationRecord
   has_one  :point,                                                       dependent: :destroy
   has_many :likes,                                                       dependent: :destroy
   has_many :from_messages,class_name: "Message" ,foreign_key: "from_id", dependent: :destroy
-
-  scope :trading, ->(trading_status_id) {where(trading_status_id: trading_status_id)}
+  has_many :evaluations
   
   with_options presence: true do
     validates :nickname

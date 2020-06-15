@@ -1,0 +1,41 @@
+.user__evaluations{
+  color: black;
+  display: flex;
+  background-color: white;
+  width: 100%;
+  text-decoration: none;
+  border-bottom: 1px solid $whitesmoke;
+  padding: 20px 20px 10px;
+  position: relative;
+  @include hover__color(black, #EEEEEE, 0.8);
+    &:hover{
+      .fa-chevron-right{
+        color: black;
+        transform: scale(1.5);
+        transition-duration: 0.3s;
+      }
+    }
+  .user__icon{
+    margin-right: 20px;
+  }
+  .evaluation__details{
+    .which__evaluation{
+      i.fa-laugh{
+        color: #FF5192;
+      }
+      i.fa-meh{
+        color: #FFD700;
+      }
+      i.fa-frown{
+        color: #3399FF;
+      }
+    }
+  }
+  .fa-chevron-right{
+    color: $lightgray;
+    position: absolute;
+    right: 15px;
+
+  }
+}
+

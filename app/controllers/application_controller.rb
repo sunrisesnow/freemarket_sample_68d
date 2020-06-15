@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :redirect_to_root, only: [:render_404]
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth, if: :production?
   before_action :set_host
-  
+
+  def render_404
+    redirect_to root_path
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -27,14 +32,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_to_root
+    redirect_to root_path
+  end
+
   def set_item_search_query
-    @q = Item.search(params[:q])
+    @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true)
   end
 
-  def set_category_brand
+  def set_categories
     @parents = Category.ancestries(nil)
-    @brands = ["シャネル","ナイキ", "ルイヴィトン", "シュプリーム","アディダス"]
   end
 
   def item_user?
@@ -42,10 +50,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_trading_item
-    @item = Item.find(params[:item_id])
+    @item = Item.find_by_id(params[:item_id])
   end
 
-  def set_notice
-    @notifications = current_user.passive_notifications
+  def item_present?
+    redirect_to root_path unless @item.present?
   end
 end

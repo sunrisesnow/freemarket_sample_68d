@@ -4,4 +4,5 @@ class Account < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true
+  validates :introduction, length: { maximum: 1000 }
 end

@@ -12,6 +12,7 @@
           = @item.name.truncate(15, omission: '...')
         .saler__user
           = @saler_user.nickname.truncate(15, omission: '...')
+        = link_to "商品ページを確認する", item_path(@item)
     .item__information
       .item__information__title
         発送日数
@@ -62,7 +63,7 @@
           .item__information__title
             取引評価数
           .item__information__box
-            今後実装する？？
+            = @buyer_user.evaluations.count
   - else
     .trading__information
       .trading__information__title
@@ -78,4 +79,4 @@
           .item__information__title
             取引評価数
           .item__information__box
-            今後実装する？？
+            = @saler_user.evaluations.count
