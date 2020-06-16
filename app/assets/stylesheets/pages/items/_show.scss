@@ -9,63 +9,61 @@
       &--form {
         .itembox {
           background-color: #fff;
-          padding: 24px 70px 40px;
+          padding: 8px 90px 40px;
           &__name {
+            margin-bottom: 20px;
             text-align: center;
             font-weight: bold;
             font-size: 24px;
           }
-          &__image {
-            margin: 16px 0 0;
-            & ul {
+          &__image-container {
+            &__target {
               display: flex;
               position: relative;
-              & li {
-                display: flex;
-                flex-direction: column;
-                width: 560px;
-                align-items: center;
+              background-color: $whitesmoke;
+              .sold-item {
+                width: 0;
+                height: 0;
+                border-width: 160px 160px 0 0;
+                border-color: #ea352d transparent transparent transparent;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                border-style: solid;
+                &__inner {
+                  top: -130px;
+                  font-size: 34px;
+                  position: absolute;
+                  left: 0;
+                  z-index: 2;
+                  color: #fff;
+                  transform: rotate(-45deg);
+                  letter-spacing: 2px;
+                  font-weight: 600;
+                }
+              }
+              &__box {
                 margin: 0 auto;
                 & img {
-                  object-fit: cover;
-                  height: 346px;
                   width: 100%;
-                  vertical-align: bottom;
-                }
-                .mini-image {
-                  width: 560px;
-                  font-size: 0;
-                  &s {
-                    display: inline-block;
-                    & img {
-                      width: 112px;
-                      height: 87px;
-                    }
-                  }
-                }
-                
-                .sold-item {
-                  width: 0;
-                  height: 0;
-                  border-width: 160px 160px 0 0;
-                  border-color: #ea352d transparent transparent transparent;
-                  display: block;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  z-index: 1;
-                  border-style: solid;
-                  &__inner {
-                    top: -130px;
-                    font-size: 34px;
-                    position: absolute;
-                    left: 0;
-                    z-index: 2;
-                    color: #fff;
-                    transform: rotate(-45deg);
-                    letter-spacing: 2px;
-                    font-weight: 600;
-                  }
+                  height: 320px;
+                  object-fit: contain;
+                }  
+              }
+            }
+            &__thumb-list {
+              display: flex;
+              align-items: center;
+              width: 520px;
+              background-color: $whitesmoke;
+              &__thumb {
+                width: 104px;
+                & img {
+                  width: 104px;
+                  height: 104px;
+                  object-fit: fill;
                 }
               }
             }

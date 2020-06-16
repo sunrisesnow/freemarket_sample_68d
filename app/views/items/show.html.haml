@@ -7,19 +7,19 @@
           .itembox
             %h2.itembox__name
               = @item.name.truncate(30, omission: '...')
-            .itembox__image
-              %ul
-                %li
+            .itembox__image-container
+              .itembox__image-container__target
+                .itembox__image-container__target__box
                   = image_tag @item.images[0].image.url
                     - if @item.buyer_id.present?
                     .sold-item
                       .sold-item__inner
                         SOLD
-                  .mini-image
-                    - @item.images.each_with_index do |image, i|
-                      - unless i == 0
-                        .mini-images
-                          =image_tag image.image.url
+              %ul.itembox__image-container__thumb-list
+                - if @item.images.count > 1
+                  - @item.images.each_with_index do |image, i|
+                    %li.itembox__image-container__thumb-list__thumb
+                      = image_tag image.image.url
             .itembox__price
               %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
