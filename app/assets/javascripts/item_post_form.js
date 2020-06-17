@@ -351,9 +351,8 @@ $(function(){
       fileReader.readAsDataURL(file);
       const num = i
 
-      
     //画像が10枚になったら超えたらドロップボックスを削除する
-      if (num == 10){
+      if (currentNum + i + 1 >= 10){
         $('#image-box__container').css('display', 'none')
         fileReader.onloadend = function() {
           fileIndex += 1;
@@ -411,9 +410,10 @@ $(function(){
         $.each(files, function(i,file){
           const fileReader = new FileReader();
           fileReader.readAsDataURL(file);
-          const inputNum = $('.item-image').length + add_files_length
+          const currentNum = $('.item-image').length
+          const inputNum = currentNum + add_files_length
           const num = i
-          if (num==10){
+          if (currentNum + i + 1 >= 10){
             $('#image-box__container').css('display', 'none')
             fileReader.onloadend = function() {
               fileIndex += 1;
