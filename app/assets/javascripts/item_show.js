@@ -20,12 +20,15 @@ $(function() {
     $(thumbnailImages+'[data-index="'+index+'"]').addClass("thumbnail-current");
    });
  
-  //slickスライダー定義
-  $(slider).slick({
-    prevArrow:'<i class="fa fa-angle-left arrow arrow-left"></i>',
-    nextArrow:'<i class="fa fa-angle-right arrow arrow-right"></i>',
-    fade: true,
-    infinite: true,
+  $(slider).css('opacity',0);
+  $(slider).animate({'z-index':1}, 300,function(){
+    $(slider).slick({
+      prevArrow:'<i class="fa fa-angle-left arrow arrow-left"></i>',
+      nextArrow:'<i class="fa fa-angle-right arrow arrow-right"></i>',
+      fade: true,
+      infinite: true,
+    });
+    $(slider).animate({'opacity':1});
   });
 
   //サムネイル画像アイテムをクリックしたときにスライダー切り替え
@@ -41,7 +44,7 @@ $(function() {
     });
     $(thumbnailImages+'[data-index="'+nextSlide+'"]').addClass("thumbnail-current");
   });
-  
+
   // モーダルの挙動
   $('[data-modal="overlay"], [data-modal="content"]').hide();
   

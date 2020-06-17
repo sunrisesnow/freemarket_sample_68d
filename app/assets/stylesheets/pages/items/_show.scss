@@ -22,7 +22,7 @@
             .sold-item {
               width: 0;
               height: 0;
-              border-width: 160px 160px 0 0;
+              border-width: 144px 144px 0 0;
               border-color: #ea352d transparent transparent transparent;
               display: block;
               position: absolute;
@@ -31,8 +31,8 @@
               z-index: 1;
               border-style: solid;
               &__inner {
-                top: -130px;
-                font-size: 34px;
+                top: -120px;
+                font-size: 32px;
                 position: absolute;
                 left: 0;
                 z-index: 2;
@@ -40,6 +40,7 @@
                 transform: rotate(-45deg);
                 letter-spacing: 2px;
                 font-weight: 600;
+                user-select: none;
               }
             }
             &__slider {
