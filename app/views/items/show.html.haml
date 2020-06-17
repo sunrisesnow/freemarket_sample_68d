@@ -1,4 +1,4 @@
-.wrapper
+%div{ class: "wrapper", data: {modal: "fixed"}}
   = render "shared/header"
   .main
     .main-item
@@ -7,19 +7,20 @@
           .itembox
             %h2.itembox__name
               = @item.name.truncate(30, omission: '...')
-            .itembox__image
-              %ul
-                %li
-                  = image_tag @item.images[0].image.url
-                    - if @item.buyer_id.present?
-                    .sold-item
-                      .sold-item__inner
-                        SOLD
-                  .mini-image
-                    - @item.images.each_with_index do |image, i|
-                      - unless i == 0
-                        .mini-images
-                          =image_tag image.image.url
+            .itembox__image-container
+              %ul.itembox__image-container__slider#slider_images
+                - @item.images.each_with_index do |image, i|
+                  %li.itembox__image-container__slider__box.slider_image
+                    = image_tag image.image.url
+              - if @item.buyer_id.present?
+                .sold-item
+                  .sold-item__inner
+                    SOLD
+              %ul.itembox__image-container__thumb#thumb_images
+                - if @item.images.count > 1
+                  - @item.images.each_with_index do |image, i|
+                    %li.itembox__image-container__thumb__box.thumb_image
+                      = image_tag image.image.url
             .itembox__price
               %span= "¥#{@item.price.to_s(:delimited)}"
               .itembox__price--detail
@@ -103,5 +104,13 @@
           = link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
             %span をもっと見る
+      %div{ id: "item-modal__content", data: { modal: "content"}}
+        .item-modal__times
+          %i.fas.fa-times.fa-lg.js_modal_close
+        %ul.item-modal__slider#slider_images_modal
+          - @item.images.each_with_index do |image, i|
+            %li.item-modal__slider__box.slider_image
+              = image_tag image.image.url
+      %div{ id: "item-modal__overlay", data: { modal: "overlay"}}
   = render "shared/footer-image"
   = render "shared/footer"
