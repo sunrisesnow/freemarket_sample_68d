@@ -104,5 +104,13 @@
           = link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
             %span をもっと見る
+      %div{ id: "item-modal__content", data: { modal: "content"}}
+        .item-modal__times
+          %i.fas.fa-times.fa-lg.js_modal_close
+        %ul.item-modal__slider#slider_images_modal
+          - @item.images.each_with_index do |image, i|
+            %li.item-modal__slider__box.slider_image
+              = image_tag image.image.url
+      %div{ id: "item-modal__overlay", data: { modal: "overlay"}}
   = render "shared/footer-image"
   = render "shared/footer"
