@@ -26,43 +26,43 @@
             %span.member-main__form--require 必須
           .member-main--area__name
             .member-main--area__name--left
-              = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--left__input'}
+              = f.text_field :last_name, {placeholder:"例) 山田",class:'member-main__name--left__input', required: true}
             .member-main--area__name--right
-              = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--right__input'}
+              = f.text_field :first_name, {placeholder:"例) 太郎",class:'member-main__name--right__input', required: true}
         .member-main--area
           .member-main--area__label
             = f.label '送付先氏名(全角カナ)'
             %span.member-main__form--require 必須
           .member-main--area__name
             .member-main--area__name--left
-              = f.text_field :last_name_kana, {placeholder:"例) ヤマダ",class:'member-main__name--left__input'}
+              = f.text_field :last_name_kana, {placeholder:"例) ヤマダ",class:'member-main__name--left__input', required: true}
             .member-main--area__name--right
-              = f.text_field :first_name_kana, {placeholder:"例) タロウ",class:'member-main__name--right__input'}
+              = f.text_field :first_name_kana, {placeholder:"例) タロウ",class:'member-main__name--right__input', required: true}
         .member-main--area  
           .member-main--area__label
             = f.label '郵便番号', {class: 'member-main__form--label'}
             %span 必須
             .member-main--area__label--info ※ ハイフン不要
           .member-main--area__pform
-            = f.text_field :postal_code, {placeholder: "7ケタの半角数字", class:'member-main--area__pform--input'}              
+            = f.text_field :postal_code, {placeholder: "7ケタの半角数字", class:'member-main--area__pform--input', required: true}
         .member-main--area
           .member-main--area__label
             = f.label '都道府県'
             %span 必須
           .member-main--area__form
-            = f.select :prefectures, Address.prefectures.keys, {include_blank: "選択してください"}, {class:'member-main--area__form--prefecture'}
+            = f.select :prefectures, Address.prefectures.keys, {include_blank: "選択してください"}, {class:'member-main--area__form--prefecture', required: true}
         .member-main--area
           .member-main--area__label
             = f.label '市区町村'
             %span 必須
           .member-main--area__form
-            = f.text_field :municipality, {placeholder: "例) 〇〇市", class:'member-main--area__form--input'}
+            = f.text_field :municipality, {placeholder: "例) 〇〇市", class:'member-main--area__form--input', required: true}
         .member-main--area
           .member-main--area__label
             = f.label '町名・番地'
             %span 必須
           .member-main--area__form
-            = f.text_field :address, {placeholder: "例) 〇〇町1-1-1", class:'member-main--area__form--input'}
+            = f.text_field :address, {placeholder: "例) 〇〇町1-1-1", class:'member-main--area__form--input', required: true}
         .member-main--area
           .member-main--area__label
             = f.label '建物名・部屋番号'
