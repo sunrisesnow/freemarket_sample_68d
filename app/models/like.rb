@@ -14,7 +14,6 @@ class Like < ApplicationRecord
     notification = current_user.active_notifications.new(
       item_id: item.id,
       receiver_id: item.saler_id,
-      like_id: self.id,
       action: "like"
     )
     notification.save

@@ -5,5 +5,4 @@ class Notification < ApplicationRecord
   belongs_to :receiver, optional: true, foreign_key: "receiver_id", class_name: 'User'
   belongs_to :item,     optional: true 
   belongs_to :like,     optional: true 
-  belongs_to :comment,  optional: true 
 end
