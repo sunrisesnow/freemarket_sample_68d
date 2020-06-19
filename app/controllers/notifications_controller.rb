@@ -1,25 +1,9 @@
 class NotificationsController < ApplicationController
-    before_action :authenticate_user!
-    before_action :set_category_brand
-    before_action :set_item
-    before_action :set_item_search_query
-  
-    def index
-      @user = current_user
-      #current_userの投稿に紐づいた通知一覧
-        @notifications = @user.passive_notifications
-      #@notificationの中でまだ確認していない(indexに一度も遷移していない)通知のみ
-        @notifications.where(checked: false).each do |notification|
-          notification.update_attributes(checked: true)
-        end
-      @likers = @notifications.find_all(item_id)
-    end
-  
-    # def destroy_all
-    #   #通知を全削除
-    #     @notifications = current_user.passive_notifications.destroy_all
-    #     redirect_to users_notifications_path
-    # end
+  before_action :authenticate_user!
+  before_action :set_category_brand
+  before_action :set_item
+  before_action :set_item_search_query
+  before_action :my_notifications
 
   private
   def set_category_brand
