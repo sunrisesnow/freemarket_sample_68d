@@ -1,35 +1,28 @@
 %ul.notice
   -if @notifications.present?
     - @notifications.limit(5).order(created_at: :desc).each do |notice|
-      -# - if notice.comment_id.present?
-      -#   %li.notice__news__box
-      -#     = link_to "item_path"
-      -#     .notice__news__box--icon
-      -#       = icon('far', 'user', class:"notice--icon") 
-      -#     .notice__news__box--message 
-      -#       %span.notice--user= "#{notice.sender.nickname}"
-      -#       が
-      -#       %a.notice--item(href="item_path(notice.item_id")="#{notice.item.name}"
-      -#       にコメントしました
-      -#     .notice__news__box--time 
-      -#       = icon('far', 'clock', class:"top-item__icon__btn") 
-      -#       = time_ago_in_words(notice.created_at) + "前"
-      - if notice.like_id.present?
-        = link_to "/items/#{notice.item.id}" do
-          %li.notice__news__box
-            .notice__news__box--icon
-              = icon('far', 'user', class:"notice--icon") 
-            .notice__news__box--message 
+      = link_to "/items/#{notice.item.id}", class:"notice--link" do
+        %li.notice__news__box
+          .notice__news__box--icon
+            -if notice.sender.account&.icon_image.present?
+              = image_tag notice.sender.account.icon_image.url, class: "notice--icon"
+            -else
+              = image_tag "member_photo_noimage.png", class: "notice--icon"
+          .notice__news__box--message 
+            - case notice.action
+            - when 'like'
               %span.notice--user= "#{notice.sender.nickname}"
-              さん
-              -# - if @likers.length > 2 
-              -#   %span.notice--likers="、他#{@likers.length-1}名"
-              が
-              %span.notice--item= "#{notice.item.name}"
-              にいいね！しました
-            .notice__news__box--time 
-              = icon('far', 'clock', class:"top-item__icon__btn") 
-              = time_ago_in_words(notice.created_at) + "前"
+              さんが
+              %a.notice--item(href="item_path(notice.item_id")="#{notice.item.name}"
+              にお気に入り！しました
+            - when 'comment'
+              %span.notice--user= "#{notice.sender.nickname}"
+              さんが
+              %a.notice--item(href="item_path(notice.item_id")="#{notice.item.name}"
+              にコメントしました
+          .notice__news__box--time 
+            = icon('far', 'clock', class:"top-item__icon__btn") 
+            = time_ago_in_words(notice.created_at) + "前"
   -else 
     .news__content.notice__list
       %i.far.fa-file-alt.fa-4x

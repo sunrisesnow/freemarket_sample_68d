@@ -7,23 +7,32 @@
   position: absolute;
   text-align: center;
   color:$lightgray;
-}
 
+}
+.notice--link{
+  color: black;
+  text-decoration: none;
+}
 .notice__news__box{
   position: relative;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
   display: block;
   color: #333;
   height: 80px;
-  margin:10px 15px 0 0;
+  padding:10px 15px 0 0;
   display: none;
+}
+.notice__news__box:hover{
+  background-color: $whitesmoke;
 }
 .notice--icon{
   float: left;
   color: $lightgray;
   background-color: $whitesmoke;
-  font-size: 3em ;
-  margin: 10px 15px 15px 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px 15px 15px 15px;
 }
 .notice__news__box--message {
   font-size: 15px;
@@ -40,9 +49,6 @@
 .notice--chevron{
 
 }
-
-
-
 
 
 
