@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :item_present?, only: [:show, :edit]
   before_action :set_categories, except: [:destroy]
-  
+  before_action :my_notifications
+
 # 未ログインで行えるアクション
   def index
     redirect_to root_path

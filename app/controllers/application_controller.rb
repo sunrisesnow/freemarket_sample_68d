@@ -56,4 +56,11 @@ class ApplicationController < ActionController::Base
   def item_present?
     redirect_to root_path unless @item.present?
   end
+
+  def my_notifications
+    @notifications = current_user.passive_notifications.preload(:item, sender: :account)
+    @notifications.where(checked: false).each do |notification|
+      notification.update_attributes(checked: true)
+    end
+  end
 end
