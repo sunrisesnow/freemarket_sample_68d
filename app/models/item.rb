@@ -40,6 +40,10 @@ class Item < ApplicationRecord
   # 販売価格の数値範囲のバリデーション
   validates :price, numericality: {greater_than_or_equal_to: 300}
   validates :price, numericality: {less_than: 10000000}
+  belongs_to :category
+
+  # 商品と通知のアソシエーション、商品にイイねした際に通知を作成するメソッド
+  has_many :notifications, dependent: :destroy
 
   # 文字数のバリデーション
   validates :name, length: { maximum: 40 }

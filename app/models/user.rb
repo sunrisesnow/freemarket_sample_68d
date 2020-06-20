@@ -28,4 +28,7 @@ class User < ApplicationRecord
   def already_liked?(item)
     self.likes.exists?(item_id: item.id)
   end
+  
+  has_many :active_notifications,   class_name: "Notification",  foreign_key: "sender_id",   dependent: :destroy
+  has_many :passive_notifications,  class_name: "Notification",  foreign_key: "receiver_id", dependent: :destroy
 end

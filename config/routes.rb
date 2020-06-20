@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :addresses, only: [:edit, :update, :show]
   resources :users, only: [:show, :index] do
     resources :likes, only: [:index]
+    resources :notifications, only: [:index]
     collection do
       get 'draft'
       get 'exhibition'
@@ -49,5 +50,6 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create, :destroy]
   end
+  
   get  '*unmatched_route', to: 'application#render_404', format: false
 end

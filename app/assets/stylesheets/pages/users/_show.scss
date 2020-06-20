@@ -111,19 +111,23 @@
               }
             }
             .fa-chevron-right{
-              position: absolute;
               right: 10px;
               color: $lightgray;
             }
             &__img{
-              margin: 6px 25px 0 15px;
+              margin: 0 10px;
+              padding-top: 5px;
             }
             &__details {
               &__message {
                 padding-right: 40px;
+                line-height: 60px;
+                font-size: 18px;
               }
               &__time {
                 color: gray;
+                margin-bottom: 5px;
+                font-size: 17px;
               }
             }
           }
@@ -143,4 +147,21 @@
       }
     }
   }
+}
+
+.mp-notification__box{
+  display: flex;
+  border-bottom: 2px solid whitesmoke;
+}
+.mp-notification__box:hover{
+  background-color: whitesmoke;
+}
+.notification_mypage--link{
+  color: black;
+}
+.notification_mypage--icon{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px;
 }

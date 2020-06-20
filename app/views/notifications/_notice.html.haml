@@ -1,0 +1,29 @@
+%ul.notice
+  -if @notifications.present?
+    - @notifications.limit(5).order(created_at: :desc).each do |notice|
+      = link_to "/items/#{notice.item.id}", class:"notice--link" do
+        %li.notice__news__box
+          .notice__news__box--icon
+            -if notice.sender.account&.icon_image.present?
+              = image_tag notice.sender.account.icon_image.url, class: "notice--icon"
+            -else
+              = image_tag "member_photo_noimage.png", class: "notice--icon"
+          .notice__news__box--message 
+            - case notice.action
+            - when 'like'
+              %span.notice--text= notice.sender.nickname
+              さんが
+              %span.notice--text= notice.item.name
+              がお気に入り！しました
+            - when 'comment'
+              %span.notice--text= notice.sender.nickname
+              さんが
+              %span.notice--text= notice.item.name
+              がお気に入り！しました
+          .notice__news__box--time 
+            = icon('far', 'clock', class:"top-item__icon__btn") 
+            = time_ago_in_words(notice.created_at) + "前"
+  -else 
+    .news__content.notice__list
+      %i.far.fa-file-alt.fa-4x
+      %p お知らせはありません

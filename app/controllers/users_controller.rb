@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_item_search_query
   before_action :set_categories
+  before_action :my_notifications
   
   def index
   end
@@ -31,5 +32,4 @@ class UsersController < ApplicationController
   def bought_completed
     @items = Item.bought_completed(current_user.id).page(params[:page]).per(14)
   end
-
 end

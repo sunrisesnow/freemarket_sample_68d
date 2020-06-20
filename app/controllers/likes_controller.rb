@@ -14,12 +14,12 @@ class LikesController < ApplicationController
   end
 
   def create
-    like = Like.create(user_id: current_user.id, item_id: params[:item_id])
+    like = Like.create(user_id: current_user.id, item_id: params[:item_id])&.create_notification_by(current_user)
   end
 
   def destroy
     like = Like.find(params[:id])
-    current_user.id == like.user_id ? ( like.destroy) : (redirect_to root_path)
+    current_user.id == like.user_id ? ( like.destroy&.destroy_notification_by(current_user, @item.id)) : (redirect_to root_path)
   end
 
   private
