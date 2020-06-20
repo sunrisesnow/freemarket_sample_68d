@@ -26,10 +26,10 @@
       .user__nickname
         = current_user.nickname.truncate(15, omission: '...')
       .user__details
-        = link_to "#", class: "user__detaild--evaluation user__details--link" do
+        = link_to item_evaluations_path(current_user), class: "user__detaild--evaluation user__details--link" do
           %span 評価：
           = current_user.evaluations.count
-        = link_to "#", class: "user__detaild--saled user__details--link" do
+        = link_to exhibition_users_path, class: "user__detaild--saled user__details--link" do
           %span 出品数：
           = Item.where(saler_id: current_user.id).including.count 
     .mypage__container--menu
