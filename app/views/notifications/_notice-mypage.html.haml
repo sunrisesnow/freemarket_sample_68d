@@ -22,22 +22,20 @@
                 - when 'like'
                   .mp-notif__details
                     .mp-notif__details__message
-                      %span.notice--text= "#{notice.sender.nickname}"
+                      %span.notice--text= notice.sender.nickname
                       さんが
-                      %span.notice--text= "#{notice.item.name}"
+                      %span.notice--text= notice.item.name
                       がお気に入り！しました
                     .mp-notif__details__time
                       %i.far.fa-clock
                       %span= time_ago_in_words(notice.created_at) + "前"
-                    -# %i.fas.fa-chevron-right
                 - when 'comment'
                   .mp-notif__details
                     .mp-notif__details__message
-                      %span.notice--text= "#{notice.sender.nickname}"
+                      %span.notice--text= notice.sender.nickname
                       さんが
-                      %span.notice--text= "#{notice.item.name}"
-                      にコメントしました
+                      %span.notice--text= notice.item.name
+                      がお気に入り！しました
                     .mp-notif__details__time
                       %i.far.fa-clock
                       %span= time_ago_in_words(notice.created_at) + "前"
-                  -# %i.fas.fa-chevron-right
