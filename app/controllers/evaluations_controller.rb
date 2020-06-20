@@ -4,7 +4,6 @@ class EvaluationsController < ApplicationController
   before_action :set_trading_item, only: %i[create]
   before_action :item_present?, only: %i[create]
   before_action :set_item_search_query
-  before_action :set_trading_item_users, only: %i[create]
   before_action :set_new_message, only: %i[create]
   before_action :item_user?, only: %i[create]
 
@@ -20,6 +19,7 @@ class EvaluationsController < ApplicationController
       return
     elsif @item.trading_status_id == 3
       if @item.update(trading_status_id: 5)
+        trading_item_users(@item)
         sales_prices(@saler_user, @item)
         gives_point(@buyer_user, @item)
       else
@@ -40,9 +40,6 @@ class EvaluationsController < ApplicationController
         :comment,
         :evaluation).merge(user_id: @buyer_user.id, saler_id: @saler_user.id, buyer_id: @buyer_user.id)
     end
-  end
-  def set_trading_item_users
-    trading_item_users(@item)
   end
 
   def set_new_message
