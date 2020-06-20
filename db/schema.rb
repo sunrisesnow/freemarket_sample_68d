@@ -122,7 +122,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_051917) do
     t.integer "receiver_id"
     t.integer "item_id"
     t.string "action"
-    t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
