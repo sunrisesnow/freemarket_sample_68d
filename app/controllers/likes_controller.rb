@@ -19,7 +19,7 @@ class LikesController < ApplicationController
 
   def destroy
     like = Like.find(params[:id])
-    current_user.id == like.user_id ? ( like.destroy) : (redirect_to root_path)
+    current_user.id == like.user_id ? ( like.destroy&.destroy_notification_by(current_user, @item.id)) : (redirect_to root_path)
   end
 
   private

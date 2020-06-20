@@ -59,8 +59,5 @@ class ApplicationController < ActionController::Base
 
   def my_notifications
     @notifications = current_user.passive_notifications.preload(:item, sender: :account)
-    @notifications.where(checked: false).each do |notification|
-      notification.update_attributes(checked: true)
-    end
   end
 end

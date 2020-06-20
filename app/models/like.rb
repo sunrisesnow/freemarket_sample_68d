@@ -8,7 +8,7 @@ class Like < ApplicationRecord
   validates :item_id, presence: true
   validates_uniqueness_of :item_id, scope: :user_id
 
-  has_many :notifications, dependent: :destroy
+  has_one :notification
 
   def create_notification_by(current_user)
     notification = current_user.active_notifications.new(
@@ -18,4 +18,9 @@ class Like < ApplicationRecord
     )
     notification.save
   end
+
+  def destroy_notification_by(current_user, item_id)
+    Notification.find_by(item_id: item_id, sender_id: current_user.id, action: "like" ).destroy
+  end
+
 end
