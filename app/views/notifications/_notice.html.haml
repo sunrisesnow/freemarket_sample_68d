@@ -11,14 +11,14 @@
           .notice__news__box--message 
             - case notice.action
             - when 'like'
-              %span.notice--user= "#{notice.sender.nickname}"
+              %span.notice--text= "#{notice.sender.nickname}" 
               さんが
-              %a.notice--item(href="item_path(notice.item_id")="#{notice.item.name}"
+              %span.notice--text="#{notice.item.name}"
               にお気に入り！しました
             - when 'comment'
-              %span.notice--user= "#{notice.sender.nickname}"
+              %span.notice--text= "#{notice.sender.nickname}" 
               さんが
-              %a.notice--item(href="item_path(notice.item_id")="#{notice.item.name}"
+              %span.notice--text="#{notice.item.name}"
               にコメントしました
           .notice__news__box--time 
             = icon('far', 'clock', class:"top-item__icon__btn") 

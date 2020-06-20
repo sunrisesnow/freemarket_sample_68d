@@ -22,10 +22,9 @@
                 - when 'like'
                   .mp-notif__details
                     .mp-notif__details__message
-                      %span.notice--user= "#{notice.sender.nickname}"
-                      さん
-                      が
-                      %span.notice--item= "#{notice.item.name}"
+                      %span.notice--text= "#{notice.sender.nickname}"
+                      さんが
+                      %span.notice--text= "#{notice.item.name}"
                       がお気に入り！しました
                     .mp-notif__details__time
                       %i.far.fa-clock
@@ -34,10 +33,9 @@
                 - when 'comment'
                   .mp-notif__details
                     .mp-notif__details__message
-                      %span.notice--user= "#{notice.sender.nickname}"
-                      さん
-                      が
-                      %span.notice--item= "#{notice.item.name}"
+                      %span.notice--text= "#{notice.sender.nickname}"
+                      さんが
+                      %span.notice--text= "#{notice.item.name}"
                       にコメントしました
                     .mp-notif__details__time
                       %i.far.fa-clock

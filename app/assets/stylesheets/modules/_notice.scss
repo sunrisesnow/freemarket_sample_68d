@@ -21,6 +21,7 @@
   height: 80px;
   padding:10px 15px 0 0;
   display: none;
+
 }
 .notice__news__box:hover{
   background-color: $whitesmoke;
@@ -36,13 +37,16 @@
 }
 .notice__news__box--message {
   font-size: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
-.notice--item{
+.notice--text{
   color: $mainblueColor;
 }
-.notice--user{
-  color: $mainblueColor;
-}
+
+
+
 .notice__news__box--time{
   color: $gray;
 }
@@ -77,10 +81,12 @@
           .notification--user{
             color: $mainblueColor;
             margin-top: 20px;
+            text-overflow: ellipsis;
           }
           .notification--item{
             color: $mainblueColor;
             margin-top: 20px;
+            text-overflow: ellipsis;
           }
         }
         .notification__contents__message__box--time{
