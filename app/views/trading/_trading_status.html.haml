@@ -3,9 +3,9 @@
   %i.fas.fa-truck-moving
   = trading_status_check(item ,saler_user,  buyer_user)
 - if item.trading_status_id == 2 && buyer_user == current_user
-  = render partial: 'evaluation-form', locals: { item: item , saler_user: saler_user, buyer_user: buyer_user, evaluation: evaluation}
+  = render partial: 'evaluation-form', locals: { item: item, evaluation: evaluation}
 - elsif item.trading_status_id == 3 && saler_user == current_user
-  = render partial: 'evaluation-form', locals: { item: item , saler_user: saler_user, buyer_user: buyer_user, evaluation: evaluation}
+  = render partial: 'evaluation-form', locals: { item: item, evaluation: evaluation}
 - else
   .content__trading__box
     = transaction_button(item ,saler_user, buyer_user)
