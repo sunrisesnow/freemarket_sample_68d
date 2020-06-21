@@ -1,6 +1,4 @@
-- if @item.trading_status_id == 3
-  $("#trading__box").html("#{escape_javascript(render partial: 'trading/trading_status', locals: { item: @item, saler_user: @saler_user, buyer_user: @buyer_user, evaluation: @evaluation})}")
-- else
-  $("#trading__box").html("#{escape_javascript(render partial: 'trading/trading_status', locals: { item: @item, saler_user: @saler_user, buyer_user: @buyer_user})}")
+
+$("#trading__box").html("#{escape_javascript(render partial: 'trading/trading_status', locals: { item: @item, saler_user: @saler_user, buyer_user: @buyer_user, evaluation: @evaluation})}")
 $("#message__form").html("#{escape_javascript(render partial: 'trading/form', locals: { item: @item, message: @message})}")
 $(".menu__sales").html("#{escape_javascript(render partial: 'shared/header-price_point')}")
