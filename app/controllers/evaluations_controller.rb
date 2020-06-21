@@ -1,11 +1,11 @@
 class EvaluationsController < ApplicationController
   include TradingHelper
   before_action :set_categories
-  before_action :set_trading_item, only: %i[create]
-  before_action :item_present?, only: %i[create]
+  before_action :set_trading_item, only: [:create]
+  before_action :item_present?, only: [:create]
   before_action :set_item_search_query
-  before_action :set_new_message, only: %i[create]
-  before_action :item_user?, only: %i[create]
+  before_action :set_new_message, only: [:create]
+  before_action :item_user?, only: [:create]
 
   def index
     @evaluations = current_user.evaluations.eager_load(saler: :account,buyer: :account).page(params[:page]).per(8)
@@ -16,7 +16,6 @@ class EvaluationsController < ApplicationController
     redirect_to root_path unless Evaluation.create!(params_evaluation)
     if @item.trading_status_id == 2
       redirect_to root_path unless @item.update(trading_status_id: 3)
-      return
     elsif @item.trading_status_id == 3
       if @item.update(trading_status_id: 5)
         trading_item_users(@item)
@@ -41,6 +40,7 @@ class EvaluationsController < ApplicationController
         :evaluation).merge(user_id: @buyer_user.id, saler_id: @saler_user.id, buyer_id: @buyer_user.id)
     end
   end
+
 
   def set_new_message
     @message = Message.new
