@@ -1,32 +1,37 @@
 -# - @infomations.each do |info|
 %li
-  - @notifications.limit(5).order(created_at: :desc).each do |notice|
-    = link_to "/items/#{notice.item.id}", class:"notification_mypage--link" do
-      .mp-notification__box
-        .mp-notif__img
-          -if notice.sender.account&.icon_image.present?
-            = image_tag notice.sender.account.icon_image.url, class: "notification_mypage--icon"
-          -else
-            = image_tag "member_photo_noimage.png", class: "notification_mypage--icon"
-        - case notice.action
-        - when 'like'
-          .mp-notif__details
-            .mp-notif__details__message
-              %span.notice--text= notice.sender.nickname
-              さんが
-              %span.notice--text= notice.item.name
-              がお気に入り！しました
-            .mp-notif__details__time
-              %i.far.fa-clock
-              %span= time_ago_in_words(notice.created_at) + "前"
-        - when 'comment'
-          .mp-notif__details
-            .mp-notif__details__message
-              %span.notice--text= notice.sender.nickname
-              さんが
-              %span.notice--text= notice.item.name
-              にコメントしました
-            .mp-notif__details__time
-              %i.far.fa-clock
-              %span= time_ago_in_words(notice.created_at) + "前"
+  -if @notifications.present?
+    - @notifications.limit(5).order(created_at: :desc).each do |notice|
+      = link_to "/items/#{notice.item.id}", class:"notification_mypage--link" do
+        .mp-notification__box
+          .mp-notif__img
+            -if notice.sender.account&.icon_image.present?
+              = image_tag notice.sender.account.icon_image.url, class: "notification_mypage--icon"
+            -else
+              = image_tag "member_photo_noimage.png", class: "notification_mypage--icon"
+          - case notice.action
+          - when 'like'
+            .mp-notif__details
+              .mp-notif__details__message
+                %span.notice--text= notice.sender.nickname
+                さんが
+                %span.notice--text= notice.item.name
+                をお気に入り！しました
+              .mp-notif__details__time
+                %i.far.fa-clock
+                %span= time_ago_in_words(notice.created_at) + "前"
+          -# - when 'comment'
+          -#   .mp-notif__details
+          -#     .mp-notif__details__message
+          -#       %span.notice--text= notice.sender.nickname
+          -#       さんが
+          -#       %span.notice--text= notice.item.name
+          -#       にコメントしました
+          -#     .mp-notif__details__time
+          -#       %i.far.fa-clock
+          -#       %span= time_ago_in_words(notice.created_at) + "前"
+  -else 
+    .no-notifications
+      = icon('far', 'file-alt',class: 'file-icon')
+      .no-notifications-information お知らせはありません
 -# = paginate @infomations

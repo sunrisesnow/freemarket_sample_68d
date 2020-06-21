@@ -85,12 +85,21 @@
           .notification--clock{
           }
         }
-        .notification--chevron{
-          position: absolute;
-          top: 50%;
-          right: 16px;
-        }
       }
     }
   }
 } 
+
+.no-notifications{
+  text-align: center;
+  padding: 100px 0 ;
+  .file-icon{
+    color: $lightgray;
+    font-size: 100px;
+  }
+  &-information{
+    margin-top: 30px;
+    color: $lightgray;
+    font-size: 20px;
+  }
+}

@@ -14,12 +14,12 @@
               %span.notice--text= notice.sender.nickname
               さんが
               %span.notice--text= notice.item.name
-              がお気に入り！しました
+              をお気に入り！しました
             - when 'comment'
               %span.notice--text= notice.sender.nickname
               さんが
               %span.notice--text= notice.item.name
-              がお気に入り！しました
+              にコメントしました
           .notice__news__box--time 
             = icon('far', 'clock', class:"top-item__icon__btn") 
             = time_ago_in_words(notice.created_at) + "前"
