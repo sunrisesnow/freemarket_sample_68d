@@ -13,10 +13,10 @@ class EvaluationsController < ApplicationController
   end
 
   def create
-    @evaluation = Evaluation.new
     redirect_to root_path unless Evaluation.create!(params_evaluation)
     if @item.trading_status_id == 2
       redirect_to root_path unless @item.update(trading_status_id: 3)
+      @evaluation = Evaluation.new
       return
     elsif @item.trading_status_id == 3
       if @item.update(trading_status_id: 5)
