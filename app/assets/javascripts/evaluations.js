@@ -8,7 +8,7 @@ $(function(){
       }
     });
     if (flag){
-      Rails.fire($("#evaluation__form")[0], 'submit');
+      $('#evaluation__form').submit();
     }else{
       const errorBox = $(".content__trading__nav")
       const next     = errorBox.next();

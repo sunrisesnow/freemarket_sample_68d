@@ -13,7 +13,7 @@ class EvaluationsController < ApplicationController
   end
 
   def create
-    redirect_to root_path unless Evaluation.create!(params_evaluation)
+    redirect_to root_path unless Evaluation.create(params_evaluation)
     if @item.trading_status_id == 2
       @item.update(trading_status_id: 3) ? (redirect_to item_trading_path(@item, current_user)) : (redirect_to root_path)
     elsif @item.trading_status_id == 3
@@ -52,10 +52,9 @@ class EvaluationsController < ApplicationController
 
   def sales_prices(saler_user, item)
     trading_item_fee(item)
-    sales_price = SalesPrice.user(saler_user.id)
-    if sales_price.present?
-      sum_price = sales_price.price + @sales_profit
-      redirect_to root_path unless sales_price.update(price: sum_price) 
+    if saler_user.sales_price.present?
+      sum_price = saler_user.sales_price.price + @sales_profit
+      redirect_to root_path unless saler_user.sales_price.update(price: sum_price) 
     else
       redirect_to root_path unless SalesPrice.create(user_id: saler_user.id, price: @sales_profit)
     end
@@ -63,10 +62,9 @@ class EvaluationsController < ApplicationController
 
   def gives_point(buyer_user, item)
     trading_item_fee(item)
-    point = Point.user(buyer_user.id)
-    if point.present?
-      sum_point = point.point + @sales_commission
-      redirect_to root_path unless point.update(point: sum_point) 
+    if buyer_user.point.present?
+      sum_point = buyer_user.point.point + @sales_commission
+      redirect_to root_path unless buyer_user.point.update(point: sum_point) 
     else
       redirect_to root_path unless Point.create(user_id: buyer_user.id, point: @sales_commission)
     end
