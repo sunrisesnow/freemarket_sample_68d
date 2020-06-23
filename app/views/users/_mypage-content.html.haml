@@ -16,16 +16,16 @@
       #notif_tab.mp-content__todo_info__tabs__tab.active_tab
         .mp-content__todo_info__tabs__tab__notifications
           %span お知らせ        
-      #todo_tab.mp-content__todo_info__tabs__tab
-        .mp-content__todo_info__tabs__tab__todos
-          %span やることリスト
+      -# #todo_tab.mp-content__todo_info__tabs__tab
+      -#   .mp-content__todo_info__tabs__tab__todos
+      -#     %span やることリスト
     .mp-content__todo_info__todo_notif
       %ul#notif_tab_box.mp-content__todo_info__todo_notif__box.active_box
         = render "users/mypage-info_list"
         .mp-content__todo_info__todo_notif__list_link
-          = link_to "一覧を見る", "#", class: "mp-content__todo_info__todo_notif__list_link--btn notif_list_btn"
-      %ul#todo_tab_box.mp-content__todo_info__tabs__tab__info_box
-        = render "users/mypage-info_list"   
-        .mp-content__todo_info__todo_notif__list_link
-          = link_to "一覧を見る", "#", class: "mp-content__todo_info__todo_notif__list_link--btn todo_list_btn"
+          = link_to "一覧を見る", user_notifications_path(current_user), class: "mp-content__todo_info__todo_notif__list_link--btn notif_list_btn"
+      -# %ul#todo_tab_box.mp-content__todo_info__tabs__tab__info_box
+      -#   = render "users/mypage-info_list"   
+      -#   .mp-content__todo_info__todo_notif__list_link
+      -#     = link_to "一覧を見る", "#", class: "mp-content__todo_info__todo_notif__list_link--btn todo_list_btn"
 
