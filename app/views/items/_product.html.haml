@@ -1,8 +1,7 @@
 %h2.pickup-title PICK UP
 - @parents.each do |category|
   - unless category.name.include?("カテゴリー一覧")
-    - grandchildren_ids = category.indirect_ids.sort
-    - items = @items.where(category_id: grandchildren_ids.first..grandchildren_ids.last)
+    - items = @items.where(category_id: category.subtree_ids)
     .pickup-box.pickup-box-fadein
       .category__title 
         = "#{category.name}新着アイテム"
