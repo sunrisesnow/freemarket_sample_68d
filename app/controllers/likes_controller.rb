@@ -5,12 +5,8 @@ class LikesController < ApplicationController
   before_action :move_show_item, except: [:index]
 
   def index
-    items = []
-    likes = Like.users(params[:user_id])
-    if likes.present?
-      likes.each { |like| items << Item.find(like.item_id)}
-    end
-    @items = Kaminari.paginate_array(items).page(params[:page]).per(14)
+    like_ids = Like.users(params[:user_id]).pluck(:id)
+    @items = Item.eager_load(:images).joins(:likes).where(likes: {id: like_ids}).page(params[:page]).per(12)
   end
 
   def create

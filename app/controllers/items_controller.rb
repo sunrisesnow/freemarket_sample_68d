@@ -35,11 +35,9 @@ class ItemsController < ApplicationController
     if trading_status_key = params.require(:q)[:trading_status_id_in]
       @q = Item.including.search(search_params_for_trading_status)
       if trading_status_key.count == 1 && trading_status_key == ["3"]
-        sold_items = Item.where.not(buyer_id: nil)
-        @items = @items & sold_items
+        @items = @items.where.not(buyer_id: nil)
       elsif trading_status_key.count == 1 && trading_status_key == ["1"]
-        selling_items = Item.where(buyer_id: nil)
-        @items = @items & selling_items
+        @items = @items.where(buyer_id: nil)
       end
     end
 
@@ -190,14 +188,6 @@ class ItemsController < ApplicationController
   end
 
   def find_category_item(subtree_ids)
-    category_item = Item.where(category_id: subtree_ids).where.not(trading_status_id: 4)
-    category_search_items = []
-    category_search_items += category_item if category_item.present?
-    if category_search_items.length == 0
-      @q = Item.search(search_params)
-      sort = params[:sort] || "created_at DESC"
-      @items = @q.result(distinct: true).order(sort)
-    end
-    @items = @items & category_search_items
+    @items = @items.where(category_id: subtree_ids)
   end
 end
