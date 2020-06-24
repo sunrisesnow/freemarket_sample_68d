@@ -9,8 +9,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    items = Item.including.where(category_id: @category.subtree_ids).trading_not
-    @items = Kaminari.paginate_array(items).page(params[:page]).per(30)
+    @items = Item.including.where(category_id: @category.subtree_ids).trading_not.page(params[:page]).per(30)
   end
 
   private
