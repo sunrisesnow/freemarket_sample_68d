@@ -51,8 +51,7 @@
                   %tr
                     %th 出品者
                     %td
-                      = link_to '#' do
-                        %span= @user.nickname
+                      %span= @user.nickname
                   %tr
                     %th カテゴリー
                     %td
@@ -88,18 +87,6 @@
                       %span= @item.delivery_method.name
             .itembox__option
               = render partial: 'likes/like', locals: { item: @item}
-          .commentbox
-            %ul.commentbox__contents
-            %form{class: 'new__comment', action: '#',method:'post', id:'new__comment'}
-              %input{type: 'hidden', value: '✓'}
-              %textarea.comment__body
-              %p.notice__message
-                %span 相手のことを考え丁寧なコメントを心がけましょう。
-                %br
-                %span 不快な言葉遣いなどは利用制限や退会処分となることがあります。 
-              %button.comment__btn
-                %i.fa.fa-comment
-                %span コメントする
         .main-item__content--related
           = link_to  category_path(@item.category.root_id) do
             = @item.category.root.name

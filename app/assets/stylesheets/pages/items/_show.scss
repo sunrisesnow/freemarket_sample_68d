@@ -185,10 +185,11 @@
               }
             }
           }
-          &__explaination {
-            line-height: 1.5;
+          &__explanation {
             font-size: 18px;
             margin-bottom: 30px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
           }
           &__table {
             margin-bottom: 20px;
