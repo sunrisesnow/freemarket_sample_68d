@@ -350,6 +350,32 @@ address               = "123-456"
 phone_number          = "0123456789" 
 building              = "草薙ビル"
 
+# 購入テストユーザ
+User.create(
+  email: "buy_user@furima.work",
+  password: "1111aaa",
+  password_confirmation: "1111aaa",
+  nickname: "購入テストユーザ",
+  last_name: ForgeryJa(:name).last_name,
+  last_name_kana: ForgeryJa(:name).last_name(to: ForgeryJa::KANA),
+  first_name: ForgeryJa(:name).first_name,
+  first_name_kana: ForgeryJa(:name).first_name(to: ForgeryJa::KANA),
+  birthday: Faker::Date.birthday 
+)
+
+# 出品テストユーザ
+User.create(
+  email: "sell_user@furima.work",
+  password: "2222bbb",
+  password_confirmation: "2222bbb",
+  nickname: "出品テストユーザ",
+  last_name: ForgeryJa(:name).last_name,
+  last_name_kana: ForgeryJa(:name).last_name(to: ForgeryJa::KANA),
+  first_name: ForgeryJa(:name).first_name,
+  first_name_kana: ForgeryJa(:name).first_name(to: ForgeryJa::KANA),
+  birthday: Faker::Date.birthday 
+)
+
 (1..10).each { |i|
   user = User.create(
     email: "user#{i}@furima.com",
@@ -380,11 +406,11 @@ building              = "草薙ビル"
 # items
 (1..1315).each do |i|
   
-  saler_id             = Faker::Number.between(from: 1, to: 10)
+  saler_id             = Faker::Number.between(from: 1, to: 12)
   name                 = "サンプル#{i}"
   explanation          = "サンプル#{i}の説明"
   delivery_charge_flag = Faker::Number.between(from: 1, to: 2)
-  price                = Faker::Number.between(from: 300, to: 9999999)
+  price                = Faker::Number.between(from: 300, to: 50000)
   prefecture_id        = Faker::Number.between(from: 1, to: 47)
   status_id            = Faker::Number.between(from: 1, to: 6)
   delivery_date_id     = Faker::Number.between(from: 1, to: 3)
@@ -421,96 +447,31 @@ building              = "草薙ビル"
   def seed(category, i)
     case category.name
     when "レディース"
-      case i % 2
-      when 1
-        open("./db/images/Tシャツ1.jpg")
-      when 0
-        open("./db/images/コート.jpg")
-      end
+      open("./db/images/lady_blouse.jpg")
     when "メンズ"
-      case i % 2
-      when 1
-        open("./db/images/シャツ1.jpeg")
-      when 0
-        open("./db/images/ブルゾン1.jpg")
-      end
+      open("./db/images/men_jacket.jpg")
     when "ベビー・キッズ"
-      case i % 2
-      when 1
-        open("./db/images/スカート.jpeg")
-      when 0
-        open("./db/images/トップス.jpg")
-      end
+      open("./db/images/men_t-shirt.jpg")
     when "インテリア・住まい・小物"
-      case i % 2
-      when 1
-        open("./db/images/靴1.jpg")
-      when 0
-        open("./db/images/靴2.jpg")
-      end
+      open("./db/images/lady_bag.jpg")
     when "本・音楽・ゲーム"
-      case i % 2
-      when 1
-        open("./db/images/時計.jpeg")
-      when 0
-        open("./db/images/バッグ1.jpg")
-      end
+      open("./db/images/men_革靴.jpg")
     when "おもちゃ・ホビー・グッズ"
-      case i % 2
-      when 1
-        open("./db/images/ロングシャツ1.jpg")
-      when 0
-        open("./db/images/ブルゾン2.jpeg")
-      end
+      open("./db/images/men_スニーカー.jpg")
     when "コスメ・香水・美容"
-      case i % 2
-      when 1
-        open("./db/images/靴3.jpg")
-      when 0
-        open("./db/images/靴4.jpeg")
-      end
+      open("./db/images/men_wallet.jpg")
     when "家電・スマホ・カメラ"
-      case i % 2
-      when 1
-        open("./db/images/ロングシャツ2.jpg")
-      when 0
-        open("./db/images/バッグ2.jpeg")
-      end
+      open("./db/images/men_watch.jpg")
     when "スポーツ・レジャー"
-      case i % 2
-      when 1
-        open("./db/images/靴5.jpg")
-      when 0
-        open("./db/images/ゴルフ.jpeg")
-      end
+      open("./db/images/men_pants.jpg")
     when "ハンドメイド"
-      case i % 2
-      when 1
-        open("./db/images/ハンドメイド1.jpg")
-      when 0
-        open("./db/images/ハンドメイド2.jpeg")
-      end
+      open("./db/images/lady_skirt.jpg")
     when "チケット"
-      case i % 2
-      when 1
-        open("./db/images/チケット1.png")
-      when 0
-        open("./db/images/チケット2.jpeg")
-      end
+      open("./db/images/lady_blouse.jpg")
     when "自動車・オートバイ"
-      case i % 2
-      when 1
-        open("./db/images/オートバイ.jpeg")
-      when 0
-        open("./db/images/自転車.jpg")
-      end
+      open("./db/images/men_jacket.jpg")
     when "その他"
-      case i % 2
-      when 1
-        open("./db/images/財布.jpg")
-      when 0
-        open("./db/images/その他.jpg")
-      end
+      open("./db/images/men_watch.jpg")
     end
   end
   Image.create(
