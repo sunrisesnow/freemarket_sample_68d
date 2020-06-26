@@ -58,6 +58,8 @@ class ApplicationController < ActionController::Base
   end
 
   def my_notifications
-    @notifications = current_user.passive_notifications.preload(:item, sender: :account)
+    if current_user.present?
+      @notifications = current_user.passive_notifications.preload(:item, sender: :account)
+    end
   end
 end
