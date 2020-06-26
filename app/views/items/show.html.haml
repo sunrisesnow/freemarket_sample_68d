@@ -87,33 +87,6 @@
                       %span= @item.delivery_method.name
             .itembox__option
               = render partial: 'likes/like', locals: { item: @item}
-        %div{id: 'map', style: 'height: 480px; width: 60%;'}
-          :javascript
-            function initMap() {
-              var test ={ lat: parseFloat('35.6626'), lng: parseFloat("139.668") };
-              var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16,
-                center: test
-              });
-              var transitLayer = new google.maps.TransitLayer();
-              transitLayer.setMap(map);
-
-              var contentString = "住所：";
-              var infowindow = new google.maps.InfoWindow({
-                content: contentString
-              });
-
-              var marker = new google.maps.Marker({
-                position:test,
-                map: map,
-                title: contentString
-              });
-
-              marker.addListener('click', function() {
-                infowindow.open(map, marker);
-              });
-            }
-          %script{type: "text/javascript", src: "https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDB8byrrB7qMyvGV-tq2QdUvdMgeKY64wk&callback=initMap", async: true, defer: true}
         .main-item__content--related
           = link_to  category_path(@item.category.root_id) do
             = @item.category.root.name
