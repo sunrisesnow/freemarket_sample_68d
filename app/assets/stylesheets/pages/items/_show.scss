@@ -339,11 +339,11 @@
 
     #item-modal__content {
       position: fixed;
-      top: 15%;
+      top: 10%;
       bottom: 0;
       right: 0;
       left: 25%;
-      min-width: 880px;
+      min-width: 720px;
       min-height: 640px;
       width: 50%;
       height: 70%;
@@ -385,7 +385,8 @@
           & img {
             display: block;
             margin: 0 auto;
-            min-height: 480px;
+            max-height: 520px;
+            min-height: 400px;
             height: 100%;
             object-fit: fill;
           }  
