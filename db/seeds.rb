@@ -406,6 +406,23 @@ User.create(
 # items
 (1..1315).each do |i|
   
+  def set_category_id(i, num)
+    c = Category.find(i)
+    if c.ancestry == nil
+      c.indirect_ids[num]	
+    elsif c.ancestry.include?("/")
+      c.id
+    else
+      if c.name.include?("その他")
+        c.child_ids[0]
+      else 
+        c.child_ids[num]
+      end
+    end
+  end
+
+  num = Faker::Number.between(from: 0, to: 1)
+  
   saler_id             = Faker::Number.between(from: 1, to: 12)
   name                 = "サンプル#{i}"
   explanation          = "サンプル#{i}の説明"
@@ -415,9 +432,12 @@ User.create(
   status_id            = Faker::Number.between(from: 1, to: 6)
   delivery_date_id     = Faker::Number.between(from: 1, to: 3)
   delivery_method_id   = Faker::Number.between(from: 1, to: 2)
-  category_id          = i
+  category_id          = set_category_id(i, num)
   trading_status_id    = 1
   created_at           = Faker::Time.between(from: DateTime.now - 10, to: DateTime.now)
+
+  
+
   item = Item.create(
     saler_id: saler_id,
     buyer_id: nil,
@@ -434,17 +454,8 @@ User.create(
     created_at: created_at
   )
 
-  c = Category.find(category_id)
-  def search_category(c)
-    if c.ancestry == nil
-      category = c
-    elsif c.ancestry.include?("/")
-      category = c.root
-    else
-      category = c.parent
-    end
-  end
-  def seed(category, i)
+  
+  def seed(category)
     case category.name
     when "レディース"
       open("./db/images/lady_blouse.jpg")
@@ -474,9 +485,19 @@ User.create(
       open("./db/images/men_watch.jpg")
     end
   end
+  c = Category.find(category_id)
+  def search_category(c)
+    if c.ancestry == nil
+      category = c
+    elsif c.ancestry.include?("/")
+      category = c.root
+    else
+      category = c.parent
+    end
+  end
   Image.create(
     item_id: item.id,
-    image: seed(search_category(c), i)
+    image: seed(search_category(c))
   )
 end
 
