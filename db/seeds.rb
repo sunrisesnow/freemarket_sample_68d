@@ -421,7 +421,7 @@ User.create(
     end
   end
 
-  num = Faker::Number.between(from: 0, to: 1)
+  num = 0
   
   saler_id             = Faker::Number.between(from: 1, to: 12)
   name                 = "サンプル#{i}"
