@@ -339,12 +339,14 @@
 
     #item-modal__content {
       position: fixed;
-      top: 10%;
+      top: 15%;
       bottom: 0;
       right: 0;
-      left: 20%;
-      width: 880px;
-      height: 640px;
+      left: 25%;
+      min-width: 880px;
+      min-height: 640px;
+      width: 50%;
+      height: 70%;
       border-radius: 10px;
       background-color: white;
       z-index: 100;
@@ -383,7 +385,7 @@
           & img {
             display: block;
             margin: 0 auto;
-            max-height: 480px;
+            min-height: 480px;
             height: 100%;
             object-fit: fill;
           }  
