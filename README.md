@@ -1,27 +1,14 @@
-# README
+# アプリ概要
+誰でも簡単に売買ができる、フリーマーケットのアプリケーションを作成しました。  
+下記ページで公開中です。  
+https://www.furima-68d.work/
+※Basic認証がかかっています。  
+ユーザー名: admin  
+パスワード: 68d68d  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 機能
+- 商品出品機能
+- 商品購入機能
 
 # 初回起動手順
 
@@ -39,7 +26,41 @@ rails s
 # pass: furima1234
 ```
 
-# サンプルユーザー一覧
+# 動作確認方法
+- Chromeの最新版を利用してアクセスしてください。
+- ただしデプロイ等で接続できないタイミングもございます。その際は少し時間をおいてから接続ください。
+- 接続先およびログイン情報については、上記の通りです。
+- 同時に複数の方がログインしている場合に、ログインできない可能性がございます。
+
+- 出品方法は以下の手順で確認できます
+```
+テストアカウントでログイン→トップページから出品ボタン押下→商品情報入力→商品出品
+```
+- 購入方法は以下の手順で確認できます
+```
+テストアカウントでログイン→トップページから商品検索→商品選択→クレジットカード登録(カード情報は上述)→商品購入
+```
+- 確認後、ログアウト処理（マイページ→サイドバーのログアウト押下→ログアウトするボタン押下）をお願いします。
+
+## テスト用アカウント等
+- 購入者用
+```
+メールアドレス: buy_user@furima.work
+パスワード: 1111aaa
+```
+- 購入用カード情報
+```
+番号: 4242424242424242
+期限: 22/01
+セキュリティコード: 123
+```
+- 出品者用
+```
+メールアドレス名: sell_user@furima.work
+パスワード: 2222bbb
+```
+
+## その他サンプルユーザー一覧
 
 |email|pass|
 |-----|----|
