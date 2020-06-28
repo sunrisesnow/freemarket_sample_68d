@@ -1,32 +1,21 @@
 # アプリ概要
 誰でも簡単に売買ができる、フリーマーケットのアプリケーションを作成しました。  
 下記ページで公開中です。  
-https://www.furima-68d.work/
+https://www.furima-68d.work/  
 ※Basic認証がかかっています。  
 ユーザー名: admin  
 パスワード: 68d68d  
 
-# 機能
+## 機能
 - 商品出品機能
+- 商品検索機能
 - 商品購入機能
+- 商品取引機能
+- 商品お気に入り機能
+- マイページ機能
+- 通知機能(お気に入りされると通知される)
 
-# 初回起動手順
-
-```
-git clone https://github.com/masato-teshita/freemarket_sample_68d.git
-cd freemarket_sample_68d
-bundle
-rails db:create
-rails db:migrate
-rails db:seed
-rails s
-
-# ログイン
-# user: user1@furima.com
-# pass: furima1234
-```
-
-# 動作確認方法
+## 動作確認方法
 - Chromeの最新版を利用してアクセスしてください。
 - ただしデプロイ等で接続できないタイミングもございます。その際は少し時間をおいてから接続ください。
 - 接続先およびログイン情報については、上記の通りです。
@@ -75,6 +64,21 @@ rails s
 |user9@furima.com|furima1234|
 |user10@furima.com|furima1234|
 
+# ローカル環境での起動手順
+
+```
+git clone https://github.com/masato-teshita/freemarket_sample_68d.git
+cd freemarket_sample_68d
+bundle
+rails db:create
+rails db:migrate
+rails db:seed
+rails s
+
+# ログイン
+# user: user1@furima.com
+# pass: furima1234
+```
 
 # DBテーブル構成
 
